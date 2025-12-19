@@ -1,0 +1,101 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { useContent } from '../hooks/useContent';
+import { brandConfig } from '../config/brand.config';
+const fadeInUp = {
+  hidden: {
+    opacity: 0,
+    y: 40
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6
+    }
+  }
+};
+export function About() {
+  const content = useContent();
+  return <section className="py-24 px-4 md:px-8" style={{
+    backgroundColor: brandConfig.colors.primary.white,
+    color: brandConfig.colors.primary.black
+  }}>
+      <div className="max-w-4xl mx-auto space-y-24">
+        {/* Vision Section */}
+        <motion.div initial="hidden" whileInView="visible" viewport={{
+        once: true,
+        margin: '-100px'
+      }} variants={fadeInUp} className="text-center">
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 border-b-4 inline-block pb-2" style={{
+          borderColor: brandConfig.colors.primary.black
+        }}>
+            {content.about.vision.title}
+          </h2>
+          <p className="text-lg md:text-xl leading-relaxed font-light" style={{
+          color: brandConfig.colors.neutral.gray700
+        }}>
+            {content.about.vision.description}
+          </p>
+        </motion.div>
+
+        {/* Born Section */}
+        <motion.div initial="hidden" whileInView="visible" viewport={{
+        once: true,
+        margin: '-100px'
+      }} variants={fadeInUp} className="text-center">
+          <div className="border-4 p-8 md:p-12 relative" style={{
+          borderColor: brandConfig.colors.primary.black
+        }}>
+            <div className="absolute -top-6 left-1/2 -translate-x-1/2 px-4" style={{
+            backgroundColor: brandConfig.colors.primary.white
+          }}>
+              <h2 className="text-4xl md:text-5xl font-display font-bold">
+                {content.about.born.title}
+              </h2>
+            </div>
+            <h3 className="text-3xl md:text-6xl font-display font-bold uppercase tracking-widest mt-4">
+              {brandConfig.name.toUpperCase()}
+            </h3>
+            <p className="mt-4" style={{
+            color: brandConfig.colors.neutral.gray600
+          }}>
+              {content.about.born.established} {brandConfig.established}
+            </p>
+          </div>
+        </motion.div>
+
+        {/* About Section */}
+        <motion.div initial="hidden" whileInView="visible" viewport={{
+        once: true,
+        margin: '-100px'
+      }} variants={fadeInUp} className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="text-left">
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
+              {content.about.about.title}
+            </h2>
+            <p className="leading-relaxed mb-4" style={{
+            color: brandConfig.colors.neutral.gray700
+          }}>
+              {content.about.about.description1}
+            </p>
+            <p className="leading-relaxed" style={{
+            color: brandConfig.colors.neutral.gray700
+          }}>
+              {content.about.about.description2}
+            </p>
+          </div>
+          <div className="h-64 rounded-lg border-2 border-dashed flex items-center justify-center" style={{
+          backgroundColor: brandConfig.colors.neutral.gray100,
+          borderColor: brandConfig.colors.neutral.gray300
+        }}>
+            <span className="font-display text-xl" style={{
+            color: brandConfig.colors.neutral.gray400
+          }}>
+              Creative Space
+            </span>
+          </div>
+        </motion.div>
+      </div>
+    </section>;
+}
