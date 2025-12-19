@@ -92,9 +92,9 @@ export const projectsData: Project[] = [
       'Laravel Sanctum',
     ],
     gallery: [
-      '/public/menu-select.png',
-      '/public/orders.png',
-      '/public/history-orders.png',
+      '/menu-select.png',
+      '/orders.png',
+      '/history-orders.png',
     ],
     link: '',
     github: 'https://github.com/DuckHats/menu-ginebro-front',
