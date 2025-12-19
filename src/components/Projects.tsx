@@ -14,7 +14,7 @@ const projects: Project[] = [{
   title: 'Menú-Ginebro',
   date: 'En Procés',
   category: 'Web App',
-  image: ''
+  image: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpetfood.guide%2Fwp-content%2Fuploads%2F2022%2F06%2Fwapt_image_post_-6.jpg&f=1&nofb=1&ipt=4f82a78be934f6f0dbbde99f0ec727af671f40f99f74f7c98bf0402e07aed173'
 },
 ];
 export function Projects() {
