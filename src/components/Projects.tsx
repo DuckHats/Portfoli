@@ -11,35 +11,12 @@ type Project = {
 };
 const projects: Project[] = [{
   id: 1,
-  title: 'NEON DUCK',
-  date: 'OCT 2023',
+  title: 'Menú-Ginebro',
+  date: 'En Procés',
   category: 'Web App',
-  image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=1000'
-}, {
-  id: 2,
-  title: 'CYBER POND',
-  date: 'DEC 2023',
-  category: 'Immersive 3D',
-  image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1000'
-}, {
-  id: 3,
-  title: 'HAT STACK',
-  date: 'JAN 2024',
-  category: 'E-commerce',
-  image: 'https://images.unsplash.com/photo-1572281060488-e15a8f01f052?auto=format&fit=crop&q=80&w=1000'
-}, {
-  id: 4,
-  title: 'QUACK CHAT',
-  date: 'FEB 2024',
-  category: 'Social Platform',
-  image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=1000'
-}, {
-  id: 5,
-  title: 'FEATHER UI',
-  date: 'MAR 2024',
-  category: 'Design System',
-  image: 'https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=1000'
-}];
+  image: ''
+},
+];
 export function Projects() {
   const [activeProject, setActiveProject] = useState<number>(0);
   const content = useContent();
