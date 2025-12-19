@@ -48,7 +48,16 @@ export const contentConfig = {
       planTitle: "Pla de Direcció de l'Equip"
     },
     projects: {
-      title: 'PROJECTES'
+      title: 'PROJECTES',
+      backToProjects: 'Tornar a Projectes',
+      visitSite: 'Visitar Lloc',
+      challenge: 'El Repte',
+      solution: 'La Solució',
+      results: 'Resultats',
+      technologies: 'Tecnologies',
+      gallery: 'Galeria',
+      viewAllProjects: 'VEURE TOTS ELS PROJECTES',
+      viewProject: 'Veure Projecte',
     },
     joinUs: {
       title: 'UNEIX-TE',
@@ -61,17 +70,26 @@ export const contentConfig = {
       tagline: "amb amor i codi\ndes de l'estany",
       copyright: '© 2024 DuckHats'
     },
-    menu: {
-      careers: 'Carreres',
-      portfolio: 'Portafoli',
-      news: 'Notícies',
-      contact: 'Contacte',
+    fullScreenMenu: {
+      mainNav: {
+        home: 'Inici',
+        about: 'Història',
+        team: 'Equip',
+        projects: 'Projectes',
+      },
+      secondaryLinks: {
+        contact: 'Contacte',
+      },
       policies: {
-        investment: "Política d'Inversió",
-        antiHarassment: 'Política Anti-Assetjament',
         privacy: 'Política de Privacitat',
         compliance: 'Política de Compliment',
-        anniversary: '10è Aniversari'
+      },
+    },
+    menu: {
+      contact: 'Contacte',
+      policies: {
+        privacy: 'Política de Privacitat',
+        compliance: 'Política de Compliment',
       }
     }
   },
@@ -124,7 +142,16 @@ export const contentConfig = {
       planTitle: 'Plan de Dirección del Equipo'
     },
     projects: {
-      title: 'PROYECTOS'
+      title: 'PROYECTOS',
+      backToProjects: 'Volver a Proyectos',
+      visitSite: 'Visitar Sitio',
+      challenge: 'El Reto',
+      solution: 'La Solución',
+      results: 'Resultados',
+      technologies: 'Tecnologías',
+      gallery: 'Galería',
+      viewAllProjects: 'VER TODOS LOS PROYECTOS',
+      viewProject: 'Ver Proyecto'
     },
     joinUs: {
       title: 'ÚNETE',
@@ -136,6 +163,29 @@ export const contentConfig = {
       socials: 'Redes Sociales',
       tagline: 'con amor y código\ndesde el estanque',
       copyright: '© 2024 DuckHats'
+    },
+    fullScreenMenu: {
+      mainNav: {
+        home: 'Inicio',
+        about: 'Historia',
+        team: 'Equipo',
+        projects: 'Proyectos',
+      },
+      secondaryLinks: {
+        careers: 'Carreras',
+        portfolio: 'Portafolio',
+        portfolioCount: '265',
+        news: 'Noticias',
+        newsCount: '386',
+        contact: 'Contacto',
+      },
+      policies: {
+        investment: 'Política de Inversión',
+        antiHarassment: 'Política Anti-Acoso',
+        privacy: 'Política de Privacidad',
+        compliance: 'Política de Cumplimiento',
+        anniversary: '10º Aniversario',
+      },
     },
     menu: {
       careers: 'Carreras',
@@ -200,7 +250,16 @@ export const contentConfig = {
       planTitle: 'Team Direction Plan'
     },
     projects: {
-      title: 'PROJECTS'
+      title: 'PROJECTS',
+      backToProjects: 'Back to Projects',
+      visitSite: 'Visit Site',
+      challenge: 'The Challenge',
+      solution: 'The Solution',
+      results: 'Results',
+      technologies: 'Technologies',
+      gallery: 'Gallery',
+      viewAllProjects: 'VIEW ALL PROJECTS',
+      viewProject: 'View Project'
     },
     joinUs: {
       title: 'JOIN US',
@@ -212,6 +271,29 @@ export const contentConfig = {
       socials: 'Social Networks',
       tagline: 'with love and code\nfrom the pond',
       copyright: '© 2024 DuckHats'
+    },
+    fullScreenMenu: {
+      mainNav: {
+        home: 'Home',
+        about: 'History',
+        team: 'Team',
+        projects: 'Projects',
+      },
+      secondaryLinks: {
+        careers: 'Careers',
+        portfolio: 'Portfolio',
+        portfolioCount: '265',
+        news: 'News',
+        newsCount: '386',
+        contact: 'Contact',
+      },
+      policies: {
+        investment: 'Investment Policy',
+        antiHarassment: 'Anti-Harassment Policy',
+        privacy: 'Privacy Policy',
+        compliance: 'Compliance Policy',
+        anniversary: '10th Anniversary',
+      },
     },
     menu: {
       careers: 'Careers',
