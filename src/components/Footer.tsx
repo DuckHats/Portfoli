@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import { brandConfig } from '../config/brand.config'
 import { contactConfig } from '../config/contact.config'

@@ -1,4 +1,3 @@
-import React from 'react'
 import { useParams, Navigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowLeft, ExternalLink, Github } from 'lucide-react'

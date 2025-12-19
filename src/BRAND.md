@@ -5,7 +5,7 @@
 **Name:** DUCKHATS  
 **Tagline:** Desenvolupant amb passió i un toc d'humor  
 **Established:** 2020  
-**Contact:** hello@duckhats.cat  
+**Contact:** info@duckhats.cat  
 **Social:** @duckhats
 
 ## Brand Philosophy
