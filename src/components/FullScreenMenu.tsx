@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { X, ArrowRight } from 'lucide-react';
 import { useContent } from '../hooks/useContent';
 import { useLanguage } from '../hooks/useLanguage';
+import { contactConfig } from '../config/contact.config';
 
 interface FullScreenMenuProps {
   isOpen: boolean;
@@ -58,7 +59,7 @@ export function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps) {
 
             {/* Secondary Links */}
             <div className="flex flex-wrap justify-center gap-8 md:gap-16 mb-16 text-xl md:text-2xl font-bold">
-              <SecondaryLink href="mailto:info@duckhats.cat">
+              <SecondaryLink href={`mailto:${contactConfig.email}`}>
                 {content.fullScreenMenu.secondaryLinks.contact}
               </SecondaryLink>
             </div>

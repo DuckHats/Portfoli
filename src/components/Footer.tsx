@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { brandConfig } from '../config/brand.config'
+import { contactConfig } from '../config/contact.config'
 import { useContent } from '../hooks/useContent'
 
 export function Footer() {
@@ -101,7 +102,7 @@ export function Footer() {
               {content.footer.contact}
             </h3>
             <a
-              href="mailto:info@duckhats.cat"
+              href={`mailto:${contactConfig.email}`}
               className="font-mono text-sm transition-colors inline-block w-fit"
               style={{
                 color: brandConfig.colors.neutral.gray600,
@@ -113,7 +114,7 @@ export function Footer() {
                 e.currentTarget.style.color = brandConfig.colors.neutral.gray600
               }}
             >
-              info@duckhats.cat
+              {contactConfig.email}
             </a>
             <div className="pt-4">
               <h4
@@ -125,7 +126,7 @@ export function Footer() {
                 {content.footer.socials}
               </h4>
               <a
-                href="https://github.com/DuckHats"
+                href={contactConfig.social.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-mono text-sm transition-colors inline-block w-fit"
@@ -139,7 +140,7 @@ export function Footer() {
                   e.currentTarget.style.color = brandConfig.colors.neutral.gray600
                 }}
               >
-                @duckhats
+                {contactConfig.handles.github}
               </a>
             </div>
           </div>
