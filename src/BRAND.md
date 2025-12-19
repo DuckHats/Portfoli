@@ -1,7 +1,7 @@
-
 # DUCKHATS Brand Guidelines
 
 ## Identity
+
 **Name:** DUCKHATS  
 **Tagline:** Desenvolupant amb passió i un toc d'humor  
 **Established:** 2020  
@@ -9,16 +9,19 @@
 **Social:** @duckhats
 
 ## Brand Philosophy
+
 The "Duck" philosophy: Calm on the surface, paddling furiously underneath. We balance playful professionalism—where serious code meets creative chaos.
 
 ## Visual Language
 
 ### Logo
+
 - Duck with a hat (Noir/Detective style)
-- URL: `https://cdn.magicpatterns.com/uploads/3bs1BNudrejbo5etwijhrg/logo_(2).png`
+- URL: `public/logo.png`
 - Usage: Centered, prominent, with subtle animations on load
 
 ### Typography
+
 - **Display Font:** `Space Grotesk` - Bold, tall, impactful (headers, titles)
 - **Body Font:** `Inter` - Clean, readable, modern (paragraphs, UI text)
 - **Mono Font:** `monospace` - Technical, precise (code, dates, labels)
@@ -26,13 +29,16 @@ The "Duck" philosophy: Calm on the surface, paddling furiously underneath. We ba
 ### Color Palette
 
 #### Primary Colors
+
 - **Black:** `#1a1a1a` - Main text, borders, strong elements
 - **White:** `#f5f5f5` - Backgrounds, light surfaces
 
 #### Accent Color
+
 - **Red:** `#e63946` - Emphasis, hover states, CTAs, highlights
 
 #### Neutral Grays
+
 - `gray50`: `#f9fafb` - Lightest backgrounds
 - `gray100`: `#f3f4f6` - Section backgrounds
 - `gray200`: `#e5e7eb` - Borders, dividers
@@ -45,6 +51,7 @@ The "Duck" philosophy: Calm on the surface, paddling furiously underneath. We ba
 - `gray900`: `#111827` - Near black
 
 ### Spacing & Layout
+
 - **Section Padding:** `py-24` (vertical), `px-4 md:px-8` (horizontal)
 - **Container Max Width:** `max-w-7xl` (wide), `max-w-4xl` (narrow content)
 - **Consistent Gaps:** Use 4, 6, 8, 12, 16, 24 for spacing scale
@@ -52,16 +59,19 @@ The "Duck" philosophy: Calm on the surface, paddling furiously underneath. We ba
 ## Motion Principles
 
 ### Animation Durations
+
 - **Fast:** `0.3s` - Quick interactions, hover states
 - **Normal:** `0.5s` - Standard transitions, reveals
 - **Slow:** `0.8s` - Page loads, major state changes
 
 ### Easing Functions
+
 - **Default:** `easeInOut` - Balanced, smooth
 - **Smooth:** `easeOut` - Natural deceleration
 - **Spring:** `circOut` - Playful, bouncy
 
 ### Animation Guidelines
+
 - **Smoothness:** All transitions should feel fluid (spring physics preferred)
 - **Playfulness:** Elements can scale, rotate slightly, or bounce
 - **Context:** Animations should guide the user (e.g., project previews appearing as you scroll)
@@ -70,12 +80,14 @@ The "Duck" philosophy: Calm on the surface, paddling furiously underneath. We ba
 ## Component Patterns
 
 ### Projects Showcase
+
 - Split-screen layout (preview left, titles right)
 - Fixed preview, scrolling titles
 - Grayscale images with color on hover
 - Bold, large typography for project names
 
 ### Team Members
+
 - Grid layout (2 cols mobile, 4 cols desktop)
 - Square aspect ratio images
 - Grayscale to color on hover
@@ -83,6 +95,7 @@ The "Duck" philosophy: Calm on the surface, paddling furiously underneath. We ba
 - Shadow changes color on hover (black → red)
 
 ### Navigation
+
 - Pill-shaped navbar (rounded-full)
 - White background with backdrop blur
 - Centered, contained width
@@ -90,6 +103,7 @@ The "Duck" philosophy: Calm on the surface, paddling furiously underneath. We ba
 - Smooth fade-in on home page (2s delay)
 
 ### Buttons & CTAs
+
 - Black background, white text
 - Red hover state
 - Rectangular (no border-radius)
@@ -99,12 +113,14 @@ The "Duck" philosophy: Calm on the surface, paddling furiously underneath. We ba
 ## Content Tone
 
 ### Voice
+
 - **Friendly:** Approachable, conversational
 - **Professional:** Competent, reliable
 - **Playful:** Witty, creative, not too serious
 - **Confident:** Clear, direct, no jargon
 
 ### Language Support
+
 - **Primary:** Catalan (CA)
 - **Secondary:** Spanish (ES), English (EN)
 - All content centralized in `config/content.config.ts`
@@ -112,6 +128,7 @@ The "Duck" philosophy: Calm on the surface, paddling furiously underneath. We ba
 ## Technical Implementation
 
 ### Config Structure
+
 ```
 config/
   ├── brand.config.ts    # Colors, typography, spacing, animations
@@ -120,6 +137,7 @@ config/
 ```
 
 ### Hooks
+
 ```
 hooks/
   ├── useLanguage.ts     # Language state management
@@ -127,6 +145,7 @@ hooks/
 ```
 
 ### Usage Example
+
 ```typescript
 import { brandConfig } from '../config/brand.config'
 import { useContent } from '../hooks/useContent'
