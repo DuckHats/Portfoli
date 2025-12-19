@@ -5,7 +5,6 @@ export const contactConfig = {
     github: 'https://github.com/DuckHats',
     twitter: 'https://twitter.com/@Hats4Ducks',
     instagram: 'https://instagram.com/hats4_ducks',
-    linkedin: 'https://linkedin.com/company/duckhats',
   },
   handles: {
     github: 'DuckHats',

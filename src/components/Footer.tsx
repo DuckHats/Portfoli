@@ -142,6 +142,40 @@ export function Footer() {
               >
                 {contactConfig.handles.github}
               </a>
+              <a
+                href={contactConfig.social.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-sm transition-colors inline-block w-fit"
+                style={{
+                  color: brandConfig.colors.neutral.gray600,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = brandConfig.colors.accent.red
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = brandConfig.colors.neutral.gray600
+                }}
+              >
+                {contactConfig.handles.twitter}
+              </a>
+              <a
+                href={contactConfig.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-sm transition-colors inline-block w-fit"
+                style={{
+                  color: brandConfig.colors.neutral.gray600,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = brandConfig.colors.accent.red
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = brandConfig.colors.neutral.gray600
+                }}
+              >
+                {contactConfig.handles.instagram}
+              </a>
             </div>
           </div>
 
