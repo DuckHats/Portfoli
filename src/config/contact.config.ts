@@ -1,6 +1,6 @@
 export const contactConfig = {
   email: 'info@duckhats.cat',
-  phone: '+34 636 643 43 88',
+  phone: '+34 636 63 43 88',
 
   social: {
     github: 'https://github.com/DuckHats',
