@@ -68,7 +68,7 @@ export const contentConfig = {
       contact: 'Contacte',
       socials: 'Xarxes Socials',
       tagline: "amb amor i codi\ndes de l'estany",
-      copyright: '© 2024 DuckHats'
+      copyright: '© 2025 DuckHats'
     },
     fullScreenMenu: {
       mainNav: {
@@ -162,7 +162,7 @@ export const contentConfig = {
       contact: 'Contacto',
       socials: 'Redes Sociales',
       tagline: 'con amor y código\ndesde el estanque',
-      copyright: '© 2024 DuckHats'
+      copyright: '© 2025 DuckHats'
     },
     fullScreenMenu: {
       mainNav: {
@@ -270,7 +270,7 @@ export const contentConfig = {
       contact: 'Contact',
       socials: 'Social Networks',
       tagline: 'with love and code\nfrom the pond',
-      copyright: '© 2024 DuckHats'
+      copyright: '© 2025 DuckHats'
     },
     fullScreenMenu: {
       mainNav: {

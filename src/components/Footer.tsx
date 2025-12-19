@@ -116,15 +116,31 @@ export function Footer() {
             >
               {contactConfig.email}
             </a>
+            <a
+              href={`tel:${contactConfig.phone}`}
+              className="font-mono text-sm transition-colors inline-block w-fit"
+              style={{
+                color: brandConfig.colors.neutral.gray600,
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = brandConfig.colors.accent.red
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = brandConfig.colors.neutral.gray600
+              }}
+            >
+              {contactConfig.phone}
+            </a>
             <div className="pt-4">
               <h4
-                className="font-mono font-bold text-sm mb-2"
+                className="font-mono font-bold text-sm mb-3"
                 style={{
                   color: brandConfig.colors.primary.black,
                 }}
               >
                 {content.footer.socials}
               </h4>
+              <div className="flex flex-col space-y-2">
               <a
                 href={contactConfig.social.github}
                 target="_blank"
@@ -176,6 +192,7 @@ export function Footer() {
               >
                 {contactConfig.handles.instagram}
               </a>
+              </div>
             </div>
           </div>
 

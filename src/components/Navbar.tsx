@@ -38,8 +38,8 @@ export function Navbar() {
         duration: brandConfig.animation.duration.slow,
         ease: brandConfig.animation.easing.smooth
       }} className="pointer-events-auto bg-white/90 backdrop-blur-md rounded-full px-6 py-3 shadow-lg flex items-center gap-6 md:gap-8 border border-gray-200">
-          {/* Language Toggle */}
-          <div className="text-xs font-bold tracking-widest flex gap-2" style={{
+          {/* Language Toggle - Hidden on mobile */}
+          <div className="hidden md:flex text-xs font-bold tracking-widest gap-2" style={{
           color: brandConfig.colors.primary.black
         }}>
             <button onClick={() => setLanguage('ca')} className={language === 'ca' ? '' : 'opacity-40'} style={{
@@ -76,19 +76,19 @@ export function Navbar() {
             <NavLink to="/projects">{content.nav.projects}</NavLink>
           </div>
 
-          {/* Divider */}
-          <div className="h-4 w-px" style={{
+          {/* Divider - Hidden on mobile */}
+          <div className="hidden md:block h-4 w-px" style={{
           backgroundColor: brandConfig.colors.neutral.gray300
         }} />
 
           {/* Branding - Links to About */}
           <Link to="/about" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <span className="font-display font-bold italic text-lg" style={{
+            <span className="hidden md:inline font-display font-bold italic text-lg" style={{
             color: brandConfig.colors.primary.black
           }}>
               {content.nav.story}
             </span>
-            <span className="font-bold" style={{
+            <span className="font-bold text-lg md:text-base" style={{
             color: brandConfig.colors.accent.red
           }}>
               {brandConfig.name.toUpperCase()}
