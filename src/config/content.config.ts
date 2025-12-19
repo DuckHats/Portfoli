@@ -19,7 +19,7 @@ export const contentConfig = {
       },
       born: {
         title: 'NEIXEMENT',
-        established: 'Est. 2025'
+        established: 'Est. '
       },
       about: {
         title: 'Sobre nosaltres',
@@ -221,7 +221,7 @@ export const contentConfig = {
       },
       born: {
         title: 'BORN',
-        established: 'Est. 2020'
+        established: 'Est. '
       },
       about: {
         title: 'About us',
