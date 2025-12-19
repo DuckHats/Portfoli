@@ -248,13 +248,13 @@ return <h1>{content.hero.tagline}</h1>;
 
 ## 📄 License
 
-© 2024 DuckHats. All rights reserved.
+© 2025 DuckHats. All rights reserved.
 
 ## 🤝 Contributing
 
 We're always looking for new ducks to join our pond! Designers, developers, and dreamers welcome.
 
-Contact: hello@duckhats.cat
+Contact: info@duckhats.cat
 
 ---
 
