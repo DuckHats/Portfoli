@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { useContent } from '../hooks/useContent';
 import { brandConfig } from '../config/brand.config';

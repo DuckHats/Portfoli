@@ -1,8 +1,6 @@
 export const brandConfig = {
   name: 'DuckHats',
   tagline: "Desenvolupant amb passió i un toc d'humor",
-  email: 'hello@duckhats.cat',
-  social: '@duckhats',
   established: '2020',
   logo: {
     url: "/logo_(2).png",

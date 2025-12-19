@@ -18,8 +18,8 @@ export const contentConfig = {
         description: 'Per crear experiències digitals que no només funcionin, sinó que deixin una impressió duradora. Creiem en el poder del joc professionalitat—on el codi seriós es troba amb el caos creatiu.'
       },
       born: {
-        title: 'NAIXEMENT',
-        established: 'Est. 2020'
+        title: 'NEIXEMENT',
+        established: 'Est. 2025'
       },
       about: {
         title: 'Sobre nosaltres',
@@ -113,7 +113,7 @@ export const contentConfig = {
       },
       born: {
         title: 'NACIMIENTO',
-        established: 'Est. 2020'
+        established: 'Est. '
       },
       about: {
         title: 'Sobre nosotros',

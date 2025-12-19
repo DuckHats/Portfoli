@@ -1,4 +1,3 @@
-import React from 'react';
 import { Team } from '../components/Team';
 import { Members } from '../components/Members';
 import { JoinUs } from '../components/JoinUs';

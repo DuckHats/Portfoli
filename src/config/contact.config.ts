@@ -8,8 +8,8 @@ export const contactConfig = {
     instagram: 'https://instagram.com/hats4_ducks',
   },
   handles: {
-    github: 'Github: DuckHats',
-    twitter: 'Twitter: @Hats4Ducks',
-    instagram: 'Instagram: @hats4_ducks',
+    github: 'Github',
+    twitter: 'Twitter',
+    instagram: 'Instagram',
   },
 }
