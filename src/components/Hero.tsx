@@ -169,19 +169,29 @@ export function Hero() {
         </div>
 
         {/* CTA Button */}
-        <motion.div key={activeSection.id} initial={{
-        opacity: 0,
-        y: 20
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: brandConfig.animation.duration.fast
-      }}>
-          <Link to={activeSection.path} className="group flex items-center gap-3 px-8 py-4 rounded-none transition-colors duration-300" style={{
-          backgroundColor: brandConfig.colors.primary.black,
-          color: brandConfig.colors.primary.white
-        }}>
+        {/* CTA Button */}
+        <motion.div
+          key={activeSection.id}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{
+            opacity: activeSection.id === 'home' ? 0 : 1,
+            y: 0,
+          }}
+          transition={{
+            duration: brandConfig.animation.duration.fast,
+          }}
+          style={{
+            pointerEvents: activeSection.id === 'home' ? 'none' : 'auto',
+          }}
+        >
+          <Link
+            to={activeSection.path}
+            className="group flex items-center gap-3 px-8 py-4 rounded-none transition-colors duration-300"
+            style={{
+              backgroundColor: brandConfig.colors.primary.black,
+              color: brandConfig.colors.primary.white,
+            }}
+          >
             <span className="font-mono text-lg">
               {content.hero.viewButton} [ {activeSection.label} ]
             </span>

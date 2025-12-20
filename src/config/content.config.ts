@@ -15,7 +15,7 @@ export const contentConfig = {
     about: {
       vision: {
         title: 'VISIÓ',
-        description: 'Per crear experiències digitals que no només funcionin, sinó que deixin una impressió duradora. Creiem en el poder del joc professionalitat—on el codi seriós es troba amb el caos creatiu.'
+        description: 'Per crear experiències digitals que no només funcionin, sinó que deixin una impressió duradora. Creiem en el poder del joc la professionalitat lúdica on el codi seriós es troba amb el caos creatiu.'
       },
       born: {
         title: 'NAIXEMENT',
