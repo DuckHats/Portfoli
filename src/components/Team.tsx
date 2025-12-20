@@ -82,7 +82,7 @@ export function Team() {
           <h3 className="text-2xl font-bold mb-4" style={{
           color: brandConfig.colors.primary.black
         }}>
-            {content.team.planTitle}
+            {content.team.planTitle} {/* no hauria de ser un title sino mes text */}
           </h3>
           <div className="space-y-2">
             <div className="h-1 w-full rounded-full" style={{

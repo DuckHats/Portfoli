@@ -37,7 +37,7 @@ export type Project = {
 export const projectsData: Project[] = [
   {
     id: 'menu-ginebro',
-    title: 'MENÚ GINEBRO',
+    title: 'MENÚ GINEBRÓ',
     date: 'En Procés',
     category: {
       ca: 'Aplicació Web',

@@ -33,7 +33,7 @@ export function ProjectDetailPage() {
           <div className="max-w-7xl mx-auto">
             <ShadowButton to="/projects" size="small" className="mb-8">
               <ArrowLeft className="w-4 h-4" />
-              {content.projects.backToProjects || 'Tornar a Projectes'}
+              {content.projects.backToProjects}
             </ShadowButton>
 
             <motion.div
@@ -100,7 +100,7 @@ export function ProjectDetailPage() {
                       color: brandConfig.colors.primary.white,
                     }}
                   >
-                    {content.projects.visitSite || 'Visitar Lloc'}
+                    {content.projects.visitSite}
                     <ExternalLink className="w-4 h-4" />
                   </a>
                 )}
@@ -179,7 +179,7 @@ export function ProjectDetailPage() {
                   borderColor: brandConfig.colors.primary.black,
                 }}
               >
-                {content.projects.challenge || 'El Repte'}
+                {content.projects.challenge}
               </h2>
               <p
                 className="text-lg md:text-xl leading-relaxed"
@@ -215,7 +215,7 @@ export function ProjectDetailPage() {
                   borderColor: brandConfig.colors.primary.black,
                 }}
               >
-                {content.projects.solution || 'La Solució'}
+                {content.projects.solution}
               </h2>
               <p
                 className="text-lg md:text-xl leading-relaxed"
@@ -251,7 +251,7 @@ export function ProjectDetailPage() {
                   borderColor: brandConfig.colors.primary.black,
                 }}
               >
-                {content.projects.results || 'Resultats'}
+                {content.projects.results}
               </h2>
               <ul className="space-y-4">
                 {project.results[language].map((result, index) => (
@@ -318,7 +318,7 @@ export function ProjectDetailPage() {
                   borderColor: brandConfig.colors.primary.black,
                 }}
               >
-                {content.projects.technologies || 'Tecnologies'}
+                {content.projects.technologies}
               </h2>
               <div className="flex flex-wrap gap-3">
                 {project.technologies.map((tech, index) => (
@@ -362,7 +362,7 @@ export function ProjectDetailPage() {
                   color: brandConfig.colors.primary.black,
                 }}
               >
-                {content.projects.gallery || 'Galeria'}
+                {content.projects.gallery}
               </h2>
               <div className="grid md:grid-cols-2 gap-8">
                 {project.gallery.map((image, index) => (
@@ -425,7 +425,7 @@ export function ProjectDetailPage() {
               }}
             >
               <ShadowButton to="/projects" size="large">
-                {content.projects.viewAllProjects || 'VEURE TOTS ELS PROJECTES'}
+                {content.projects.viewAllProjects}
               </ShadowButton>
             </motion.div>
           </div>
