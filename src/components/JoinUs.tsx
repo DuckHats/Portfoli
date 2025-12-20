@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { ShadowButton } from './ShadowButton';
 import { brandConfig } from '../config/brand.config';
+
 export function JoinUs() {
   return (
     <section
@@ -37,5 +38,5 @@ export function JoinUs() {
         </p>
       </div>
     </section>
-  )
+  );
 }

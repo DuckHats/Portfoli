@@ -61,7 +61,36 @@ export const contentConfig = {
     },
     joinUs: {
       title: 'UNEIX-TE',
-      description: 'Sempre estem buscant nous ànecs per unir-se al nostre estany. Dissenyadors, desenvolupadors i somiadors benvinguts.'
+      description: 'Sempre estem buscant nous ànecs per unir-se al nostre estany. Dissenyadors, desenvolupadors i somiadors benvinguts.',
+      form: {
+        title: 'Uneix-te a la Bandada',
+        description: "Sempre estem buscant nous ànecs per unir-se al nostre estany. Si t'apassiona el codi, el disseny i tens un toc d'humor, aquest és el teu lloc.",
+        emailLabel: 'Email',
+        phoneLabel: 'Telèfon',
+        nameLabel: 'Nom Complet',
+        namePlaceholder: 'El teu nom',
+        emailPlaceholder: 'tucorreu@exemple.com',
+        roleLabel: 'Rol Sol·licitat',
+        rolePlaceholder: 'Selecciona un rol',
+        roles: {
+          frontend: 'Frontend Developer',
+          backend: 'Backend Developer',
+          fullstack: 'Full Stack Developer',
+          uiux: 'UI/UX Designer',
+          pm: 'Project Manager',
+          marketing: 'Marketing Specialist',
+          other: 'Altres'
+        },
+        linksLabel: 'Enllaços (LinkedIn / GitHub)',
+        linksPlaceholder: 'https://linkedin.com/in/...',
+        cvLabel: 'CV (PDF)',
+        uploadButton: 'Pujar un arxiu',
+        dragDrop: 'o arrossega i deixa anar',
+        fileLimit: 'PDF fins a 10MB',
+        messageLabel: "Parla'ns de tu",
+        messagePlaceholder: 'Què et fa especial? Per què vols unir-te a DuckHats?',
+        submitButton: 'Enviar Sol·licitud'
+      }
     },
     footer: {
       internal: 'Intern',
@@ -155,7 +184,36 @@ export const contentConfig = {
     },
     joinUs: {
       title: 'ÚNETE',
-      description: 'Siempre estamos buscando nuevos patos para unirse a nuestro estanque. Diseñadores, desarrolladores y soñadores bienvenidos.'
+      description: 'Siempre estamos buscando nuevos patos para unirse a nuestro estanque. Diseñadores, desarrolladores y soñadores bienvenidos.',
+      form: {
+        title: 'Únete a la Bandada',
+        description: 'Siempre estamos buscando nuevos patos para unirse a nuestro estanque. Si te apasiona el código, el diseño y tienes un toque de humor, este es tu lugar.',
+        emailLabel: 'Email',
+        phoneLabel: 'Teléfono',
+        nameLabel: 'Nombre Completo',
+        namePlaceholder: 'Tu nombre',
+        emailPlaceholder: 'tucorreo@ejemplo.com',
+        roleLabel: 'Rol Solicitado',
+        rolePlaceholder: 'Selecciona un rol',
+        roles: {
+          frontend: 'Frontend Developer',
+          backend: 'Backend Developer',
+          fullstack: 'Full Stack Developer',
+          uiux: 'UI/UX Designer',
+          pm: 'Project Manager',
+          marketing: 'Marketing Specialist',
+          other: 'Otros'
+        },
+        linksLabel: 'Enlaces (LinkedIn / GitHub)',
+        linksPlaceholder: 'https://linkedin.com/in/...',
+        cvLabel: 'CV (PDF)',
+        uploadButton: 'Subir un archivo',
+        dragDrop: 'o arrastra y suelta',
+        fileLimit: 'PDF hasta 10MB',
+        messageLabel: 'Háblanos de ti',
+        messagePlaceholder: '¿Qué te hace especial? ¿Por qué quieres unirte a DuckHats?',
+        submitButton: 'Enviar Solicitud'
+      }
     },
     footer: {
       internal: 'Interno',
@@ -249,7 +307,36 @@ export const contentConfig = {
     },
     joinUs: {
       title: 'JOIN US',
-      description: "We're always looking for new ducks to join our pond. Designers, developers and dreamers welcome."
+      description: "We're always looking for new ducks to join our pond. Designers, developers and dreamers welcome.",
+      form: {
+        title: 'Join the Flock',
+        description: "We're always looking for new ducks to join our pond. If you're passionate about code, design, and have a sense of humor, this is your place.",
+        emailLabel: 'Email',
+        phoneLabel: 'Phone',
+        nameLabel: 'Full Name',
+        namePlaceholder: 'Your name',
+        emailPlaceholder: 'youremail@example.com',
+        roleLabel: 'Requested Role',
+        rolePlaceholder: 'Select a role',
+        roles: {
+          frontend: 'Frontend Developer',
+          backend: 'Backend Developer',
+          fullstack: 'Full Stack Developer',
+          uiux: 'UI/UX Designer',
+          pm: 'Project Manager',
+          marketing: 'Marketing Specialist',
+          other: 'Other'
+        },
+        linksLabel: 'Links (LinkedIn / GitHub)',
+        linksPlaceholder: 'https://linkedin.com/in/...',
+        cvLabel: 'CV (PDF)',
+        uploadButton: 'Upload a file',
+        dragDrop: 'or drag and drop',
+        fileLimit: 'PDF up to 10MB',
+        messageLabel: 'Tell us about yourself',
+        messagePlaceholder: 'What makes you special? Why do you want to join DuckHats?',
+        submitButton: 'Send Application'
+      }
     },
     footer: {
       internal: 'Internal',
