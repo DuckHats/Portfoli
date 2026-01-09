@@ -74,7 +74,7 @@ export function About() {
         <motion.div initial="hidden" whileInView="visible" viewport={{
         once: true,
         margin: '-100px'
-      }}variants={fadeInUp} className="grid md:grid-cols-2 gap-12 items-center">
+      }} variants={fadeInUp} className="grid md:grid-cols-2 gap-12 items-center">
           <div className="text-left">
             <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
               {content.about.about.title}
@@ -91,9 +91,8 @@ export function About() {
             </p>
           </div>
           <div className="h-64 rounded-lg border-2 border-dashed flex items-center justify-center" style={{
-          backgroundColor: brandConfig.colors.primary.white,
-          borderColor: brandConfig.colors.primary.black,
-          boxShadow: `4px 4px 0px 0px ${brandConfig.colors.primary.black}`
+          backgroundColor: brandConfig.colors.neutral.gray100,
+          borderColor: brandConfig.colors.neutral.gray300
         }}>
             <span className="font-display text-xl" style={{
             color: brandConfig.colors.neutral.gray400
