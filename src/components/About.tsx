@@ -71,9 +71,12 @@ export function About() {
         </motion.div>
 
         {/* About Section */}
-        <motion.div initial="hidden" whileInView="visible" viewport={{
+        <motion.div initial="hidden" whileInView="visible" sx={{
         once: true,
-        margin: '-100px'
+        margin: '-100px',
+        borderColor: brandConfig.colors.primary.black,
+        backgroundColor: brandConfig.colors.primary.white,
+        boxShadow: `10px 10px 0px 0px ${brandConfig.colors.primary.black}`
       }} variants={fadeInUp} className="grid md:grid-cols-2 gap-12 items-center">
           <div className="text-left">
             <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">

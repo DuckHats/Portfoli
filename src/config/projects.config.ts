@@ -1,7 +1,11 @@
 export type Project = {
   id: string
   title: string
-  date: string
+  date: {
+    ca: string
+    es: string
+    en: string
+  }
   category: {
     ca: string
     es: string
@@ -38,7 +42,11 @@ export const projectsData: Project[] = [
   {
     id: 'menu-ginebro',
     title: 'MENÚ GINEBRÓ',
-    date: 'En Procés',
+    date: {
+      ca: 'En Procès',
+      es: 'En Proceso',
+      en: 'In Progress',
+    },
     category: {
       ca: 'Aplicació Web',
       es: 'Aplicación Web',
