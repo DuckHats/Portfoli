@@ -31,11 +31,21 @@ export const teamMembers = [{
   },
   img: 'https://media-mad2-1.cdn.whatsapp.net/v/t61.24694-24/417577600_879089957327510_6055466079789488261_n.jpg?ccb=11-4&oh=01_Q5Aa3gG7PQx_n5DmKgjWqmGQi05WZFfnea14F6EnNPE3ZzrFyg&oe=696E6BE2&_nc_sid=5e03e0&_nc_cat=110'
 }];
+
 export const teamImage = {
   url: 'https://www.ginebro.cat/fp/wp-content/uploads/elementor/thumbs/dam-05-quc4hr1xpg898hh1kwnw16uzcnftkw8yo8a29pn7ko.jpg',
   alt: {
     ca: 'Equip treballant junts',
     es: 'Equipo trabajando juntos',
     en: 'Team working together'
+  }
+};
+
+  export const aboutImage = {
+  url: 'https://media-mad2-1.cdn.whatsapp.net/v/t61.24694-24/455900521_400929506349481_5639963107387292162_n.jpg?ccb=11-4&oh=01_Q5Aa3gEr2ZHNmGzOJtlMQYxyfZ9tSU0ZK3nUYYqobJ1qrgItRQ&oe=696E583D&_nc_sid=5e03e0&_nc_cat=101',
+  alt: {
+    ca: 'L\'equip sobre una pedra mirant al horitzó',
+    es: 'El equipo sobre una piedra mirando al horizonte',
+    en: 'The team on a rock looking at the horizon'
   }
 };
