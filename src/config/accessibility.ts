@@ -1,54 +1,98 @@
 export const accessibilityConfig = {
-        nav: {
-            ca: {
-                navbarLabel: 'Menú de navegació principal',
+    nav: {
+        ca: {
+            navbarLabel: 'Menú de navegació principal',
 
-                langaugeLabel: 'Menú d\'idioma',
-                    catalanLabel: 'Canviar a català',
-                    spanishLabel: 'Canviar a Castellà',
-                    englishLabel: 'Canviar a anglès',
+            langaugeLabel: 'Menú d\'idioma',
+                catalanLabel: 'Canviar a català',
+                spanishLabel: 'Canviar a Castellà',
+                englishLabel: 'Canviar a anglès',
 
-                hamburgerLabel: 'Obrir menú',
+            hamburgerLabel: 'Obrir menú',
 
-                linkLinksLabel: 'Enllaços de navegació',
-                    linkHomeLabel: 'Enllaç a la pàgina d\'inici',
-                    linkTeamLabel: 'Enllaç a la pàgina de l\'equip',
-                    linkProjectsLabel: 'Enllaç a la pàgina de projectes',
-                    linkAboutLabel: 'Enllaç a la pàgina sobre nosaltres',
+            linkLinksLabel: 'Enllaços de navegació',
+                linkHomeLabel: 'Enllaç a la pàgina d\'inici',
+                linkTeamLabel: 'Enllaç a la pàgina de l\'equip',
+                linkProjectsLabel: 'Enllaç a la pàgina de projectes',
+                linkAboutLabel: 'Enllaç a la pàgina sobre nosaltres',
 
-            },
-            es: {
-                navbarLabel: 'Menú de navegación principal',
+        },
+        es: {
+            navbarLabel: 'Menú de navegación principal',
 
-                langaugeLabel: 'Menú de idioma',
-                    catalanLabel: 'Cambiar a catalán',
-                    spanishLabel: 'Cambiar a español',
-                    englishLabel: 'Cambiar a inglés',
+            langaugeLabel: 'Menú de idioma',
+                catalanLabel: 'Cambiar a catalán',
+                spanishLabel: 'Cambiar a español',
+                englishLabel: 'Cambiar a inglés',
 
-                hamburgerLabel: 'Abrir menú',
+            hamburgerLabel: 'Abrir menú',
 
-                linkLinksLabel: 'Enlaces de navegación',
-                    linkHomeLabel: 'Enlace a la página de inicio',
-                    linkTeamLabel: 'Enlace a la página del equipo',
-                    linkProjectsLabel: 'Enlace a la página de proyectos',
-                    linkAboutLabel: 'Enlace a la página sobre nosotros',
-            },
-            en: {
-                navbarLabel: 'Main navigation menu',
+            linkLinksLabel: 'Enlaces de navegación',
+                linkHomeLabel: 'Enlace a la página de inicio',
+                linkTeamLabel: 'Enlace a la página del equipo',
+                linkProjectsLabel: 'Enlace a la página de proyectos',
+                linkAboutLabel: 'Enlace a la página sobre nosotros',
+        },
+        en: {
+            navbarLabel: 'Main navigation menu',
 
-                langaugeLabel: 'Language menu',
-                    catalanLabel: 'Switch to Catalan',
-                    spanishLabel: 'Switch to Spanish',
-                    englishLabel: 'Switch to English',
+            langaugeLabel: 'Language menu',
+                catalanLabel: 'Switch to Catalan',
+                spanishLabel: 'Switch to Spanish',
+                englishLabel: 'Switch to English',
 
-                hamburgerLabel: 'Open menu',
+            hamburgerLabel: 'Open menu',
 
-                linkLinksLabel: 'Navigation links',
-                    linkHomeLabel: 'Link to home page',
-                    linkTeamLabel: 'Link to team page',
-                    linkProjectsLabel: 'Link to projects page',
-                    linkAboutLabel: 'Link to about us page',
-            },
+            linkLinksLabel: 'Navigation links',
+                linkHomeLabel: 'Link to home page',
+                linkTeamLabel: 'Link to team page',
+                linkProjectsLabel: 'Link to projects page',
+                linkAboutLabel: 'Link to about us page',
+        },
 
+},
+    footer: {
+        ca: {
+            footerLabel: 'Peu de pàgina principal',
+            internalLinksLabel: 'Enllaços interns',
+
+            contactInfoLabel: 'Informació de contacte',
+                emailLinkLabel: 'Enllaç per enviar un correu electrònic',
+                phoneLinkLabel: 'Enllaç per trucar per telèfon',
+
+                socialsLabel: 'Enllaços de xarxes socials',
+                    githubLinkLabel: 'Enllaç al perfil de GitHub',
+                    twitterLinkLabel: 'Enllaç al perfil de Twitter',
+                    instagramLinkLabel: 'Enllaç al perfil d\'Instagram',
+        },
+        es: {
+            footerLabel: 'Pie de página principal',
+            internalLinksLabel: 'Enlaces internos',
+            
+            contactInfoLabel: 'Información de contacto',
+                emailLinkLabel: 'Enlace para enviar un correo electrónico',
+                phoneLinkLabel: 'Enlace para llamar por teléfono',
+
+                socialsLabel: 'Enlaces de redes sociales',
+                    githubLinkLabel: 'Enlace al perfil de GitHub',
+                    twitterLinkLabel: 'Enlace al perfil de Twitter',
+                    instagramLinkLabel: 'Enlace al perfil de Instagram',
+                    
+        },
+        en: {
+            footerLabel: 'Main footer',
+            internalLinksLabel: 'Internal links',
+
+            contactInfoLabel: 'Contact information',
+                emailLinkLabel: 'Link to send an email',
+                phoneLinkLabel: 'Link to make a phone call',
+
+                socialsLabel: 'Social media links',
+                    githubLinkLabel: 'Link to GitHub profile',
+                    twitterLinkLabel: 'Link to Twitter profile',
+                    instagramLinkLabel: 'Link to Instagram profile',
+                    
+        },
     },
+
 };

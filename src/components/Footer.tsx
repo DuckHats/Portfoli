@@ -2,12 +2,17 @@ import { Link } from 'react-router-dom'
 import { brandConfig } from '../config/brand.config'
 import { contactConfig } from '../config/contact.config'
 import { useContent } from '../hooks/useContent'
+import { useLanguage } from '../hooks/useLanguage'
+import { accessibilityConfig } from '../config/accessibility'
 
 export function Footer() {
   const content = useContent()
+  const {
+    language
+  } = useLanguage();
 
   return (
-    <footer
+    <footer aria-label={accessibilityConfig.footer[language].footerLabel}
       className="border-t-4 py-16 px-4 md:px-8 mt-32"
       style={{
         backgroundColor: brandConfig.colors.primary.white,
@@ -17,7 +22,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           {/* Internal Links */}
-          <div className="flex flex-col space-y-3">
+          <nav aria-label={accessibilityConfig.footer[language].internalLinksLabel} className="flex flex-col space-y-3">
             <h3
               className="font-display font-bold text-xl mb-4 pb-2 border-b-4 inline-block"
               style={{
@@ -27,7 +32,7 @@ export function Footer() {
             >
               {content.footer.internal}
             </h3>
-            <Link
+            <Link aria-label={accessibilityConfig.nav[language].linkHomeLabel}
               to="/"
               className="font-mono text-sm transition-all hover:translate-x-1 inline-block w-fit"
               style={{
@@ -42,7 +47,7 @@ export function Footer() {
             >
               → {content.nav.home}
             </Link>
-            <Link
+            <Link aria-label={accessibilityConfig.nav[language].linkAboutLabel}
               to="/about"
               className="font-mono text-sm transition-all hover:translate-x-1 inline-block w-fit"
               style={{
@@ -57,22 +62,7 @@ export function Footer() {
             >
               → {content.nav.about}
             </Link>
-            <Link
-              to="/team"
-              className="font-mono text-sm transition-all hover:translate-x-1 inline-block w-fit"
-              style={{
-                color: brandConfig.colors.neutral.gray600,
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = brandConfig.colors.primary.black
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = brandConfig.colors.neutral.gray600
-              }}
-            >
-              → {content.nav.team}
-            </Link>
-            <Link
+            <Link aria-label={accessibilityConfig.nav[language].linkTeamLabel}
               to="/projects"
               className="font-mono text-sm transition-all hover:translate-x-1 inline-block w-fit"
               style={{
@@ -87,10 +77,26 @@ export function Footer() {
             >
               → {content.nav.projects}
             </Link>
-          </div>
+            <Link aria-label={accessibilityConfig.nav[language].linkAboutLabel}
+              to="/team"
+              className="font-mono text-sm transition-all hover:translate-x-1 inline-block w-fit"
+              style={{
+                color: brandConfig.colors.neutral.gray600,
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = brandConfig.colors.primary.black
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = brandConfig.colors.neutral.gray600
+              }}
+            >
+              → {content.nav.team}
+            </Link>
+            
+          </nav>
 
           {/* Contact */}
-          <div className="flex flex-col space-y-3">
+          <div aria-label={accessibilityConfig.footer[language].contactInfoLabel} className="flex flex-col space-y-3">
             <h3
               className="font-display font-bold text-xl mb-4 pb-2 border-b-4 inline-block"
               style={{
@@ -100,7 +106,7 @@ export function Footer() {
             >
               {content.footer.contact}
             </h3>
-            <a
+            <a aria-label={accessibilityConfig.footer[language].emailLinkLabel}
               href={`mailto:${contactConfig.email}`}
               className="font-mono text-sm transition-colors inline-block w-fit"
               style={{
@@ -115,7 +121,7 @@ export function Footer() {
             >
               {contactConfig.email}
             </a>
-            <a
+            <a aria-label={accessibilityConfig.footer[language].phoneLinkLabel}
               href={`tel:${contactConfig.phone}`}
               className="font-mono text-sm transition-colors inline-block w-fit"
               style={{
@@ -130,7 +136,8 @@ export function Footer() {
             >
               {contactConfig.phone}
             </a>
-            <div className="pt-4">
+            {/* Socials */}
+            <div role='group' aria-label={accessibilityConfig.footer[language].socialsLabel} className="pt-4">
               <h4
                 className="font-mono font-bold text-sm mb-3"
                 style={{
@@ -140,7 +147,7 @@ export function Footer() {
                 {content.footer.socials}
               </h4>
               <div className="flex flex-col space-y-2">
-              <a
+              <a aria-label={accessibilityConfig.footer[language].githubLinkLabel}
                 href={contactConfig.social.github}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -157,7 +164,7 @@ export function Footer() {
               >
                 {contactConfig.handles.github}
               </a>
-              <a
+              <a aria-label={accessibilityConfig.footer[language].twitterLinkLabel}
                 href={contactConfig.social.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -174,7 +181,7 @@ export function Footer() {
               >
                 {contactConfig.handles.twitter}
               </a>
-              <a
+              <a aria-label={accessibilityConfig.footer[language].instagramLinkLabel}
                 href={contactConfig.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
