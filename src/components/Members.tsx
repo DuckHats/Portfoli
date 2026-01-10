@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Github, Instagram, Linkedin, Twitter } from 'lucide-react';
 import { useContent } from '../hooks/useContent';
 import { useLanguage } from '../hooks/useLanguage';
 import { brandConfig } from '../config/brand.config';
@@ -48,11 +49,35 @@ export function Members() {
           }}>
                 {member.name}
               </h3>
-              <p className="text-xs font-mono uppercase tracking-wider" style={{
+              <p className="text-xs font-mono uppercase tracking-wider mb-4" style={{
             color: brandConfig.colors.neutral.gray500
           }}>
                 {member.role[language]}
               </p>
+
+              {/* Social Media Links */}
+              {member.social && <div className="flex gap-3 mt-auto">
+                  {member.social.linkedin && <a href={member.social.linkedin} target="_blank" rel="noopener noreferrer" className="transition-colors duration-300 hover:text-opacity-70" style={{
+              color: brandConfig.colors.primary.black
+            }}>
+                      <Linkedin size={20} />
+                    </a>}
+                  {member.social.github && <a href={member.social.github} target="_blank" rel="noopener noreferrer" className="transition-colors duration-300 hover:text-opacity-70" style={{
+              color: brandConfig.colors.primary.black
+            }}>
+                      <Github size={20} />
+                    </a>}
+                  {member.social.twitter && <a href={member.social.twitter} target="_blank" rel="noopener noreferrer" className="transition-colors duration-300 hover:text-opacity-70" style={{
+              color: brandConfig.colors.primary.black
+            }}>
+                      <Twitter size={20} />
+                    </a>}
+                  {member.social.instagram && <a href={member.social.instagram} target="_blank" rel="noopener noreferrer" className="transition-colors duration-300 hover:text-opacity-70" style={{
+              color: brandConfig.colors.primary.black
+            }}>
+                      <Instagram size={20} />
+                    </a>}
+                </div>}
             </motion.div>)}
         </div>
       </div>

@@ -5,7 +5,13 @@ export const teamMembers = [{
     es: 'Coordinación y administración',
     en: 'Coordination and administration'
   },
-  img: 'https://media-mad1-1.cdn.whatsapp.net/v/t61.24694-24/538273153_2295578454231702_2324249293735100636_n.jpg?ccb=11-4&oh=01_Q5Aa3gGD-7j13mU9aNvjmPZjI1x5J4AA5xnzrz7k0lVaqs7evg&oe=696E6A0B&_nc_sid=5e03e0&_nc_cat=106'
+  img: 'https://media-mad1-1.cdn.whatsapp.net/v/t61.24694-24/538273153_2295578454231702_2324249293735100636_n.jpg?ccb=11-4&oh=01_Q5Aa3gGD-7j13mU9aNvjmPZjI1x5J4AA5xnzrz7k0lVaqs7evg&oe=696E6A0B&_nc_sid=5e03e0&_nc_cat=106',
+  social: {
+    linkedin: 'https://linkedin.com/in/sergigiribet',
+    github: 'https://github.com/SergiGiribet',
+    twitter: '',
+    instagram: ''
+  }
 }, {
   name: 'Gerard Loriz',
   role: {
@@ -13,7 +19,11 @@ export const teamMembers = [{
     es: 'Desarrollador Back-end',
     en: 'Back-end Developer'
   },
-  img: 'https://media-mad1-1.cdn.whatsapp.net/v/t61.24694-24/598335585_1402671691576661_8635073915938445903_n.jpg?ccb=11-4&oh=01_Q5Aa3gG2wP_ee22HWhX_wmd8Hxv3I88D2wzGYtKdJLYUs57RoQ&oe=696E65C8&_nc_sid=5e03e0&_nc_cat=108'
+  img: 'https://media-mad1-1.cdn.whatsapp.net/v/t61.24694-24/598335585_1402671691576661_8635073915938445903_n.jpg?ccb=11-4&oh=01_Q5Aa3gG2wP_ee22HWhX_wmd8Hxv3I88D2wzGYtKdJLYUs57RoQ&oe=696E65C8&_nc_sid=5e03e0&_nc_cat=108',
+  social: {
+    linkedin: '',
+    github: ''
+  }
 }, {
   name: 'Arnau Clavijos',
   role: {
@@ -21,7 +31,11 @@ export const teamMembers = [{
     es: 'Desarrollador Front-end',
     en: 'Front-end Developer'
   },
-  img: 'https://media-mad2-1.cdn.whatsapp.net/v/t61.24694-24/545604290_1113696997567738_7589873008295301530_n.jpg?ccb=11-4&oh=01_Q5Aa3gEC1v2PgooF1owWIhWS9d6dgzvegAXuDJToV3zZSRP6dg&oe=696E7C03&_nc_sid=5e03e0&_nc_cat=105'
+  img: 'https://media-mad2-1.cdn.whatsapp.net/v/t61.24694-24/545604290_1113696997567738_7589873008295301530_n.jpg?ccb=11-4&oh=01_Q5Aa3gEC1v2PgooF1owWIhWS9d6dgzvegAXuDJToV3zZSRP6dg&oe=696E7C03&_nc_sid=5e03e0&_nc_cat=105',
+  social: {
+    linkedin: '',
+    github: ''
+  }
 }, {
   name: 'Ferran García',
   role: {
@@ -29,7 +43,14 @@ export const teamMembers = [{
     es: 'Desarrollador Front-end',
     en: 'Front-end Developer'
   },
-  img: 'https://media-mad2-1.cdn.whatsapp.net/v/t61.24694-24/417577600_879089957327510_6055466079789488261_n.jpg?ccb=11-4&oh=01_Q5Aa3gG7PQx_n5DmKgjWqmGQi05WZFfnea14F6EnNPE3ZzrFyg&oe=696E6BE2&_nc_sid=5e03e0&_nc_cat=110'
+  img: 'https://media-mad2-1.cdn.whatsapp.net/v/t61.24694-24/417577600_879089957327510_6055466079789488261_n.jpg?ccb=11-4&oh=01_Q5Aa3gG7PQx_n5DmKgjWqmGQi05WZFfnea14F6EnNPE3ZzrFyg&oe=696E6BE2&_nc_sid=5e03e0&_nc_cat=110',
+
+  socials: {
+    github: 'https://github.com/ferrangarcia',
+    twitter: 'https://twitter.com/ferrangarcia',
+    instagram: 'https://instagram.com/ferrangarcia',
+    linkedin: 'https://linkedin.com/in/ferrangarcia',
+  }
 }];
 
 export const teamImage = {
