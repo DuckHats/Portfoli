@@ -17,6 +17,7 @@ export const accessibilityConfig = {
                 linkProjectsLabel: 'Enllaç a la pàgina de projectes',
                 linkAboutLabel: 'Enllaç a la pàgina sobre nosaltres',
                 linkContatLabel: 'Enllaç a la pàgina de contacte',
+                linkJoinUsLabel: 'Enllaç a la pàgina d\'unir-se a l\'equip',
                 linkPrivacyLabel: 'Enllaç a la política de privacitat',
                 linkComplianceLabel: 'Enllaç a la política de compliment',
 
@@ -38,6 +39,7 @@ export const accessibilityConfig = {
                 linkProjectsLabel: 'Enlace a la página de proyectos',
                 linkAboutLabel: 'Enlace a la página sobre nosotros',
                 linkContatLabel: 'Enlace a la página de contacto',
+                linkJoinUsLabel: 'Enlace a la página de unirse al equipo',
                 linkPrivacyLabel: 'Enlace a la política de privacidad',
                 linkComplianceLabel: 'Enlace a la política de cumplimiento',
         },
@@ -51,13 +53,14 @@ export const accessibilityConfig = {
 
             hamburgerLabel: 'Open menu',
             closeLabel: 'Close menu',
-            
+
             linkLinksLabel: 'Navigation links',
                 linkHomeLabel: 'Link to home page',
                 linkTeamLabel: 'Link to team page',
                 linkProjectsLabel: 'Link to projects page',
                 linkAboutLabel: 'Link to about us page',
                 linkContatLabel: 'Link to contact page',
+                linkJoinUsLabel: 'Link to join our team page',
                 linkPrivacyLabel: 'Link to privacy policy',
                 linkComplianceLabel: 'Link to compliance policy',
         },
@@ -147,6 +150,29 @@ export const accessibilityConfig = {
             instagramLabel: 'Link to Instagram of ',
             linkedinLabel: 'Link to LinkedIn of ',
             globeLabel: 'Link to website of ',
+        },
+    },
+    contact: {
+        ca: {
+            contactFormLabel: 'Formulari de contacte',
+            nameFieldLabel: 'Camp per al nom',
+            emailFieldLabel: 'Camp per al correu electrònic',
+            messageFieldLabel: 'Camp per al missatge',
+            submitButtonLabel: 'Botó per enviar el formulari',
+        },
+        es: {
+            contactFormLabel: 'Formulario de contacto',
+            nameFieldLabel: 'Campo para el nombre',
+            emailFieldLabel: 'Campo para el correo electrónico',
+            messageFieldLabel: 'Campo para el mensaje',
+            submitButtonLabel: 'Botón para enviar el formulario',
+        },
+        en: {
+            contactFormLabel: 'Contact form',
+            nameFieldLabel: 'Field for name',
+            emailFieldLabel: 'Field for email',
+            messageFieldLabel: 'Field for message',
+            submitButtonLabel: 'Button to submit the form',
         },
     },
 };

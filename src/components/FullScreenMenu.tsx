@@ -59,8 +59,8 @@ export function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps) {
 
             {/* Secondary Links */}
             <div className="flex flex-wrap justify-center gap-8 md:gap-16 mb-16 text-xl md:text-2xl font-bold">
-              <SecondaryLink href="/contact" onClick={onClose} aria-label={accessibilityConfig.nav[language].linkContatLabel}>
-                {content.fullScreenMenu.secondaryLinks.contact}
+              <SecondaryLink href="/join-us" onClick={onClose} aria-label={accessibilityConfig.nav[language].linkJoinUsLabel}>
+                {content.fullScreenMenu.secondaryLinks.joinUs}
               </SecondaryLink>
             </div>
 

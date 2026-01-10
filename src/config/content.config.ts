@@ -111,6 +111,7 @@ export const contentConfig = {
       },
       secondaryLinks: {
         contact: 'Contacte',
+        joinUs: 'Uneix-te',
       },
       policies: {
         privacy: 'Política de Privacitat',
@@ -237,6 +238,7 @@ export const contentConfig = {
       },
       secondaryLinks: {
         contact: 'Contacto',
+        joinUs: 'Únete',
       },
       policies: {
         privacy: 'Política de Privacidad',
@@ -363,6 +365,7 @@ export const contentConfig = {
       },
       secondaryLinks: {
         contact: 'Contact',
+        joinUs: 'Join Us',
       },
       policies: {
         privacy: 'Privacy Policy',
