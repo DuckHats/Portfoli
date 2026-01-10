@@ -45,7 +45,7 @@ export const contentConfig = {
       subtitle: "Som un grup divers de creatius i \"protoenginyers\" units per una sola missió: construir l'extraordinari. Des de diferents racons de Catalunya, ens reunim per remar en la mateixa direcció.", // plantejar modificació
       teamTitle: 'Equip DuckHats',
       membersTitle: 'MEMBRES',
-      planTitle: "Pla de Direcció de l'Equip"
+      planText: "A DuckHats creiem que la creativitat no entén d'horaris. Treballem amb una estructura flexible on el que compta no és quan piques tecles, sinó com i amb quina qualitat arriba el que construeixes. Confiem en l'autonomia, en els ritmes personals i en la responsabilitat compartida de fer que cada projecte arribi on ha d'arribar, amb l'excel·lència que ens defineix."
     },
     projects: {
       title: 'PROJECTES',
@@ -168,7 +168,7 @@ export const contentConfig = {
       subtitle: 'Somos un grupo diverso de creativos y \"protoingenieros\" unidos por una sola misión: construir lo extraordinario. Desde diferentes rincones de Catalunya, nos reunimos para remar en la misma dirección.',
       teamTitle: 'Equipo DuckHats',
       membersTitle: 'MIEMBROS',
-      planTitle: 'Plan de Dirección del Equipo'
+      planText: 'En DuckHats creemos que la creatividad no entiende de horarios. Trabajamos con una estructura flexible donde lo que importa no es cuándo tecleas, sino cómo y con qué calidad llega lo que construyes. Confiamos en la autonomía, en los ritmos personales y en la responsabilidad compartida de llevar cada proyecto allí donde debe llegar, con la excelencia que nos define.'
     },
     projects: {
       title: 'PROYECTOS',
@@ -291,7 +291,7 @@ export const contentConfig = {
       subtitle: 'We are a diverse group of creatives and "protoengineers" united by a single mission: to build the extraordinary. From different corners of Catalonia, we come together to swim in the same direction.',
       teamTitle: 'DuckHats Team',
       membersTitle: 'MEMBERS',
-      planTitle: 'Team Direction Plan'
+      planText: 'At DuckHats, we believe creativity doesn¡t follow a schedule. We work within a flexible structure where what matters isn\'t when you type, but how — and with what level of quality — your work arrives. We trust autonomy, personal rhythms, and the shared responsibility of bringing every project exactly where it needs to go, with the excellence that defines us.'
     },
     projects: {
       title: 'PROJECTS',
