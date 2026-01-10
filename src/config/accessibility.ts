@@ -94,5 +94,24 @@ export const accessibilityConfig = {
                     
         },
     },
-
+    home: {
+        ca: {
+            carouselLabel: 'Selector de seccions de la pàgina d\'inici',
+            prevButtonLabel: 'Anar a la secció anterior',
+            nextButtonLabel: 'Anar a la secció següent',
+            currentSectionLabel: 'Secció actual'
+        },
+        es: {
+            carouselLabel: 'Selector de secciones de la página de inicio',
+            prevButtonLabel: 'Ir a la sección anterior',
+            nextButtonLabel: 'Ir a la sección siguiente',
+            currentSectionLabel: 'Sección actual'
+        },
+        en: {
+            carouselLabel: 'Home page sections selector',
+            prevButtonLabel: 'Go to previous section',
+            nextButtonLabel: 'Go to next section',
+            currentSectionLabel: 'Current section'
+        },
+    },
 };

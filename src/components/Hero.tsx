@@ -3,9 +3,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useContent } from '../hooks/useContent';
+import { useLanguage } from '../hooks/useLanguage';
+import { accessibilityConfig } from '../config/accessibility';
 import { brandConfig } from '../config/brand.config';
 export function Hero() {
   const content = useContent();
+    const {
+    language
+  } = useLanguage();
   const [activeIndex, setActiveIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const SECTIONS = [{
@@ -32,25 +37,19 @@ export function Hero() {
     setActiveIndex(prev => (prev - 1 + SECTIONS.length) % SECTIONS.length);
   };
   useEffect(() => {
-    const handleWheel = (e: WheelEvent) => {
-      e.preventDefault();
-      if (e.deltaY > 0) {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
         nextSection();
-      } else {
+      }
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
         prevSection();
       }
     };
-    const container = containerRef.current;
-    if (container) {
-      container.addEventListener('wheel', handleWheel, {
-        passive: false
-      });
-    }
-    return () => {
-      if (container) {
-        container.removeEventListener('wheel', handleWheel);
-      }
-    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
   const activeSection = SECTIONS[activeIndex];
   const prevIndex = (activeIndex - 1 + SECTIONS.length) % SECTIONS.length;
@@ -117,14 +116,22 @@ export function Hero() {
         </motion.p>
 
         {/* Manual Carousel */}
-        <div className="relative w-full h-40 md:h-64 flex items-center justify-center mb-12 perspective-1000">
-          <button onClick={prevSection} className="absolute left-0 md:left-10 z-20 p-4 hover:bg-black/5 rounded-full transition-colors">
+        <div role='region' aria-label={accessibilityConfig.home[language].carouselLabel}  
+        className="relative w-full h-40 md:h-64 flex items-center justify-center mb-12 perspective-1000 focus:outline-none">
+        {/* Screen reader announcement */}
+        <span className="sr-only" aria-live="polite">
+          {accessibilityConfig.home[language].currentSectionLabel} {activeSection.label}
+        </span>
+          
+          <button aria-label={accessibilityConfig.home[language].prevButtonLabel} onClick={prevSection}
+           className="absolute left-0 md:left-10 z-20 p-4 hover:bg-black/5 rounded-full transition-colors">
             <ChevronLeft className="w-8 h-8 md:w-12 md:h-12" style={{
             color: brandConfig.colors.primary.black
           }} />
           </button>
 
-          <button onClick={nextSection} className="absolute right-0 md:right-10 z-20 p-4 hover:bg-black/5 rounded-full transition-colors">
+          <button aria-label={accessibilityConfig.home[language].nextButtonLabel} onClick={nextSection}
+           className="absolute right-0 md:right-10 z-20 p-4 hover:bg-black/5 rounded-full transition-colors">
             <ChevronRight className="w-8 h-8 md:w-12 md:h-12" style={{
             color: brandConfig.colors.primary.black
           }} />
@@ -136,7 +143,7 @@ export function Hero() {
             let position = 0;
             if (index === prevIndex) position = -1;
             if (index === nextIndex) position = 1;
-            return <motion.div key={section.id} initial={{
+            return <motion.div aria-hidden="true" tabIndex={-1} key={section.id} initial={{
               opacity: 0,
               x: position === -1 ? -100 : position === 1 ? 100 : 0,
               scale: 0.5,
@@ -154,7 +161,7 @@ export function Hero() {
             }} transition={{
               duration: brandConfig.animation.duration.normal,
               ease: brandConfig.animation.easing.default
-            }} className="absolute text-center whitespace-nowrap cursor-pointer" onClick={() => {
+            }} className="absolute text-center whitespace-nowrap cursor-pointer pointer-events-none" onClick={() => {
               if (position === -1) prevSection();
               if (position === 1) nextSection();
             }}>
