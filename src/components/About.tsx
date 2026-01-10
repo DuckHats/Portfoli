@@ -90,15 +90,16 @@ export function About() {
               {content.about.about.description2}
             </p>
           </div>
-          <div className="h-64 rounded-lg border-2 border-dashed flex items-center justify-center" style={{
-          backgroundColor: brandConfig.colors.neutral.gray100,
-          borderColor: brandConfig.colors.neutral.gray300
-        }}>
-            <span className="font-display text-xl" style={{
-            color: brandConfig.colors.neutral.gray400
+          <div className="w-full aspect-square p-2 mb-4 border-2 transition-shadow duration-300" style={{
+            backgroundColor: brandConfig.colors.primary.white,
+            borderColor: brandConfig.colors.primary.black,
+            boxShadow: `4px 4px 0px 0px ${brandConfig.colors.primary.black}`
+          }} onMouseEnter={e => {
+            e.currentTarget.style.boxShadow = `8px 8px 0px 0px ${brandConfig.colors.accent.red}`;
+          }} onMouseLeave={e => {
+            e.currentTarget.style.boxShadow = `4px 4px 0px 0px ${brandConfig.colors.primary.black}`;
           }}>
-            <img src={aboutImage.url} alt={aboutImage.alt[language]} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
-            </span>
+            <img src={aboutImage.url} alt={aboutImage.alt[language]} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300" />
           </div>
         </motion.div>
       </div>
