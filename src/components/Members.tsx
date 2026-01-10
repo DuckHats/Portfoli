@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Github, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { Github, Globe, Instagram, Linkedin, Twitter } from 'lucide-react';
 import { useContent } from '../hooks/useContent';
 import { useLanguage } from '../hooks/useLanguage';
 import { brandConfig } from '../config/brand.config';
@@ -76,6 +76,11 @@ export function Members() {
               color: brandConfig.colors.primary.black
             }}>
                       <Instagram size={20} />
+                    </a>}
+                  {member.social.website && <a href={member.social.website} target="_blank" rel="noopener noreferrer" className="transition-colors duration-300 hover:text-opacity-70" style={{
+              color: brandConfig.colors.primary.black
+            }}>
+                      <Globe size={20} />
                     </a>}
                 </div>}
             </motion.div>)}

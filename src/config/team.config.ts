@@ -10,7 +10,8 @@ export const teamMembers = [{
     linkedin: 'https://linkedin.com/in/sergigiribet',
     github: 'https://github.com/SergiGiribet',
     twitter: '',
-    instagram: ''
+    instagram: '',
+    website: '',
   }
 }, {
   name: 'Gerard Loriz',
@@ -22,7 +23,8 @@ export const teamMembers = [{
   img: 'https://media-mad1-1.cdn.whatsapp.net/v/t61.24694-24/598335585_1402671691576661_8635073915938445903_n.jpg?ccb=11-4&oh=01_Q5Aa3gG2wP_ee22HWhX_wmd8Hxv3I88D2wzGYtKdJLYUs57RoQ&oe=696E65C8&_nc_sid=5e03e0&_nc_cat=108',
   social: {
     linkedin: '',
-    github: ''
+    github: '',
+    website: 'https://www.gerardloriz.com/'
   }
 }, {
   name: 'Arnau Clavijos',
@@ -34,7 +36,8 @@ export const teamMembers = [{
   img: 'https://media-mad2-1.cdn.whatsapp.net/v/t61.24694-24/545604290_1113696997567738_7589873008295301530_n.jpg?ccb=11-4&oh=01_Q5Aa3gEC1v2PgooF1owWIhWS9d6dgzvegAXuDJToV3zZSRP6dg&oe=696E7C03&_nc_sid=5e03e0&_nc_cat=105',
   social: {
     linkedin: '',
-    github: ''
+    github: '',
+    website: ''
   }
 }, {
   name: 'Ferran García',
@@ -45,11 +48,12 @@ export const teamMembers = [{
   },
   img: 'https://media-mad2-1.cdn.whatsapp.net/v/t61.24694-24/417577600_879089957327510_6055466079789488261_n.jpg?ccb=11-4&oh=01_Q5Aa3gG7PQx_n5DmKgjWqmGQi05WZFfnea14F6EnNPE3ZzrFyg&oe=696E6BE2&_nc_sid=5e03e0&_nc_cat=110',
 
-  socials: {
-    github: 'https://github.com/ferrangarcia',
-    twitter: 'https://twitter.com/ferrangarcia',
-    instagram: 'https://instagram.com/ferrangarcia',
-    linkedin: 'https://linkedin.com/in/ferrangarcia',
+  social: {
+    github: '',
+    twitter: '',
+    instagram: '',
+    linkedin: '',
+    website: ''
   }
 }];
 
