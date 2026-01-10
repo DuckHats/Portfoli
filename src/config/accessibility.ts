@@ -9,12 +9,16 @@ export const accessibilityConfig = {
                 englishLabel: 'Canviar a anglès',
 
             hamburgerLabel: 'Obrir menú',
+            closeLabel: 'Tancar menú',
 
             linkLinksLabel: 'Enllaços de navegació',
                 linkHomeLabel: 'Enllaç a la pàgina d\'inici',
                 linkTeamLabel: 'Enllaç a la pàgina de l\'equip',
                 linkProjectsLabel: 'Enllaç a la pàgina de projectes',
                 linkAboutLabel: 'Enllaç a la pàgina sobre nosaltres',
+                linkContatLabel: 'Enllaç a la pàgina de contacte',
+                linkPrivacyLabel: 'Enllaç a la política de privacitat',
+                linkComplianceLabel: 'Enllaç a la política de compliment',
 
         },
         es: {
@@ -26,12 +30,16 @@ export const accessibilityConfig = {
                 englishLabel: 'Cambiar a inglés',
 
             hamburgerLabel: 'Abrir menú',
+            closeLabel: 'Cerrar menú',
 
             linkLinksLabel: 'Enlaces de navegación',
                 linkHomeLabel: 'Enlace a la página de inicio',
                 linkTeamLabel: 'Enlace a la página del equipo',
                 linkProjectsLabel: 'Enlace a la página de proyectos',
                 linkAboutLabel: 'Enlace a la página sobre nosotros',
+                linkContatLabel: 'Enlace a la página de contacto',
+                linkPrivacyLabel: 'Enlace a la política de privacidad',
+                linkComplianceLabel: 'Enlace a la política de cumplimiento',
         },
         en: {
             navbarLabel: 'Main navigation menu',
@@ -42,12 +50,16 @@ export const accessibilityConfig = {
                 englishLabel: 'Switch to English',
 
             hamburgerLabel: 'Open menu',
-
+            closeLabel: 'Close menu',
+            
             linkLinksLabel: 'Navigation links',
                 linkHomeLabel: 'Link to home page',
                 linkTeamLabel: 'Link to team page',
                 linkProjectsLabel: 'Link to projects page',
                 linkAboutLabel: 'Link to about us page',
+                linkContatLabel: 'Link to contact page',
+                linkPrivacyLabel: 'Link to privacy policy',
+                linkComplianceLabel: 'Link to compliance policy',
         },
 
 },
