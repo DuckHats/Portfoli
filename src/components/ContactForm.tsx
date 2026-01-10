@@ -31,22 +31,35 @@ export function ContactForm() {
     setFormState({ ...formState, links: newLinks });
   };
 
-  const getLinkIcon = (url: string) => {
-    const lowerUrl = url.toLowerCase();
-    if (lowerUrl.includes('linkedin')) return <Linkedin className="h-5 w-5 text-gray-400" />;
-    if (lowerUrl.includes('github')) return <Github className="h-5 w-5 text-gray-400" />;
-    if (lowerUrl.includes('twitter') || lowerUrl.includes('x.com')) return <Twitter className="h-5 w-5 text-gray-400" />;
-    if (lowerUrl.includes('instagram')) return <Instagram className="h-5 w-5 text-gray-400" />;
-    if (lowerUrl.includes('facebook')) return <Facebook className="h-5 w-5 text-gray-400" />;
-    if (lowerUrl.includes('youtube')) return <Youtube className="h-5 w-5 text-gray-400" />;
-    if (lowerUrl.includes('twitch')) return <Twitch className="h-5 w-5 text-gray-400" />;
-    if (lowerUrl.includes('gitlab')) return <Gitlab className="h-5 w-5 text-gray-400" />;
-    if (lowerUrl.includes('dribbble')) return <Dribbble className="h-5 w-5 text-gray-400" />;
-    if (lowerUrl.includes('figma')) return <Figma className="h-5 w-5 text-gray-400" />;
-    if (lowerUrl.includes('infojobs')) return <Briefcase className="h-5 w-5 text-gray-400" />;
-    if (lowerUrl.includes('stackoverflow')) return <Code className="h-5 w-5 text-gray-400" />;
-    return <Globe className="h-5 w-5 text-gray-400" />;
-  };
+  const iconMatchers: { regex: RegExp; Icon: any }[] = [
+    { regex: /linkedin/i, Icon: Linkedin },
+    { regex: /github/i, Icon: Github },
+    { regex: /(twitter|x\.com)/i, Icon: Twitter },
+    { regex: /instagram/i, Icon: Instagram },
+    { regex: /facebook/i, Icon: Facebook },
+    { regex: /youtube/i, Icon: Youtube },
+    { regex: /twitch/i, Icon: Twitch },
+    { regex: /gitlab/i, Icon: Gitlab },
+    { regex: /dribbble/i, Icon: Dribbble },
+    { regex: /figma/i, Icon: Figma },
+    { regex: /infojobs/i, Icon: Briefcase },
+    { regex: /stackoverflow/i, Icon: Code },
+  ];
+
+  function LinkIcon({ url }: { url: string }) {
+    if (!url) return <Globe className="h-5 w-5 text-gray-400" />;
+
+    let host = url;
+    try {
+      host = new URL(url).hostname.toLowerCase();
+    } catch {
+      host = url.toLowerCase();
+    }
+
+    const match = iconMatchers.find((m) => m.regex.test(host));
+    const Icon = match ? match.Icon : Globe;
+    return <Icon className="h-5 w-5 text-gray-400" />;
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -260,7 +273,7 @@ export function ContactForm() {
                     <div key={index} className="relative flex gap-2">
                       <div className="relative flex-1">
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          {getLinkIcon(link)}
+                          <LinkIcon url={link} />
                         </div>
                         <input
                           type="url"
