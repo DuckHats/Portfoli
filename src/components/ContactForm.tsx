@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, Upload, Send, Linkedin } from 'lucide-react';
+import {Mail,Phone,Upload,Send,Linkedin,Plus,Trash2,Github,Globe,Twitter,Instagram,Facebook,Youtube,Twitch,Gitlab,Dribbble,Figma,Briefcase,Code,} from 'lucide-react';
 import { brandConfig } from '../config/brand.config';
 import { contactConfig } from '../config/contact.config';
 import { useContent } from '../hooks/useContent';
@@ -11,9 +11,42 @@ export function ContactForm() {
     name: '',
     email: '',
     role: '',
-    links: '',
+    customRole: '',
+    links: [''],
     message: '',
   });
+
+  const handleLinkChange = (index: number, value: string) => {
+    const newLinks = [...formState.links];
+    newLinks[index] = value;
+    setFormState({ ...formState, links: newLinks });
+  };
+
+  const addLink = () => {
+    setFormState({ ...formState, links: [...formState.links, ''] });
+  };
+
+  const removeLink = (index: number) => {
+    const newLinks = formState.links.filter((_, i) => i !== index);
+    setFormState({ ...formState, links: newLinks });
+  };
+
+  const getLinkIcon = (url: string) => {
+    const lowerUrl = url.toLowerCase();
+    if (lowerUrl.includes('linkedin')) return <Linkedin className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes('github')) return <Github className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes('twitter') || lowerUrl.includes('x.com')) return <Twitter className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes('instagram')) return <Instagram className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes('facebook')) return <Facebook className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes('youtube')) return <Youtube className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes('twitch')) return <Twitch className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes('gitlab')) return <Gitlab className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes('dribbble')) return <Dribbble className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes('figma')) return <Figma className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes('infojobs')) return <Briefcase className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes('stackoverflow')) return <Code className="h-5 w-5 text-gray-400" />;
+    return <Globe className="h-5 w-5 text-gray-400" />;
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -195,6 +228,24 @@ export function ContactForm() {
                     </svg>
                   </div>
                 </div>
+                {formState.role === 'other' && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="mt-3"
+                  >
+                    <input
+                      type="text"
+                      name="customRole"
+                      value={formState.customRole}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all outline-none bg-gray-50"
+                      placeholder={content.joinUs.form.otherRolePlaceholder}
+                      required
+                    />
+                  </motion.div>
+                )}
               </div>
 
               <div>
@@ -204,19 +255,43 @@ export function ContactForm() {
                 >
                   {content.joinUs.form.linksLabel}
                 </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Linkedin className="h-5 w-5 text-gray-400" />
-                  </div>
-                  <input
-                    type="url"
-                    id="links"
-                    name="links"
-                    value={formState.links}
-                    onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all outline-none bg-gray-50"
-                    placeholder={content.joinUs.form.linksPlaceholder}
-                  />
+                <div className="space-y-3">
+                  {formState.links.map((link, index) => (
+                    <div key={index} className="relative flex gap-2">
+                      <div className="relative flex-1">
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                          {getLinkIcon(link)}
+                        </div>
+                        <input
+                          type="url"
+                          value={link}
+                          onChange={(e) =>
+                            handleLinkChange(index, e.target.value)
+                          }
+                          className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all outline-none bg-gray-50"
+                          placeholder={content.joinUs.form.linksPlaceholder}
+                        />
+                      </div>
+                      {formState.links.length > 1 && (
+                        <button
+                          type="button"
+                          onClick={() => removeLink(index)}
+                          className="p-3 text-gray-500 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                          title={content.joinUs.form.removeLink}
+                        >
+                          <Trash2 className="w-5 h-5" />
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={addLink}
+                    className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-black transition-colors px-1"
+                  >
+                    <Plus className="w-4 h-4" />
+                    {content.joinUs.form.addLink}
+                  </button>
                 </div>
               </div>
 
