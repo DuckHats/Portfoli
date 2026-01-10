@@ -4,10 +4,12 @@ import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { brandConfig } from '../config/brand.config'
 import { useContent } from '../hooks/useContent'
+import { useLanguage } from '../hooks/useLanguage'
 import { projectsData } from '../config/projects.config'
 export function Projects() {
   const [activeProject, setActiveProject] = useState<number>(0)
   const content = useContent()
+  const { language } = useLanguage()
   return (
     <section
       className="relative min-h-screen flex flex-col"
@@ -74,7 +76,7 @@ export function Projects() {
                         opacity: activeProject === index ? 1 : 0,
                       }}
                     >
-                      {project.date}
+                      {project.date[language]}
                     </motion.span>
                     <motion.h3
                       className="text-4xl font-display font-bold mb-4"
@@ -145,6 +147,7 @@ function ProjectItem({
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const content = useContent()
+  const { language } = useLanguage()
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
@@ -206,7 +209,7 @@ function ProjectItem({
               color: brandConfig.colors.neutral.gray500,
             }}
           >
-            {project.date}
+            {project.date[language]}
           </p>
         </div>
         <div

@@ -1,6 +1,9 @@
+
 import { motion } from 'framer-motion';
 import { useContent } from '../hooks/useContent';
+import { useLanguage } from '../hooks/useLanguage';
 import { brandConfig } from '../config/brand.config';
+import { aboutImage } from '../config/team.config';
 const fadeInUp = {
   hidden: {
     opacity: 0,
@@ -16,6 +19,9 @@ const fadeInUp = {
 };
 export function About() {
   const content = useContent();
+  const {
+      language
+    } = useLanguage();
   return <section className="py-24 px-4 md:px-8" style={{
     backgroundColor: brandConfig.colors.primary.white,
     color: brandConfig.colors.primary.black
@@ -91,7 +97,7 @@ export function About() {
             <span className="font-display text-xl" style={{
             color: brandConfig.colors.neutral.gray400
           }}>
-              Creative Space
+            <img src={aboutImage.url} alt={aboutImage.alt[language]} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
             </span>
           </div>
         </motion.div>

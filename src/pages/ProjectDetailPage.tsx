@@ -65,7 +65,7 @@ export function ProjectDetailPage() {
                     color: brandConfig.colors.neutral.gray500,
                   }}
                 >
-                  {project.date}
+                  {project.date[language]}
                 </span>
               </div>
 

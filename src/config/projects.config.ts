@@ -1,7 +1,11 @@
 export type Project = {
   id: string
   title: string
-  date: string
+  date: {
+    ca: string
+    es: string
+    en: string
+  }
   category: {
     ca: string
     es: string
@@ -38,21 +42,25 @@ export const projectsData: Project[] = [
   {
     id: 'menu-ginebro',
     title: 'MENÚ GINEBRÓ',
-    date: 'En Procés',
+    date: {
+      ca: 'En Procès',
+      es: 'En Proceso',
+      en: 'In Progress',
+    },
     category: {
       ca: 'Aplicació Web',
       es: 'Aplicación Web',
-      en: 'Web App',
+      en: 'Web Application',
     },
     image:
       'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpetfood.guide%2Fwp-content%2Fuploads%2F2022%2F06%2Fwapt_image_post_-6.jpg&f=1&nofb=1&ipt=4f82a78be934f6f0dbbde99f0ec727af671f40f99f74f7c98bf0402e07aed173',
     description: {
-      ca: "Sistema complet de gestió de menús escolars per a l'Escola Ginebro. Permet als estudiants seleccionar els seus menús setmanals i als administradors gestionar plats, usuaris i comandes amb facilitat.",
-      es: 'Sistema completo de gestión de menús escolares para la Escuela Ginebro. Permite a los estudiantes seleccionar sus menús semanales y a los administradores gestionar platos, usuarios y pedidos con facilidad.',
+      ca: 'Sistema complet de gestió de menús escolars per a l\'Escola Ginebro. Permet als estudiants seleccionar els seus menús setmanals i als administradors gestionar plats, usuaris i comandes amb facilitat.',
+      es: 'Sistema completo de gestión de menús escolares para l\'Escola Ginebro. Permite a los estudiantes seleccionar sus menús semanales y a los administradores gestionar platos, usuarios y pedidos con facilidad.',
       en: 'Complete school menu management system for Escola Ginebro. Allows students to select their weekly menus and administrators to manage dishes, users and orders with ease.',
     },
     challenge: {
-      ca: "L'escola necessitava digitalitzar el procés de selecció de menús escolars, eliminant el paper i millorant l'eficiència en la gestió de pedidos diaris per a centenars d'estudiants.",
+      ca: 'L\'escola necessitava digitalitzar el procés de selecció de menús escolars, eliminant el paper i millorant l\'eficiència en la gestió de comandes diàries per a centenars d\'estudiants.',
       es: 'La escuela necesitaba digitalizar el proceso de selección de menús escolares, eliminando el papel y mejorando la eficiencia en la gestión de pedidos diarios para cientos de estudiantes.',
       en: 'The school needed to digitize the school menu selection process, eliminating paper and improving efficiency in managing daily orders for hundreds of students.',
     },
@@ -65,7 +73,7 @@ export const projectsData: Project[] = [
       ca: [
         'Eliminació completa del procés en paper',
         'Reducció del 70% en temps de gestió administrativa',
-        'Sistema de verificació per email amb OTP',
+        'Sistema de verificació per correu electrònic amb OTP',
         'Dashboard amb mètriques en temps real',
       ],
       es: [
@@ -75,15 +83,15 @@ export const projectsData: Project[] = [
         'Dashboard con métricas en tiempo real',
       ],
       en: [
-        'Complete elimination of paper process',
+        'Complete elimination of paper-based workflows',
         '70% reduction in administrative management time',
         'Email verification system with OTP',
         'Dashboard with real-time metrics',
       ],
     },
     technologies: [
-      'Angular 19',
-      'Laravel 10',
+      'Angular',
+      'Laravel',
       'TypeScript',
       'PHP',
       'MySQL',

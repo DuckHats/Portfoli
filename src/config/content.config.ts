@@ -15,7 +15,7 @@ export const contentConfig = {
     about: {
       vision: {
         title: 'VISIÓ',
-        description: 'Per crear experiències digitals que no només funcionin, sinó que deixin una impressió duradora. Creiem en el poder del joc la professionalitat lúdica on el codi seriós es troba amb el caos creatiu.'
+        description: 'Per crear experiències digitals que no només funcionin, sinó que deixin una impressió duradora. Creiem en el poder del joc i la professionalitat lúdica, on el codi seriós es troba amb el caos creatiu.'
       },
       born: {
         title: 'NAIXEMENT',
@@ -23,13 +23,13 @@ export const contentConfig = {
       },
       about: {
         title: 'Sobre nosaltres',
-        description1: "Som un col·lectiu de desenvolupadors, dissenyadors i somiadors. Com un ànec, semblem tranquilos a la superfície, però per dins, estem nadant frenèticament per aconseguir l'excel·lència.",
+        description1: "Som un col·lectiu de desenvolupadors, dissenyadors i somiadors. Com un ànec, semblem tranquils a la superfície, però per dins estem nedant frenèticament per aconseguir l'excel·lència.",
         description2: 'Els nostres barrets representen els molts rols que assumim per assegurar que el projecte té èxit.'
       },
       origins: {
         title: "Els Orígens de l'Estany",
-        paragraph1: "DuckHats va néixer en un CFGS allà al 2020, fruit d'una observació senzilla: la majoria d'agències digitals es prenen massa seriosament, o no prou. Volíem trobar l'equilibri perfecte la filosofia del \"Ànec\".",
-        paragraph2: "Calmat a la superfície, nadant furiosament per sota. Això som nosaltres. Vam començar com un quatre d'amics cansats de la rigidesa corporativa i amb ganes de construir coses que generessin alegria, tant per a nosaltres com per als nostres clients."
+        paragraph1: "DuckHats va néixer en un CFGS l'any 2020, fruit d'una observació senzilla: la majoria d'agències digitals es prenen massa seriosament, o no prou. Volíem trobar l'equilibri perfecte: la filosofia de l'«ànec».",
+        paragraph2: "Calmat a la superfície, nadant furiosament per sota. Això som nosaltres. Vam començar com un grup de quatre amics cansats de la rigidesa corporativa i amb ganes de construir coses que generessin alegria, tant per a nosaltres com per als nostres clients."
       },
       dna: {
         title: 'El Nostre ADN',
@@ -37,7 +37,7 @@ export const contentConfig = {
       },
       hats: {
         title: 'Els Barrets que Portem',
-        description: "Per què \"Barrets\"? Perquè en el món digital, l'adaptabilitat és supervivència. Un dia som dissenyadors UI, l'endemà arquitectes back-end, i de vegades només som terapeutes per a la crisi d'identitat de la teva marca." //plantejar modificació
+        description: "Per què \"Barrets\"? Perquè en el món digital, l'adaptabilitat és supervivència. Un dia som dissenyadors UI, l'endemà arquitectes back-end, i, de vegades, guies per a la crisi d'identitat de la teva marca." //plantejar modificació
       }
     },
     team: {
@@ -61,10 +61,10 @@ export const contentConfig = {
     },
     joinUs: {
       title: 'UNEIX-TE',
-      description: 'Sempre estem buscant nous ànecs per unir-se al nostre estany. Dissenyadors, desenvolupadors i somiadors benvinguts.',
+      description: 'Sempre estem buscant nous ànecs que vulguin formar part del nostre estany. Dissenyadors, desenvolupadors i somiadors benvinguts.',
       form: {
         title: 'Uneix-te a la Bandada',
-        description: "Sempre estem buscant nous ànecs per unir-se al nostre estany. Si t'apassiona el codi, el disseny i tens un toc d'humor, aquest és el teu lloc.",
+        description: "Sempre estem buscant nous ànecs que vulguin formar part del nostre estany. Si t'apassiona el codi, el disseny i tens un toc d'humor, aquest és el teu lloc.",
         emailLabel: 'Email',
         phoneLabel: 'Telèfon',
         nameLabel: 'Nom Complet',
@@ -102,7 +102,7 @@ export const contentConfig = {
     fullScreenMenu: {
       mainNav: {
         home: 'Inici',
-        about: 'Història',
+        about: 'La nostra Història',
         team: 'Equip',
         projects: 'Projectes',
       },
@@ -138,7 +138,7 @@ export const contentConfig = {
     about: {
       vision: {
         title: 'VISIÓN',
-        description: 'Crear experiencias digitales que no solo funcionen, sino que dejen una impresión duradera. Creemos en el poder de la profesionalidad lúdica donde el código serio se encuentra con el caos creativo.'
+        description: 'Crear experiencias digitales que no solo funcionen, sino que dejen una impresión duradera. Creemos en el poder de la profesionalidad lúdica, donde el código serio se encuentra con el caos creativo.'
       },
       born: {
         title: 'NACIMIENTO',
@@ -146,12 +146,12 @@ export const contentConfig = {
       },
       about: {
         title: 'Sobre Nosotros',
-        description1: 'Somos un colectivo de desarrolladores, diseñadores y soñadores. Como un pato, parecemos tranquilos en la superficie, pero por dentro, estamos nadando frenéticamente para lograr la excelencia.',
+        description1: 'Somos un colectivo de desarrolladores, diseñadores y soñadores. Como un pato, parecemos tranquilos en la superficie, pero por dentro estamos nadando frenéticamente para lograr la excelencia.',
         description2: 'Nuestros sombreros representan los muchos roles que asumimos para asegurar que el proyecto tenga éxito.'
       },
       origins: {
         title: 'Los Orígenes del Estanque',
-        paragraph1: 'DuckHats nació en un CFGS allá en 2020, fruto de una observación sencilla: la mayoría de agencias digitales se toman demasiado en serio, o no lo suficiente. Queríamos encontrar el equilibrio perfecto, la filosofía del "Pato".',
+        paragraph1: 'DuckHats nació en un CFGS en el año 2020, fruto de una observación sencilla: la mayoría de las agencias digitales se toman demasiado en serio, o no lo suficiente. Queríamos encontrar el equilibrio perfecto: la filosofía del «Pato».',
         paragraph2: 'Calmado en la superficie, nadando furiosamente por debajo. Eso somos nosotros. Empezamos como cuatro amigos cansados de la rigidez corporativa y con ganas de construir cosas que generaran alegría, tanto para nosotros como para nuestros clientes.'
       },
       dna: {
@@ -160,12 +160,12 @@ export const contentConfig = {
       },
       hats: {
         title: 'Los Sombreros que Llevamos',
-        description: '¿Por qué "Sombreros"? Porque en el mundo digital, la adaptabilidad es supervivencia. Un día somos diseñadores UI, al día siguiente arquitectos back-end, y a veces solo somos terapeutas para la crisis de identidad de tu marca.'
+        description: '¿Por qué "Sombreros"? Porque en el mundo digital, la adaptabilidad es supervivencia. Un día somos diseñadores UI, al día siguiente arquitectos back-end, y a veces somos guías en la crisis de identidad de tu marca.' //plantejar modificació
       }
     },
     team: {
       title: 'LA BANDADA',
-      subtitle: 'Somos un grupo diverso de creativos y \"protoingenieros\" unidos por una sola misión: construir lo extraordinario. Desde diferentes rincones del mundo, nos reunimos para remar en la misma dirección.',
+      subtitle: 'Somos un grupo diverso de creativos y \"protoingenieros\" unidos por una sola misión: construir lo extraordinario. Desde diferentes rincones de Catalunya, nos reunimos para remar en la misma dirección.',
       teamTitle: 'Equipo DuckHats',
       membersTitle: 'MIEMBROS',
       planTitle: 'Plan de Dirección del Equipo'
@@ -184,10 +184,10 @@ export const contentConfig = {
     },
     joinUs: {
       title: 'ÚNETE',
-      description: 'Siempre estamos buscando nuevos patos para unirse a nuestro estanque. Diseñadores, desarrolladores y soñadores bienvenidos.',
+      description: 'Siempre estamos buscando nuevos patos que quieran unirse a nuestro estanque. Diseñadores, desarrolladores y soñadores bienvenidos.',
       form: {
         title: 'Únete a la Bandada',
-        description: 'Siempre estamos buscando nuevos patos para unirse a nuestro estanque. Si te apasiona el código, el diseño y tienes un toque de humor, este es tu lugar.',
+        description: 'Siempre estamos buscando nuevos patos que quieran unirse a nuestro estanque. Si te apasiona el código, el diseño y tienes un toque de humor, este es tu lugar.',
         emailLabel: 'Email',
         phoneLabel: 'Teléfono',
         nameLabel: 'Nombre Completo',
@@ -219,13 +219,13 @@ export const contentConfig = {
       internal: 'Interno',
       contact: 'Contacto',
       socials: 'Redes Sociales',
-      tagline: 'con amor y código\ndesde el estanque',
+      tagline: 'Con amor y código\ndesde el estanque',
       copyright: '© 2025 DuckHats'
     },
     fullScreenMenu: {
       mainNav: {
         home: 'Inicio',
-        about: 'Historia',
+        about: 'Nuestra Historia',
         team: 'Equipo',
         projects: 'Proyectos',
       },
@@ -269,12 +269,12 @@ export const contentConfig = {
       },
       about: {
         title: 'About us',
-        description1: 'We are a collective of developers, designers and dreamers. Like a duck, we appear calm on the surface, but underneath, we are swimming furiously to achieve excellence.',
+        description1: 'We are a collective of developers, designers and dreamers. Like a duck, we appear calm on the surface but underneath we are swimming furiously to achieve excellence.',
         description2: 'Our hats represent the many roles we take on to ensure the project succeeds.'
       },
       origins: {
         title: 'The Pond Origins',
-        paragraph1: 'DuckHats was born in a vocational school back in 2020, from a simple observation: most digital agencies take themselves too seriously, or not seriously enough. We wanted to find the perfect balance, the "Duck" philosophy.',
+        paragraph1: 'DuckHats was born in a vocational school in Catalonia in 2020, from a simple observation: most digital agencies take themselves too seriously, or not seriously enough. We wanted to find the perfect balance: the “Duck” philosophy.',
         paragraph2: "Calm on the surface, swimming furiously underneath. That's us. We started as four friends tired of corporate rigidity and eager to build things that sparked joy, both for us and our clients."
       },
       dna: {
@@ -288,7 +288,7 @@ export const contentConfig = {
     },
     team: {
       title: 'THE FLOCK',
-      subtitle: 'We are a diverse group of creatives and \"protoengineers\" united by a single mission: to build the extraordinary. From different corners of the world, we come together to swim in the same direction.',
+      subtitle: 'We are a diverse group of creatives and "protoengineers" united by a single mission: to build the extraordinary. From different corners of Catalonia, we come together to swim in the same direction.',
       teamTitle: 'DuckHats Team',
       membersTitle: 'MEMBERS',
       planTitle: 'Team Direction Plan'
@@ -307,10 +307,10 @@ export const contentConfig = {
     },
     joinUs: {
       title: 'JOIN US',
-      description: "We're always looking for new ducks to join our pond. Designers, developers and dreamers welcome.",
+      description: "We're always looking for new ducks to become part of our pond. Designers, developers and dreamers welcome.",
       form: {
         title: 'Join the Flock',
-        description: "We're always looking for new ducks to join our pond. If you're passionate about code, design, and have a sense of humor, this is your place.",
+        description: "We're always looking for new ducks to become part of our pond. If you're passionate about code, design, and have a sense of humor, this is your place.",
         emailLabel: 'Email',
         phoneLabel: 'Phone',
         nameLabel: 'Full Name',
@@ -342,13 +342,13 @@ export const contentConfig = {
       internal: 'Internal',
       contact: 'Contact',
       socials: 'Social Networks',
-      tagline: 'with love and code\nfrom the pond',
+      tagline: 'With love and code\nfrom the pond',
       copyright: '© 2025 DuckHats'
     },
     fullScreenMenu: {
       mainNav: {
         home: 'Home',
-        about: 'History',
+        about: 'Our Story',
         team: 'Team',
         projects: 'Projects',
       },
