@@ -114,4 +114,27 @@ export const accessibilityConfig = {
             currentSectionLabel: 'Current section'
         },
     },
+    socials: {
+        ca: {
+            githubLabel: 'Enllaç a GitHub de ',
+            twitterLabel: 'Enllaç a Twitter de ',
+            instagramLabel: 'Enllaç a Instagram de ',
+            linkedinLabel: 'Enllaç a LinkedIn de ',
+            globeLabel: 'Enllaç al lloc web de ',
+        },
+        es: {
+            githubLabel: 'Enlace a GitHub de ',
+            twitterLabel: 'Enlace a Twitter de ',
+            instagramLabel: 'Enlace a Instagram de ',
+            linkedinLabel: 'Enlace a LinkedIn de ',
+            globeLabel: 'Enlace al sitio web de ',
+        },
+        en: {
+            githubLabel: 'Link to GitHub of ',
+            twitterLabel: 'Link to Twitter of ',
+            instagramLabel: 'Link to Instagram of ',
+            linkedinLabel: 'Link to LinkedIn of ',
+            globeLabel: 'Link to website of ',
+        },
+    },
 };
