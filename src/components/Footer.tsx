@@ -62,7 +62,7 @@ export function Footer() {
             >
               → {content.nav.about}
             </Link>
-            <Link aria-label={accessibilityConfig.nav[language].linkTeamLabel}
+            <Link aria-label={accessibilityConfig.nav[language].linkProjectsLabel}
               to="/projects"
               className="font-mono text-sm transition-all hover:translate-x-1 inline-block w-fit"
               style={{
@@ -77,7 +77,7 @@ export function Footer() {
             >
               → {content.nav.projects}
             </Link>
-            <Link aria-label={accessibilityConfig.nav[language].linkAboutLabel}
+            <Link aria-label={accessibilityConfig.nav[language].linkTeamLabel}
               to="/team"
               className="font-mono text-sm transition-all hover:translate-x-1 inline-block w-fit"
               style={{
