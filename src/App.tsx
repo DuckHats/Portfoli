@@ -5,6 +5,7 @@ import {
   useLocation,
 } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
+import { HelmetProvider } from 'react-helmet-async'
 import { HomePage } from './pages/HomePage'
 import { ProjectsPage } from './pages/ProjectsPage'
 import { ProjectDetailPage } from './pages/ProjectDetailPage'
@@ -28,8 +29,10 @@ function AnimatedRoutes() {
 }
 export function App() {
   return (
-    <Router>
-      <AnimatedRoutes />
-    </Router>
+    <HelmetProvider>
+      <Router>
+        <AnimatedRoutes />
+      </Router>
+    </HelmetProvider>
   )
 }
