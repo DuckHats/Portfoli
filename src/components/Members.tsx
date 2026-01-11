@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
+import { Github, Globe, Instagram, Linkedin, Twitter } from 'lucide-react';
 import { useContent } from '../hooks/useContent';
 import { useLanguage } from '../hooks/useLanguage';
 import { brandConfig } from '../config/brand.config';
 import { teamMembers } from '../config/team.config';
+import { accessibilityConfig } from '../config/accessibility';
 export function Members() {
   const content = useContent();
   const {
@@ -41,18 +43,47 @@ export function Members() {
           }} onMouseLeave={e => {
             e.currentTarget.style.boxShadow = `4px 4px 0px 0px ${brandConfig.colors.primary.black}`;
           }}>
-                <img src={member.img} alt={member.name} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300" />
+                <img src={member.img} alt={member.name + " - " + member.role[language]} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300" />
               </div>
-              <h3 className="font-display text-lg font-bold text-center" style={{
+              <h3 aria-hidden="true" className="font-display text-lg font-bold text-center" style={{
             color: brandConfig.colors.primary.black
           }}>
                 {member.name}
               </h3>
-              <p className="text-xs font-mono uppercase tracking-wider" style={{
+              <p aria-hidden="true" className="text-xs font-mono uppercase tracking-wider mb-4" style={{
             color: brandConfig.colors.neutral.gray500
           }}>
                 {member.role[language]}
               </p>
+
+              {/* Social Media Links */}
+              {member.social && <div className="flex gap-3 mt-auto">
+                  {member.social.linkedin && <a aria-label={accessibilityConfig.socials[language].linkedinLabel + member.name} href={member.social.linkedin} target="_blank" rel="noopener noreferrer" className="transition-colors duration-300 hover:text-opacity-70" style={{
+              color: brandConfig.colors.primary.black
+            }}>
+                      <Linkedin  size={20} />
+                    </a>}
+                  {member.social.github && <a aria-label={accessibilityConfig.socials[language].githubLabel + member.name} href={member.social.github} target="_blank" rel="noopener noreferrer" className="transition-colors duration-300 hover:text-opacity-70" style={{
+              color: brandConfig.colors.primary.black
+            }}>
+                      <Github  size={20} />
+                    </a>}
+                  {member.social.twitter && <a aria-label={accessibilityConfig.socials[language].twitterLabel + member.name} href={member.social.twitter} target="_blank" rel="noopener noreferrer" className="transition-colors duration-300 hover:text-opacity-70" style={{
+              color: brandConfig.colors.primary.black
+            }}>
+                      <Twitter size={20} />
+                    </a>}
+                  {member.social.instagram && <a aria-label={accessibilityConfig.socials[language].instagramLabel + member.name} href={member.social.instagram} target="_blank" rel="noopener noreferrer" className="transition-colors duration-300 hover:text-opacity-70" style={{
+              color: brandConfig.colors.primary.black
+            }}>
+                      <Instagram size={20} />
+                    </a>}
+                  {member.social.website && <a aria-label={accessibilityConfig.socials[language].globeLabel + member.name} href={member.social.website} target="_blank" rel="noopener noreferrer" className="transition-colors duration-300 hover:text-opacity-70" style={{
+              color: brandConfig.colors.primary.black
+            }}>
+                      <Globe size={20} />
+                    </a>}
+                </div>}
             </motion.div>)}
         </div>
       </div>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { X, ArrowRight } from 'lucide-react';
 import { useContent } from '../hooks/useContent';
 import { useLanguage } from '../hooks/useLanguage';
-import { contactConfig } from '../config/contact.config';
+import { accessibilityConfig } from '../config/accessibility';
 
 interface FullScreenMenuProps {
   isOpen: boolean;
@@ -32,7 +32,7 @@ export function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps) {
         >
           {/* Close Button */}
           <div className="absolute top-8 left-1/2 -translate-x-1/2 z-50">
-            <button
+            <button aria-label={accessibilityConfig.nav[language].closeLabel}
               onClick={onClose}
               className="w-16 h-8 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 transition-colors"
             >
@@ -42,41 +42,41 @@ export function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps) {
 
           <div className="min-h-screen flex flex-col items-center justify-center py-20 px-4">
             {/* Main Navigation */}
-            <nav className="flex flex-col items-center space-y-2 mb-20">
-              <MainMenuLink to="/" onClick={onClose}>
+            <nav aria-label={accessibilityConfig.nav[language].navbarLabel} className="flex flex-col items-center space-y-2 mb-20">
+              <MainMenuLink to="/" onClick={onClose} aria-label={accessibilityConfig.nav[language].linkHomeLabel}>
                 {content.fullScreenMenu.mainNav.home}
               </MainMenuLink>
-              <MainMenuLink to="/about" onClick={onClose}>
+              <MainMenuLink to="/about" onClick={onClose} aria-label={accessibilityConfig.nav[language].linkAboutLabel}>
                 {content.fullScreenMenu.mainNav.about}
               </MainMenuLink>
-              <MainMenuLink to="/team" onClick={onClose}>
+              <MainMenuLink to="/team" onClick={onClose} aria-label={accessibilityConfig.nav[language].linkTeamLabel}>
                 {content.fullScreenMenu.mainNav.team}
               </MainMenuLink>
-              <MainMenuLink to="/projects" onClick={onClose}>
+              <MainMenuLink to="/projects" onClick={onClose} aria-label={accessibilityConfig.nav[language].linkProjectsLabel}>
                 {content.fullScreenMenu.mainNav.projects}
               </MainMenuLink>
             </nav>
 
             {/* Secondary Links */}
             <div className="flex flex-wrap justify-center gap-8 md:gap-16 mb-16 text-xl md:text-2xl font-bold">
-              <SecondaryLink href={`mailto:${contactConfig.email}`}>
-                {content.fullScreenMenu.secondaryLinks.contact}
+              <SecondaryLink href="/join-us" onClick={onClose} aria-label={accessibilityConfig.nav[language].linkJoinUsLabel}>
+                {content.fullScreenMenu.secondaryLinks.joinUs}
               </SecondaryLink>
             </div>
 
             {/* Footer Links */}
             <div className="flex flex-wrap justify-center gap-6 text-xs md:text-sm text-gray-500 font-mono mb-8">
-              <a href="#" className="hover:text-white transition-colors">
+              <a aria-label={accessibilityConfig.nav[language].linkPrivacyLabel} href="#" className="hover:text-white transition-colors">
                 {content.fullScreenMenu.policies.privacy}
               </a>
-              <a href="#" className="hover:text-white transition-colors">
+              <a aria-label={accessibilityConfig.nav[language].linkComplianceLabel} href="#" className="hover:text-white transition-colors">
                 {content.fullScreenMenu.policies.compliance}
               </a>
             </div>
 
             {/* Language Toggle */}
             <div className="text-sm font-bold tracking-widest">
-              <button
+              <button aria-label={accessibilityConfig.nav[language].catalanLabel}
                 onClick={() => setLanguage('ca')}
                 className={`${
                   language === 'ca' ? 'text-white' : 'text-gray-500'
@@ -84,8 +84,10 @@ export function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps) {
               >
                 CA
               </button>{' '}
-              /{' '}
-              <button
+              <span aria-hidden="true">
+              /{}
+              </span>
+              <button aria-label={accessibilityConfig.nav[language].spanishLabel}
                 onClick={() => setLanguage('es')}
                 className={`${
                   language === 'es' ? 'text-white' : 'text-gray-500'
@@ -93,8 +95,10 @@ export function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps) {
               >
                 ES
               </button>{' '}
-              /{' '}
-              <button
+              <span aria-hidden="true">
+              /{}
+              </span>
+              <button aria-label={accessibilityConfig.nav[language].englishLabel}
                 onClick={() => setLanguage('en')}
                 className={`${
                   language === 'en' ? 'text-white' : 'text-gray-500'
@@ -134,13 +138,16 @@ function MainMenuLink({
 function SecondaryLink({
   href,
   children,
+  onClick,
 }: {
   href: string;
   children: React.ReactNode;
+  onClick?: () => void;
 }) {
   return (
     <a
       href={href}
+      onClick={onClick}
       className="relative hover:text-[#e63946] transition-colors after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#e63946] hover:after:w-full after:transition-all after:duration-300"
     >
       {children}

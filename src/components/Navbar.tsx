@@ -49,7 +49,7 @@ export function Navbar() {
           }}>
               CA
             </button>
-            <span style={{
+            <span aria-hidden="true" style={{
             color: brandConfig.colors.neutral.gray300
           }}>
               /
@@ -59,7 +59,7 @@ export function Navbar() {
           }}>
               ES
             </button>
-            <span style={{
+            <span aria-hidden="true" style={{
             color: brandConfig.colors.neutral.gray300
           }}>
               /

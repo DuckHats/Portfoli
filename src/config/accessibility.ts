@@ -9,12 +9,17 @@ export const accessibilityConfig = {
                 englishLabel: 'Canviar a anglès',
 
             hamburgerLabel: 'Obrir menú',
+            closeLabel: 'Tancar menú',
 
             linkLinksLabel: 'Enllaços de navegació',
                 linkHomeLabel: 'Enllaç a la pàgina d\'inici',
                 linkTeamLabel: 'Enllaç a la pàgina de l\'equip',
                 linkProjectsLabel: 'Enllaç a la pàgina de projectes',
                 linkAboutLabel: 'Enllaç a la pàgina sobre nosaltres',
+                linkContatLabel: 'Enllaç a la pàgina de contacte',
+                linkJoinUsLabel: 'Enllaç a la pàgina d\'unir-se a l\'equip',
+                linkPrivacyLabel: 'Enllaç a la política de privacitat',
+                linkComplianceLabel: 'Enllaç a la política de compliment',
 
         },
         es: {
@@ -26,12 +31,17 @@ export const accessibilityConfig = {
                 englishLabel: 'Cambiar a inglés',
 
             hamburgerLabel: 'Abrir menú',
+            closeLabel: 'Cerrar menú',
 
             linkLinksLabel: 'Enlaces de navegación',
                 linkHomeLabel: 'Enlace a la página de inicio',
                 linkTeamLabel: 'Enlace a la página del equipo',
                 linkProjectsLabel: 'Enlace a la página de proyectos',
                 linkAboutLabel: 'Enlace a la página sobre nosotros',
+                linkContatLabel: 'Enlace a la página de contacto',
+                linkJoinUsLabel: 'Enlace a la página de unirse al equipo',
+                linkPrivacyLabel: 'Enlace a la política de privacidad',
+                linkComplianceLabel: 'Enlace a la política de cumplimiento',
         },
         en: {
             navbarLabel: 'Main navigation menu',
@@ -42,12 +52,17 @@ export const accessibilityConfig = {
                 englishLabel: 'Switch to English',
 
             hamburgerLabel: 'Open menu',
+            closeLabel: 'Close menu',
 
             linkLinksLabel: 'Navigation links',
                 linkHomeLabel: 'Link to home page',
                 linkTeamLabel: 'Link to team page',
                 linkProjectsLabel: 'Link to projects page',
                 linkAboutLabel: 'Link to about us page',
+                linkContatLabel: 'Link to contact page',
+                linkJoinUsLabel: 'Link to join our team page',
+                linkPrivacyLabel: 'Link to privacy policy',
+                linkComplianceLabel: 'Link to compliance policy',
         },
 
 },
@@ -94,5 +109,108 @@ export const accessibilityConfig = {
                     
         },
     },
-
-};
+    home: {
+        ca: {
+            carouselLabel: 'Selector de seccions de la pàgina d\'inici',
+            prevButtonLabel: 'Anar a la secció anterior',
+            nextButtonLabel: 'Anar a la secció següent',
+            currentSectionLabel: 'Secció actual'
+        },
+        es: {
+            carouselLabel: 'Selector de secciones de la página de inicio',
+            prevButtonLabel: 'Ir a la sección anterior',
+            nextButtonLabel: 'Ir a la sección siguiente',
+            currentSectionLabel: 'Sección actual'
+        },
+        en: {
+            carouselLabel: 'Home page sections selector',
+            prevButtonLabel: 'Go to previous section',
+            nextButtonLabel: 'Go to next section',
+            currentSectionLabel: 'Current section'
+        },
+    },
+    socials: {
+        ca: {
+            githubLabel: 'Enllaç a GitHub de ',
+            twitterLabel: 'Enllaç a Twitter de ',
+            instagramLabel: 'Enllaç a Instagram de ',
+            linkedinLabel: 'Enllaç a LinkedIn de ',
+            globeLabel: 'Enllaç al lloc web de ',
+        },
+        es: {
+            githubLabel: 'Enlace a GitHub de ',
+            twitterLabel: 'Enlace a Twitter de ',
+            instagramLabel: 'Enlace a Instagram de ',
+            linkedinLabel: 'Enlace a LinkedIn de ',
+            globeLabel: 'Enlace al sitio web de ',
+        },
+        en: {
+            githubLabel: 'Link to GitHub of ',
+            twitterLabel: 'Link to Twitter of ',
+            instagramLabel: 'Link to Instagram of ',
+            linkedinLabel: 'Link to LinkedIn of ',
+            globeLabel: 'Link to website of ',
+        },
+    },
+    joinUs: {
+        ca: {
+            contactFormLabel: 'Formulari de contacte',
+            nameFieldLabel: 'Camp per al nom',
+            emailFieldLabel: 'Camp per al correu electrònic',
+            messageFieldLabel: 'Camp per al missatge',
+            submitButtonLabel: 'Botó per enviar el formulari',
+            deleteLinkButtonLabel: 'Botó per esborrar l\'enllaç a',
+            enterLinkButtonLabel: 'Camp per introduir un enllaç',
+            addLinkButtonLabel: 'Botó per afegir un nou enllaç',
+            UploadButtonLabel: 'Camp per pujar un fitxer',
+            moreAboutYouLabel: 'Camp per explicar més sobre tu',
+        },
+        es: {
+            contactFormLabel: 'Formulario de contacto',
+            nameFieldLabel: 'Campo para el nombre',
+            emailFieldLabel: 'Campo para el correo electrónico',
+            messageFieldLabel: 'Campo para el mensaje',
+            submitButtonLabel: 'Botón para enviar el formulario',
+            deleteLinkButtonLabel: 'Botón para borrar el enlace a',
+            enterLinkButtonLabel: 'Campo para introducir un enlace',
+            addLinkButtonLabel: 'Botón para añadir un nuevo enlace',
+            UploadButtonLabel: 'Campo para subir un archivo',
+            moreAboutYouLabel: 'Campa para explicar más sobre ti',
+        },
+        en: {
+            contactFormLabel: 'Contact form',
+            nameFieldLabel: 'Field for name',
+            emailFieldLabel: 'Field for email',
+            messageFieldLabel: 'Field for message',
+            submitButtonLabel: 'Button to submit the form',
+            deleteLinkButtonLabel: 'Button to delete the link to',
+            enterLinkButtonLabel: 'Field to enter a link',
+            addLinkButtonLabel: 'Button to add a new link',
+            UploadButtonLabel: 'Field to upload a file',
+            moreAboutYouLabel: 'Field to explain more about you',
+        },
+    },
+    projectDetails: {
+        ca: {
+            typeProjectLabel: 'Projecte de tipus: ',
+            finalizationDateLabel: 'Data de finalització: ',
+            nameOfProjectLabel: 'Projecte: ',
+            demoProjectLinkLabel: 'Enllaç al demo del projecte',
+            githubProjetLinkLabel: 'Enllaç al Github del projecte',
+        },
+        es: {
+            typeProjectLabel: 'Proyecto de tipo: ',
+            finalizationDateLabel: 'Fecha de finalización: ',
+            nameOfProjectLabel: 'Proyecto: ',
+            demoProjectLinkLabel: 'Enlace al demo del proyecto',
+            githubProjetLinkLabel: 'Enlace al Github del proyecto',
+        },
+        en: {
+            typeProjectLabel: 'Project of type: ',
+            finalizationDateLabel: 'Finalization date: ',
+            nameOfProjectLabel: 'Project: ',
+            demoProjectLinkLabel: 'Link to the project demo',
+            githubProjetLinkLabel: 'Link to the project Github',
+        },
+    },
+}
