@@ -152,13 +152,18 @@ export const accessibilityConfig = {
             globeLabel: 'Link to website of ',
         },
     },
-    contact: {
+    joinUs: {
         ca: {
             contactFormLabel: 'Formulari de contacte',
             nameFieldLabel: 'Camp per al nom',
             emailFieldLabel: 'Camp per al correu electrònic',
             messageFieldLabel: 'Camp per al missatge',
             submitButtonLabel: 'Botó per enviar el formulari',
+            deleteLinkButtonLabel: 'Botó per esborrar l\'enllaç a',
+            enterLinkButtonLabel: 'Camp per introduir un enllaç',
+            addLinkButtonLabel: 'Botó per afegir un nou enllaç',
+            UploadButtonLabel: 'Camp per pujar un fitxer',
+            moreAboutYouLabel: 'Camp per explicar més sobre tu',
         },
         es: {
             contactFormLabel: 'Formulario de contacto',
@@ -166,6 +171,11 @@ export const accessibilityConfig = {
             emailFieldLabel: 'Campo para el correo electrónico',
             messageFieldLabel: 'Campo para el mensaje',
             submitButtonLabel: 'Botón para enviar el formulario',
+            deleteLinkButtonLabel: 'Botón para borrar el enlace a',
+            enterLinkButtonLabel: 'Campo para introducir un enlace',
+            addLinkButtonLabel: 'Botón para añadir un nuevo enlace',
+            UploadButtonLabel: 'Campo para subir un archivo',
+            moreAboutYouLabel: 'Campa para explicar más sobre ti',
         },
         en: {
             contactFormLabel: 'Contact form',
@@ -173,6 +183,11 @@ export const accessibilityConfig = {
             emailFieldLabel: 'Field for email',
             messageFieldLabel: 'Field for message',
             submitButtonLabel: 'Button to submit the form',
+            deleteLinkButtonLabel: 'Button to delete the link to',
+            enterLinkButtonLabel: 'Field to enter a link',
+            addLinkButtonLabel: 'Button to add a new link',
+            UploadButtonLabel: 'Field to upload a file',
+            moreAboutYouLabel: 'Field to explain more about you',
         },
     },
 };

@@ -1,19 +1,55 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, Upload, Send, Linkedin } from 'lucide-react';
+import {Mail,Phone,Upload,Send,Linkedin,Plus,Trash2,Github,Globe,Twitter,Instagram,Facebook,Youtube,Twitch,Gitlab,Dribbble,Figma,Briefcase,Code,} from 'lucide-react';
 import { brandConfig } from '../config/brand.config';
 import { contactConfig } from '../config/contact.config';
 import { useContent } from '../hooks/useContent';
+import { useLanguage } from '../hooks/useLanguage';
+import { accessibilityConfig } from '../config/accessibility';
 
 export function JoinUsForm() {
   const content = useContent();
+  const {language} = useLanguage();
   const [formState, setFormState] = useState({
     name: '',
     email: '',
     role: '',
-    links: '',
+    customRole: '',
+    links: [''],
     message: '',
   });
+
+  const handleLinkChange = (index: number, value: string) => {
+    const newLinks = [...formState.links];
+    newLinks[index] = value;
+    setFormState({ ...formState, links: newLinks });
+  };
+
+  const addLink = () => {
+    setFormState({ ...formState, links: [...formState.links, ''] });
+  };
+
+  const removeLink = (index: number) => {
+    const newLinks = formState.links.filter((_, i) => i !== index);
+    setFormState({ ...formState, links: newLinks });
+  };
+
+  const getLinkIcon = (url: string) => {
+    const lowerUrl = url.toLowerCase();
+    if (lowerUrl.includes('linkedin')) return <Linkedin className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes('github')) return <Github className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes('twitter') || lowerUrl.includes('x.com')) return <Twitter className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes('instagram')) return <Instagram className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes('facebook')) return <Facebook className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes('youtube')) return <Youtube className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes('twitch')) return <Twitch className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes('gitlab')) return <Gitlab className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes('dribbble')) return <Dribbble className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes('figma')) return <Figma className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes('infojobs')) return <Briefcase className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes('stackoverflow')) return <Code className="h-5 w-5 text-gray-400" />;
+    return <Globe className="h-5 w-5 text-gray-400" />;
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,7 +77,7 @@ export function JoinUsForm() {
     >
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 lg:gap-20">
-          {/* Left Column: Contact Info */}
+          {/* Left Column: joinUs Info */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -103,7 +139,7 @@ export function JoinUsForm() {
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label
+                <label 
                   htmlFor="name"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
@@ -122,7 +158,7 @@ export function JoinUsForm() {
               </div>
 
               <div>
-                <label
+                <label 
                   htmlFor="email"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
@@ -141,7 +177,7 @@ export function JoinUsForm() {
               </div>
 
               <div>
-                <label
+                <label 
                   htmlFor="role"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
@@ -180,7 +216,7 @@ export function JoinUsForm() {
                     </option>
                   </select>
                   <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none">
-                    <svg
+                    <svg aria-hidden="true"
                       className="w-4 h-4 text-gray-500"
                       fill="none"
                       stroke="currentColor"
@@ -195,33 +231,77 @@ export function JoinUsForm() {
                     </svg>
                   </div>
                 </div>
+                <div aria-live='polite'>
+                {formState.role === 'other' && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="mt-3"
+                  >
+                    <input
+                      type="text"
+                      name="customRole"
+                      value={formState.customRole}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all outline-none bg-gray-50"
+                      placeholder={content.joinUs.form.otherRolePlaceholder}
+                      required
+                    />
+                  </motion.div>
+                )}
+                </div>
               </div>
 
               <div>
-                <label
+                <label 
                   htmlFor="links"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
                   {content.joinUs.form.linksLabel}
                 </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Linkedin className="h-5 w-5 text-gray-400" />
-                  </div>
-                  <input
-                    type="url"
-                    id="links"
-                    name="links"
-                    value={formState.links}
-                    onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all outline-none bg-gray-50"
-                    placeholder={content.joinUs.form.linksPlaceholder}
-                  />
+                <div className="space-y-3">
+                  {formState.links.map((link, index) => (
+                    <div key={index} className="relative flex gap-2">
+                      <div className="relative flex-1">
+                        <div aria-hidden="true" className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                          {getLinkIcon(link)}
+                        </div>
+                        <input aria-label={accessibilityConfig.joinUs[language].enterLinkButtonLabel}
+                          type="url"
+                          value={link}
+                          onChange={(e) =>
+                            handleLinkChange(index, e.target.value)
+                          }
+                          className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all outline-none bg-gray-50"
+                          placeholder={content.joinUs.form.linksPlaceholder}
+                        />
+                      </div>
+                      {formState.links.length > 1 && (
+                        <button aria-label={accessibilityConfig.joinUs[language].deleteLinkButtonLabel + ` ${link}`}
+                          type="button"
+                          onClick={() => removeLink(index)}
+                          className="p-3 text-gray-500 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                          title={content.joinUs.form.removeLink}
+                        >
+                          <Trash2 className="w-5 h-5" />
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                  <button aria-label={accessibilityConfig.joinUs[language].addLinkButtonLabel}
+                    type="button"
+                    onClick={addLink}
+                    className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-black transition-colors px-1"
+                  >
+                    <Plus className="w-4 h-4" />
+                    {content.joinUs.form.addLink}
+                  </button>
                 </div>
               </div>
 
               <div>
-                <label
+                <label 
                   htmlFor="cv"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
@@ -235,18 +315,20 @@ export function JoinUsForm() {
                         htmlFor="file-upload"
                         className="relative cursor-pointer bg-white rounded-md font-medium text-black hover:text-gray-700 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-black"
                       >
-                        <span>{content.joinUs.form.uploadButton}</span>
+                        <span aria-hidden="true">{content.joinUs.form.uploadButton}</span>
                         <input
+                          aria-label={accessibilityConfig.joinUs[language].UploadButtonLabel}
                           id="file-upload"
                           name="file-upload"
                           type="file"
+                          aria-describedby='cv-desc'
                           accept=".pdf"
                           className="sr-only"
                         />
                       </label>
-                      <p className="pl-1">{content.joinUs.form.dragDrop}</p>
+                      <p aria-hidden="true" className="pl-1">{content.joinUs.form.dragDrop}</p>
                     </div>
-                    <p className="text-xs text-gray-500">
+                    <p id="cv-desc" aria-hidden="true" className="text-xs text-gray-500">
                       {content.joinUs.form.fileLimit}
                     </p>
                   </div>
@@ -254,7 +336,7 @@ export function JoinUsForm() {
               </div>
 
               <div>
-                <label
+                <label 
                   htmlFor="message"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
@@ -271,7 +353,7 @@ export function JoinUsForm() {
                 />
               </div>
 
-              <button
+              <button aria-label={accessibilityConfig.joinUs[language].submitButtonLabel}
                 type="submit"
                 className="w-full flex items-center justify-center gap-2 bg-black text-white py-4 rounded-lg font-bold text-lg hover:bg-gray-800 transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
               >
@@ -280,6 +362,10 @@ export function JoinUsForm() {
               </button>
             </form>
           </motion.div>
+          {/* success mesage accessiblity */}
+            {/* <div aria-live="polite">
+              {submitted && content.joinUs.form.successMessage}
+            </div> */}
         </div>
       </div>
     </section>
