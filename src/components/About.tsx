@@ -32,11 +32,11 @@ export function About() {
         once: true,
         margin: '-100px'
       }} variants={fadeInUp} className="text-center">
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 border-b-4 inline-block pb-2" style={{
+          <h1 className="text-4xl md:text-5xl font-display font-bold mb-6 border-b-4 inline-block pb-2" style={{
           borderColor: brandConfig.colors.primary.black
         }}>
             {content.about.vision.title}
-          </h2>
+          </h1>
           <p className="text-lg md:text-xl leading-relaxed font-light" style={{
           color: brandConfig.colors.neutral.gray700
         }}>
