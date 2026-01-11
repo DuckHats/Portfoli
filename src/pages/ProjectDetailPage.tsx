@@ -8,6 +8,7 @@ import { useContent } from '../hooks/useContent.ts'
 import { useLanguage } from '../hooks/useLanguage.ts'
 import { brandConfig } from '../config/brand.config.ts'
 import { projectsData } from '../config/projects.config.ts'
+import { accessibilityConfig } from '../config/accessibility.ts'
 export function ProjectDetailPage() {
   const { projectId } = useParams<{
     projectId: string
@@ -50,7 +51,7 @@ export function ProjectDetailPage() {
               }}
             >
               <div className="flex items-center gap-4 mb-4">
-                <span
+                <span aria-label={accessibilityConfig.projectDetails[language].typeProjectLabel + project.category[language]}
                   className="text-sm font-mono px-3 py-1 border-2"
                   style={{
                     color: brandConfig.colors.accent.red,
@@ -59,7 +60,7 @@ export function ProjectDetailPage() {
                 >
                   {project.category[language]}
                 </span>
-                <span
+                <span aria-label={accessibilityConfig.projectDetails[language].finalizationDateLabel + project.date[language]}
                   className="text-sm font-mono"
                   style={{
                     color: brandConfig.colors.neutral.gray500,
@@ -69,7 +70,7 @@ export function ProjectDetailPage() {
                 </span>
               </div>
 
-              <h1
+              <h1 aria-label={accessibilityConfig.projectDetails[language].nameOfProjectLabel + project.title}
                 className="text-5xl md:text-8xl font-display font-bold mb-6"
                 style={{
                   color: brandConfig.colors.primary.black,
@@ -90,7 +91,7 @@ export function ProjectDetailPage() {
               {/* Links */}
               <div className="flex gap-4 mt-8">
                 {project.link && (
-                  <a
+                  <a aria-label={accessibilityConfig.projectDetails[language].demoProjectLinkLabel}
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -105,7 +106,7 @@ export function ProjectDetailPage() {
                   </a>
                 )}
                 {project.github && (
-                  <a
+                  <a aria-label={accessibilityConfig.projectDetails[language].githubProjetLinkLabel}
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"

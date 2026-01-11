@@ -190,4 +190,27 @@ export const accessibilityConfig = {
             moreAboutYouLabel: 'Field to explain more about you',
         },
     },
-};
+    projectDetails: {
+        ca: {
+            typeProjectLabel: 'Projecte de tipus: ',
+            finalizationDateLabel: 'Data de finalització: ',
+            nameOfProjectLabel: 'Projecte: ',
+            demoProjectLinkLabel: 'Enllaç al demo del projecte',
+            githubProjetLinkLabel: 'Enllaç al Github del projecte',
+        },
+        es: {
+            typeProjectLabel: 'Proyecto de tipo: ',
+            finalizationDateLabel: 'Fecha de finalización: ',
+            nameOfProjectLabel: 'Proyecto: ',
+            demoProjectLinkLabel: 'Enlace al demo del proyecto',
+            githubProjetLinkLabel: 'Enlace al Github del proyecto',
+        },
+        en: {
+            typeProjectLabel: 'Project of type: ',
+            finalizationDateLabel: 'Finalization date: ',
+            nameOfProjectLabel: 'Project: ',
+            demoProjectLinkLabel: 'Link to the project demo',
+            githubProjetLinkLabel: 'Link to the project Github',
+        },
+    },
+}
