@@ -1,4 +1,5 @@
 import { Team } from '../components/Team';
+import { Helmet } from 'react-helmet-async';
 import { Members } from '../components/Members';
 import { JoinUs } from '../components/JoinUs';
 import { useContent } from '../hooks/useContent';
@@ -8,6 +9,14 @@ import { motion } from 'framer-motion';
 export function TeamPage() {
     const content = useContent();
   return <div className="min-h-screen bg-[#f5f5f5] flex flex-col">
+    <Helmet>
+                <title>Team - DuckHats</title>
+                <link rel="canonical" href="https://duckhats.com/team/"/>
+                <meta
+                  name="description"
+                  content="Meet our team and learn about our mission."
+                />
+              </Helmet>
       <Navbar />
       <div className="pt-20 flex-1">
         {/* Intro Section */}
