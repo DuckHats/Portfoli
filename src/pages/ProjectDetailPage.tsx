@@ -9,7 +9,7 @@ import { useContent } from '../hooks/useContent.ts'
 import { useLanguage } from '../hooks/useLanguage.ts'
 import { brandConfig } from '../config/brand.config.ts'
 import { projectsData } from '../config/projects.config.ts'
-import { accessibilityConfig } from '../config/accessibility.ts'
+import { accessibilityConfig } from '../config/accessibility.config.ts'
 export function ProjectDetailPage() {
   const { projectId } = useParams<{
     projectId: string
