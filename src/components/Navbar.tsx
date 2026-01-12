@@ -6,7 +6,7 @@ import { FullScreenMenu } from './FullScreenMenu';
 import { useLanguage } from '../hooks/useLanguage';
 import { useContent } from '../hooks/useContent';
 import { brandConfig } from '../config/brand.config';
-import { accessibilityConfig } from '../config/accessibility';
+import { accessibilityConfig } from '../config/accessibility.config';
 export function Navbar() {
   const location = useLocation();
   const isHome = location.pathname === '/';

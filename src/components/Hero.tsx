@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { ArrowDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useContent } from '../hooks/useContent';
 import { useLanguage } from '../hooks/useLanguage';
-import { accessibilityConfig } from '../config/accessibility';
+import { accessibilityConfig } from '../config/accessibility.config';
 import { brandConfig } from '../config/brand.config';
 export function Hero() {
   const content = useContent();

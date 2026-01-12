@@ -4,7 +4,7 @@ import { useContent } from '../hooks/useContent';
 import { useLanguage } from '../hooks/useLanguage';
 import { brandConfig } from '../config/brand.config';
 import { teamMembers } from '../config/team.config';
-import { accessibilityConfig } from '../config/accessibility';
+import { accessibilityConfig } from '../config/accessibility.config';
 export function Members() {
   const content = useContent();
   const {

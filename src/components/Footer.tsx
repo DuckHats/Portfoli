@@ -3,7 +3,7 @@ import { brandConfig } from '../config/brand.config'
 import { contactConfig } from '../config/contact.config'
 import { useContent } from '../hooks/useContent'
 import { useLanguage } from '../hooks/useLanguage'
-import { accessibilityConfig } from '../config/accessibility'
+import { accessibilityConfig } from '../config/accessibility.config'
 
 export function Footer() {
   const content = useContent()
