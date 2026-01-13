@@ -1,23 +1,50 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import {Mail,Phone,Upload,Send,Linkedin,Plus,Trash2,Github,Globe,Twitter,Instagram,Facebook,Youtube,Twitch,Gitlab,Dribbble,Figma,Briefcase,Code,} from 'lucide-react';
-import { brandConfig } from '../config/brand.config';
-import { contactConfig } from '../config/contact.config';
-import { useContent } from '../hooks/useContent';
-import { useLanguage } from '../hooks/useLanguage';
-import { accessibilityConfig } from '../config/accessibility.config';
+import { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  Mail,
+  Phone,
+  Upload,
+  Send,
+  Linkedin,
+  Plus,
+  Trash2,
+  Github,
+  Globe,
+  Twitter,
+  Instagram,
+  Facebook,
+  Youtube,
+  Twitch,
+  Gitlab,
+  Dribbble,
+  Figma,
+  Briefcase,
+  Code,
+} from "lucide-react";
+import { brandConfig } from "../config/brand.config";
+import { contactConfig } from "../config/contact.config";
+import { useContent } from "../hooks/useContent";
+import { useLanguage } from "../hooks/useLanguage";
+import { accessibilityConfig } from "../config/accessibility.config";
 
 export function JoinUsForm() {
   const content = useContent();
-  const {language} = useLanguage();
+  const { language } = useLanguage();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
+
   const [formState, setFormState] = useState({
-    name: '',
-    email: '',
-    role: '',
-    customRole: '',
-    links: [''],
-    message: '',
+    name: "",
+    email: "",
+    role: "",
+    customRole: "",
+    links: [""],
+    message: "",
   });
+
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const handleLinkChange = (index: number, value: string) => {
     const newLinks = [...formState.links];
@@ -26,7 +53,7 @@ export function JoinUsForm() {
   };
 
   const addLink = () => {
-    setFormState({ ...formState, links: [...formState.links, ''] });
+    setFormState({ ...formState, links: [...formState.links, ""] });
   };
 
   const removeLink = (index: number) => {
@@ -36,25 +63,83 @@ export function JoinUsForm() {
 
   const getLinkIcon = (url: string) => {
     const lowerUrl = url.toLowerCase();
-    if (lowerUrl.includes('linkedin')) return <Linkedin className="h-5 w-5 text-gray-400" />;
-    if (lowerUrl.includes('github')) return <Github className="h-5 w-5 text-gray-400" />;
-    if (lowerUrl.includes('twitter') || lowerUrl.includes('x.com')) return <Twitter className="h-5 w-5 text-gray-400" />;
-    if (lowerUrl.includes('instagram')) return <Instagram className="h-5 w-5 text-gray-400" />;
-    if (lowerUrl.includes('facebook')) return <Facebook className="h-5 w-5 text-gray-400" />;
-    if (lowerUrl.includes('youtube')) return <Youtube className="h-5 w-5 text-gray-400" />;
-    if (lowerUrl.includes('twitch')) return <Twitch className="h-5 w-5 text-gray-400" />;
-    if (lowerUrl.includes('gitlab')) return <Gitlab className="h-5 w-5 text-gray-400" />;
-    if (lowerUrl.includes('dribbble')) return <Dribbble className="h-5 w-5 text-gray-400" />;
-    if (lowerUrl.includes('figma')) return <Figma className="h-5 w-5 text-gray-400" />;
-    if (lowerUrl.includes('infojobs')) return <Briefcase className="h-5 w-5 text-gray-400" />;
-    if (lowerUrl.includes('stackoverflow')) return <Code className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes("linkedin"))
+      return <Linkedin className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes("github"))
+      return <Github className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes("twitter") || lowerUrl.includes("x.com"))
+      return <Twitter className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes("instagram"))
+      return <Instagram className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes("facebook"))
+      return <Facebook className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes("youtube"))
+      return <Youtube className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes("twitch"))
+      return <Twitch className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes("gitlab"))
+      return <Gitlab className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes("dribbble"))
+      return <Dribbble className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes("figma"))
+      return <Figma className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes("infojobs"))
+      return <Briefcase className="h-5 w-5 text-gray-400" />;
+    if (lowerUrl.includes("stackoverflow"))
+      return <Code className="h-5 w-5 text-gray-400" />;
     return <Globe className="h-5 w-5 text-gray-400" />;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setSelectedFile(e.target.files[0]);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log('Form submitted:', formState);
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
+
+    try {
+      const formData = new FormData();
+      formData.append("name", formState.name);
+      formData.append("email", formState.email);
+      formData.append("role", formState.role);
+      formData.append("customRole", formState.customRole);
+      formData.append("message", formState.message);
+      formData.append("links", JSON.stringify(formState.links));
+
+      if (selectedFile) {
+        formData.append("cv", selectedFile);
+      }
+
+      const response = await fetch("/api/submit-join-us", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit");
+      }
+
+      setSubmitStatus("success");
+      // Reset form
+      setFormState({
+        name: "",
+        email: "",
+        role: "",
+        customRole: "",
+        links: [""],
+        message: "",
+      });
+      setSelectedFile(null);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -119,7 +204,7 @@ export function JoinUsForm() {
                     {content.joinUs.form.phoneLabel}
                   </p>
                   <a
-                    href={`tel:${contactConfig.phone.replace(/\s/g, '')}`}
+                    href={`tel:${contactConfig.phone.replace(/\s/g, "")}`}
                     className="text-lg font-medium hover:underline"
                   >
                     {contactConfig.phone}
@@ -139,7 +224,7 @@ export function JoinUsForm() {
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label 
+                <label
                   htmlFor="name"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
@@ -158,7 +243,7 @@ export function JoinUsForm() {
               </div>
 
               <div>
-                <label 
+                <label
                   htmlFor="email"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
@@ -177,7 +262,7 @@ export function JoinUsForm() {
               </div>
 
               <div>
-                <label 
+                <label
                   htmlFor="role"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
@@ -216,7 +301,8 @@ export function JoinUsForm() {
                     </option>
                   </select>
                   <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none">
-                    <svg aria-hidden="true"
+                    <svg
+                      aria-hidden="true"
                       className="w-4 h-4 text-gray-500"
                       fill="none"
                       stroke="currentColor"
@@ -231,30 +317,30 @@ export function JoinUsForm() {
                     </svg>
                   </div>
                 </div>
-                <div aria-live='polite'>
-                {formState.role === 'other' && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="mt-3"
-                  >
-                    <input
-                      type="text"
-                      name="customRole"
-                      value={formState.customRole}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all outline-none bg-gray-50"
-                      placeholder={content.joinUs.form.otherRolePlaceholder}
-                      required
-                    />
-                  </motion.div>
-                )}
+                <div aria-live="polite">
+                  {formState.role === "other" && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="mt-3"
+                    >
+                      <input
+                        type="text"
+                        name="customRole"
+                        value={formState.customRole}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all outline-none bg-gray-50"
+                        placeholder={content.joinUs.form.otherRolePlaceholder}
+                        required
+                      />
+                    </motion.div>
+                  )}
                 </div>
               </div>
 
               <div>
-                <label 
+                <label
                   htmlFor="links"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
@@ -264,10 +350,17 @@ export function JoinUsForm() {
                   {formState.links.map((link, index) => (
                     <div key={index} className="relative flex gap-2">
                       <div className="relative flex-1">
-                        <div aria-hidden="true" className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <div
+                          aria-hidden="true"
+                          className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                        >
                           {getLinkIcon(link)}
                         </div>
-                        <input aria-label={accessibilityConfig.joinUs[language].enterLinkButtonLabel}
+                        <input
+                          aria-label={
+                            accessibilityConfig.joinUs[language]
+                              .enterLinkButtonLabel
+                          }
                           type="url"
                           value={link}
                           onChange={(e) =>
@@ -278,7 +371,11 @@ export function JoinUsForm() {
                         />
                       </div>
                       {formState.links.length > 1 && (
-                        <button aria-label={accessibilityConfig.joinUs[language].deleteLinkButtonLabel + ` ${link}`}
+                        <button
+                          aria-label={
+                            accessibilityConfig.joinUs[language]
+                              .deleteLinkButtonLabel + ` ${link}`
+                          }
                           type="button"
                           onClick={() => removeLink(index)}
                           className="p-3 text-gray-500 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
@@ -289,7 +386,10 @@ export function JoinUsForm() {
                       )}
                     </div>
                   ))}
-                  <button aria-label={accessibilityConfig.joinUs[language].addLinkButtonLabel}
+                  <button
+                    aria-label={
+                      accessibilityConfig.joinUs[language].addLinkButtonLabel
+                    }
                     type="button"
                     onClick={addLink}
                     className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-black transition-colors px-1"
@@ -301,7 +401,7 @@ export function JoinUsForm() {
               </div>
 
               <div>
-                <label 
+                <label
                   htmlFor="cv"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
@@ -315,28 +415,42 @@ export function JoinUsForm() {
                         htmlFor="file-upload"
                         className="relative cursor-pointer bg-white rounded-md font-medium text-black hover:text-gray-700 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-black"
                       >
-                        <span aria-hidden="true">{content.joinUs.form.uploadButton}</span>
+                        <span aria-hidden="true">
+                          {content.joinUs.form.uploadButton}
+                        </span>
                         <input
-                          aria-label={accessibilityConfig.joinUs[language].UploadButtonLabel}
+                          aria-label={
+                            accessibilityConfig.joinUs[language]
+                              .UploadButtonLabel
+                          }
                           id="file-upload"
                           name="file-upload"
                           type="file"
-                          aria-describedby='cv-desc'
+                          aria-describedby="cv-desc"
                           accept=".pdf"
+                          onChange={handleFileChange}
                           className="sr-only"
                         />
                       </label>
-                      <p aria-hidden="true" className="pl-1">{content.joinUs.form.dragDrop}</p>
+                      <p aria-hidden="true" className="pl-1">
+                        {content.joinUs.form.dragDrop}
+                      </p>
                     </div>
-                    <p id="cv-desc" aria-hidden="true" className="text-xs text-gray-500">
-                      {content.joinUs.form.fileLimit}
+                    <p
+                      id="cv-desc"
+                      aria-hidden="true"
+                      className="text-xs text-gray-500"
+                    >
+                      {selectedFile
+                        ? `Selected: ${selectedFile.name}`
+                        : content.joinUs.form.fileLimit}
                     </p>
                   </div>
                 </div>
               </div>
 
               <div>
-                <label 
+                <label
                   htmlFor="message"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
@@ -353,19 +467,36 @@ export function JoinUsForm() {
                 />
               </div>
 
-              <button aria-label={accessibilityConfig.joinUs[language].submitButtonLabel}
+              <button
+                aria-label={
+                  accessibilityConfig.joinUs[language].submitButtonLabel
+                }
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 bg-black text-white py-4 rounded-lg font-bold text-lg hover:bg-gray-800 transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                disabled={isSubmitting}
+                className="w-full flex items-center justify-center gap-2 bg-black text-white py-4 rounded-lg font-bold text-lg hover:bg-gray-800 transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <span>{content.joinUs.form.submitButton}</span>
+                <span>
+                  {isSubmitting
+                    ? "Sending..."
+                    : content.joinUs.form.submitButton}
+                </span>
                 <Send className="w-5 h-5" />
               </button>
             </form>
           </motion.div>
           {/* success mesage accessiblity */}
-            {/* <div aria-live="polite">
-              {submitted && content.joinUs.form.successMessage}
-            </div> */}
+          <div aria-live="polite" className="mt-4">
+            {submitStatus === "success" && (
+              <p className="text-green-600 font-medium text-center">
+                Application sent successfully!
+              </p>
+            )}
+            {submitStatus === "error" && (
+              <p className="text-red-600 font-medium text-center">
+                Failed to send application. Please try again.
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </section>
