@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import formidable from "formidable";
 import { IncomingMessage } from "http";
+import fs from "fs";
 
 // Disable default body parser to handle multipart/form-data
 export const config = {
@@ -37,7 +38,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const role = getString(fields.role);
     const customRole = getString(fields.customRole);
     const message = getString(fields.message);
-    const linksRaw = getString(fields.links); // Expecting JSON string for links array
+    const linksRaw = getString(fields.links);
 
     let links: string[] = [];
     try {
@@ -48,103 +49,81 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const cvFile = Array.isArray(files.cv) ? files.cv[0] : files.cv;
 
-    // Construct Slack Blocks
-    const blocks = [
-      {
-        type: "header",
-        text: {
-          type: "plain_text",
-          text: "🚀 New Join Us Application",
-          emoji: true,
+    // Discord Embed
+    const embed = {
+      title: "🚀 New Join Us Application",
+      color: 0x000000, // Black color
+      fields: [
+        { name: "Name", value: name, inline: true },
+        { name: "Email", value: email, inline: true },
+        {
+          name: "Role",
+          value: role === "other" ? `${role} (${customRole})` : role,
+          inline: true,
         },
+      ],
+      description: `**Message**\n${message}`,
+      timestamp: new Date().toISOString(),
+      footer: {
+        text: "Duckhats Portfolio",
       },
-      {
-        type: "section",
-        fields: [
-          {
-            type: "mrkdwn",
-            text: `*Name:*\n${name}`,
-          },
-          {
-            type: "mrkdwn",
-            text: `*Email:*\n${email}`,
-          },
-          {
-            type: "mrkdwn",
-            text: `*Role:*\n${
-              role === "other" ? `${role} (${customRole})` : role
-            }`,
-          },
-        ],
-      },
-      {
-        type: "divider",
-      },
-      {
-        type: "section",
-        text: {
-          type: "mrkdwn",
-          text: `*Message:*\n${message}`,
-        },
-      },
-    ];
+    };
 
     if (links.length > 0 && links.some((l) => l.trim())) {
       const linksText = links
         .map((l) => l.trim())
         .filter(Boolean)
-        .map((l) => `- <${l}|${l}>`)
+        .map((l) => `- ${l}`)
         .join("\n");
       if (linksText) {
-        blocks.push({
-          type: "section",
-          text: {
-            type: "mrkdwn",
-            text: `*Portfolio / Links:*\n${linksText}`,
-          },
+        embed.fields.push({
+          name: "Portfolio / Links",
+          value: linksText,
+          inline: false,
         });
       }
     }
 
-    // File info section
-    if (cvFile) {
-      blocks.push({
-        type: "section",
-        text: {
-          type: "mrkdwn",
-          text: `*CV Attached:*\nFilename: ${cvFile.originalFilename}\nSize: ${(
-            cvFile.size / 1024
-          ).toFixed(
-            2
-          )} KB\n\n_Note: File content cannot be uploaded via standard Slack Webhooks._`,
-        },
-      });
-    }
+    const discordWebhookUrl = process.env.DISCORD_WEBHOOK_URL;
 
-    const slackWebhookUrl = process.env.SLACK_WEBHOOK_URL;
-
-    if (!slackWebhookUrl) {
-      console.error("Missing SLACK_WEBHOOK_URL");
+    if (!discordWebhookUrl) {
+      console.error("Missing DISCORD_WEBHOOK_URL");
       return res.status(500).json({ error: "Server configuration error" });
     }
 
-    const slackResponse = await fetch(slackWebhookUrl, {
+    const formData = new FormData();
+    formData.append(
+      "payload_json",
+      JSON.stringify({
+        username: "Duckhats Bot",
+        embeds: [embed],
+      })
+    );
+
+    if (cvFile) {
+      const fileContent = fs.readFileSync(cvFile.filepath);
+      const blob = new Blob([fileContent], {
+        type: cvFile.mimetype || "application/pdf",
+      });
+      formData.append("file", blob, cvFile.originalFilename || "cv.pdf");
+    }
+
+    const discordResponse = await fetch(discordWebhookUrl, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ blocks }),
+      body: formData,
     });
 
-    if (!slackResponse.ok) {
-      const text = await slackResponse.text();
-      console.error("Slack API error:", text);
+    if (!discordResponse.ok) {
+      const text = await discordResponse.text();
+      console.error("Discord API error:", text);
       return res
         .status(500)
-        .json({ error: "Failed to send to Slack", details: text });
+        .json({ error: "Failed to send to Discord", details: text });
     }
 
     return res.status(200).json({ success: true });
   } catch (error) {
-    console.error("Form parsing error:", error);
+    console.error("Form parsing or execution error:", error);
     return res.status(500).json({ error: "Internal server error" });
   }
 }
