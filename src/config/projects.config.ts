@@ -107,4 +107,66 @@ export const projectsData: Project[] = [
     link: '',
     github: 'https://github.com/DuckHats/menu-ginebro-front',
   },
+  {
+    id: 'sushi-sudoku',
+    title: 'SUSHI SUDOKU',
+    date: {
+      ca: 'En Procès',
+      es: 'En Proceso',
+      en: 'In Progress',
+    },
+    category: {
+      ca: 'Aplicació Web',
+      es: 'Aplicación Web',
+      en: 'Web Application',
+    },
+    image:
+      'https://www.sushisudoku.com/_image?href=%2F_astro%2Freserva_sushi.CHoo8QP_.webp&w=1080&h=1620&f=webp',
+    description: {
+      ca: 'Plataforma web per a la gestió de reserves i comandes en un restaurant de sushi, amb gestió d\'inventari en temps real i actualització i enregistrament de comandes via api amb les principals empreses de menjar a domicili.',
+      es: 'Plataforma web para la gestión de reservas y pedidos en un restaurante de sushi, con gestión de inventario en tiempo real y actualización y registro de pedidos vía API con las principales empresas de comida a domicilio.',
+      en: 'Web platform for managing reservations and orders in a sushi restaurant, with real-time inventory management and updating and recording orders via API with the main food delivery companies.',
+    },
+    challenge: {
+      ca: 'El restaurant necessitava una solució digital per gestionar les reserves i comandes, optimitzar l\'inventari i centralitzar les comandes de les diverses plataformes de menjar a domicili per augmentar l\'eficiència i reduir processos.',
+      es: 'El restaurante necesitaba una solución digital para gestionar las reservas y pedidos, optimizar el inventario y centralizar los pedidos de las diversas plataformas de comida a domicilio para aumentar la eficiencia y reducir procesos.',
+      en: 'The restaurant needed a digital solution to manage reservations and orders, optimize inventory, and centralize orders from various food delivery platforms to increase efficiency and reduce processes.',
+    },
+    solution: {
+      ca: "Junt amb l'equip de Visualize, hem desenvolupat una aplicació web completa.", // Modificar
+      es: 'Junto con el equipo de Visualize, hemos desarrollado una aplicación web completa.', // Modificar
+      en: 'Together with the Visualize team, we have developed a complete web application.', // Modificar
+    },
+    results: {
+      ca: [
+        'Reducció del temps de gestió administrativa',
+        'Sistema de verificació per correu electrònic amb OTP',
+        'Dashboard amb mètriques en temps real',
+      ],
+      es: [
+        'Reducción del tiempo de gestión administrativa',
+        'Sistema de verificación por email con OTP',
+        'Dashboard con métricas en tiempo real',
+      ],
+      en: [
+        'reduction in administrative management time',
+        'Email verification system with OTP',
+        'Dashboard with real-time metrics',
+      ],
+    },
+    technologies: [
+      'React',
+      'Laravel',
+      'TypeScript',
+      'PHP',
+      'MySQL',
+      'TailwindCSS',
+      'Laravel Sanctum',
+    ],
+    gallery: [
+      '',
+    ],
+    link: '',
+    github: 'https://github.com/DuckHats/backend-landing-sushi', // Modificar
+  },
 ]
