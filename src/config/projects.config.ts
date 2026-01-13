@@ -166,7 +166,7 @@ export const projectsData: Project[] = [
     gallery: [
       '',
     ],
-    link: '',
+    link: 'https://www.sushisudoku.com/', // Modificar
     github: 'https://github.com/DuckHats/backend-landing-sushi', // Modificar
   },
 ]
