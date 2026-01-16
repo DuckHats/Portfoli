@@ -12,6 +12,8 @@ import { ProjectDetailPage } from './pages/ProjectDetailPage'
 import { TeamPage } from './pages/TeamPage'
 import { AboutPage } from './pages/AboutPage'
 import { JoinUsPage } from './pages/JoinUsPage'
+import ServicesPage from './pages/ServicesPage'
+import ContactPage from './pages/ContactPage'
 function AnimatedRoutes() {
   const location = useLocation()
   return (
@@ -23,6 +25,8 @@ function AnimatedRoutes() {
         <Route path="/team" element={<TeamPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/join-us" element={<JoinUsPage />} />
+        <Route path="/services" element={<ServicesPage />} />
+        <Route path="/contact" element={<ContactPage />} />
       </Routes>
     </AnimatePresence>
   )

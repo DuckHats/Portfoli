@@ -62,6 +62,12 @@ export function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps) {
               <SecondaryLink href="/join-us" onClick={onClose} aria-label={accessibilityConfig.nav[language].linkJoinUsLabel}>
                 {content.fullScreenMenu.secondaryLinks.joinUs}
               </SecondaryLink>
+              <SecondaryLink href="/services" onClick={onClose} aria-label={accessibilityConfig.nav[language].linkServicesLabel}>
+                {content.fullScreenMenu.secondaryLinks.services}
+              </SecondaryLink>
+              <SecondaryLink href="/contact" onClick={onClose} aria-label={accessibilityConfig.nav[language].linkContatLabel}>
+                {content.fullScreenMenu.secondaryLinks.contact}
+              </SecondaryLink>
             </div>
 
             {/* Footer Links */}

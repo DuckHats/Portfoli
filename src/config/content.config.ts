@@ -6,7 +6,9 @@ export const contentConfig = {
       team: 'Equip',
       projects: 'Projectes',
       story: "la història de",
-      joinUs: 'Uneix-te'
+      joinUs: 'Uneix-te',
+      serveis: 'Serveis',
+      contacta: 'Contacta',
     },
     hero: {
       tagline: "Desenvolupant amb passió i un toc d'humor",
@@ -112,6 +114,7 @@ export const contentConfig = {
       secondaryLinks: {
         contact: 'Contacte',
         joinUs: 'Uneix-te',
+        services: 'Serveis',
       },
       policies: {
         privacy: 'Política de Privacitat',
@@ -124,6 +127,165 @@ export const contentConfig = {
         privacy: 'Política de Privacitat',
         compliance: 'Política de Compliment',
       }
+    },
+    services: {
+      title: 'Catàleg de Serveis',
+      disclaimer: 'Tots els rangs d’hores són estimacions orientatives. El pressupost final es defineix després de l’anàlisi funcional del projecte.',
+      sections: [
+        {
+          title: '1. Desenvolupament Base',
+          subsections: [
+            {
+              title: '1.1 Desenvolupament Front-end (Web)',
+              description: 'Maquetació i implementació de la interfície d’usuari a partir d’un disseny acordat, amb enfocament responsive i bones pràctiques de rendiment.',
+              options: [
+                {
+                  name: 'Disseny Simple',
+                  description: 'Maquetació bàsica, estructura senzilla, components estàndard.'
+                },
+                {
+                  name: 'Disseny Estàndard',
+                  description: 'Layout més elaborat, interaccions bàsiques, adaptació completa a dispositius mòbils.'
+                },
+                {
+                  name: 'Disseny Avançat',
+                  description: 'Disseny visual personalitzat, animacions, components reutilitzables i optimització de performance.'
+                }
+              ],
+              note: 'No inclou lògica de negoci complexa ni integracions externes.'
+            },
+            {
+              title: '1.2 Desenvolupament d’API (Back-end)',
+              description: 'Disseny i implementació d’APIs per al consum propi o integració amb tercers, seguint criteris de seguretat i escalabilitat.',
+              options: [
+                {
+                  name: 'API Simple',
+                  description: 'CRUD bàsic, autenticació simple, validacions estàndard.'
+                },
+                {
+                  name: 'API Mitjana',
+                  description: 'Gestió de rols, relacions entre entitats, validacions avançades.'
+                },
+                {
+                  name: 'API Avançada',
+                  description: 'Integracions complexes, sistemes de permisos, pagaments o serveis externs.'
+                }
+              ],
+              note: 'Inclou documentació bàsica (OpenAPI / Swagger).'
+            },
+            {
+              title: '1.3 Panell de Gestió (Backoffice / Admin)',
+              description: 'Interfície per a la gestió interna de dades i continguts.',
+              options: [
+                {
+                  name: 'Genèric',
+                  description: 'Panell CRUD estàndard, formularis i taules de dades.'
+                },
+                {
+                  name: 'Personalitzat',
+                  description: 'Disseny a mida, rols d’usuari, filtres avançats i dashboards.'
+                }
+              ]
+            },
+            {
+              title: '1.4 Deploy i Configuració d’Entorns',
+              description: 'Configuració i posada en producció del projecte sobre infraestructura existent o nova.',
+              options: [
+                {
+                  name: 'Deploy i configuració bàsica',
+                  description: 'Entorn de producció, SSL, configuració inicial.'
+                },
+                {
+                  name: 'Deploy amb CMS existent',
+                  description: 'Configuració, adaptació i posada en marxa sobre CMS ja existents.'
+                }
+              ],
+              note: 'No inclou costos d’infraestructura ni serveis externs.'
+            }
+          ]
+        },
+        {
+          title: '2. Funcionalitats Addicionals (Feats)',
+          items: [
+            {
+              name: 'Bot de WhatsApp',
+              description: 'Automatització de respostes i fluxos bàsics.'
+            },
+            {
+              name: 'Accessibilitat WCAG 2.1 AA',
+              description: 'Adaptació del projecte per complir criteris d’accessibilitat.'
+            },
+            {
+              name: 'Enviament de correus electrònics',
+              subOptions: [
+                'Bàsic',
+                'Avançat – plantilles, serveis externs i tracking'
+              ]
+            },
+            {
+              name: 'Integració amb serveis externs',
+              description: 'Connexió amb APIs de tercers (pagaments, CRMs, etc.).'
+            },
+            {
+              name: 'Aplicació Mòbil (iOS / Android)',
+              description: 'Desenvolupament d’app híbrida o nativa amb API pròpia.'
+            },
+            {
+              name: 'Automatització de processos',
+              description: 'Scripts, tasques programades i workflows.'
+            },
+            {
+              name: 'Integració amb dispositius IoT',
+              subOptions: [
+                'Prova de concepte',
+                'Solució en producció'
+              ]
+            }
+          ]
+        },
+        {
+          title: '3. Serveis Complementaris',
+          simpleList: [
+            'Testing (unitari / e2e)',
+            'Optimització de rendiment',
+            'Seguretat bàsica i hardening',
+            'Monitoratge i logs',
+            'SEO tècnic inicial',
+            'Analítica i esdeveniments',
+            'Documentació tècnica i formació'
+          ]
+        },
+        {
+          title: '4. Manteniment i Suport',
+          items: [
+            {
+              name: 'Manteniment de servidors i sistemes',
+              description: 'Inclou: actualitzacions bàsiques, revisió d’errors, suport tècnic limitat'
+            }
+          ],
+          note: 'Subjecte als costos propis del servidor i serveis contractats.'
+        }
+      ],
+      contactCTA: {
+        title: 'Tens un projecte en ment?',
+        description: 'Parlem de com podem ajudar-te a fer-lo realitat.',
+        button: 'Contactar'
+      }
+    },
+    contact: {
+      title: 'Contacta amb Nosaltres',
+      subtitle: "Tens alguna dubte o vols començar un projecte? Escriu-nos!",
+      form: {
+        nameLabel: 'Nom',
+        namePlaceholder: 'El teu nom',
+        emailLabel: 'Correu electrònic',
+        emailPlaceholder: 'tucorreu@exemple.com',
+        messageLabel: 'Missatge',
+        messagePlaceholder: "Explica'ns en què et podem ajudar...",
+        submitButton: 'Enviar Missatge',
+        successMessage: 'Missatge enviat correctament!',
+        errorMessage: "Hi ha hagut un error. Si us plau, torna-ho a provar."
+      }
     }
   },
   es: {
@@ -133,7 +295,9 @@ export const contentConfig = {
       team: 'Equipo',
       projects: 'Proyectos',
       story: 'la historia de',
-      joinUs: 'Únete'
+      joinUs: 'Únete',
+      serveis: 'Servicios',
+      contacta: 'Contacta'
     },
     hero: {
       tagline: 'Desarrollando con pasión y un toque de humor',
@@ -239,6 +403,7 @@ export const contentConfig = {
       secondaryLinks: {
         contact: 'Contacto',
         joinUs: 'Únete',
+        services: 'Servicios',
       },
       policies: {
         privacy: 'Política de Privacidad',
@@ -251,6 +416,165 @@ export const contentConfig = {
         privacy: 'Política de Privacidad',
         compliance: 'Política de Cumplimiento',
       }
+    },
+    services: {
+      title: 'Catálogo de Servicios',
+      disclaimer: 'Todos los rangos de horas son estimaciones orientativas. El presupuesto final se define después del análisis funcional del proyecto.',
+      sections: [
+        {
+          title: '1. Desarrollo Base',
+          subsections: [
+            {
+              title: '1.1 Desarrollo Front-end (Web)',
+              description: 'Maquetación e implementación de la interfaz de usuario a partir de un diseño acordado, con enfoque responsive y buenas prácticas de rendimiento.',
+              options: [
+                {
+                  name: 'Diseño Simple',
+                  description: 'Maquetación básica, estructura sencilla, componentes estándar.'
+                },
+                {
+                  name: 'Diseño Estándar',
+                  description: 'Layout más elaborado, interacciones básicas, adaptación completa a dispositivos móviles.'
+                },
+                {
+                  name: 'Diseño Avanzado',
+                  description: 'Diseño visual personalizado, animaciones, componentes reutilizables y optimización de performance.'
+                }
+              ],
+              note: 'No incluye lógica de negocio compleja ni integraciones externas.'
+            },
+            {
+              title: '1.2 Desarrollo de API (Back-end)',
+              description: 'Diseño e implementación de APIs para consumo propio o integración con terceros, siguiendo criterios de seguridad y escalabilidad.',
+              options: [
+                {
+                  name: 'API Simple',
+                  description: 'CRUD básico, autenticación simple, validaciones estándar.'
+                },
+                {
+                  name: 'API Media',
+                  description: 'Gestión de roles, relaciones entre entidades, validaciones avanzadas.'
+                },
+                {
+                  name: 'API Avanzada',
+                  description: 'Integraciones complejas, sistemas de permisos, pagos o servicios externos.'
+                }
+              ],
+              note: 'Incluye documentación básica (OpenAPI / Swagger).'
+            },
+            {
+              title: '1.3 Panel de Gestión (Backoffice / Admin)',
+              description: 'Interfaz para la gestión interna de datos y contenidos.',
+              options: [
+                {
+                  name: 'Genérico',
+                  description: 'Panel CRUD estándar, formularios y tablas de datos.'
+                },
+                {
+                  name: 'Personalizado',
+                  description: 'Diseño a medida, roles de usuario, filtros avanzados y dashboards.'
+                }
+              ]
+            },
+            {
+              title: '1.4 Deploy y Configuración de Entornos',
+              description: 'Configuración y puesta en producción del proyecto sobre infraestructura existente o nueva.',
+              options: [
+                {
+                  name: 'Deploy y configuración básica',
+                  description: 'Entorno de producción, SSL, configuración inicial.'
+                },
+                {
+                  name: 'Deploy con CMS existente',
+                  description: 'Configuración, adaptación y puesta en marcha sobre CMS ya existentes.'
+                }
+              ],
+              note: 'No incluye costes de infraestructura ni servicios externos.'
+            },
+          ]
+        },
+        {
+          title: '2. Funcionalidades Adicionales (Feats)',
+          items: [
+            {
+              name: 'Bot de WhatsApp',
+              description: 'Automatización de respuestas y flujos básicos.'
+            },
+            {
+              name: 'Accesibilidad WCAG 2.1 AA',
+              description: 'Adaptación del proyecto para cumplir criterios de accesibilidad.'
+            },
+            {
+              name: 'Envío de correos electrónicos',
+              subOptions: [
+                'Básico',
+                'Avanzado – plantillas, servicios externos y tracking'
+              ]
+            },
+            {
+              name: 'Integración con servicios externos',
+              description: 'Conexión con APIs de terceros (pagos, CRMs, etc.).'
+            },
+            {
+              name: 'Aplicación Móvil (iOS / Android)',
+              description: 'Desarrollo de app híbrida o nativa con API propia.'
+            },
+            {
+              name: 'Automatización de procesos',
+              description: 'Scripts, tareas programadas y workflows.'
+            },
+            {
+              name: 'Integración con dispositivos IoT',
+              subOptions: [
+                'Prueba de concepto',
+                'Solución en producción'
+              ]
+            }
+          ]
+        },
+        {
+          title: '3. Servicios Complementarios',
+          simpleList: [
+            'Testing (unitario / e2e)',
+            'Optimización de rendimiento',
+            'Seguridad básica y hardening',
+            'Monitorización y logs',
+            'SEO técnico inicial',
+            'Analítica y eventos',
+            'Documentación técnica y formación'
+          ]
+        },
+        {
+          title: '4. Mantenimiento y Soporte',
+          items: [
+            {
+              name: 'Mantenimiento de servidores y sistemas',
+              description: 'Incluye: actualizaciones básicas, revisión de errores, soporte técnico limitado'
+            }
+          ],
+          note: 'Sujeto a los costes propios del servidor y servicios contratados.'
+        }
+      ],
+      contactCTA: {
+        title: '¿Tienes un proyecto en mente?',
+        description: 'Hablemos de cómo podemos ayudarte a hacerlo realidad.',
+        button: 'Contactar'
+      }
+    },
+    contact: {
+      title: 'Contacta con Nosotros',
+      subtitle: "¿Tienes alguna duda o quieres empezar un proyecto? ¡Escríbenos!",
+      form: {
+        nameLabel: 'Nombre',
+        namePlaceholder: 'Tu nombre',
+        emailLabel: 'Correo electrónico',
+        emailPlaceholder: 'tucorreo@ejemplo.com',
+        messageLabel: 'Mensaje',
+        messagePlaceholder: 'Cuéntanos en qué podemos ayudarte...',
+        submitButton: 'Enviar Mensaje',
+        successMessage: '¡Mensaje enviado correctamente!',
+        errorMessage: 'Ha habido un error. Por favor, inténtalo de nuevo.'
+      }
     }
   },
   en: {
@@ -260,7 +584,9 @@ export const contentConfig = {
       team: 'Team',
       projects: 'Projects',
       story: 'the story of',
-      joinUs: 'Join Us'
+      joinUs: 'Join Us',
+      serveis: 'Services',
+      contacta: 'Contact Us'
     },
     hero: {
       tagline: 'Developing with passion and a touch of humor',
@@ -366,6 +692,7 @@ export const contentConfig = {
       secondaryLinks: {
         contact: 'Contact',
         joinUs: 'Join Us',
+        services: 'Services',
       },
       policies: {
         privacy: 'Privacy Policy',
@@ -377,6 +704,165 @@ export const contentConfig = {
       policies: {
         privacy: 'Privacy Policy',
         compliance: 'Compliance Policy',
+      }
+    },
+    services: {
+      title: 'Services Catalog',
+      disclaimer: 'All hour ranges are indicative estimates. The final budget is defined after the functional analysis of the project.',
+      sections: [
+        {
+          title: '1. Base Development',
+          subsections: [
+            {
+              title: '1.1 Front-end Development (Web)',
+              description: 'Layout and implementation of the user interface based on an agreed design, with responsive focus and performance best practices.',
+              options: [
+                {
+                  name: 'Simple Design',
+                  description: 'Basic layout, simple structure, standard components.'
+                },
+                {
+                  name: 'Standard Design',
+                  description: 'More elaborate layout, basic interactions, complete adaptation to mobile devices.'
+                },
+                {
+                  name: 'Advanced Design',
+                  description: 'Personalized visual design, animations, reusable components, and performance optimization.'
+                }
+              ],
+              note: 'Does not include complex business logic or external integrations.'
+            },
+            {
+              title: '1.2 API Development (Back-end)',
+              description: 'Design and implementation of APIs for internal consumption or third-party integration, following security and scalability criteria.',
+              options: [
+                {
+                  name: 'Simple API',
+                  description: 'Basic CRUD, simple authentication, standard validations.'
+                },
+                {
+                  name: 'Medium API',
+                  description: 'Role management, relationships between entities, advanced validations.'
+                },
+                {
+                  name: 'Advanced API',
+                  description: 'Complex integrations, permission systems, payments, or external services.'
+                }
+              ],
+              note: 'Includes basic documentation (OpenAPI / Swagger).'
+            },
+            {
+              title: '1.3 Management Panel (Backoffice / Admin)',
+              description: 'Interface for internal data and content management.',
+              options: [
+                {
+                  name: 'Generic',
+                  description: 'Standard CRUD panel, forms, and data tables.'
+                },
+                {
+                  name: 'Custom',
+                  description: 'Custom design, user roles, advanced filters, and dashboards.'
+                }
+              ]
+            },
+            {
+              title: '1.4 Deploy and Environment Configuration',
+              description: 'Configuration and deployment of the project on existing or new infrastructure.',
+              options: [
+                {
+                  name: 'Basic Deploy and Configuration',
+                  description: 'Production environment, SSL, initial configuration.'
+                },
+                {
+                  name: 'Deploy with existing CMS',
+                  description: 'Configuration, adaptation, and launch on existing CMS.'
+                }
+              ],
+              note: 'Does not include infrastructure costs or external services.'
+            }
+          ]
+        },
+        {
+          title: '2. Additional Features (Feats)',
+          items: [
+            {
+              name: 'WhatsApp Bot',
+              description: 'Automation of responses and basic flows.'
+            },
+            {
+              name: 'WCAG 2.1 AA Accessibility',
+              description: 'Adaptation of the project to meet accessibility criteria.'
+            },
+            {
+              name: 'Email Sending',
+              subOptions: [
+                'Basic',
+                'Advanced – templates, external services, and tracking'
+              ]
+            },
+            {
+              name: 'Integration with External Services',
+              description: 'Connection with third-party APIs (payments, CRMs, etc.).'
+            },
+            {
+              name: 'Mobile Application (iOS / Android)',
+              description: 'Hybrid or native app development with own API.'
+            },
+            {
+              name: 'Process Automation',
+              description: 'Scripts, scheduled tasks, and workflows.'
+            },
+            {
+              name: 'IoT Device Integration',
+              subOptions: [
+                'Proof of Concept',
+                'Production Solution'
+              ]
+            }
+          ]
+        },
+        {
+          title: '3. Complementary Services',
+          simpleList: [
+            'Testing (unit / e2e)',
+            'Performance Optimization',
+            'Basic Security and Hardening',
+            'Monitoring and Logs',
+            'Initial Technical SEO',
+            'Analytics and Events',
+            'Technical Documentation and Training'
+          ]
+        },
+        {
+          title: '4. Maintenance and Support',
+          items: [
+            {
+              name: 'Server and System Maintenance',
+              description: 'Includes: basic updates, error review, limited technical support'
+            }
+          ],
+          note: 'Subject to server costs and contracted services.'
+        }
+      ],
+      contactCTA: {
+        title: 'Have a project in mind?',
+        description: "Let's talk about how we can help you make it a reality.",
+        button: 'Contact Us'
+      }
+    },
+    contact: {
+      title: 'Contact Us',
+      subtitle: "Have a question or want to start a project? Write to us!",
+      form: {
+        nameLabel: 'Name',
+        namePlaceholder: 'Your name',
+        emailLabel: 'Email',
+        emailPlaceholder: 'youremail@example.com',
+        messageLabel: 'Message',
+        messagePlaceholder: 'Tell us how we can help you...',
+        submitButton: 'Send Message',
+        successMessage: 'Message sent successfully!',
+        errorMessage: 'There was an error. Please try again.'
       }
     }
   }
