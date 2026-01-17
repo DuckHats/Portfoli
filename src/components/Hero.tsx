@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ArrowDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useContent } from '../hooks/useContent';
 import { useLanguage } from '../hooks/useLanguage';
@@ -11,6 +11,7 @@ export function Hero() {
     const {
     language
   } = useLanguage();
+  const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const SECTIONS = [{
@@ -46,11 +47,18 @@ export function Hero() {
         e.preventDefault();
         prevSection();
       }
+      if (e.key === ' ' || e.code === 'Space') {
+        e.preventDefault();
+        const currentSection = SECTIONS[activeIndex];
+        if (currentSection.id !== 'home') {
+          navigate(currentSection.path);
+        }
+      }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [activeIndex]); // Added activeIndex dependency to access current state
   const activeSection = SECTIONS[activeIndex];
   const prevIndex = (activeIndex - 1 + SECTIONS.length) % SECTIONS.length;
   const nextIndex = (activeIndex + 1) % SECTIONS.length;
