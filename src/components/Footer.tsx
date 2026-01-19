@@ -92,6 +92,55 @@ export function Footer() {
             >
               → {content.nav.team}
             </Link>
+
+            {/* Secondary Links */}
+            <div className="pt-4 flex flex-col space-y-3 border-t border-gray-200 mt-2">
+              <Link aria-label={accessibilityConfig.nav[language].linkJoinUsLabel}
+                to="/join-us"
+                className="font-mono text-sm transition-all hover:translate-x-1 inline-block w-fit"
+                style={{
+                  color: brandConfig.colors.neutral.gray600,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = brandConfig.colors.primary.black
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = brandConfig.colors.neutral.gray600
+                }}
+              >
+                → {content.nav.joinUs}
+              </Link>
+              <Link aria-label={accessibilityConfig.nav[language].linkServicesLabel}
+                to="/services"
+                className="font-mono text-sm transition-all hover:translate-x-1 inline-block w-fit"
+                style={{
+                  color: brandConfig.colors.neutral.gray600,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = brandConfig.colors.primary.black
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = brandConfig.colors.neutral.gray600
+                }}
+              >
+                → {content.nav.serveis}
+              </Link>
+              <Link aria-label={accessibilityConfig.nav[language].linkContatLabel}
+                to="/contact"
+                className="font-mono text-sm transition-all hover:translate-x-1 inline-block w-fit"
+                style={{
+                  color: brandConfig.colors.neutral.gray600,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = brandConfig.colors.primary.black
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = brandConfig.colors.neutral.gray600
+                }}
+              >
+                → {content.nav.contacta}
+              </Link>
+            </div>
             
           </nav>
 

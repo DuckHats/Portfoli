@@ -43,7 +43,7 @@ export const ContactCTA: React.FC = () => {
         >
           <ShadowButton to="/contact" size="large">
             {contactCTA.button}
-            <ArrowRight size={24} />
+            <ArrowRight size={24} className="w-12 h-12 group-hover:translate-x-4 transition-transform text-[#e63946]" />
           </ShadowButton>
         </motion.div>
       </div>
