@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Navbar } from '../components/Navbar';
+import { Footer } from '../components/Footer';
 import { ContactForm } from '../components/ContactForm';
 import { useContent } from '../hooks/useContent';
 import { brandConfig } from '../config/brand.config';
@@ -51,6 +52,7 @@ const ContactPage: React.FC = () => {
           </motion.div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 };
