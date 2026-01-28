@@ -20,6 +20,7 @@ export const accessibilityConfig = {
                 linkJoinUsLabel: 'Enllaç a la pàgina d\'unir-se a l\'equip',
                 linkPrivacyLabel: 'Enllaç a la política de privacitat',
                 linkComplianceLabel: 'Enllaç a la política de compliment',
+                linkServicesLabel: 'Enllaç a la pàgina de serveis',
 
         },
         es: {
@@ -42,6 +43,7 @@ export const accessibilityConfig = {
                 linkJoinUsLabel: 'Enlace a la página de unirse al equipo',
                 linkPrivacyLabel: 'Enlace a la política de privacidad',
                 linkComplianceLabel: 'Enlace a la política de cumplimiento',
+                linkServicesLabel: 'Enlace a la página de servicios',
         },
         en: {
             navbarLabel: 'Main navigation menu',
@@ -63,6 +65,7 @@ export const accessibilityConfig = {
                 linkJoinUsLabel: 'Link to join our team page',
                 linkPrivacyLabel: 'Link to privacy policy',
                 linkComplianceLabel: 'Link to compliance policy',
+                linkServicesLabel: 'Link to services page',
         },
 
 },

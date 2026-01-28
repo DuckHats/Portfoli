@@ -107,6 +107,7 @@ export const projectsData: Project[] = [
     link: '',
     github: 'https://github.com/DuckHats/menu-ginebro-front',
   },
+
   {
     id: 'sushi-sudoku',
     title: 'SUSHI SUDOKU',
@@ -161,12 +162,15 @@ export const projectsData: Project[] = [
       'PHP',
       'MySQL',
       'TailwindCSS',
-      'Laravel Sanctum',
     ],
     gallery: [
-      '',
+      '/projects/sushisudoku/Home.jpg',
+      '/projects/sushisudoku/food-Images.jpg',
+      '/projects/sushisudoku/Products-to-change.jpg',
+      '/projects/sushisudoku/reviews.jpg',
+      '/projects/sushisudoku/reservationForm.jpg',
     ],
-    link: 'https://www.sushisudoku.com/', // Modificar
-    github: 'https://github.com/DuckHats/backend-landing-sushi', // Modificar
+    link: 'https://www.sushisudoku.com/',
+    github: '',
   },
 ]
