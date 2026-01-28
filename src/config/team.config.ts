@@ -5,7 +5,7 @@ export const teamMembers = [{
     es: 'Coordinación y administración',
     en: 'Coordination and administration'
   },
-  img: 'https://media-mad1-1.cdn.whatsapp.net/v/t61.24694-24/538273153_2295578454231702_2324249293735100636_n.jpg?ccb=11-4&oh=01_Q5Aa3gGD-7j13mU9aNvjmPZjI1x5J4AA5xnzrz7k0lVaqs7evg&oe=696E6A0B&_nc_sid=5e03e0&_nc_cat=106',
+  img: 'https://media-mrs2-1.cdn.whatsapp.net/v/t61.24694-24/538273153_2295578454231702_2324249293735100636_n.jpg?ccb=11-4&oh=01_Q5Aa3gEdLDTi0qXeBbG-BIkSARRR4GIoOpuqQzBXoQ5e_NxSFA&oe=6987768B&_nc_sid=5e03e0&_nc_cat=106',
   social: {
     linkedin: 'https://linkedin.com/in/sergigiribet',
     github: 'https://github.com/SergiGiribet',
@@ -20,7 +20,7 @@ export const teamMembers = [{
     es: 'Desarrollador Back-end',
     en: 'Back-end Developer'
   },
-  img: 'https://media-mad1-1.cdn.whatsapp.net/v/t61.24694-24/598335585_1402671691576661_8635073915938445903_n.jpg?ccb=11-4&oh=01_Q5Aa3gG2wP_ee22HWhX_wmd8Hxv3I88D2wzGYtKdJLYUs57RoQ&oe=696E65C8&_nc_sid=5e03e0&_nc_cat=108',
+  img: 'https://media-mrs2-3.cdn.whatsapp.net/v/t61.24694-24/598335585_1402671691576661_8635073915938445903_n.jpg?stp=dst-jpg_s96x96_tt6&ccb=11-4&oh=01_Q5Aa3gECJ2K-xjpgZouRlOlISozrk2oSv4fwlWn4zeK2D7R9Rw&oe=69877248&_nc_sid=5e03e0&_nc_cat=108',
   social: {
     linkedin: '',
     github: '',
@@ -33,7 +33,7 @@ export const teamMembers = [{
     es: 'Desarrollador Front-end',
     en: 'Front-end Developer'
   },
-  img: 'https://media-mad2-1.cdn.whatsapp.net/v/t61.24694-24/545604290_1113696997567738_7589873008295301530_n.jpg?ccb=11-4&oh=01_Q5Aa3gEC1v2PgooF1owWIhWS9d6dgzvegAXuDJToV3zZSRP6dg&oe=696E7C03&_nc_sid=5e03e0&_nc_cat=105',
+  img: 'https://media-mrs2-3.cdn.whatsapp.net/v/t61.24694-24/545604290_1113696997567738_7589873008295301530_n.jpg?stp=dst-jpg_s96x96_tt6&ccb=11-4&oh=01_Q5Aa3gFcE2hcgyEfU0Nqm7JN6ca4DAAtBZ3gvzQKozQ4EAHWcA&oe=69878883&_nc_sid=5e03e0&_nc_cat=105',
   social: {
     linkedin: '',
     github: '',
@@ -46,7 +46,7 @@ export const teamMembers = [{
     es: 'Desarrollador Front-end',
     en: 'Front-end Developer'
   },
-  img: 'https://media-mad2-1.cdn.whatsapp.net/v/t61.24694-24/417577600_879089957327510_6055466079789488261_n.jpg?ccb=11-4&oh=01_Q5Aa3gG7PQx_n5DmKgjWqmGQi05WZFfnea14F6EnNPE3ZzrFyg&oe=696E6BE2&_nc_sid=5e03e0&_nc_cat=110',
+  img: 'https://media-mrs2-2.cdn.whatsapp.net/v/t61.24694-24/417577600_879089957327510_6055466079789488261_n.jpg?stp=dst-jpg_s96x96_tt6&ccb=11-4&oh=01_Q5Aa3gGj1VBSSRmYW8NjGE2lyMWQrp1EdDHtfukxRYIaJfEVtw&oe=69877862&_nc_sid=5e03e0&_nc_cat=110',
 
   social: {
     github: '',
