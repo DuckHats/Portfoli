@@ -5,7 +5,7 @@ export const teamMembers = [{
     es: 'Coordinación y administración',
     en: 'Coordination and administration'
   },
-  img: '/images/sergi.jpg',
+  img: '/team/Sergi.jpg',
   social: {
     linkedin: 'https://linkedin.com/in/sergigiribet',
     github: 'https://github.com/SergiGiribet',
@@ -20,7 +20,7 @@ export const teamMembers = [{
     es: 'Desarrollador Back-end',
     en: 'Back-end Developer'
   },
-  img: '/images/gerard.jpg',
+  img: '/team/Gerard.jpg',
   social: {
     linkedin: '',
     github: '',
@@ -33,7 +33,7 @@ export const teamMembers = [{
     es: 'Desarrollador Front-end',
     en: 'Front-end Developer'
   },
-  img: '/images/arnau.jpg',
+  img: '/team/Arnau.jpg',
   social: {
     linkedin: '',
     github: '',
@@ -46,7 +46,7 @@ export const teamMembers = [{
     es: 'Desarrollador Front-end',
     en: 'Front-end Developer'
   },
-  img: '/images/ferran.jpg',
+  img: '/team/Ferran.jpg',
 
   social: {
     github: '',
@@ -67,7 +67,7 @@ export const teamImage = {
 };
 
   export const aboutImage = {
-  url: '/public/images/team_pedra.jpg',
+  url: '/team/team_pedra.jpg',
   alt: {
     ca: 'L\'equip sobre una pedra mirant al horitzó',
     es: 'El equipo sobre una piedra mirando al horizonte',
