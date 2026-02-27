@@ -5,7 +5,7 @@ export const teamMembers = [{
     es: 'Coordinación y administración',
     en: 'Coordination and administration'
   },
-  img: 'https://media-mrs2-1.cdn.whatsapp.net/v/t61.24694-24/538273153_2295578454231702_2324249293735100636_n.jpg?ccb=11-4&oh=01_Q5Aa3gEdLDTi0qXeBbG-BIkSARRR4GIoOpuqQzBXoQ5e_NxSFA&oe=6987768B&_nc_sid=5e03e0&_nc_cat=106',
+  img: '/images/sergi.jpg',
   social: {
     linkedin: 'https://linkedin.com/in/sergigiribet',
     github: 'https://github.com/SergiGiribet',
@@ -20,7 +20,7 @@ export const teamMembers = [{
     es: 'Desarrollador Back-end',
     en: 'Back-end Developer'
   },
-  img: 'https://media-mrs2-3.cdn.whatsapp.net/v/t61.24694-24/598335585_1402671691576661_8635073915938445903_n.jpg?ccb=11-4&oh=01_Q5Aa3gFpOlR9xw3Z_cJEWGNJjaiZfINSX7Mgpmkiff_fd2K0Ew&oe=69877248&_nc_sid=5e03e0&_nc_cat=108',
+  img: '/images/gerard.jpg',
   social: {
     linkedin: '',
     github: '',
@@ -33,7 +33,7 @@ export const teamMembers = [{
     es: 'Desarrollador Front-end',
     en: 'Front-end Developer'
   },
-  img: 'https://media-mrs2-3.cdn.whatsapp.net/v/t61.24694-24/545604290_1113696997567738_7589873008295301530_n.jpg?ccb=11-4&oh=01_Q5Aa3gFenb_FLag5tO_KLanUUSXHEgTok7Ts2wGrjDnt_5UGrg&oe=69878883&_nc_sid=5e03e0&_nc_cat=105',
+  img: '/images/arnau.jpg',
   social: {
     linkedin: '',
     github: '',
@@ -46,7 +46,7 @@ export const teamMembers = [{
     es: 'Desarrollador Front-end',
     en: 'Front-end Developer'
   },
-  img: 'https://media-mrs2-2.cdn.whatsapp.net/v/t61.24694-24/417577600_879089957327510_6055466079789488261_n.jpg?ccb=11-4&oh=01_Q5Aa3gH2FjTsy9p3WiovZAXtx3eZoZxJYc9t56Iu3lrD7a1JOQ&oe=69877862&_nc_sid=5e03e0&_nc_cat=110',
+  img: '/images/ferran.jpg',
 
   social: {
     github: '',
@@ -67,7 +67,7 @@ export const teamImage = {
 };
 
   export const aboutImage = {
-  url: 'https://media-mrs2-3.cdn.whatsapp.net/v/t61.24694-24/455900521_400929506349481_5639963107387292162_n.jpg?ccb=11-4&oh=01_Q5Aa3gEeu0-5BI0u6BW66jl5rPZ6eE2VKoW1SBWlsN-hBGIYSQ&oe=69879CFD&_nc_sid=5e03e0&_nc_cat=101',
+  url: '/public/images/team_pedra.jpg',
   alt: {
     ca: 'L\'equip sobre una pedra mirant al horitzó',
     es: 'El equipo sobre una piedra mirando al horizonte',
