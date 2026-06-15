@@ -111,7 +111,7 @@ export function Hero() {
           {brandConfig.name}
         </motion.h1>
 
-        <motion.p className="text-lg md:text-xl font-sans tracking-widest uppercase mb-16 md:mb-24" style={{
+        <motion.p className="text-lg md:text-xl font-sans tracking-widest uppercase mb-16 md:mb-24 text-center px-4" style={{
         color: brandConfig.colors.neutral.gray600
       }} initial={{
         opacity: 0

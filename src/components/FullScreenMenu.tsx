@@ -40,9 +40,9 @@ export function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps) {
             </button>
           </div>
 
-          <div className="min-h-screen flex flex-col items-center justify-center py-20 px-4">
+          <div className="min-h-screen flex flex-col items-center justify-center py-20 px-4 overflow-x-hidden w-full">
             {/* Main Navigation */}
-            <nav aria-label={accessibilityConfig.nav[language].navbarLabel} className="flex flex-col items-center space-y-2 mb-20">
+            <nav aria-label={accessibilityConfig.nav[language].navbarLabel} className="flex flex-col items-center space-y-2 mb-20 w-full overflow-x-hidden px-12 sm:px-16">
               <MainMenuLink to="/" onClick={onClose} aria-label={accessibilityConfig.nav[language].linkHomeLabel}>
                 {content.fullScreenMenu.mainNav.home}
               </MainMenuLink>
@@ -133,7 +133,7 @@ function MainMenuLink({
     <Link
       to={to}
       onClick={onClick}
-      className="group flex items-center gap-4 text-5xl md:text-7xl font-display font-bold hover:text-[#e63946] transition-colors relative py-2"
+      className="group flex items-center gap-4 text-4xl sm:text-5xl md:text-7xl font-display font-bold hover:text-[#e63946] transition-colors relative py-2"
     >
       <ArrowRight className="absolute -left-12 md:-left-16 w-8 h-8 md:w-12 md:h-12 opacity-0 group-hover:opacity-100 transition-opacity" />
       {children}
