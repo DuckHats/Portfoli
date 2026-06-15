@@ -52,7 +52,7 @@ export const projectsData: Project[] = [
       es: 'Aplicación Web',
       en: 'Web Application',
     },
-    image: '/projects/menuGinebro/menu-ginebro-01.png',
+    image: '/projects/menuGinebro/menu-ginebro-02.png',
     description: {
       ca: 'Sistema complet de gestió de menús escolars per a l\'Escola Ginebro. Permet als estudiants seleccionar els seus menús setmanals i als administradors gestionar plats, usuaris i comandes amb facilitat.',
       es: 'Sistema completo de gestión de menús escolares para l\'Escola Ginebro. Permite a los estudiantes seleccionar sus menús semanales y a los administradores gestionar platos, usuarios y pedidos con facilidad.',
