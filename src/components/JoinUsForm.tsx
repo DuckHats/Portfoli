@@ -421,7 +421,7 @@ export function JoinUsForm() {
                         <input
                           aria-label={
                             accessibilityConfig.joinUs[language]
-                              .UploadButtonLabel
+                              .uploadButtonLabel
                           }
                           id="file-upload"
                           name="file-upload"

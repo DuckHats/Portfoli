@@ -116,7 +116,7 @@ export function ProjectDetailPage() {
                     </a>
                   )}
                   {project.github && (
-                    <a aria-label={accessibilityConfig.projectDetails[language].githubProjetLinkLabel}
+                    <a aria-label={accessibilityConfig.projectDetails[language].githubProjectLinkLabel}
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"

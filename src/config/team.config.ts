@@ -58,6 +58,7 @@ export const teamMembers = [{
 }];
 
 export const teamImage = {
+  // TODO: descarregar i moure a /public/team/team_group.jpg quan estigui disponible
   url: 'https://www.ginebro.cat/fp/wp-content/uploads/elementor/thumbs/dam-05-quc4hr1xpg898hh1kwnw16uzcnftkw8yo8a29pn7ko.jpg',
   alt: {
     ca: 'Equip treballant junts',
@@ -69,7 +70,7 @@ export const teamImage = {
   export const aboutImage = {
   url: '/team/team_pedra.jpg',
   alt: {
-    ca: 'L\'equip sobre una pedra mirant al horitzó',
+    ca: 'L\'equip sobre una pedra mirant a l\'horitzó',
     es: 'El equipo sobre una piedra mirando al horizonte',
     en: 'The team on a rock looking at the horizon'
   }

@@ -125,7 +125,7 @@ export function Footer() {
               >
                 → {content.nav.serveis}
               </Link>
-              <Link aria-label={accessibilityConfig.nav[language].linkContatLabel}
+              <Link aria-label={accessibilityConfig.nav[language].linkContactLabel}
                 to="/contact"
                 className="font-mono text-sm transition-all hover:translate-x-1 inline-block w-fit"
                 style={{

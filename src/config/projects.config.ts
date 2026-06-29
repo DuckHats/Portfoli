@@ -43,7 +43,7 @@ export const projectsData: Project[] = [
     id: 'menu-ginebro',
     title: 'MENÚ GINEBRÓ',
     date: {
-      ca: 'En Procès',
+      ca: 'En procés',
       es: 'En Proceso',
       en: 'In Progress',
     },
@@ -120,7 +120,7 @@ export const projectsData: Project[] = [
     id: 'sushi-sudoku',
     title: 'SUSHI SUDOKU',
     date: {
-      ca: 'En Procès',
+      ca: 'En procés',
       es: 'En Proceso',
       en: 'In Progress',
     },
@@ -129,10 +129,9 @@ export const projectsData: Project[] = [
       es: 'Aplicación Web',
       en: 'Web Application',
     },
-    image:
-      'https://www.sushisudoku.com/_image?href=%2F_astro%2Freserva_sushi.CHoo8QP_.webp&w=1080&h=1620&f=webp',
+    image: '/projects/sushisudoku/Home.jpg',
     description: {
-      ca: 'Plataforma web per a la gestió de reserves i comandes en un restaurant de sushi, amb gestió d\'inventari en temps real i actualització i enregistrament de comandes via api amb les principals empreses de menjar a domicili.',
+      ca: 'Plataforma web per a la gestió de reserves i comandes en un restaurant de sushi, amb gestió d\'inventari en temps real i actualització i enregistrament de comandes via API amb les principals empreses de menjar a domicili.',
       es: 'Plataforma web para la gestión de reservas y pedidos en un restaurante de sushi, con gestión de inventario en tiempo real y actualización y registro de pedidos vía API con las principales empresas de comida a domicilio.',
       en: 'Web platform for managing reservations and orders in a sushi restaurant, with real-time inventory management and updating and recording orders via API with the main food delivery companies.',
     },
@@ -142,9 +141,10 @@ export const projectsData: Project[] = [
       en: 'The restaurant needed a digital solution to manage reservations and orders, optimize inventory, and centralize orders from various food delivery platforms to increase efficiency and reduce processes.',
     },
     solution: {
-      ca: "Junt amb l'equip de Visualize, hem desenvolupat una aplicació web completa.", // Modificar
-      es: 'Junto con el equipo de Visualize, hemos desarrollado una aplicación web completa.', // Modificar
-      en: 'Together with the Visualize team, we have developed a complete web application.', // Modificar
+      // TODO: ampliar amb la descripció tècnica real de la solució (arquitectura, integracions, etc.)
+      ca: "Junt amb l'equip de Visualize, hem desenvolupat una aplicació web completa.",
+      es: 'Junto con el equipo de Visualize, hemos desarrollado una aplicación web completa.',
+      en: 'Together with the Visualize team, we have developed a complete web application.',
     },
     results: {
       ca: [
@@ -158,7 +158,7 @@ export const projectsData: Project[] = [
         'Dashboard con métricas en tiempo real',
       ],
       en: [
-        'reduction in administrative management time',
+        'Reduced administrative management time',
         'Email verification system with OTP',
         'Dashboard with real-time metrics',
       ],

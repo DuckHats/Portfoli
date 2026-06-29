@@ -43,7 +43,7 @@ export function Navbar() {
           <fieldset className="hidden md:flex text-xs font-bold tracking-widest gap-2"
            style={{
           color: brandConfig.colors.primary.black
-        }}><legend className="sr-only">{accessibilityConfig.nav[language].langaugeLabel}</legend>
+        }}><legend className="sr-only">{accessibilityConfig.nav[language].languageLabel}</legend>
             <button aria-label={accessibilityConfig.nav[language].catalanLabel} onClick={() => setLanguage('ca')} className={language === 'ca' ? '' : 'opacity-40'} style={{
             color: brandConfig.colors.primary.black
           }}>

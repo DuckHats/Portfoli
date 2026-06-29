@@ -3,7 +3,7 @@ export const brandConfig = {
   tagline: "Desenvolupant amb passió i un toc d'humor",
   established: '2020',
   logo: {
-    url: "/logo_(2).png",
+    url: "/logo.png",
     alt: 'Duckhats Logo'
   },
   colors: {

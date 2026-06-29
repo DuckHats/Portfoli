@@ -3,7 +3,7 @@ export const accessibilityConfig = {
         ca: {
             navbarLabel: 'Menú de navegació principal',
 
-            langaugeLabel: 'Menú d\'idioma',
+            languageLabel: 'Menú d\'idioma',
                 catalanLabel: 'Canviar a català',
                 spanishLabel: 'Canviar a Castellà',
                 englishLabel: 'Canviar a anglès',
@@ -16,7 +16,7 @@ export const accessibilityConfig = {
                 linkTeamLabel: 'Enllaç a la pàgina de l\'equip',
                 linkProjectsLabel: 'Enllaç a la pàgina de projectes',
                 linkAboutLabel: 'Enllaç a la pàgina sobre nosaltres',
-                linkContatLabel: 'Enllaç a la pàgina de contacte',
+                linkContactLabel: 'Enllaç a la pàgina de contacte',
                 linkJoinUsLabel: 'Enllaç a la pàgina d\'unir-se a l\'equip',
                 linkPrivacyLabel: 'Enllaç a la política de privacitat',
                 linkComplianceLabel: 'Enllaç a la política de compliment',
@@ -26,7 +26,7 @@ export const accessibilityConfig = {
         es: {
             navbarLabel: 'Menú de navegación principal',
 
-            langaugeLabel: 'Menú de idioma',
+            languageLabel: 'Menú de idioma',
                 catalanLabel: 'Cambiar a catalán',
                 spanishLabel: 'Cambiar a español',
                 englishLabel: 'Cambiar a inglés',
@@ -39,7 +39,7 @@ export const accessibilityConfig = {
                 linkTeamLabel: 'Enlace a la página del equipo',
                 linkProjectsLabel: 'Enlace a la página de proyectos',
                 linkAboutLabel: 'Enlace a la página sobre nosotros',
-                linkContatLabel: 'Enlace a la página de contacto',
+                linkContactLabel: 'Enlace a la página de contacto',
                 linkJoinUsLabel: 'Enlace a la página de unirse al equipo',
                 linkPrivacyLabel: 'Enlace a la política de privacidad',
                 linkComplianceLabel: 'Enlace a la política de cumplimiento',
@@ -48,7 +48,7 @@ export const accessibilityConfig = {
         en: {
             navbarLabel: 'Main navigation menu',
 
-            langaugeLabel: 'Language menu',
+            languageLabel: 'Language menu',
                 catalanLabel: 'Switch to Catalan',
                 spanishLabel: 'Switch to Spanish',
                 englishLabel: 'Switch to English',
@@ -61,7 +61,7 @@ export const accessibilityConfig = {
                 linkTeamLabel: 'Link to team page',
                 linkProjectsLabel: 'Link to projects page',
                 linkAboutLabel: 'Link to about us page',
-                linkContatLabel: 'Link to contact page',
+                linkContactLabel: 'Link to contact page',
                 linkJoinUsLabel: 'Link to join our team page',
                 linkPrivacyLabel: 'Link to privacy policy',
                 linkComplianceLabel: 'Link to compliance policy',
@@ -80,7 +80,7 @@ export const accessibilityConfig = {
 
                 socialsLabel: 'Enllaços de xarxes socials',
                     githubLinkLabel: 'Enllaç al perfil de GitHub',
-                    twitterLinkLabel: 'Enllaç al perfil de Twitter',
+                    twitterLinkLabel: 'Enllaç al perfil de X',
                     instagramLinkLabel: 'Enllaç al perfil d\'Instagram',
         },
         es: {
@@ -93,7 +93,7 @@ export const accessibilityConfig = {
 
                 socialsLabel: 'Enlaces de redes sociales',
                     githubLinkLabel: 'Enlace al perfil de GitHub',
-                    twitterLinkLabel: 'Enlace al perfil de Twitter',
+                    twitterLinkLabel: 'Enlace al perfil de X',
                     instagramLinkLabel: 'Enlace al perfil de Instagram',
                     
         },
@@ -107,7 +107,7 @@ export const accessibilityConfig = {
 
                 socialsLabel: 'Social media links',
                     githubLinkLabel: 'Link to GitHub profile',
-                    twitterLinkLabel: 'Link to Twitter profile',
+                    twitterLinkLabel: 'Link to X profile',
                     instagramLinkLabel: 'Link to Instagram profile',
                     
         },
@@ -135,21 +135,21 @@ export const accessibilityConfig = {
     socials: {
         ca: {
             githubLabel: 'Enllaç a GitHub de ',
-            twitterLabel: 'Enllaç a Twitter de ',
+            twitterLabel: 'Enllaç a X de ',
             instagramLabel: 'Enllaç a Instagram de ',
             linkedinLabel: 'Enllaç a LinkedIn de ',
             globeLabel: 'Enllaç al lloc web de ',
         },
         es: {
             githubLabel: 'Enlace a GitHub de ',
-            twitterLabel: 'Enlace a Twitter de ',
+            twitterLabel: 'Enlace a X de ',
             instagramLabel: 'Enlace a Instagram de ',
             linkedinLabel: 'Enlace a LinkedIn de ',
             globeLabel: 'Enlace al sitio web de ',
         },
         en: {
             githubLabel: 'Link to GitHub of ',
-            twitterLabel: 'Link to Twitter of ',
+            twitterLabel: 'Link to X of ',
             instagramLabel: 'Link to Instagram of ',
             linkedinLabel: 'Link to LinkedIn of ',
             globeLabel: 'Link to website of ',
@@ -165,7 +165,7 @@ export const accessibilityConfig = {
             deleteLinkButtonLabel: 'Botó per esborrar l\'enllaç a',
             enterLinkButtonLabel: 'Camp per introduir un enllaç',
             addLinkButtonLabel: 'Botó per afegir un nou enllaç',
-            UploadButtonLabel: 'Camp per pujar un fitxer',
+            uploadButtonLabel: 'Camp per pujar un fitxer',
             moreAboutYouLabel: 'Camp per explicar més sobre tu',
         },
         es: {
@@ -177,8 +177,8 @@ export const accessibilityConfig = {
             deleteLinkButtonLabel: 'Botón para borrar el enlace a',
             enterLinkButtonLabel: 'Campo para introducir un enlace',
             addLinkButtonLabel: 'Botón para añadir un nuevo enlace',
-            UploadButtonLabel: 'Campo para subir un archivo',
-            moreAboutYouLabel: 'Campa para explicar más sobre ti',
+            uploadButtonLabel: 'Campo para subir un archivo',
+            moreAboutYouLabel: 'Campo para explicar más sobre ti',
         },
         en: {
             contactFormLabel: 'Contact form',
@@ -189,7 +189,7 @@ export const accessibilityConfig = {
             deleteLinkButtonLabel: 'Button to delete the link to',
             enterLinkButtonLabel: 'Field to enter a link',
             addLinkButtonLabel: 'Button to add a new link',
-            UploadButtonLabel: 'Field to upload a file',
+            uploadButtonLabel: 'Field to upload a file',
             moreAboutYouLabel: 'Field to explain more about you',
         },
     },
@@ -199,21 +199,21 @@ export const accessibilityConfig = {
             finalizationDateLabel: 'Data de finalització: ',
             nameOfProjectLabel: 'Projecte: ',
             demoProjectLinkLabel: 'Enllaç al demo del projecte',
-            githubProjetLinkLabel: 'Enllaç al Github del projecte',
+            githubProjectLinkLabel: 'Enllaç al Github del projecte',
         },
         es: {
             typeProjectLabel: 'Proyecto de tipo: ',
             finalizationDateLabel: 'Fecha de finalización: ',
             nameOfProjectLabel: 'Proyecto: ',
             demoProjectLinkLabel: 'Enlace al demo del proyecto',
-            githubProjetLinkLabel: 'Enlace al Github del proyecto',
+            githubProjectLinkLabel: 'Enlace al Github del proyecto',
         },
         en: {
             typeProjectLabel: 'Project of type: ',
             finalizationDateLabel: 'Finalization date: ',
             nameOfProjectLabel: 'Project: ',
             demoProjectLinkLabel: 'Link to the project demo',
-            githubProjetLinkLabel: 'Link to the project Github',
+            githubProjectLinkLabel: 'Link to the project Github',
         },
     },
 }

@@ -17,7 +17,7 @@ export const contentConfig = {
     about: {
       vision: {
         title: 'VISIÓ',
-        description: 'Per crear experiències digitals que no només funcionin, sinó que deixin una impressió duradora. Creiem en el poder del joc i la professionalitat lúdica, on el codi seriós es troba amb el caos creatiu.'
+        description: 'Crear experiències digitals que no només funcionin, sinó que deixin una impressió duradora. Creiem en el poder del joc i la professionalitat lúdica, on el codi seriós es troba amb el caos creatiu.'
       },
       born: {
         title: 'NAIXEMENT',
@@ -39,7 +39,7 @@ export const contentConfig = {
       },
       hats: {
         title: 'Els Barrets que Portem',
-        description: "Per què \"Barrets\"? Perquè en el món digital, l'adaptabilitat és supervivència. Un dia som dissenyadors UI, l'endemà arquitectes back-end, i, de vegades, guies per a la crisi d'identitat de la teva marca." //plantejar modificació
+        description: "Per què \"Barrets\"? Perquè en el món digital, l'adaptabilitat és supervivència. Un dia som dissenyadors UI, l'endemà arquitectes back-end, i, de vegades, terapeutes per a la crisi d'identitat de la teva marca."
       }
     },
     team: {
@@ -149,7 +149,7 @@ export const contentConfig = {
                 },
                 {
                   name: 'Disseny Avançat',
-                  description: 'Disseny visual personalitzat, animacions, components reutilitzables i optimització de performance.'
+                  description: 'Disseny visual personalitzat, animacions, components reutilitzables i optimització de rendiment.'
                 }
               ],
               note: 'No inclou lògica de negoci complexa ni integracions externes.'
@@ -274,7 +274,7 @@ export const contentConfig = {
     },
     contact: {
       title: 'Contacta amb Nosaltres',
-      subtitle: "Tens alguna dubte o vols començar un projecte? Escriu-nos!",
+      subtitle: "Tens algun dubte o vols començar un projecte? Escriu-nos!",
       form: {
         nameLabel: 'Nom',
         namePlaceholder: 'El teu nom',
@@ -291,7 +291,7 @@ export const contentConfig = {
   es: {
     nav: {
       home: 'Inicio',
-      about: 'Quiénes Somos',
+      about: 'Historia',
       team: 'Equipo',
       projects: 'Proyectos',
       story: 'la historia de',
@@ -328,7 +328,7 @@ export const contentConfig = {
       },
       hats: {
         title: 'Los Sombreros que Llevamos',
-        description: '¿Por qué "Sombreros"? Porque en el mundo digital, la adaptabilidad es supervivencia. Un día somos diseñadores UI, al día siguiente arquitectos back-end, y a veces somos guías en la crisis de identidad de tu marca.' //plantejar modificació
+        description: '¿Por qué "Sombreros"? Porque en el mundo digital, la adaptabilidad es supervivencia. Un día somos diseñadores UI, al día siguiente arquitectos back-end, y a veces somos terapeutas para la crisis de identidad de tu marca.'
       }
     },
     team: {
@@ -438,7 +438,7 @@ export const contentConfig = {
                 },
                 {
                   name: 'Diseño Avanzado',
-                  description: 'Diseño visual personalizado, animaciones, componentes reutilizables y optimización de performance.'
+                  description: 'Diseño visual personalizado, animaciones, componentes reutilizables y optimización de rendimiento.'
                 }
               ],
               note: 'No incluye lógica de negocio compleja ni integraciones externas.'
@@ -580,7 +580,7 @@ export const contentConfig = {
   en: {
     nav: {
       home: 'Home',
-      about: 'Who We Are',
+      about: 'Story',
       team: 'Team',
       projects: 'Projects',
       story: 'the story of',
@@ -625,7 +625,7 @@ export const contentConfig = {
       subtitle: 'We are a diverse group of creatives and "protoengineers" united by a single mission: to build the extraordinary. From different corners of Catalonia, we come together to swim in the same direction.',
       teamTitle: 'DuckHats Team',
       membersTitle: 'MEMBERS',
-      planText: 'At DuckHats, we believe creativity doesn¡t follow a schedule. We work within a flexible structure where what matters isn\'t when you type, but how — and with what level of quality — your work arrives. We trust autonomy, personal rhythms, and the shared responsibility of bringing every project exactly where it needs to go, with the excellence that defines us.'
+      planText: "At DuckHats, we believe creativity doesn't follow a schedule. We work within a flexible structure where what matters isn't when you type, but how — and with what level of quality — your work arrives. We trust autonomy, personal rhythms, and the shared responsibility of bringing every project exactly where it needs to go, with the excellence that defines us."
     },
     projects: {
       title: 'PROJECTS',
