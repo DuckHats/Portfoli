@@ -4,7 +4,7 @@
 
 **Name:** DUCKHATS  
 **Tagline:** Desenvolupant amb passió i un toc d'humor  
-**Established:** 2020  
+**Established:** 2023  
 **Contact:** info@duckhats.cat  
 **Social:** @duckhats
 

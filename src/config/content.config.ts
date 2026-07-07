@@ -30,7 +30,7 @@ export const contentConfig = {
       },
       origins: {
         title: "Els Orígens de l'Estany",
-        paragraph1: "DuckHats va néixer en un CFGS l'any 2020, fruit d'una observació senzilla: la majoria d'agències digitals es prenen massa seriosament, o no prou. Volíem trobar l'equilibri perfecte: la filosofia de l'«ànec».",
+        paragraph1: "DuckHats va néixer en un CFGS l'any 2023, fruit d'una observació senzilla: la majoria d'agències digitals es prenen massa seriosament, o no prou. Volíem trobar l'equilibri perfecte: la filosofia de l'«ànec».",
         paragraph2: "Calmat a la superfície, nadant furiosament per sota. Això som nosaltres. Vam començar com un grup de quatre amics cansats de la rigidesa corporativa i amb ganes de construir coses que generessin alegria, tant per a nosaltres com per als nostres clients."
       },
       dna: {
@@ -319,7 +319,7 @@ export const contentConfig = {
       },
       origins: {
         title: 'Los Orígenes del Estanque',
-        paragraph1: 'DuckHats nació en un CFGS en el año 2020, fruto de una observación sencilla: la mayoría de las agencias digitales se toman demasiado en serio, o no lo suficiente. Queríamos encontrar el equilibrio perfecto: la filosofía del «Pato».',
+        paragraph1: 'DuckHats nació en un CFGS en el año 2023, fruto de una observación sencilla: la mayoría de las agencias digitales se toman demasiado en serio, o no lo suficiente. Queríamos encontrar el equilibrio perfecto: la filosofía del «Pato».',
         paragraph2: 'Calmado en la superficie, nadando furiosamente por debajo. Eso somos nosotros. Empezamos como cuatro amigos cansados de la rigidez corporativa y con ganas de construir cosas que generaran alegría, tanto para nosotros como para nuestros clientes.'
       },
       dna: {
@@ -608,7 +608,7 @@ export const contentConfig = {
       },
       origins: {
         title: 'The Pond Origins',
-        paragraph1: 'DuckHats was born in a vocational school in Catalonia in 2020, from a simple observation: most digital agencies take themselves too seriously, or not seriously enough. We wanted to find the perfect balance: the “Duck” philosophy.',
+        paragraph1: 'DuckHats was born in a vocational school in Catalonia in 2023, from a simple observation: most digital agencies take themselves too seriously, or not seriously enough. We wanted to find the perfect balance: the “Duck” philosophy.',
         paragraph2: "Calm on the surface, swimming furiously underneath. That's us. We started as four friends tired of corporate rigidity and eager to build things that sparked joy, both for us and our clients."
       },
       dna: {

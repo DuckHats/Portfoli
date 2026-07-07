@@ -1,7 +1,7 @@
 export const brandConfig = {
   name: 'DuckHats',
   tagline: "Desenvolupant amb passió i un toc d'humor",
-  established: '2020',
+  established: '2023',
   logo: {
     url: "/logo.png",
     alt: 'Duckhats Logo'
