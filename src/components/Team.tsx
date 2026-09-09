@@ -45,7 +45,7 @@ export function Team() {
             <div className="w-full h-full flex items-center justify-center overflow-hidden" style={{
             backgroundColor: brandConfig.colors.neutral.gray200
           }}>
-              <img src={teamImage.url} alt={teamImage.alt[language]} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
+              <img src={teamImage.img} alt={teamImage.alt[language]} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
             </div>
             <div aria-hidden="true" className="absolute -top-4 -left-4 text-4xl" style={{
             color: brandConfig.colors.accent.red
