@@ -59,7 +59,7 @@ export const teamMembers = [{
 
 export const teamImage = {
   // TODO: descarregar i moure a /public/team/team_group.jpg quan estigui disponible
-  url: 'https://www.ginebro.cat/fp/wp-content/uploads/elementor/thumbs/dam-05-quc4hr1xpg898hh1kwnw16uzcnftkw8yo8a29pn7ko.jpg',
+  img: '/team/team_rafting.jpg',
   alt: {
     ca: 'Equip treballant junts',
     es: 'Equipo trabajando juntos',
