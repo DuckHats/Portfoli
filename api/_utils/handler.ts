@@ -1,11 +1,11 @@
 import type { IncomingMessage } from 'node:http'
-import type { VercelRequest, VercelResponse } from '@vercel/node'
 import type { ZodType } from 'zod'
 import type { DiscordEmbed, DiscordFile } from './discord.js'
 import { sendToDiscord } from './discord.js'
 import type { ParsedForm } from './parse.js'
 import { PayloadError, parseMultipart } from './parse.js'
 import type { RateLimiter } from './rateLimit.js'
+import type { ApiRequest, ApiResponse } from './types.js'
 
 export interface FormHandlerOptions<T> {
   schema: ZodType<T>
@@ -23,7 +23,7 @@ export interface FormHandlerDeps {
 
 const defaultDeps: FormHandlerDeps = { parse: parseMultipart, send: sendToDiscord }
 
-export const clientIp = (req: Pick<VercelRequest, 'headers'>): string => {
+export const clientIp = (req: Pick<ApiRequest, 'headers'>): string => {
   const forwarded = req.headers['x-forwarded-for']
   const first = (Array.isArray(forwarded) ? forwarded[0] : forwarded)?.split(',')[0]?.trim()
   return first || 'unknown'
@@ -34,7 +34,7 @@ export function createFormHandler<T>(
   options: FormHandlerOptions<T>,
   deps: FormHandlerDeps = defaultDeps,
 ) {
-  return async function handler(req: VercelRequest, res: VercelResponse) {
+  return async function handler(req: ApiRequest, res: ApiResponse) {
     if (req.method !== 'POST') {
       res.setHeader('Allow', 'POST')
       return res.status(405).json({ error: 'method_not_allowed' })

@@ -1,4 +1,4 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node'
+import type { ApiRequest, ApiResponse } from '../../api/_utils/types'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { contactSchema } from '../../src/lib/schemas'
 import { createFormHandler } from '../../api/_utils/handler'
@@ -40,8 +40,8 @@ function call(handler: ReturnType<typeof setup>['handler'], method = 'POST', ip 
       return this
     },
   }
-  const req = { method, headers: { 'x-forwarded-for': ip } } as unknown as VercelRequest
-  return handler(req, res as unknown as VercelResponse).then(() => res)
+  const req = { method, headers: { 'x-forwarded-for': ip } } as unknown as ApiRequest
+  return handler(req, res as unknown as ApiResponse).then(() => res)
 }
 
 describe('createFormHandler', () => {
