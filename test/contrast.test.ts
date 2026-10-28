@@ -38,7 +38,7 @@ describe.each(Object.entries(themes))('%s theme contrast (WCAG AA)', (_, t) => {
   const backgrounds = ['canvas', 'surface', 'tint'] as const
 
   it.each(backgrounds)('ink, muted and accent text are readable on %s', (bg) => {
-    for (const fg of ['ink', 'muted', 'accent'] as const) {
+    for (const fg of ['ink', 'muted', 'accent-text'] as const) {
       expect(ratio(t[fg]!, t[bg]!), `${fg} on ${bg}`).toBeGreaterThanOrEqual(4.5)
     }
   })
@@ -47,8 +47,15 @@ describe.each(Object.entries(themes))('%s theme contrast (WCAG AA)', (_, t) => {
     expect(ratio(t['on-accent']!, t.accent!)).toBeGreaterThanOrEqual(4.5)
   })
 
-  it('ink is readable on the soft accent block', () => {
-    expect(ratio(t.ink!, t['accent-soft']!)).toBeGreaterThanOrEqual(4.5)
+  it.each(backgrounds)('the accent colour works as a graphic on %s', (bg) => {
+    expect(ratio(t.accent!, t[bg]!)).toBeGreaterThanOrEqual(3)
+  })
+})
+
+describe.each(Object.entries(themes))('%s inverse blocks (CTA and footer)', (_, t) => {
+  it('keep their text readable', () => {
+    expect(ratio(t['on-inverse']!, t.inverse!)).toBeGreaterThanOrEqual(4.5)
+    expect(ratio(t.accent!, t.inverse!)).toBeGreaterThanOrEqual(3)
   })
 })
 

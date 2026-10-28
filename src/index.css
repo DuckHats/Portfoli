@@ -5,42 +5,50 @@
 /* Design tokens: space-separated RGB so Tailwind opacity modifiers work. */
 @layer base {
   :root {
-    --color-canvas: 246 241 231;
-    --color-surface: 251 248 241;
-    --color-tint: 234 226 208;
-    --color-ink: 23 20 15;
-    --color-muted: 94 87 75;
-    --color-line: 221 213 196;
-    --color-accent: 31 77 58;
-    --color-accent-soft: 220 232 223;
-    --color-on-accent: 246 241 231;
+    --color-canvas: 255 255 255;
+    --color-surface: 255 255 255;
+    --color-tint: 241 240 236;
+    --color-ink: 15 15 15;
+    --color-muted: 85 82 76;
+    --color-line: 208 205 197;
+    --color-accent: 230 57 70;
+    --color-accent-text: 184 34 47;
+    --color-on-accent: 15 15 15;
+    --color-inverse: 15 15 15;
+    --color-on-inverse: 255 255 255;
     color-scheme: light;
   }
 
   :root[data-theme='dark'] {
-    --color-canvas: 15 21 18;
-    --color-surface: 22 30 26;
-    --color-tint: 27 37 32;
-    --color-ink: 237 232 220;
-    --color-muted: 163 171 159;
-    --color-line: 38 49 43;
-    --color-accent: 127 196 160;
-    --color-accent-soft: 30 51 41;
-    --color-on-accent: 15 21 18;
+    --color-canvas: 14 14 14;
+    --color-surface: 23 23 23;
+    --color-tint: 32 32 32;
+    --color-ink: 244 244 242;
+    --color-muted: 168 166 160;
+    --color-line: 66 66 64;
+    --color-accent: 255 89 100;
+    --color-accent-text: 255 138 146;
+    --color-on-accent: 14 14 14;
+    --color-inverse: 23 23 23;
+    --color-on-inverse: 244 244 242;
     color-scheme: dark;
   }
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme='light']) {
-      --color-canvas: 15 21 18;
-      --color-surface: 22 30 26;
-      --color-tint: 27 37 32;
-      --color-ink: 237 232 220;
-      --color-muted: 163 171 159;
-      --color-line: 38 49 43;
-      --color-accent: 127 196 160;
-      --color-accent-soft: 30 51 41;
-      --color-on-accent: 15 21 18;
+      --color-canvas: 14 14 14;
+      --color-surface: 23 23 23;
+      --color-tint: 32 32 32;
+      --color-ink: 244 244 242;
+      --color-muted: 168 166 160;
+      --color-line: 66 66 64;
+      --color-accent: 255 89 100;
+      --color-accent-text: 255 138 146;
+      --color-on-accent: 14 14 14;
+      --color-inverse: 23 23 23;
+      --color-on-inverse: 244 244 242;
+      --color-inverse: 23 23 23;
+      --color-on-inverse: 244 244 242;
       color-scheme: dark;
     }
   }
@@ -52,32 +60,50 @@
   body {
     @apply bg-canvas font-sans text-ink antialiased;
     font-feature-settings: 'cv11', 'ss01';
+    font-variant-numeric: tabular-nums;
   }
 
   h1,
   h2,
   h3 {
-    @apply font-display font-medium tracking-tight;
+    @apply font-display font-bold tracking-tight;
+    text-wrap: balance;
   }
 
-  /* One or two emphasised words per headline: italic and in the accent colour. */
-  h1 em,
-  h2 em,
-  h3 em {
-    @apply italic text-accent;
+  p {
+    text-wrap: pretty;
   }
 
   ::selection {
     @apply bg-accent text-on-accent;
   }
 
+  /* Sections jumped to with the arrow keys land below the sticky header. */
+  main > section {
+    scroll-margin-top: 4.5rem;
+  }
+
+  input,
+  textarea {
+    caret-color: rgb(var(--color-accent-text));
+  }
+
   :focus-visible {
-    @apply outline outline-2 outline-offset-2 outline-accent;
+    @apply outline outline-[3px] outline-offset-2 outline-accent;
+  }
+
+  /* Thin scrollbar drawn from the palette instead of the browser default. */
+  html {
+    scrollbar-color: rgb(var(--color-ink)) rgb(var(--color-tint));
+    scrollbar-width: thin;
   }
 
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
+    }
+    .scribble-path {
+      animation: none;
     }
     *,
     *::before,
@@ -92,6 +118,7 @@
 @layer components {
   /* Underline that draws in on hover. */
   .link-underline {
+    text-underline-offset: 0.25em;
     background-image: linear-gradient(currentColor, currentColor);
     background-position: 0 100%;
     background-repeat: no-repeat;
@@ -108,4 +135,19 @@
     -webkit-mask: url('/brand/logo-mark.png') center / contain no-repeat;
     mask: url('/brand/logo-mark.png') center / contain no-repeat;
   }
+}
+
+/* The hand-drawn underline draws itself once on load (see ui/Scribble). */
+@keyframes scribble-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.scribble-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  animation: scribble-draw 0.9s 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }

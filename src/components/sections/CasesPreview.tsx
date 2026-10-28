@@ -15,14 +15,17 @@ export function CasesPreview() {
       title={cases.title}
       intro={cases.intro}
       action={
-        <AppLink to="projects" className="inline-flex items-center gap-2 font-medium text-accent">
+        <AppLink
+          to="projects"
+          className="inline-flex items-center gap-2 font-medium text-accent-text"
+        >
           <span className="link-underline pb-0.5">{cases.link}</span>{' '}
           <ArrowRight size={16} aria-hidden />
         </AppLink>
       }
     >
       <div className="space-y-28 sm:space-y-36">
-        {projects.slice(0, 2).map((project, index) => (
+        {projects.slice(1, 3).map((project, index) => (
           <Reveal key={project.id}>
             <ProjectShowcase project={project} reverse={index % 2 === 1} />
           </Reveal>

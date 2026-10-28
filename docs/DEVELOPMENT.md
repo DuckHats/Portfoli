@@ -16,12 +16,11 @@ Read README.md first. Things that are not obvious from the code:
 - **Tests under Node 26**: Node ships its own file-less `localStorage` that shadows jsdom's;
   `src/test/setup.ts` installs an in-memory one. Do not remove it.
 - **Colours are tokens.** No hex values or `style={{ color }}` in components.
-- **Emphasis markers**: headline strings may wrap one or two words in `*...*`. Render them with
-  `<Emphasis text={...} />`; use `stripEmphasis()` where plain text is needed (tests, `aria`).
-  Opening `*` must be followed, and closing `*` preceded, by a non-space.
+- **No emphasis markers**: headlines are plain strings; `translations.test.ts` fails on any `*`.
 - **`dark:` follows the manual theme**: `tailwind.config.js` defines `darkMode` as a variant over
   `data-theme` plus the system preference, so `dark:invert` etc. react to the theme button.
-- **Showcase**: `ProjectShowcase` > `BrowserFrame` > `ShowcaseCarousel` (`useCarousel`). Autoplay is
+- **Hero and showcase**: `Hero` reuses `BrowserFrame` + `ShowcaseCarousel` (`priority` loads the first
+  screenshot eagerly). `ProjectShowcase` > `BrowserFrame` > `ShowcaseCarousel` (`useCarousel`). Autoplay is
   off for reduced motion, hover, focus and off-screen; parallax is `useScrollProgress` writing `--p`.
   Keep the 16:10 box fixed so it never shifts layout.
 - **Images**: add originals under `public/projects` or `public/team`, run `pnpm images`

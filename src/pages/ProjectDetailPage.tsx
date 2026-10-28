@@ -38,7 +38,7 @@ export function ProjectDetailPage() {
     <>
       <SEO title={project.title} description={description} image={project.image} jsonLd={jsonLd} />
       <article>
-        <header className="border-b border-line bg-tint/50">
+        <header className="border-b-2 border-ink bg-tint">
           <Container className="py-14 sm:py-20">
             <AppLink
               to="projects"
@@ -71,10 +71,6 @@ export function ProjectDetailPage() {
 
         <Container className="overflow-x-clip py-16 sm:py-20">
           <div className="relative">
-            <div
-              aria-hidden
-              className="absolute inset-0 translate-x-3 translate-y-3 rounded-2xl bg-accent-soft lg:translate-x-5 lg:translate-y-5"
-            />
             <div className="relative">
               <BrowserFrame url={displayUrl(project)}>
                 <ShowcaseCarousel slides={slides} />
@@ -126,10 +122,7 @@ export function ProjectDetailPage() {
           </aside>
         </Container>
 
-        <section
-          aria-labelledby="gallery"
-          className="border-t border-line bg-tint/60 py-16 sm:py-24"
-        >
+        <section aria-labelledby="gallery" className="border-t-2 border-ink bg-tint py-16 sm:py-24">
           <Container>
             <h2 id="gallery" className="text-3xl sm:text-4xl">
               {copy.gallery}

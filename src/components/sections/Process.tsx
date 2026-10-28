@@ -11,7 +11,10 @@ export function Process() {
         {process.steps.map((step, index) => (
           <li key={step.title} className={index % 2 === 1 ? 'md:mt-14' : ''}>
             <Reveal delay={index * 0.06}>
-              <span aria-hidden className="font-display text-7xl italic leading-none text-accent">
+              <span
+                aria-hidden
+                className="font-display text-8xl font-bold leading-none text-transparent [-webkit-text-stroke:2px_rgb(var(--color-ink))]"
+              >
                 {index + 1}
               </span>
               <h3 className="mt-5 text-2xl">{step.title}</h3>

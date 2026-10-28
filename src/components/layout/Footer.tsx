@@ -17,26 +17,20 @@ const socials = [
   { key: 'instagram', label: 'Instagram', url: SITE.social.instagram, Icon: Instagram },
 ] as const
 
-const headingStyles = 'text-sm font-semibold text-ink'
+const headingStyles = 'text-sm font-semibold text-on-inverse'
 
 export function Footer() {
   const { footer, nav, a11y } = useMessages()
   return (
-    <footer className="border-t border-line bg-tint">
+    <footer className="border-t-2 border-ink bg-inverse text-on-inverse">
       <Container className="py-16">
         <div className="grid gap-12 md:grid-cols-[1.6fr_1fr_1fr]">
           <div>
-            <p className="flex items-center gap-3 font-display text-4xl font-semibold tracking-tight">
-              <img
-                src={SITE.logo}
-                alt=""
-                width={44}
-                height={44}
-                className="h-11 w-11 dark:invert"
-              />
+            <p className="flex items-center gap-3 font-display text-5xl font-bold tracking-tight">
+              <img src={SITE.logo} alt="" width={44} height={44} className="h-11 w-11 invert" />
               {SITE.name}
             </p>
-            <p className="mt-5 max-w-xs text-muted">{footer.tagline}</p>
+            <p className="mt-5 max-w-xs text-on-inverse/70">{footer.tagline}</p>
           </div>
 
           <nav aria-label={a11y.footerNav}>
@@ -44,7 +38,10 @@ export function Footer() {
             <ul className="mt-4 space-y-2.5">
               {FOOTER_NAV.map((key) => (
                 <li key={key}>
-                  <AppLink to={key} className="link-underline pb-0.5 text-ink/80 hover:text-ink">
+                  <AppLink
+                    to={key}
+                    className="link-underline pb-0.5 text-on-inverse/80 hover:text-on-inverse"
+                  >
                     {nav[key]}
                   </AppLink>
                 </li>
@@ -58,7 +55,7 @@ export function Footer() {
               <li>
                 <a
                   href={`mailto:${SITE.email}`}
-                  className="inline-flex items-center gap-2 text-ink/80 transition-colors hover:text-ink"
+                  className="inline-flex items-center gap-2 text-on-inverse/80 transition-colors hover:text-on-inverse"
                 >
                   <Mail size={16} aria-hidden /> {SITE.email}
                 </a>
@@ -70,7 +67,7 @@ export function Footer() {
                   <ExternalLink
                     href={url}
                     aria-label={label}
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-full text-ink/70 transition-colors hover:bg-ink/10 hover:text-ink"
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-full text-on-inverse/70 transition-colors hover:bg-on-inverse/15 hover:text-on-inverse"
                   >
                     <Icon size={18} aria-hidden />
                   </ExternalLink>
@@ -80,14 +77,14 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-3 border-t border-ink/15 pt-6 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 flex flex-col gap-3 border-t border-on-inverse/20 pt-6 text-sm text-on-inverse/70 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} {SITE.name}. {footer.rights}
           </p>
           <ul className="flex gap-5">
             {LEGAL_NAV.map((key) => (
               <li key={key}>
-                <AppLink to={key} className="transition-colors hover:text-ink">
+                <AppLink to={key} className="transition-colors hover:text-on-inverse">
                   {nav[key]}
                 </AppLink>
               </li>

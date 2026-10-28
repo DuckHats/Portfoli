@@ -11,7 +11,14 @@ export interface Slide {
  * Fixed-ratio screenshot carousel (no layout shift). Autoplay is handled by `useCarousel`;
  * the previous/next buttons and dots are real controls, so it also works with a keyboard.
  */
-export function ShowcaseCarousel({ slides }: { slides: Slide[] }) {
+export function ShowcaseCarousel({
+  slides,
+  priority = false,
+}: {
+  slides: Slide[]
+  /** Above-the-fold carousel: the first screenshot loads eagerly (it is the LCP image). */
+  priority?: boolean
+}) {
   const { projects } = useMessages()
   const t = useT()
   const { index, playing, go, next, prev, ref, handlers } = useCarousel({ count: slides.length })
@@ -32,7 +39,7 @@ export function ShowcaseCarousel({ slides }: { slides: Slide[] }) {
             src={slide.src}
             alt={slide.alt}
             aria-hidden={i !== index}
-            loading="lazy"
+            loading={priority && i === 0 ? 'eager' : 'lazy'}
             decoding="async"
             className={`absolute inset-0 h-full w-full object-cover object-top transition-opacity duration-700 ease-out ${
               i === index ? 'opacity-100' : 'opacity-0'
@@ -42,12 +49,12 @@ export function ShowcaseCarousel({ slides }: { slides: Slide[] }) {
       </div>
 
       {slides.length > 1 && (
-        <div className="absolute bottom-3 right-3 flex items-center rounded-full bg-canvas/90 px-1 py-0.5 shadow-md backdrop-blur">
+        <div className="absolute bottom-3 right-3 flex items-center border-2 border-ink bg-canvas px-1">
           <button
             type="button"
             onClick={prev}
             aria-label={projects.previous}
-            className="inline-flex h-8 w-8 items-center justify-center rounded-full text-ink hover:bg-ink/10"
+            className="inline-flex h-8 w-8 items-center justify-center text-ink hover:bg-accent"
           >
             <ChevronLeft size={16} aria-hidden />
           </button>
@@ -59,11 +66,11 @@ export function ShowcaseCarousel({ slides }: { slides: Slide[] }) {
                   onClick={() => go(i)}
                   aria-label={t('projects.goTo', { n: i + 1 })}
                   aria-current={i === index ? 'true' : undefined}
-                  className="group inline-flex h-8 w-4 items-center justify-center"
+                  className="group inline-flex h-8 w-6 items-center justify-center"
                 >
                   <span
-                    className={`h-1.5 rounded-full transition-all duration-300 ${
-                      i === index ? 'w-4 bg-accent' : 'w-1.5 bg-ink/30 group-hover:bg-ink/60'
+                    className={`h-1.5 transition-all duration-300 ${
+                      i === index ? 'w-4 bg-ink' : 'w-1.5 bg-ink/30 group-hover:bg-ink/60'
                     }`}
                   />
                 </button>
@@ -74,7 +81,7 @@ export function ShowcaseCarousel({ slides }: { slides: Slide[] }) {
             type="button"
             onClick={next}
             aria-label={projects.next}
-            className="inline-flex h-8 w-8 items-center justify-center rounded-full text-ink hover:bg-ink/10"
+            className="inline-flex h-8 w-8 items-center justify-center text-ink hover:bg-accent"
           >
             <ChevronRight size={16} aria-hidden />
           </button>

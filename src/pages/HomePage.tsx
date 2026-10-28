@@ -6,12 +6,14 @@ import { Process } from '@/components/sections/Process'
 import { ServicesOverview } from '@/components/sections/ServicesOverview'
 import { TeamPreview } from '@/components/sections/TeamPreview'
 import { TechMarquee } from '@/components/sections/TechMarquee'
+import { useSectionKeys } from '@/hooks/useSectionKeys'
 import { useLanguage, useMessages } from '@/lib/i18n'
 import { websiteJsonLd } from '@/lib/seo'
 
 export function HomePage() {
   const { seo } = useMessages()
   const language = useLanguage()
+  useSectionKeys()
   return (
     <>
       <SEO

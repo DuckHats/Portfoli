@@ -33,12 +33,6 @@ export function ProjectShowcase({
     <article className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
       <div className={`relative lg:col-span-7 ${reverse ? 'lg:order-2' : ''}`}>
         <div
-          aria-hidden
-          className={`absolute inset-0 translate-y-3 rounded-2xl bg-accent-soft lg:translate-y-5 ${
-            reverse ? '-translate-x-3 lg:-translate-x-5' : 'translate-x-3 lg:translate-x-5'
-          }`}
-        />
-        <div
           ref={parallax}
           className="relative [--p:0.5]"
           style={{ transform: 'translate3d(0, calc((var(--p) - 0.5) * -28px), 0)' }}
@@ -60,7 +54,7 @@ export function ProjectShowcase({
             .slice(0, 2)
             .map((result) => (
               <li key={result} className="flex gap-3">
-                <span aria-hidden className="mt-3 h-px w-5 shrink-0 bg-accent" />
+                <span aria-hidden className="mt-3 h-0.5 w-5 shrink-0 bg-accent" />
                 {result}
               </li>
             ))}
@@ -69,7 +63,7 @@ export function ProjectShowcase({
         <AppLink
           to="projects"
           param={project.id}
-          className="link-underline mt-8 inline-block pb-0.5 font-medium text-accent"
+          className="link-underline mt-8 inline-block pb-0.5 font-semibold text-accent-text"
         >
           {projects.view} →
         </AppLink>

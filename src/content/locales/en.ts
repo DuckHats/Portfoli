@@ -76,15 +76,15 @@ export const en: Messages = {
   },
   home: {
     hero: {
-      eyebrow: 'Development studio · Catalonia',
-      title: 'We build the software your business *actually* needs.',
+      title: 'Custom software for businesses that have to work.',
       subtitle:
         'Web applications, APIs and automations. We work with you from idea to production, and stay on to maintain it.',
       primaryCta: 'Talk about your project',
       secondaryCta: 'See services',
+      keyHint: 'Arrow keys ← → to move between sections',
     },
     services: {
-      title: 'From first sketch to *maintenance*',
+      title: 'From first sketch to maintenance',
       intro: 'One team accountable for the whole journey.',
       link: 'All services',
       items: [
@@ -107,7 +107,7 @@ export const en: Messages = {
       ],
     },
     cases: {
-      title: 'Recent *work*',
+      title: 'Recent work',
       intro: 'A few of the projects we have delivered.',
       link: 'View all projects',
     },
@@ -115,7 +115,7 @@ export const en: Messages = {
       label: 'Technologies we work with',
     },
     process: {
-      title: 'How we *work*',
+      title: 'How we work',
       intro: 'A clear process, with review points and documented decisions.',
       steps: [
         {
@@ -138,13 +138,13 @@ export const en: Messages = {
       ],
     },
     team: {
-      title: 'A small team, *accountable* for every project',
+      title: 'A small team, accountable for every project',
       intro:
         'A team of developers spread across Catalonia, with a flexible structure and shared responsibility for each project.',
       link: 'Meet the team',
     },
     cta: {
-      title: 'Have a project *in mind*?',
+      title: 'Have a project in mind?',
       description: 'Tell us what you need and we will propose the next steps.',
       button: 'Contact us',
     },
@@ -214,7 +214,7 @@ export const en: Messages = {
       'Every project starts with a functional analysis and ends with a documented, tested and deployed product. We keep direct communication with the client throughout.',
   },
   contact: {
-    title: 'Let’s talk about your *project*',
+    title: 'Let’s talk about your project',
     intro: 'Tell us what you need and we will propose the next steps.',
     detailsTitle: 'Contact details',
     emailLabel: 'Email',

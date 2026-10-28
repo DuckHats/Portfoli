@@ -17,7 +17,10 @@ export function ContactPage() {
         <div className="max-w-xl">
           <ContactForm />
         </div>
-        <aside aria-labelledby="details" className="self-start rounded-2xl bg-tint p-8">
+        <aside
+          aria-labelledby="details"
+          className="self-start border-2 border-ink bg-tint p-8 shadow-hard"
+        >
           <h2 id="details" className="text-2xl">
             {contact.detailsTitle}
           </h2>
@@ -25,7 +28,10 @@ export function ContactPage() {
             <li className="flex items-center gap-3">
               <Mail size={16} aria-hidden className="text-muted" />
               <span className="sr-only">{contact.emailLabel}: </span>
-              <a href={`mailto:${SITE.email}`} className="link-underline pb-0.5 hover:text-accent">
+              <a
+                href={`mailto:${SITE.email}`}
+                className="link-underline pb-0.5 hover:text-accent-text"
+              >
                 {SITE.email}
               </a>
             </li>
@@ -40,7 +46,7 @@ export function ContactPage() {
               <Github size={16} aria-hidden className="text-muted" />
               <ExternalLink
                 href={SITE.social.github}
-                className="link-underline pb-0.5 hover:text-accent"
+                className="link-underline pb-0.5 hover:text-accent-text"
               >
                 GitHub
               </ExternalLink>
@@ -49,7 +55,7 @@ export function ContactPage() {
               <Instagram size={16} aria-hidden className="text-muted" />
               <ExternalLink
                 href={SITE.social.instagram}
-                className="link-underline pb-0.5 hover:text-accent"
+                className="link-underline pb-0.5 hover:text-accent-text"
               >
                 Instagram
               </ExternalLink>

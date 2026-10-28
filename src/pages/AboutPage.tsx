@@ -30,7 +30,7 @@ export function AboutPage() {
           </ul>
         </section>
 
-        <div className="grid gap-12 rounded-2xl bg-tint p-8 sm:p-14 md:grid-cols-2">
+        <div className="grid gap-12 border-2 border-ink bg-tint p-8 sm:p-14 md:grid-cols-2">
           <section aria-labelledby="origin">
             <h2 id="origin" className="text-3xl">
               {about.originTitle}

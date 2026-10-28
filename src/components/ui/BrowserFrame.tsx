@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 
 interface BrowserFrameProps {
-  /** Address shown in the pill. Omit it for a bare title bar. */
+  /** Address shown in the bar. Omit it for a bare title bar. */
   url?: string
   children: ReactNode
   className?: string
@@ -10,17 +10,18 @@ interface BrowserFrameProps {
 /** A browser window around a real screenshot. Decorative chrome is hidden from assistive tech. */
 export function BrowserFrame({ url, children, className = '' }: BrowserFrameProps) {
   return (
-    <div
-      className={`overflow-hidden rounded-xl border border-line bg-surface shadow-xl shadow-ink/15 ${className}`}
-    >
-      <div aria-hidden className="flex items-center gap-3 border-b border-line bg-tint px-4 py-2.5">
+    <div className={`overflow-hidden border-2 border-ink bg-surface shadow-hard ${className}`}>
+      <div
+        aria-hidden
+        className="flex items-center gap-3 border-b-2 border-ink bg-tint px-4 py-2.5"
+      >
         <span className="flex gap-1.5">
-          <i className="h-2.5 w-2.5 rounded-full bg-ink/20" />
-          <i className="h-2.5 w-2.5 rounded-full bg-ink/20" />
-          <i className="h-2.5 w-2.5 rounded-full bg-ink/20" />
+          <i className="h-3 w-3 rounded-full border-2 border-ink bg-accent" />
+          <i className="h-3 w-3 rounded-full border-2 border-ink" />
+          <i className="h-3 w-3 rounded-full border-2 border-ink" />
         </span>
         {url && (
-          <span className="mx-auto max-w-[70%] truncate rounded-full bg-surface px-4 py-1 text-xs text-muted">
+          <span className="mx-auto max-w-[70%] truncate border-2 border-ink bg-surface px-3 py-0.5 text-xs text-ink">
             {url}
           </span>
         )}

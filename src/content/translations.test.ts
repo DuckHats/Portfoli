@@ -4,7 +4,6 @@ import { serviceCategories } from './services'
 import { teamMembers } from './team'
 import { messages } from './messages'
 import { LANGUAGES } from '@/lib/languages'
-import { countEmphasis } from '@/lib/emphasis'
 import { CAREER_ROLES } from '@/lib/schemas'
 
 type Json = string | Json[] | { [key: string]: Json }
@@ -48,14 +47,10 @@ describe('locales', () => {
     for (const language of others) expect(flat(language).map(placeholders)).toEqual(base)
   })
 
-  it('marks the same number of emphasised words in every language, and never in SEO text', () => {
-    const flat = (language: (typeof LANGUAGES)[number]) =>
-      leaves(messages[language] as unknown as Json)
-    const base = flat('ca').map(countEmphasis)
-    for (const language of others) expect(flat(language).map(countEmphasis)).toEqual(base)
+  it('keeps headlines free of emphasis markers', () => {
     for (const language of LANGUAGES) {
-      expect(leaves(messages[language].seo as unknown as Json).some((s) => s.includes('*'))).toBe(
-        false,
+      expect(leaves(messages[language] as unknown as Json).filter((s) => s.includes('*'))).toEqual(
+        [],
       )
     }
   })

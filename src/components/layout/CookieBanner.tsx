@@ -17,7 +17,7 @@ export function CookieBanner() {
   return (
     <aside
       aria-label={cookies.title}
-      className="fixed inset-x-4 bottom-4 z-50 mx-auto max-w-xl rounded-2xl border border-line bg-surface p-5 shadow-xl shadow-ink/15 sm:p-6"
+      className="fixed inset-x-4 bottom-4 z-50 mx-auto max-w-xl border-2 border-ink bg-surface p-5 shadow-hard-sm sm:p-6"
     >
       <p className="text-sm text-muted">
         {cookies.text}{' '}

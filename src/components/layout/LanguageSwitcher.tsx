@@ -20,8 +20,8 @@ export function LanguageSwitcher() {
           aria-label={LANGUAGE_NAMES[language]}
           aria-current={language === current ? 'true' : undefined}
           onClick={() => storeLanguage(language)}
-          className={`rounded-full px-2.5 py-1.5 uppercase transition-colors ${
-            language === current ? 'bg-tint text-ink' : 'text-muted hover:text-ink'
+          className={`px-2.5 py-1.5 uppercase transition-colors ${
+            language === current ? 'bg-ink text-canvas' : 'text-muted hover:text-ink'
           }`}
         >
           {language}

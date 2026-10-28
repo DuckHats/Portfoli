@@ -4,7 +4,6 @@ import { HelmetProvider } from 'react-helmet-async'
 import { MemoryRouter } from 'react-router-dom'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { messages } from '@/content/messages'
-import { stripEmphasis } from '@/lib/emphasis'
 import { AppRoutes } from './App'
 
 const renderAt = (path: string) =>
@@ -24,7 +23,7 @@ describe('routing and language', () => {
     expect(
       await screen.findByRole('heading', {
         level: 1,
-        name: stripEmphasis(messages[lang].home.hero.title),
+        name: messages[lang].home.hero.title,
       }),
     ).toBeInTheDocument()
     expect(document.documentElement.lang).toBe(lang)

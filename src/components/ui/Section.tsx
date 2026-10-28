@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react'
 import { Container } from './Container'
-import { Emphasis } from './Emphasis'
 
 interface SectionProps {
   id?: string
@@ -17,13 +16,13 @@ export function Section({ id, title, intro, action, tone = 'default', children }
     <section
       id={id}
       aria-labelledby={headingId}
-      className={`overflow-x-clip py-20 sm:py-28 ${tone === 'tint' ? 'bg-tint/60' : ''}`}
+      className={`overflow-x-clip border-t-2 border-ink py-20 sm:py-28 ${tone === 'tint' ? 'bg-tint' : ''}`}
     >
       <Container>
         <div className="mb-12 flex flex-col gap-6 sm:mb-16 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-2xl">
             <h2 id={headingId} className="text-4xl sm:text-5xl">
-              <Emphasis text={title} />
+              {title}
             </h2>
             {intro && <p className="mt-5 text-lg text-muted">{intro}</p>}
           </div>

@@ -77,15 +77,15 @@ export const ca = {
   },
   home: {
     hero: {
-      eyebrow: 'Estudi de desenvolupament · Catalunya',
-      title: 'Fem el programari que el teu negoci *realment* necessita.',
+      title: 'Programari a mida per a negocis que han de funcionar.',
       subtitle:
         'Aplicacions web, APIs i automatitzacions. Treballem amb tu de la idea a la posada en producció, i ens quedem per mantenir-ho.',
       primaryCta: 'Parlem del teu projecte',
       secondaryCta: 'Veure serveis',
+      keyHint: 'Fletxes ← → per canviar de secció',
     },
     services: {
-      title: 'Del primer esbós al *manteniment*',
+      title: 'Del primer esbós al manteniment',
       intro: 'Un sol equip responsable de tot el camí.',
       link: 'Tots els serveis',
       items: [
@@ -108,7 +108,7 @@ export const ca = {
       ],
     },
     cases: {
-      title: 'Feina *recent*',
+      title: 'Feina recent',
       intro: 'Alguns dels projectes que hem lliurat.',
       link: 'Veure tots els projectes',
     },
@@ -116,7 +116,7 @@ export const ca = {
       label: 'Tecnologies amb les quals treballem',
     },
     process: {
-      title: 'Com *treballem*',
+      title: 'Com treballem',
       intro: 'Un procés clar, amb punts de revisió i decisions documentades.',
       steps: [
         {
@@ -139,13 +139,13 @@ export const ca = {
       ],
     },
     team: {
-      title: 'Un equip petit, *responsable* de cada projecte',
+      title: 'Un equip petit, responsable de cada projecte',
       intro:
         'Un equip de desenvolupadors repartit per Catalunya, amb estructura flexible i responsabilitat compartida sobre cada projecte.',
       link: 'Coneix l’equip',
     },
     cta: {
-      title: 'Tens un projecte *en ment*?',
+      title: 'Tens un projecte en ment?',
       description: 'Explica’ns què necessites i et proposarem els propers passos.',
       button: 'Contacta amb nosaltres',
     },
@@ -217,7 +217,7 @@ export const ca = {
       'Cada projecte comença amb una anàlisi funcional i acaba amb un producte documentat, provat i desplegat. Mantenim una comunicació directa amb el client durant tot el procés.',
   },
   contact: {
-    title: 'Parlem del teu *projecte*',
+    title: 'Parlem del teu projecte',
     intro: 'Explica’ns què necessites i et proposarem els propers passos.',
     detailsTitle: 'Dades de contacte',
     emailLabel: 'Correu electrònic',

@@ -16,7 +16,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['"Inter Variable"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        display: ['"Fraunces Variable"', 'Georgia', 'ui-serif', 'serif'],
+        display: ['"Oswald Variable"', 'Impact', 'ui-sans-serif', 'sans-serif'],
       },
       colors: {
         canvas: token('canvas'),
@@ -26,11 +26,19 @@ export default {
         muted: token('muted'),
         line: token('line'),
         accent: token('accent'),
-        'accent-soft': token('accent-soft'),
+        'accent-text': token('accent-text'),
         'on-accent': token('on-accent'),
+        inverse: token('inverse'),
+        'on-inverse': token('on-inverse'),
       },
       maxWidth: { content: '76rem', prose: '42rem' },
-      borderRadius: { DEFAULT: '0.375rem', lg: '0.5rem', xl: '0.875rem', '2xl': '1.25rem' },
+      // Square corners are part of the look; only `rounded-full` (dots, icon buttons) stays round.
+      borderRadius: { DEFAULT: '0', lg: '0', xl: '0', '2xl': '0' },
+      boxShadow: {
+        hard: '6px 6px 0 0 rgb(var(--color-ink))',
+        'hard-lg': '10px 10px 0 0 rgb(var(--color-ink))',
+        'hard-sm': '3px 3px 0 0 rgb(var(--color-ink))',
+      },
       transitionTimingFunction: { out: 'cubic-bezier(0.22, 1, 0.36, 1)' },
       keyframes: {
         rise: {

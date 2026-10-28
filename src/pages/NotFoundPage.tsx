@@ -10,7 +10,10 @@ export function NotFoundPage() {
     <>
       <SEO noindex title={seo.notFound.title} description={seo.notFound.description} />
       <Container className="py-24 sm:py-32">
-        <p aria-hidden className="font-display text-9xl italic leading-none text-accent-soft">
+        <p
+          aria-hidden
+          className="font-display text-[10rem] font-bold leading-none text-transparent [-webkit-text-stroke:3px_rgb(var(--color-ink))]"
+        >
           404
         </p>
         <h1 className="mt-4 text-5xl">{notFound.title}</h1>

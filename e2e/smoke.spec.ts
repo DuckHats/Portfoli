@@ -81,3 +81,13 @@ test('mobile menu opens and closes with Escape', async ({ page, isMobile }) => {
   await page.keyboard.press('Escape')
   await expect(page.locator('#mobile-menu')).toHaveCount(0)
 })
+
+test('arrow keys move between sections of the home page', async ({ page, isMobile }) => {
+  test.skip(isMobile, 'keyboard navigation is a desktop affordance')
+  await page.goto('/ca')
+  await page.locator('body').click({ position: { x: 5, y: 400 } })
+  await page.keyboard.press('ArrowRight')
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(200)
+  await page.keyboard.press('ArrowLeft')
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeLessThan(50)
+})
