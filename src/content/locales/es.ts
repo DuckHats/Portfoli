@@ -288,7 +288,7 @@ export const es: Messages = {
     text: 'Usamos Google Analytics para entender cómo se utiliza el sitio. Solo se activa si lo aceptas.',
     accept: 'Aceptar',
     reject: 'Rechazar',
-    more: 'Más información',
+    more: 'Política de privacidad',
   },
   footer: {
     tagline: 'Software y servicios digitales para negocios.',

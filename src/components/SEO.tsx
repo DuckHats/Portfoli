@@ -1,9 +1,10 @@
 import { Helmet } from 'react-helmet-async'
 import { useLocation } from 'react-router-dom'
+import { messages } from '@/content/messages'
 import { SITE } from '@/config/site'
-import { useLanguage, useMessages } from '@/lib/i18n'
+import { useLanguage } from '@/lib/i18n'
 import { LANGUAGES } from '@/lib/languages'
-import { switchLanguagePath } from '@/lib/routes'
+import { absoluteUrl, alternateLinks, canonicalUrl, formatTitle } from '@/lib/seo'
 
 type JsonLd = Record<string, unknown>
 
@@ -20,12 +21,11 @@ interface SEOProps {
 
 export function SEO({ title, description, image = SITE.ogImage, noindex, jsonLd, home }: SEOProps) {
   const language = useLanguage()
-  const { meta } = useMessages()
   const { pathname } = useLocation()
 
-  const fullTitle = home ? `${SITE.name} | ${title}` : `${title} | ${SITE.name}`
-  const canonical = `${SITE.url}${pathname.replace(/\/$/, '') || '/'}`
-  const imageUrl = image.startsWith('http') ? image : `${SITE.url}${image}`
+  const fullTitle = formatTitle(title, home)
+  const canonical = canonicalUrl(pathname)
+  const imageUrl = absoluteUrl(image)
 
   return (
     <Helmet>
@@ -39,25 +39,16 @@ export function SEO({ title, description, image = SITE.ogImage, noindex, jsonLd,
       )}
 
       {!noindex &&
-        LANGUAGES.map((code) => (
-          <link
-            key={code}
-            rel="alternate"
-            hrefLang={code}
-            href={`${SITE.url}${switchLanguagePath(pathname, code)}`}
-          />
+        alternateLinks(pathname).map(({ hrefLang, href }) => (
+          <link key={hrefLang} rel="alternate" hrefLang={hrefLang} href={href} />
         ))}
-      {!noindex && (
-        <link
-          rel="alternate"
-          hrefLang="x-default"
-          href={`${SITE.url}${switchLanguagePath(pathname, 'ca')}`}
-        />
-      )}
 
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content={SITE.name} />
-      <meta property="og:locale" content={meta.ogLocale} />
+      <meta property="og:locale" content={messages[language].meta.ogLocale} />
+      {LANGUAGES.filter((code) => code !== language).map((code) => (
+        <meta key={code} property="og:locale:alternate" content={messages[code].meta.ogLocale} />
+      ))}
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={canonical} />

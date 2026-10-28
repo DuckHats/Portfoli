@@ -285,7 +285,7 @@ export const ca = {
     text: 'Fem servir Google Analytics per entendre com s’utilitza el web. Només s’activa si ho acceptes.',
     accept: 'Accepta',
     reject: 'Rebutja',
-    more: 'Més informació',
+    more: 'Política de privacitat',
   },
   footer: {
     tagline: 'Programari i serveis digitals per a negocis.',

@@ -6,9 +6,9 @@ import { buttonStyles } from '@/components/ui/buttonStyles'
 import { Container } from '@/components/ui/Container'
 import { Tag } from '@/components/ui/Tag'
 import { findProject } from '@/content/projects'
-import { SITE } from '@/config/site'
 import { useLanguage, useLocalize, useMessages } from '@/lib/i18n'
 import { buildPath, projectPath } from '@/lib/routes'
+import { breadcrumbJsonLd } from '@/lib/seo'
 import { NotFoundPage } from './NotFoundPage'
 
 export function ProjectDetailPage() {
@@ -21,30 +21,11 @@ export function ProjectDetailPage() {
   if (!project) return <NotFoundPage />
 
   const description = localize(project.summary)
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: nav.home,
-        item: `${SITE.url}${buildPath(language, 'home')}`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: nav.projects,
-        item: `${SITE.url}${buildPath(language, 'projects')}`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: project.title,
-        item: `${SITE.url}${projectPath(language, project.id)}`,
-      },
-    ],
-  }
+  const jsonLd = breadcrumbJsonLd([
+    { name: nav.home, path: buildPath(language, 'home') },
+    { name: nav.projects, path: buildPath(language, 'projects') },
+    { name: project.title, path: projectPath(language, project.id) },
+  ])
 
   return (
     <>

@@ -4,10 +4,11 @@ import type { Plugin } from 'vite'
 import { defineConfig } from 'vitest/config'
 import { SITE } from './src/config/site'
 
-/** Inject the site URL into index.html so the domain is defined in one place only. */
+/** Inject site identity into index.html so the domain and email are defined in one place only. */
 const siteUrl = (): Plugin => ({
   name: 'site-url',
-  transformIndexHtml: (html) => html.replaceAll('%SITE_URL%', SITE.url),
+  transformIndexHtml: (html) =>
+    html.replaceAll('%SITE_URL%', SITE.url).replaceAll('%SITE_EMAIL%', SITE.email),
 })
 
 export default defineConfig({
@@ -19,7 +20,6 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          motion: ['framer-motion'],
           react: ['react', 'react-dom', 'react-router-dom'],
         },
       },

@@ -22,7 +22,9 @@ export function LegalPage({ kind }: { kind: 'privacy' | 'legal' }) {
               <p className="mt-2 text-muted">{section.body.replace('{email}', SITE.email)}</p>
             </section>
           ))}
-          <p className="text-sm text-muted">{t('legalPages.updated')}: 2026-10</p>
+          <p className="text-sm text-muted">
+            {t('legalPages.updated')}: {SITE.legalUpdated}
+          </p>
         </div>
       </Container>
     </>

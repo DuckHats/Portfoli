@@ -1,8 +1,8 @@
 {
   "ci": {
     "collect": {
-      "startServerCommand": "npx vite preview --port 4173 --strictPort",
-      "startServerReadyPattern": "Local",
+      "startServerCommand": "npx tsx scripts/serve-dist.ts",
+      "startServerReadyPattern": "Serving",
       "url": ["http://localhost:4173/ca", "http://localhost:4173/en/services"],
       "numberOfRuns": 1,
       "settings": {

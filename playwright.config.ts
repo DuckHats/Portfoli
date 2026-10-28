@@ -1,6 +1,7 @@
 import { defineConfig, devices } from '@playwright/test'
 
-// Runs against the production build served by `vite preview`: run `pnpm build` first.
+// Runs against the production build (dist/) served with Vercel-like URL resolution
+// (scripts/serve-dist.ts): run `pnpm build` first.
 // Set CHROMIUM_PATH to use a system Chromium instead of the Playwright download.
 const executablePath = process.env.CHROMIUM_PATH || undefined
 
@@ -21,7 +22,7 @@ export default defineConfig({
     { name: 'mobile', use: { ...devices['Pixel 5'], launchOptions: { executablePath } } },
   ],
   webServer: {
-    command: 'npx vite preview --port 4173 --strictPort',
+    command: 'npx tsx scripts/serve-dist.ts',
     url: 'http://localhost:4173',
     reuseExistingServer: !process.env.CI,
   },

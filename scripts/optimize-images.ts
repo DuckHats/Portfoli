@@ -1,7 +1,7 @@
 /**
  * Image pipeline. Run with `pnpm images`.
  *  - Converts every JPG/PNG under public/projects and public/team to WebP (originals removed).
- *  - Generates the brand assets (transparent logo mark, favicon, touch icon, OG cover)
+ *  - Generates the brand assets (transparent logo mark, favicon, touch/manifest icons, OG cover)
  *    from brand-src/logo-source.png.
  * Idempotent: with no originals left, only the brand assets are regenerated.
  */
@@ -70,11 +70,18 @@ async function brandAssets() {
   await sharp(await logoMark(256)).toFile(path.join(PUBLIC, 'brand/logo-mark.png'))
   await sharp(await logoMark(32)).toFile(path.join(PUBLIC, 'favicon-32.png'))
 
-  const touch = await sharp(await logoMark(132))
-    .extend({ top: 24, bottom: 24, left: 24, right: 24, background: PAPER })
-    .flatten({ background: PAPER })
-    .toBuffer()
-  await sharp(touch).toFile(path.join(PUBLIC, 'apple-touch-icon.png'))
+  /** Logo mark centred on the paper colour, with 14% padding on every side. */
+  const paperIcon = async (size: number) => {
+    const pad = Math.round(size * 0.14)
+    return sharp(await logoMark(size - pad * 2))
+      .extend({ top: pad, bottom: pad, left: pad, right: pad, background: PAPER })
+      .flatten({ background: PAPER })
+      .png()
+      .toBuffer()
+  }
+  await sharp(await paperIcon(180)).toFile(path.join(PUBLIC, 'apple-touch-icon.png'))
+  await sharp(await paperIcon(192)).toFile(path.join(PUBLIC, 'icon-192.png'))
+  await sharp(await paperIcon(512)).toFile(path.join(PUBLIC, 'icon-512.png'))
 
   const text = Buffer.from(
     `<svg width="640" height="300" xmlns="http://www.w3.org/2000/svg">

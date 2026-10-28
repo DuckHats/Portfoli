@@ -67,6 +67,19 @@ describe('locales', () => {
   })
 })
 
+describe('seo copy', () => {
+  it.each(LANGUAGES)('keeps %s titles and descriptions search-friendly and unique', (language) => {
+    const entries = Object.entries(messages[language].seo)
+    for (const [key, { title, description }] of entries) {
+      expect(title.length, `${language}.${key} title`).toBeLessThanOrEqual(50)
+      expect(description.length, `${language}.${key} description`).toBeGreaterThanOrEqual(30)
+      expect(description.length, `${language}.${key} description`).toBeLessThanOrEqual(170)
+    }
+    expect(new Set(entries.map(([, v]) => v.title)).size).toBe(entries.length)
+    expect(new Set(entries.map(([, v]) => v.description)).size).toBe(entries.length)
+  })
+})
+
 describe('structured content', () => {
   const hasAllLanguages = (value: unknown) =>
     LANGUAGES.every((l) => {

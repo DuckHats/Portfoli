@@ -14,6 +14,8 @@ export const SITE = {
     x: 'https://x.com/Hats4Ducks',
     instagram: 'https://instagram.com/hats4_ducks',
   },
+  /** Last review of the privacy policy and legal notice (YYYY-MM). */
+  legalUpdated: '2026-10',
   analyticsId: 'G-TTWP9NN570',
 } as const
 

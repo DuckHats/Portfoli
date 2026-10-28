@@ -5,13 +5,20 @@ import { Hero } from '@/components/sections/Hero'
 import { Process } from '@/components/sections/Process'
 import { ServicesOverview } from '@/components/sections/ServicesOverview'
 import { TeamPreview } from '@/components/sections/TeamPreview'
-import { useMessages } from '@/lib/i18n'
+import { useLanguage, useMessages } from '@/lib/i18n'
+import { websiteJsonLd } from '@/lib/seo'
 
 export function HomePage() {
   const { seo } = useMessages()
+  const language = useLanguage()
   return (
     <>
-      <SEO home title={seo.home.title} description={seo.home.description} />
+      <SEO
+        home
+        title={seo.home.title}
+        description={seo.home.description}
+        jsonLd={websiteJsonLd(language)}
+      />
       <Hero />
       <ServicesOverview />
       <CasesPreview />
