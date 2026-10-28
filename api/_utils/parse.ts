@@ -55,4 +55,7 @@ export async function parseMultipart(
 }
 
 export const sanitiseFilename = (name: string | null) =>
-  (name ?? 'cv.pdf').replace(/[^\w.-]+/g, '_').slice(0, 80) || 'cv.pdf'
+  (name ?? 'cv.pdf')
+    .replace(/[^\w.-]+/g, '_')
+    .replace(/^\.+/, '')
+    .slice(0, 80) || 'cv.pdf'
