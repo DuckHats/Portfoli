@@ -13,7 +13,7 @@ export function Hero() {
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgb(var(--color-line)/0.6)_1px,transparent_1px),linear-gradient(to_bottom,rgb(var(--color-line)/0.6)_1px,transparent_1px)] bg-[size:48px_48px] [mask-image:radial-gradient(ellipse_at_top_left,black,transparent_70%)]"
       />
-      <Container className="relative py-24 sm:py-32 lg:py-40">
+      <Container className="relative py-20 sm:py-28 lg:py-32">
         <p className="mb-6 font-mono text-xs uppercase tracking-widest text-muted">
           {hero.eyebrow}
         </p>
