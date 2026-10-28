@@ -24,7 +24,8 @@ export function CareersForm() {
     event.preventDefault()
     const formElement = event.currentTarget
     const data = new FormData(formElement)
-    const cv = data.get('cv')
+    const cvInput = formElement.elements.namedItem('cv') as HTMLInputElement | null
+    const cv = cvInput?.files?.[0]
     const cleanLinks = links.map((l) => l.trim()).filter(Boolean)
 
     const parsed = careersSchema.safeParse({
@@ -37,13 +38,15 @@ export function CareersForm() {
       website: data.get('website') ?? undefined,
     })
     const next: Record<string, ValidationKey> = parsed.success ? {} : fieldErrors(parsed.error)
-    if (cv instanceof File && cv.size > 0) {
+    if (cv && cv.size > 0) {
       if (cv.type !== 'application/pdf') next.cv = 'fileType'
       else if (cv.size > LIMITS.cvBytes) next.cv = 'fileSize'
     }
     setErrors(next)
     if (Object.keys(next).length > 0) return
 
+    data.delete('cv')
+    if (cv && cv.size > 0) data.append('cv', cv)
     data.delete('links')
     data.append('links', JSON.stringify(cleanLinks))
     if (await submit(data)) {

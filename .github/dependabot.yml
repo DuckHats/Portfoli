@@ -4,20 +4,54 @@ updates:
     directory: /
     schedule:
       interval: weekly
+      day: monday
     cooldown:
       default-days: 7
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: 'chore(deps)'
+      prefix-development: 'chore(deps-dev)'
     groups:
+      # Packages that must move together.
+      react:
+        patterns: ['react', 'react-dom', '@types/react', '@types/react-dom']
+      testing:
+        patterns:
+          [
+            'vitest',
+            '@vitest/*',
+            '@testing-library/*',
+            'jsdom',
+            '@playwright/test',
+            '@axe-core/playwright',
+          ]
+      lint-and-format:
+        patterns: ['eslint', '@eslint/*', 'eslint-*', 'typescript-eslint', 'prettier', 'globals']
       minor-and-patch:
         update-types: [minor, patch]
     ignore:
-      # Staying on Tailwind 3 and React 18 until the migration is planned and tested.
+      # Tailwind 4 changes the config model; migrate deliberately, not through a bot PR.
       - dependency-name: tailwindcss
         update-types: [version-update:semver-major]
+      # Keep React 18 until the app is verified on 19.
       - dependency-name: react
         update-types: [version-update:semver-major]
       - dependency-name: react-dom
+        update-types: [version-update:semver-major]
+      - dependency-name: '@types/react'
+        update-types: [version-update:semver-major]
+      - dependency-name: '@types/react-dom'
+        update-types: [version-update:semver-major]
+      # lucide-react 1.x removes the brand icons used in the footer and contact page.
+      - dependency-name: lucide-react
         update-types: [version-update:semver-major]
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
+      day: monday
+    commit-message:
+      prefix: 'ci(deps)'
+    groups:
+      actions:
+        patterns: ['*']

@@ -5,8 +5,8 @@ with three languages (ca, es, en) and two serverless form endpoints on Vercel.
 
 ## Stack
 
-React 18 · TypeScript (strict) · Vite 5 · Tailwind 3 · React Router 6 · Framer Motion ·
-react-helmet-async · Zod · Vitest + Testing Library · Playwright + axe · pnpm.
+React 18 · TypeScript (strict) · Vite 7 · Tailwind 3 · React Router 7 · react-helmet-async ·
+Zod · Vitest + Testing Library · Playwright + axe · pnpm.
 
 ## Getting started
 
@@ -33,7 +33,7 @@ Set `CHROMIUM_PATH=/usr/bin/chromium` to run e2e with a system browser.
 
 ```
 api/              Vercel functions (submit-contact, submit-join-us) + _utils/
-scripts/          Build tooling: images, sitemap/robots, bundle budget
+scripts/          Build tooling: images, SEO shells/sitemap (lib/), bundle budget, serve-dist
 src/
   app/            Router and language route
   components/     layout/, sections/, forms/, ui/ primitives
@@ -54,6 +54,18 @@ e2e/  test/       Playwright specs; API and config tests
 - Add a page: add it to `ROUTES` in `src/lib/routes.ts`, create the page, register it in
   `src/app/App.tsx`, and add `seo.<key>` and `nav.<key>` messages.
 
+## SEO
+
+- `pnpm build` writes one prerendered HTML file per route and language (`dist/ca/services.html`, ...)
+  with the right title, description, canonical, hreflang, Open Graph and JSON-LD, so crawlers and
+  link previews work without JavaScript. The same helpers (`src/lib/seo.ts`) feed the client
+  `<SEO>` component, and every prerendered tag carries `data-rh` so react-helmet-async replaces it
+  instead of duplicating it.
+- `sitemap.xml` is generated from the same page list (with reciprocal hreflang), plus `robots.txt`
+  and `/.well-known/security.txt` (its `Expires` is renewed on every build).
+- Titles stay within 50 characters and descriptions within 170; `test/seo.test.ts` and
+  `translations.test.ts` enforce it.
+
 ## Design tokens
 
 Colours, fonts and radii are defined once as CSS variables in `src/index.css` (light and dark)
@@ -69,8 +81,10 @@ and exposed through `tailwind.config.js`. Use `bg-canvas`, `text-ink`, `text-mut
 
 ## Deployment
 
-Vercel. `vercel.json` rewrites everything except `/api/*` to `index.html` and sets the
-security headers (CSP, HSTS, ...), which are covered by `test/vercel.test.ts`.
+Vercel. `vercel.json` enables `cleanUrls` (so `ca/services.html` is served at `/ca/services`), rewrites
+anything else except `/api/*` to `index.html`, and sets the security headers (CSP, HSTS, ...), which
+are covered by `test/vercel.test.ts`. `scripts/serve-dist.ts` reproduces that URL resolution locally
+and is what the e2e tests and Lighthouse run against.
 
 ## Pending before launch
 

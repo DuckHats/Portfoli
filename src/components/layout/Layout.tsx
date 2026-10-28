@@ -23,7 +23,8 @@ function RouteError({ reset }: { reset: () => void }) {
 }
 
 function PageFallback() {
-  return <div className="min-h-[60vh]" aria-hidden />
+  // Tall enough to keep the footer below the fold while the page chunk loads (no layout shift).
+  return <div className="min-h-screen" aria-hidden />
 }
 
 export function Layout() {
