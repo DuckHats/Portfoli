@@ -32,11 +32,18 @@ jobs:
       - run: pnpm test:coverage
       - run: pnpm build
       - run: pnpm check:bundle
+      - name: Check generated files
+        run: |
+          for f in dist/sitemap.xml dist/robots.txt dist/.well-known/security.txt dist/ca.html dist/ca/services.html; do
+            test -s "$f" || { echo "missing $f"; exit 1; }
+          done
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: dist
           path: dist
           retention-days: 3
+          # dist/.well-known/security.txt is a hidden path and is skipped by default.
+          include-hidden-files: true
 
   e2e:
     needs: verify

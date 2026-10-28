@@ -100,7 +100,10 @@ test.describe('sitemap, robots and static assets', () => {
   })
 
   test('security.txt is valid and not expired', async ({ request }) => {
-    const txt = await (await request.get('/.well-known/security.txt')).text()
+    const response = await request.get('/.well-known/security.txt')
+    // An HTML body here means the file was not deployed and the SPA fallback answered instead.
+    expect(response.headers()['content-type']).toContain('text/plain')
+    const txt = await response.text()
     expect(txt).toContain(`Contact: mailto:${SITE.email}`)
     const expires = /Expires: (\S+)/.exec(txt)![1]!
     expect(new Date(expires).getTime()).toBeGreaterThan(Date.now())
