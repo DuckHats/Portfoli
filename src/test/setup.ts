@@ -1,6 +1,9 @@
 import '@testing-library/jest-dom/vitest'
-import { cleanup } from '@testing-library/react'
+import { cleanup, configure } from '@testing-library/react'
 import { afterEach, beforeEach, vi } from 'vitest'
+
+// Lazy route chunks can take a moment when many test files run in parallel.
+configure({ asyncUtilTimeout: 4000 })
 
 // Node 26 ships its own file-less `localStorage` global that shadows jsdom's, so install an in-memory one.
 class MemoryStorage implements Storage {
