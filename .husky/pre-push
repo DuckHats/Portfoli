@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+npx -y pnpm@10.34.9 run test:run
