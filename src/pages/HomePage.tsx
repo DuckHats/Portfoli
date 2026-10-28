@@ -5,6 +5,7 @@ import { Hero } from '@/components/sections/Hero'
 import { Process } from '@/components/sections/Process'
 import { ServicesOverview } from '@/components/sections/ServicesOverview'
 import { TeamPreview } from '@/components/sections/TeamPreview'
+import { TechMarquee } from '@/components/sections/TechMarquee'
 import { useLanguage, useMessages } from '@/lib/i18n'
 import { websiteJsonLd } from '@/lib/seo'
 
@@ -20,6 +21,7 @@ export function HomePage() {
         jsonLd={websiteJsonLd(language)}
       />
       <Hero />
+      <TechMarquee />
       <ServicesOverview />
       <CasesPreview />
       <Process />

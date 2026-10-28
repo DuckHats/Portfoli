@@ -77,16 +77,15 @@ export const en: Messages = {
   home: {
     hero: {
       eyebrow: 'Development studio · Catalonia',
-      title: 'Custom software to help your business grow.',
+      title: 'We build the software your business *actually* needs.',
       subtitle:
-        'We design, build and maintain web applications, APIs and automations. A small, direct team, from analysis to production.',
+        'Web applications, APIs and automations. We work with you from idea to production, and stay on to maintain it.',
       primaryCta: 'Talk about your project',
       secondaryCta: 'See services',
     },
     services: {
-      eyebrow: 'Services',
-      title: 'The full lifecycle of a digital product',
-      intro: 'From the first prototype to maintenance: one team accountable for the whole journey.',
+      title: 'From first sketch to *maintenance*',
+      intro: 'One team accountable for the whole journey.',
       link: 'All services',
       items: [
         {
@@ -108,14 +107,15 @@ export const en: Messages = {
       ],
     },
     cases: {
-      eyebrow: 'Projects',
-      title: 'Recent work',
+      title: 'Recent *work*',
       intro: 'A few of the projects we have delivered.',
       link: 'View all projects',
     },
+    tech: {
+      label: 'Technologies we work with',
+    },
     process: {
-      eyebrow: 'Method',
-      title: 'How we work',
+      title: 'How we *work*',
       intro: 'A clear process, with review points and documented decisions.',
       steps: [
         {
@@ -138,14 +138,13 @@ export const en: Messages = {
       ],
     },
     team: {
-      eyebrow: 'Team',
-      title: 'A small team, accountable for every project',
+      title: 'A small team, *accountable* for every project',
       intro:
         'A team of developers spread across Catalonia, with a flexible structure and shared responsibility for each project.',
       link: 'Meet the team',
     },
     cta: {
-      title: 'Have a project in mind?',
+      title: 'Have a project *in mind*?',
       description: 'Tell us what you need and we will propose the next steps.',
       button: 'Contact us',
     },
@@ -172,6 +171,11 @@ export const en: Messages = {
     gallery: 'Gallery',
     notFound: 'We could not find this project.',
     imageOf: 'Screenshot of the project',
+    carouselLabel: 'Project screenshots',
+    previous: 'Previous screenshot',
+    next: 'Next screenshot',
+    goTo: 'Show screenshot {n}',
+    slide: 'Screenshot {n} of {total}',
   },
   team: {
     title: 'Team',
@@ -210,7 +214,7 @@ export const en: Messages = {
       'Every project starts with a functional analysis and ends with a documented, tested and deployed product. We keep direct communication with the client throughout.',
   },
   contact: {
-    title: 'Let’s talk about your project',
+    title: 'Let’s talk about your *project*',
     intro: 'Tell us what you need and we will propose the next steps.',
     detailsTitle: 'Contact details',
     emailLabel: 'Email',

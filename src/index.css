@@ -5,36 +5,42 @@
 /* Design tokens: space-separated RGB so Tailwind opacity modifiers work. */
 @layer base {
   :root {
-    --color-canvas: 250 250 249;
-    --color-surface: 255 255 255;
-    --color-ink: 15 17 21;
-    --color-muted: 91 97 108;
-    --color-line: 229 229 227;
-    --color-accent: 30 64 175;
-    --color-on-accent: 255 255 255;
+    --color-canvas: 246 241 231;
+    --color-surface: 251 248 241;
+    --color-tint: 234 226 208;
+    --color-ink: 23 20 15;
+    --color-muted: 94 87 75;
+    --color-line: 221 213 196;
+    --color-accent: 31 77 58;
+    --color-accent-soft: 220 232 223;
+    --color-on-accent: 246 241 231;
     color-scheme: light;
   }
 
   :root[data-theme='dark'] {
-    --color-canvas: 11 13 16;
-    --color-surface: 18 21 26;
-    --color-ink: 236 238 241;
-    --color-muted: 150 157 168;
-    --color-line: 38 43 51;
-    --color-accent: 130 160 255;
-    --color-on-accent: 11 13 16;
+    --color-canvas: 15 21 18;
+    --color-surface: 22 30 26;
+    --color-tint: 27 37 32;
+    --color-ink: 237 232 220;
+    --color-muted: 163 171 159;
+    --color-line: 38 49 43;
+    --color-accent: 127 196 160;
+    --color-accent-soft: 30 51 41;
+    --color-on-accent: 15 21 18;
     color-scheme: dark;
   }
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme='light']) {
-      --color-canvas: 11 13 16;
-      --color-surface: 18 21 26;
-      --color-ink: 236 238 241;
-      --color-muted: 150 157 168;
-      --color-line: 38 43 51;
-      --color-accent: 130 160 255;
-      --color-on-accent: 11 13 16;
+      --color-canvas: 15 21 18;
+      --color-surface: 22 30 26;
+      --color-tint: 27 37 32;
+      --color-ink: 237 232 220;
+      --color-muted: 163 171 159;
+      --color-line: 38 49 43;
+      --color-accent: 127 196 160;
+      --color-accent-soft: 30 51 41;
+      --color-on-accent: 15 21 18;
       color-scheme: dark;
     }
   }
@@ -46,6 +52,19 @@
   body {
     @apply bg-canvas font-sans text-ink antialiased;
     font-feature-settings: 'cv11', 'ss01';
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display font-medium tracking-tight;
+  }
+
+  /* One or two emphasised words per headline: italic and in the accent colour. */
+  h1 em,
+  h2 em,
+  h3 em {
+    @apply italic text-accent;
   }
 
   ::selection {
@@ -67,5 +86,26 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
+  }
+}
+
+@layer components {
+  /* Underline that draws in on hover. */
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0 1px;
+    transition: background-size 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  /* The logo mark as a flat silhouette that takes any background colour. */
+  .mark-mask {
+    -webkit-mask: url('/brand/logo-mark.png') center / contain no-repeat;
+    mask: url('/brand/logo-mark.png') center / contain no-repeat;
   }
 }

@@ -13,22 +13,19 @@ export function ContactPage() {
     <>
       <SEO title={seo.contact.title} description={seo.contact.description} />
       <PageHeader title={contact.title} intro={contact.intro} />
-      <Container className="grid gap-16 py-16 lg:grid-cols-[1fr_20rem]">
+      <Container className="grid gap-12 py-16 sm:py-24 lg:grid-cols-[1fr_22rem] lg:gap-20">
         <div className="max-w-xl">
           <ContactForm />
         </div>
-        <aside aria-labelledby="details" className="lg:border-l lg:border-line lg:pl-8">
-          <h2 id="details" className="font-mono text-xs uppercase tracking-widest text-muted">
+        <aside aria-labelledby="details" className="self-start rounded-2xl bg-tint p-8">
+          <h2 id="details" className="text-2xl">
             {contact.detailsTitle}
           </h2>
-          <ul className="mt-5 space-y-4 text-sm">
+          <ul className="mt-6 space-y-4">
             <li className="flex items-center gap-3">
               <Mail size={16} aria-hidden className="text-muted" />
               <span className="sr-only">{contact.emailLabel}: </span>
-              <a
-                href={`mailto:${SITE.email}`}
-                className="underline underline-offset-2 hover:text-accent"
-              >
+              <a href={`mailto:${SITE.email}`} className="link-underline pb-0.5 hover:text-accent">
                 {SITE.email}
               </a>
             </li>
@@ -43,7 +40,7 @@ export function ContactPage() {
               <Github size={16} aria-hidden className="text-muted" />
               <ExternalLink
                 href={SITE.social.github}
-                className="underline underline-offset-2 hover:text-accent"
+                className="link-underline pb-0.5 hover:text-accent"
               >
                 GitHub
               </ExternalLink>
@@ -52,7 +49,7 @@ export function ContactPage() {
               <Instagram size={16} aria-hidden className="text-muted" />
               <ExternalLink
                 href={SITE.social.instagram}
-                className="underline underline-offset-2 hover:text-accent"
+                className="link-underline pb-0.5 hover:text-accent"
               >
                 Instagram
               </ExternalLink>

@@ -9,9 +9,11 @@ export function NotFoundPage() {
   return (
     <>
       <SEO noindex title={seo.notFound.title} description={seo.notFound.description} />
-      <Container className="py-28">
-        <p className="font-mono text-sm text-muted">404</p>
-        <h1 className="mt-3 text-4xl font-semibold tracking-tight">{notFound.title}</h1>
+      <Container className="py-24 sm:py-32">
+        <p aria-hidden className="font-display text-9xl italic leading-none text-accent-soft">
+          404
+        </p>
+        <h1 className="mt-4 text-5xl">{notFound.title}</h1>
         <p className="mt-3 max-w-prose text-muted">{notFound.body}</p>
         <AppLink to="home" className={`${buttonStyles({ size: 'lg' })} mt-8`}>
           {notFound.back}

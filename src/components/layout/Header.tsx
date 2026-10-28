@@ -11,8 +11,10 @@ import { ThemeToggle } from './ThemeToggle'
 import { PRIMARY_NAV } from './navigation'
 
 const linkStyles = ({ isActive }: { isActive: boolean }) =>
-  `rounded px-3 py-2 text-sm transition-colors ${
-    isActive ? 'text-ink' : 'text-muted hover:text-ink'
+  `px-3 py-2 text-sm font-medium transition-colors ${
+    isActive
+      ? 'text-ink underline decoration-accent decoration-2 underline-offset-[10px]'
+      : 'text-muted hover:text-ink'
   }`
 
 export function Header() {
@@ -32,10 +34,13 @@ export function Header() {
   }, [open])
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-canvas/85 backdrop-blur">
-      <Container className="flex h-16 items-center justify-between gap-4">
-        <AppLink to="home" className="flex items-center gap-2.5 font-semibold tracking-tight">
-          <img src={SITE.logo} alt="" width={32} height={32} className="h-8 w-8 dark:invert" />
+    <header className="sticky top-0 z-40 border-b border-line bg-canvas/90 backdrop-blur">
+      <Container className="flex h-[4.5rem] items-center justify-between gap-4">
+        <AppLink
+          to="home"
+          className="flex items-center gap-3 font-display text-2xl font-semibold tracking-tight"
+        >
+          <img src={SITE.logo} alt="" width={36} height={36} className="h-9 w-9 dark:invert" />
           <span>{SITE.name}</span>
         </AppLink>
 
@@ -57,7 +62,7 @@ export function Header() {
 
         <button
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded hover:bg-ink/5 md:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-full hover:bg-ink/5 md:hidden"
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? a11y.closeMenu : a11y.openMenu}
@@ -72,7 +77,11 @@ export function Header() {
           <Container className="flex flex-col gap-1 py-4">
             <nav aria-label={a11y.mainNav} className="flex flex-col">
               {PRIMARY_NAV.map((key) => (
-                <AppNavLink key={key} to={key} className={(s) => `${linkStyles(s)} py-3 text-base`}>
+                <AppNavLink
+                  key={key}
+                  to={key}
+                  className={(state) => `${linkStyles(state)} py-3 font-display text-2xl`}
+                >
                   {nav[key]}
                 </AppNavLink>
               ))}

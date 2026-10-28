@@ -11,7 +11,7 @@ interface FormFieldProps {
 export function FormField({ id, label, error, hint, children }: FormFieldProps) {
   return (
     <div>
-      <label htmlFor={id} className="mb-1.5 block text-sm font-medium">
+      <label htmlFor={id} className="mb-2 block text-sm font-semibold">
         {label}
       </label>
       {children}

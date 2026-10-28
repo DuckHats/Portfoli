@@ -17,11 +17,11 @@ export function CookieBanner() {
   return (
     <aside
       aria-label={cookies.title}
-      className="fixed inset-x-4 bottom-4 z-50 mx-auto max-w-xl rounded-lg border border-line bg-surface p-4 shadow-lg sm:p-5"
+      className="fixed inset-x-4 bottom-4 z-50 mx-auto max-w-xl rounded-2xl border border-line bg-surface p-5 shadow-xl shadow-ink/15 sm:p-6"
     >
       <p className="text-sm text-muted">
         {cookies.text}{' '}
-        <AppLink to="privacy" className="text-ink underline underline-offset-2">
+        <AppLink to="privacy" className="link-underline pb-0.5 text-ink">
           {cookies.more}
         </AppLink>
       </p>

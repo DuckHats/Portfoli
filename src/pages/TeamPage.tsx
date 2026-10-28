@@ -11,17 +11,19 @@ export function TeamPage() {
     <>
       <SEO title={seo.team.title} description={seo.team.description} />
       <PageHeader title={team.title} intro={team.intro} />
-      <Container className="py-16">
-        <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-          {teamMembers.map((member) => (
-            <MemberCard key={member.id} member={member} />
+      <Container className="py-16 sm:py-24">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-4">
+          {teamMembers.map((member, index) => (
+            <div key={member.id} className={index % 2 === 1 ? 'md:mt-10' : ''}>
+              <MemberCard member={member} />
+            </div>
           ))}
         </div>
-        <section aria-labelledby="work" className="mt-20 max-w-prose border-t border-line pt-8">
-          <h2 id="work" className="text-2xl font-semibold tracking-tight">
+        <section aria-labelledby="work" className="mt-24 max-w-prose border-l-2 border-accent pl-6">
+          <h2 id="work" className="text-3xl sm:text-4xl">
             {team.workTitle}
           </h2>
-          <p className="mt-3 text-muted">{team.workBody}</p>
+          <p className="mt-4 text-lg text-ink/85">{team.workBody}</p>
         </section>
       </Container>
     </>

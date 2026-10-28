@@ -9,7 +9,7 @@ export function LanguageSwitcher() {
   const { a11y } = useMessages()
 
   return (
-    <nav aria-label={a11y.language} className="flex items-center gap-1 font-mono text-xs">
+    <nav aria-label={a11y.language} className="flex items-center gap-1 text-xs font-medium">
       {LANGUAGES.map((language) => (
         <Link
           key={language}
@@ -20,8 +20,8 @@ export function LanguageSwitcher() {
           aria-label={LANGUAGE_NAMES[language]}
           aria-current={language === current ? 'true' : undefined}
           onClick={() => storeLanguage(language)}
-          className={`rounded px-2 py-1.5 uppercase transition-colors ${
-            language === current ? 'bg-ink/5 text-ink' : 'text-muted hover:text-ink'
+          className={`rounded-full px-2.5 py-1.5 uppercase transition-colors ${
+            language === current ? 'bg-tint text-ink' : 'text-muted hover:text-ink'
           }`}
         >
           {language}

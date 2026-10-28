@@ -27,16 +27,19 @@ function lastModified(): string {
 }
 
 /**
- * The body font is discovered late (HTML -> CSS -> font file). Preloading the Latin subset of
- * Inter, which covers ca/es/en, brings it into the first round trip and improves LCP.
+ * The body font is discovered late (HTML -> CSS -> font file). Preloading the Latin subsets of
+ * Inter and Fraunces, which cover ca/es/en, brings it into the first round trip and improves LCP.
  */
 async function withFontPreload(html: string): Promise<string> {
-  const font = (await readdir(path.join(DIST, 'assets'))).find((f) =>
-    /^inter-latin-wght-normal-.*\.woff2$/.test(f),
-  )
-  if (!font) return html
-  const tag = `<link rel="preload" href="/assets/${font}" as="font" type="font/woff2" crossorigin />`
-  return html.replace('</head>', `    ${tag}\n  </head>`)
+  const files = await readdir(path.join(DIST, 'assets'))
+  const tags = [/^inter-latin-wght-normal-.*\.woff2$/, /^fraunces-latin-wght-normal-.*\.woff2$/]
+    .map((pattern) => files.find((f) => pattern.test(f)))
+    .filter((f): f is string => Boolean(f))
+    .map(
+      (f) => `<link rel="preload" href="/assets/${f}" as="font" type="font/woff2" crossorigin />`,
+    )
+  if (tags.length === 0) return html
+  return html.replace('</head>', `${tags.map((t) => `    ${t}`).join('\n')}\n  </head>`)
 }
 
 const preloaded = await withFontPreload(await readFile(path.join(DIST, 'index.html'), 'utf8'))

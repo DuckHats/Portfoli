@@ -6,7 +6,7 @@ export function ConsentNote() {
   return (
     <p className="text-sm text-muted">
       {consent.prefix}{' '}
-      <AppLink to="privacy" className="text-ink underline underline-offset-2">
+      <AppLink to="privacy" className="link-underline pb-0.5 text-ink">
         {consent.link}
       </AppLink>
       .

@@ -78,17 +78,15 @@ export const ca = {
   home: {
     hero: {
       eyebrow: 'Estudi de desenvolupament · Catalunya',
-      title: 'Programari a mida per fer créixer el teu negoci.',
+      title: 'Fem el programari que el teu negoci *realment* necessita.',
       subtitle:
-        'Dissenyem, desenvolupem i mantenim aplicacions web, APIs i automatitzacions. Un equip petit i directe, de l’anàlisi a la posada en producció.',
+        'Aplicacions web, APIs i automatitzacions. Treballem amb tu de la idea a la posada en producció, i ens quedem per mantenir-ho.',
       primaryCta: 'Parlem del teu projecte',
       secondaryCta: 'Veure serveis',
     },
     services: {
-      eyebrow: 'Serveis',
-      title: 'El cicle complet d’un producte digital',
-      intro:
-        'Des del primer prototip fins al manteniment: un sol equip responsable de tot el camí.',
+      title: 'Del primer esbós al *manteniment*',
+      intro: 'Un sol equip responsable de tot el camí.',
       link: 'Tots els serveis',
       items: [
         {
@@ -110,14 +108,15 @@ export const ca = {
       ],
     },
     cases: {
-      eyebrow: 'Projectes',
-      title: 'Feina recent',
+      title: 'Feina *recent*',
       intro: 'Alguns dels projectes que hem lliurat.',
       link: 'Veure tots els projectes',
     },
+    tech: {
+      label: 'Tecnologies amb les quals treballem',
+    },
     process: {
-      eyebrow: 'Mètode',
-      title: 'Com treballem',
+      title: 'Com *treballem*',
       intro: 'Un procés clar, amb punts de revisió i decisions documentades.',
       steps: [
         {
@@ -140,14 +139,13 @@ export const ca = {
       ],
     },
     team: {
-      eyebrow: 'Equip',
-      title: 'Un equip petit, responsable de cada projecte',
+      title: 'Un equip petit, *responsable* de cada projecte',
       intro:
         'Un equip de desenvolupadors repartit per Catalunya, amb estructura flexible i responsabilitat compartida sobre cada projecte.',
       link: 'Coneix l’equip',
     },
     cta: {
-      title: 'Tens un projecte en ment?',
+      title: 'Tens un projecte *en ment*?',
       description: 'Explica’ns què necessites i et proposarem els propers passos.',
       button: 'Contacta amb nosaltres',
     },
@@ -175,6 +173,11 @@ export const ca = {
     gallery: 'Galeria',
     notFound: 'No hem trobat aquest projecte.',
     imageOf: 'Captura de pantalla del projecte',
+    carouselLabel: 'Captures de pantalla del projecte',
+    previous: 'Captura anterior',
+    next: 'Captura següent',
+    goTo: 'Mostra la captura {n}',
+    slide: 'Captura {n} de {total}',
   },
   team: {
     title: 'Equip',
@@ -214,7 +217,7 @@ export const ca = {
       'Cada projecte comença amb una anàlisi funcional i acaba amb un producte documentat, provat i desplegat. Mantenim una comunicació directa amb el client durant tot el procés.',
   },
   contact: {
-    title: 'Parlem del teu projecte',
+    title: 'Parlem del teu *projecte*',
     intro: 'Explica’ns què necessites i et proposarem els propers passos.',
     detailsTitle: 'Dades de contacte',
     emailLabel: 'Correu electrònic',

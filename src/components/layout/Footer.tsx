@@ -17,28 +17,34 @@ const socials = [
   { key: 'instagram', label: 'Instagram', url: SITE.social.instagram, Icon: Instagram },
 ] as const
 
+const headingStyles = 'text-sm font-semibold text-ink'
+
 export function Footer() {
   const { footer, nav, a11y } = useMessages()
   return (
-    <footer className="border-t border-line bg-surface">
-      <Container className="py-14">
-        <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
+    <footer className="border-t border-line bg-tint">
+      <Container className="py-16">
+        <div className="grid gap-12 md:grid-cols-[1.6fr_1fr_1fr]">
           <div>
-            <p className="flex items-center gap-2.5 font-semibold tracking-tight">
-              <img src={SITE.logo} alt="" width={28} height={28} className="h-7 w-7 dark:invert" />
+            <p className="flex items-center gap-3 font-display text-4xl font-semibold tracking-tight">
+              <img
+                src={SITE.logo}
+                alt=""
+                width={44}
+                height={44}
+                className="h-11 w-11 dark:invert"
+              />
               {SITE.name}
             </p>
-            <p className="mt-3 max-w-xs text-sm text-muted">{footer.tagline}</p>
+            <p className="mt-5 max-w-xs text-muted">{footer.tagline}</p>
           </div>
 
           <nav aria-label={a11y.footerNav}>
-            <h2 className="font-mono text-xs uppercase tracking-widest text-muted">
-              {footer.navigation}
-            </h2>
-            <ul className="mt-4 space-y-2.5 text-sm">
+            <h2 className={headingStyles}>{footer.navigation}</h2>
+            <ul className="mt-4 space-y-2.5">
               {FOOTER_NAV.map((key) => (
                 <li key={key}>
-                  <AppLink to={key} className="text-ink/80 transition-colors hover:text-ink">
+                  <AppLink to={key} className="link-underline pb-0.5 text-ink/80 hover:text-ink">
                     {nav[key]}
                   </AppLink>
                 </li>
@@ -47,10 +53,8 @@ export function Footer() {
           </nav>
 
           <div>
-            <h2 className="font-mono text-xs uppercase tracking-widest text-muted">
-              {footer.contact}
-            </h2>
-            <ul className="mt-4 space-y-2.5 text-sm">
+            <h2 className={headingStyles}>{footer.contact}</h2>
+            <ul className="mt-4 space-y-2.5">
               <li>
                 <a
                   href={`mailto:${SITE.email}`}
@@ -66,7 +70,7 @@ export function Footer() {
                   <ExternalLink
                     href={url}
                     aria-label={label}
-                    className="inline-flex h-9 w-9 items-center justify-center rounded text-muted transition-colors hover:bg-ink/5 hover:text-ink"
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-full text-ink/70 transition-colors hover:bg-ink/10 hover:text-ink"
                   >
                     <Icon size={18} aria-hidden />
                   </ExternalLink>
@@ -76,7 +80,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 border-t border-line pt-6 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 flex flex-col gap-3 border-t border-ink/15 pt-6 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} {SITE.name}. {footer.rights}
           </p>

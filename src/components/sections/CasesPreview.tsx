@@ -4,7 +4,7 @@ import { useMessages } from '@/lib/i18n'
 import { AppLink } from '../ui/AppLink'
 import { Reveal } from '../ui/Reveal'
 import { Section } from '../ui/Section'
-import { ProjectCard } from './ProjectCard'
+import { ProjectShowcase } from './ProjectShowcase'
 
 export function CasesPreview() {
   const { home } = useMessages()
@@ -12,23 +12,19 @@ export function CasesPreview() {
   return (
     <Section
       id="cases"
-      eyebrow={cases.eyebrow}
       title={cases.title}
       intro={cases.intro}
-      tone="muted"
       action={
-        <AppLink
-          to="projects"
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-accent"
-        >
-          {cases.link} <ArrowRight size={16} aria-hidden />
+        <AppLink to="projects" className="inline-flex items-center gap-2 font-medium text-accent">
+          <span className="link-underline pb-0.5">{cases.link}</span>{' '}
+          <ArrowRight size={16} aria-hidden />
         </AppLink>
       }
     >
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="space-y-28 sm:space-y-36">
         {projects.slice(0, 2).map((project, index) => (
-          <Reveal key={project.id} delay={index * 0.05}>
-            <ProjectCard project={project} />
+          <Reveal key={project.id}>
+            <ProjectShowcase project={project} reverse={index % 2 === 1} />
           </Reveal>
         ))}
       </div>

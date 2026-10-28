@@ -6,8 +6,9 @@ export function MemberCard({ member }: { member: TeamMember }) {
   const localize = useLocalize()
   const { team } = useMessages()
   return (
-    <article>
-      <div className="aspect-square overflow-hidden rounded-lg border border-line bg-surface">
+    <article className="group">
+      {/* Arch crop and a shared treatment make photos taken in different places feel like one set. */}
+      <div className="aspect-[4/5] overflow-hidden rounded-t-full bg-tint">
         <img
           src={member.photo}
           alt={member.name}
@@ -15,19 +16,19 @@ export function MemberCard({ member }: { member: TeamMember }) {
           height={640}
           loading="lazy"
           decoding="async"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover grayscale mix-blend-multiply transition duration-500 group-hover:grayscale-0 group-hover:mix-blend-normal dark:mix-blend-normal dark:brightness-90"
         />
       </div>
-      <h3 className="mt-4 font-semibold tracking-tight">{member.name}</h3>
-      <p className="text-sm text-muted">{localize(member.role)}</p>
+      <h3 className="mt-5 text-xl">{member.name}</h3>
+      <p className="text-muted">{localize(member.role)}</p>
       {member.links.length > 0 && (
-        <ul className="mt-2 flex gap-3 text-sm">
+        <ul className="mt-2 flex gap-4 text-sm">
           {member.links.map((link) => (
             <li key={link.url}>
               <ExternalLink
                 href={link.url}
                 aria-label={`${team.profile} ${member.name}: ${link.label}`}
-                className="text-ink underline underline-offset-2 hover:text-accent"
+                className="link-underline pb-0.5 text-accent"
               >
                 {link.label}
               </ExternalLink>

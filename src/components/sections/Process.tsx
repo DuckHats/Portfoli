@@ -6,14 +6,16 @@ export function Process() {
   const { home } = useMessages()
   const { process } = home
   return (
-    <Section id="process" eyebrow={process.eyebrow} title={process.title} intro={process.intro}>
-      <ol className="grid gap-8 md:grid-cols-4">
+    <Section id="process" tone="tint" title={process.title} intro={process.intro}>
+      <ol className="grid gap-12 md:grid-cols-4 md:gap-8">
         {process.steps.map((step, index) => (
-          <li key={step.title} className="border-t border-ink pt-5">
-            <Reveal delay={index * 0.05}>
-              <p className="font-mono text-xs text-muted">{String(index + 1).padStart(2, '0')}</p>
-              <h3 className="mt-3 text-lg font-semibold tracking-tight">{step.title}</h3>
-              <p className="mt-2 text-sm text-muted">{step.description}</p>
+          <li key={step.title} className={index % 2 === 1 ? 'md:mt-14' : ''}>
+            <Reveal delay={index * 0.06}>
+              <span aria-hidden className="font-display text-7xl italic leading-none text-accent">
+                {index + 1}
+              </span>
+              <h3 className="mt-5 text-2xl">{step.title}</h3>
+              <p className="mt-3 text-muted">{step.description}</p>
             </Reveal>
           </li>
         ))}

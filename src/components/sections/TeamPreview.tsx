@@ -11,21 +11,20 @@ export function TeamPreview() {
   return (
     <Section
       id="team"
-      eyebrow={team.eyebrow}
       title={team.title}
       intro={team.intro}
       action={
-        <AppLink
-          to="team"
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-accent"
-        >
-          {team.link} <ArrowRight size={16} aria-hidden />
+        <AppLink to="team" className="inline-flex items-center gap-2 font-medium text-accent">
+          <span className="link-underline pb-0.5">{team.link}</span>{' '}
+          <ArrowRight size={16} aria-hidden />
         </AppLink>
       }
     >
-      <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-        {teamMembers.map((member) => (
-          <MemberCard key={member.id} member={member} />
+      <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-4">
+        {teamMembers.map((member, index) => (
+          <div key={member.id} className={index % 2 === 1 ? 'md:mt-10' : ''}>
+            <MemberCard member={member} />
+          </div>
         ))}
       </div>
     </Section>

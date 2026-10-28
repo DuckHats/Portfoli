@@ -78,17 +78,15 @@ export const es: Messages = {
   home: {
     hero: {
       eyebrow: 'Estudio de desarrollo · Cataluña',
-      title: 'Software a medida para hacer crecer tu negocio.',
+      title: 'Hacemos el software que tu negocio *realmente* necesita.',
       subtitle:
-        'Diseñamos, desarrollamos y mantenemos aplicaciones web, APIs y automatizaciones. Un equipo pequeño y directo, del análisis a la puesta en producción.',
+        'Aplicaciones web, APIs y automatizaciones. Trabajamos contigo de la idea a la puesta en producción, y nos quedamos para mantenerlo.',
       primaryCta: 'Hablemos de tu proyecto',
       secondaryCta: 'Ver servicios',
     },
     services: {
-      eyebrow: 'Servicios',
-      title: 'El ciclo completo de un producto digital',
-      intro:
-        'Desde el primer prototipo hasta el mantenimiento: un solo equipo responsable de todo el camino.',
+      title: 'Del primer boceto al *mantenimiento*',
+      intro: 'Un solo equipo responsable de todo el camino.',
       link: 'Todos los servicios',
       items: [
         {
@@ -110,14 +108,15 @@ export const es: Messages = {
       ],
     },
     cases: {
-      eyebrow: 'Proyectos',
-      title: 'Trabajo reciente',
+      title: 'Trabajo *reciente*',
       intro: 'Algunos de los proyectos que hemos entregado.',
       link: 'Ver todos los proyectos',
     },
+    tech: {
+      label: 'Tecnologías con las que trabajamos',
+    },
     process: {
-      eyebrow: 'Método',
-      title: 'Cómo trabajamos',
+      title: 'Cómo *trabajamos*',
       intro: 'Un proceso claro, con puntos de revisión y decisiones documentadas.',
       steps: [
         {
@@ -142,14 +141,13 @@ export const es: Messages = {
       ],
     },
     team: {
-      eyebrow: 'Equipo',
-      title: 'Un equipo pequeño, responsable de cada proyecto',
+      title: 'Un equipo pequeño, *responsable* de cada proyecto',
       intro:
         'Un equipo de desarrolladores repartido por Cataluña, con estructura flexible y responsabilidad compartida sobre cada proyecto.',
       link: 'Conoce al equipo',
     },
     cta: {
-      title: '¿Tienes un proyecto en mente?',
+      title: '¿Tienes un proyecto *en mente*?',
       description: 'Cuéntanos qué necesitas y te propondremos los siguientes pasos.',
       button: 'Contacta con nosotros',
     },
@@ -178,6 +176,11 @@ export const es: Messages = {
     gallery: 'Galería',
     notFound: 'No hemos encontrado este proyecto.',
     imageOf: 'Captura de pantalla del proyecto',
+    carouselLabel: 'Capturas de pantalla del proyecto',
+    previous: 'Captura anterior',
+    next: 'Captura siguiente',
+    goTo: 'Mostrar la captura {n}',
+    slide: 'Captura {n} de {total}',
   },
   team: {
     title: 'Equipo',
@@ -217,7 +220,7 @@ export const es: Messages = {
       'Cada proyecto empieza con un análisis funcional y termina con un producto documentado, probado y desplegado. Mantenemos una comunicación directa con el cliente durante todo el proceso.',
   },
   contact: {
-    title: 'Hablemos de tu proyecto',
+    title: 'Hablemos de tu *proyecto*',
     intro: 'Cuéntanos qué necesitas y te propondremos los siguientes pasos.',
     detailsTitle: 'Datos de contacto',
     emailLabel: 'Correo electrónico',
