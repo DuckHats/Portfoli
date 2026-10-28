@@ -1,50 +1,78 @@
-import { Helmet } from 'react-helmet-async';
-import { seoConfig, SeoLang } from '../config/seo.config';
+import { Helmet } from 'react-helmet-async'
+import { useLocation } from 'react-router-dom'
+import { SITE } from '@/config/site'
+import { useLanguage, useMessages } from '@/lib/i18n'
+import { LANGUAGES } from '@/lib/languages'
+import { switchLanguagePath } from '@/lib/routes'
 
+type JsonLd = Record<string, unknown>
 
-type SEOProps = {
-  lang: SeoLang;
-  path?: string; // ex: /projects/menu-ginebro
-};
+interface SEOProps {
+  title: string
+  description: string
+  /** Absolute-path image under public/, e.g. `/projects/x/home.webp`. */
+  image?: string
+  noindex?: boolean
+  jsonLd?: JsonLd | JsonLd[]
+  /** Use the site tagline format instead of "Page | Site". */
+  home?: boolean
+}
 
-export function SEO({ lang, path = '/' }: SEOProps) {
-  const seo = seoConfig[lang];
-  const url = `https://duckhats.cat${path}`;
+export function SEO({ title, description, image = SITE.ogImage, noindex, jsonLd, home }: SEOProps) {
+  const language = useLanguage()
+  const { meta } = useMessages()
+  const { pathname } = useLocation()
+
+  const fullTitle = home ? `${SITE.name} | ${title}` : `${title} | ${SITE.name}`
+  const canonical = `${SITE.url}${pathname.replace(/\/$/, '') || '/'}`
+  const imageUrl = image.startsWith('http') ? image : `${SITE.url}${image}`
 
   return (
     <Helmet>
-      {/* HTML */}
-      <html lang={seo.lang} />
+      <html lang={language} />
+      <title>{fullTitle}</title>
+      <meta name="description" content={description} />
+      {noindex ? (
+        <meta name="robots" content="noindex" />
+      ) : (
+        <link rel="canonical" href={canonical} />
+      )}
 
-      {/* Primary SEO */}
-      <title>{seo.title}</title>
-      <meta name="description" content={seo.description} />
-      <meta name="robots" content="index, follow" />
-      <meta name="theme-color" content="#111827" />
+      {!noindex &&
+        LANGUAGES.map((code) => (
+          <link
+            key={code}
+            rel="alternate"
+            hrefLang={code}
+            href={`${SITE.url}${switchLanguagePath(pathname, code)}`}
+          />
+        ))}
+      {!noindex && (
+        <link
+          rel="alternate"
+          hrefLang="x-default"
+          href={`${SITE.url}${switchLanguagePath(pathname, 'ca')}`}
+        />
+      )}
 
-      {/* Open Graph */}
       <meta property="og:type" content="website" />
-      <meta property="og:url" content={url} />
-      <meta property="og:title" content={seo.title} />
-      <meta property="og:description" content={seo.description} />
-      <meta property="og:image" content="https://duckhats.cat/og-cover.jpg" />
-      <meta property="og:locale" content={seo.locale} />
-
-      {/* Twitter */}
+      <meta property="og:site_name" content={SITE.name} />
+      <meta property="og:locale" content={meta.ogLocale} />
+      <meta property="og:title" content={fullTitle} />
+      <meta property="og:description" content={description} />
+      <meta property="og:url" content={canonical} />
+      <meta property="og:image" content={imageUrl} />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@Hats4Ducks" />
-      <meta name="twitter:title" content={seo.title} />
-      <meta name="twitter:description" content={seo.description} />
-      <meta name="twitter:image" content="https://duckhats.cat/og-cover.jpg" />
+      <meta name="twitter:title" content={fullTitle} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={imageUrl} />
 
-      {/* Canonical */}
-      <link rel="canonical" href={url} />
-
-      {/* hreflang */}
-      <link rel="alternate" href="https://duckhats.cat/" hrefLang="ca" />
-      <link rel="alternate" href="https://duckhats.cat/es" hrefLang="es" />
-      <link rel="alternate" href="https://duckhats.cat/en" hrefLang="en" />
-      <link rel="alternate" href="https://duckhats.cat/" hrefLang="x-default" />
+      {jsonLd &&
+        (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).map((entry, index) => (
+          <script key={index} type="application/ld+json">
+            {JSON.stringify(entry).replace(/</g, '\\u003c')}
+          </script>
+        ))}
     </Helmet>
-  );
+  )
 }

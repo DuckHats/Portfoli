@@ -122,19 +122,15 @@ All branding is centralized in `config/brand.config.ts`:
 
 ```typescript
 export const brandConfig = {
-  name: "DuckHats",
+  name: 'DuckHats',
   colors: {
-    primary: { black: "#1a1a1a", white: "#f5f5f5" },
-    accent: { red: "#e63946" },
+    primary: { black: '#1a1a1a', white: '#f5f5f5' },
+    accent: { red: '#e63946' },
     // ...
   },
-  typography: {
-    /* ... */
-  },
-  animation: {
-    /* ... */
-  },
-};
+  typography: {/* ... */},
+  animation: {/* ... */},
+}
 ```
 
 ### Using Brand Config
@@ -160,17 +156,13 @@ All text content lives in `config/content.config.ts`:
 ```typescript
 export const contentConfig = {
   ca: {
-    nav: { home: "Inici", about: "Qui Som" /* ... */ },
-    hero: { tagline: "Desenvolupant amb passió..." /* ... */ },
+    nav: { home: 'Inici', about: 'Qui Som' /* ... */ },
+    hero: { tagline: 'Desenvolupant amb passió...' /* ... */ },
     // ...
   },
-  es: {
-    /* Spanish translations */
-  },
-  en: {
-    /* English translations */
-  },
-};
+  es: {/* Spanish translations */},
+  en: {/* English translations */},
+}
 ```
 
 ## 🔧 Tech Stack

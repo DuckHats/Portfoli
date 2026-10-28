@@ -1,84 +1,52 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ca">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="/theme-init.js"></script>
 
-    <title>DuckHats | Desenvolupant amb passió i un toc d'humor</title>
-    <link rel="canonical" href="https://duckhats.cat/" />
-
-    <!-- Primary SEO -->
+    <title>DuckHats | Programari i serveis digitals per a negocis</title>
     <meta
       name="description"
-      content="DuckHats — Creem experiències digitals amb personalitat, on la professionalitat del codi es troba amb el caos creatiu per deixar empremta."
+      content="Estudi de desenvolupament a Catalunya: aplicacions web, APIs, automatització i manteniment. Dissenyem, construïm i mantenim programari a mida."
     />
     <meta name="author" content="DuckHats" />
-    <meta name="referrer" content="no-referrer-when-downgrade" />
-    <meta name="theme-color" content="#111827" />
-    <meta
-      name="keywords"
-      content="DuckHats, Desenvolupament web, Desenvolupament de software, Desenvolupament de aplicacions, Startup"
-    />
+    <meta name="theme-color" content="#FAFAF9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0B0D10" media="(prefers-color-scheme: dark)" />
 
-    <!-- Open Graph / Facebook -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Defaults for crawlers that do not run JavaScript; <SEO> overrides them per page. -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://duckhats.cat/" />
-    <meta
-      property="og:title"
-      content="DuckHats | Desenvolupant amb passió i un toc d'humor"
-    />
+    <meta property="og:site_name" content="DuckHats" />
+    <meta property="og:title" content="DuckHats | Programari i serveis digitals per a negocis" />
     <meta
       property="og:description"
-      content="DuckHats — Creem experiències digitals que deixen empremta, amb professionalitat juganera, on el codi seriós es troba amb el caos creatiu."
+      content="Estudi de desenvolupament a Catalunya: aplicacions web, APIs, automatització i manteniment."
     />
-    <meta property="og:image" content="https://duckhats.cat/logo.jpg" />
-
-    <!-- Twitter -->
+    <meta property="og:image" content="%SITE_URL%/og-cover.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@Hats4Ducks" />
-    <meta name="twitter:creator" content="@Hats4Ducks" />
-    <meta property="twitter:url" content="https://duckhats.cat/" />
-    <meta
-      name="twitter:title"
-      content="DuckHats | Desenvolupant amb passió i un toc d'humor"
-    />
-    <meta
-      name="twitter:description"
-      content="DuckHats — Creem experiències digitals que deixen empremta, amb professionalitat juganera, on el codi seriós es troba amb el caos creatiu."
-    />
-    <meta name="twitter:image" content="https://duckhats.cat/logo.jpg" />
 
-    <link rel="icon" type="image" href="public/logo.jpg" />
-
-    <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "DuckHats",
-        "url": "https://duckhats.cat",
-        "logo": "https://duckhats.cat/logo.jpg",
+        "url": "%SITE_URL%",
+        "logo": "%SITE_URL%/brand/logo-mark.png",
+        "email": "info@duckhats.cat",
         "sameAs": [
-          "https://twitter.com/Hats4Ducks",
-          "https://instagram.com/hats4_ducks",
-          "https://github.com/DuckHats"
+          "https://github.com/DuckHats",
+          "https://x.com/Hats4Ducks",
+          "https://instagram.com/hats4_ducks"
         ]
       }
-    </script>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TTWP9NN570"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-TTWP9NN570');
     </script>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/index.tsx"></script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -1,68 +1,47 @@
-import { About } from '../components/About';
-import { Navbar } from '../components/Navbar';
-import { Footer } from '../components/Footer';
-import { motion } from 'framer-motion';
-import { Helmet } from 'react-helmet-async';
-import { useContent } from '../hooks/useContent';
+import { SEO } from '@/components/SEO'
+import { Container } from '@/components/ui/Container'
+import { PageHeader } from '@/components/ui/PageHeader'
+import { SITE } from '@/config/site'
+import { useMessages, useT } from '@/lib/i18n'
 
 export function AboutPage() {
-  const content = useContent();
-
+  const { seo, about } = useMessages()
+  const t = useT()
   return (
     <>
-      <Helmet>
-        <title>About Us - DuckHats</title>
-        <link rel="canonical" href="https://duckhats.com/about" />
-        <meta
-          name="description"
-          content="Learn more about DuckHats and our mission."
-        />
-      </Helmet>
+      <SEO title={seo.about.title} description={seo.about.description} />
+      <PageHeader title={about.title} intro={about.intro} />
+      <Container className="space-y-20 py-16">
+        <section aria-labelledby="values">
+          <h2 id="values" className="text-2xl font-semibold tracking-tight">
+            {about.valuesTitle}
+          </h2>
+          <ul className="mt-8 grid gap-8 md:grid-cols-3">
+            {about.values.map((value, index) => (
+              <li key={value.title} className="border-t border-ink pt-5">
+                <p className="font-mono text-xs text-muted">{String(index + 1).padStart(2, '0')}</p>
+                <h3 className="mt-3 text-lg font-semibold tracking-tight">{value.title}</h3>
+                <p className="mt-2 text-sm text-muted">{value.description}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
 
-      <div className="min-h-screen bg-[#f5f5f5] flex flex-col">
-        <Navbar />
-        <div className="pt-20 flex-1">
-          <About />
-
-          {/* Expanded Content Section */}
-          <section className="py-24 px-4 md:px-8 max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="space-y-12 text-lg md:text-xl leading-relaxed text-gray-800 font-light"
-            >
-              <div>
-                <h3 className="text-3xl font-display font-bold mb-6">
-                  {content.about.origins.title}
-                </h3>
-                <p className="mb-6">{content.about.origins.paragraph1}</p>
-                <p>{content.about.origins.paragraph2}</p>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-8 py-12 border-t border-b border-gray-200">
-                <div>
-                  <h4 className="font-bold text-xl mb-4">
-                    {content.about.dna.title}
-                  </h4>
-                  <p className="text-gray-600 text-base">
-                    {content.about.dna.description}
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-bold text-xl mb-4">
-                    {content.about.hats.title}
-                  </h4>
-                  <p className="text-gray-600 text-base">
-                    {content.about.hats.description}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
+        <div className="grid gap-12 md:grid-cols-2">
+          <section aria-labelledby="origin">
+            <h2 id="origin" className="text-2xl font-semibold tracking-tight">
+              {about.originTitle}
+            </h2>
+            <p className="mt-3 text-muted">{t('about.originBody', { year: SITE.foundedYear })}</p>
+          </section>
+          <section aria-labelledby="approach">
+            <h2 id="approach" className="text-2xl font-semibold tracking-tight">
+              {about.approachTitle}
+            </h2>
+            <p className="mt-3 text-muted">{about.approachBody}</p>
           </section>
         </div>
-        <Footer />
-      </div>
+      </Container>
     </>
-  );
+  )
 }

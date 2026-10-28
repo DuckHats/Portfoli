@@ -1,450 +1,147 @@
-import { useParams, Navigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { ArrowLeft, ExternalLink, Github } from 'lucide-react'
-import { Helmet } from 'react-helmet-async'
-import { Navbar } from '../components/Navbar.tsx'
-import { Footer } from '../components/Footer.tsx'
-import { ShadowButton } from '../components/ShadowButton.tsx'
-import { useContent } from '../hooks/useContent.ts'
-import { useLanguage } from '../hooks/useLanguage.ts'
-import { brandConfig } from '../config/brand.config.ts'
-import { projectsData } from '../config/projects.config.ts'
-import { accessibilityConfig } from '../config/accessibility.config.ts'
+import { ArrowUpRight, Github } from 'lucide-react'
+import { useParams } from 'react-router-dom'
+import { SEO } from '@/components/SEO'
+import { AppLink, ExternalLink } from '@/components/ui/AppLink'
+import { buttonStyles } from '@/components/ui/buttonStyles'
+import { Container } from '@/components/ui/Container'
+import { Tag } from '@/components/ui/Tag'
+import { findProject } from '@/content/projects'
+import { SITE } from '@/config/site'
+import { useLanguage, useLocalize, useMessages } from '@/lib/i18n'
+import { buildPath, projectPath } from '@/lib/routes'
+import { NotFoundPage } from './NotFoundPage'
+
 export function ProjectDetailPage() {
-  const { projectId } = useParams<{
-    projectId: string
-  }>()
-  const content = useContent()
-  const { language } = useLanguage()
-  const project = projectsData.find((p) => p.id === projectId)
-  if (!project) {
-    return <Navigate to="/projects" replace />
+  const { projectId } = useParams()
+  const project = findProject(projectId)
+  const language = useLanguage()
+  const localize = useLocalize()
+  const { projects: copy, nav } = useMessages()
+
+  if (!project) return <NotFoundPage />
+
+  const description = localize(project.summary)
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: nav.home,
+        item: `${SITE.url}${buildPath(language, 'home')}`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: nav.projects,
+        item: `${SITE.url}${buildPath(language, 'projects')}`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: project.title,
+        item: `${SITE.url}${projectPath(language, project.id)}`,
+      },
+    ],
   }
+
   return (
     <>
-      <Helmet>
-        <title>{project.title} - DuckHats</title>
-        <link rel="canonical" href={`https://duckhats.com/projects/${projectId}`} />
-        <meta
-          name="description"
-          content={project.description[language]}
-        />
-      </Helmet>
-      <div
-        className="min-h-screen flex flex-col"
-        style={{
-          backgroundColor: brandConfig.colors.primary.white,
-        }}
-      >
-        <Navbar />
-
-        <div className="pt-20 flex-1">
-          {/* Hero Section */}
-          <section className="py-16 px-4 md:px-8">
-            <div className="max-w-7xl mx-auto">
-              <ShadowButton to="/projects" size="small" className="mb-8">
-                <ArrowLeft className="w-4 h-4" />
-                {content.projects.backToProjects}
-              </ShadowButton>
-
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  y: 30,
-                }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                transition={{
-                  duration: brandConfig.animation.duration.slow,
-                }}
-              >
-                <div className="flex items-center gap-4 mb-4">
-                  <span aria-label={accessibilityConfig.projectDetails[language].typeProjectLabel + project.category[language]}
-                    className="text-sm font-mono px-3 py-1 border-2"
-                    style={{
-                      color: brandConfig.colors.accent.red,
-                      borderColor: brandConfig.colors.accent.red,
-                    }}
-                  >
-                    {project.category[language]}
-                  </span>
-                  <span aria-label={accessibilityConfig.projectDetails[language].finalizationDateLabel + project.date[language]}
-                    className="text-sm font-mono"
-                    style={{
-                      color: brandConfig.colors.neutral.gray500,
-                    }}
-                  >
-                    {project.date[language]}
-                  </span>
-                </div>
-
-                <h1 aria-label={accessibilityConfig.projectDetails[language].nameOfProjectLabel + project.title}
-                  className="text-5xl md:text-8xl font-display font-bold mb-6"
-                  style={{
-                    color: brandConfig.colors.primary.black,
-                  }}
-                >
-                  {project.title}
-                </h1>
-
-                <p
-                  className="text-xl md:text-2xl leading-relaxed max-w-3xl"
-                  style={{
-                    color: brandConfig.colors.neutral.gray700,
-                  }}
-                >
-                  {project.description[language]}
-                </p>
-
-                {/* Links */}
-                <div className="flex gap-4 mt-8">
-                  {project.link && (
-                    <a aria-label={accessibilityConfig.projectDetails[language].demoProjectLinkLabel}
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 font-mono transition-colors"
-                      style={{
-                        backgroundColor: brandConfig.colors.primary.black,
-                        color: brandConfig.colors.primary.white,
-                      }}
-                    >
-                      {content.projects.visitSite}
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
-                  )}
-                  {project.github && (
-                    <a aria-label={accessibilityConfig.projectDetails[language].githubProjectLinkLabel}
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 font-mono border-2 border-black text-black transition-colors hover:bg-black hover:text-white hover:border-white"
-                    >
-                      <Github className="w-4 h-4" />
-                      GitHub
-                    </a>
-                  )}
-                </div>
-              </motion.div>
+      <SEO title={project.title} description={description} image={project.image} jsonLd={jsonLd} />
+      <article>
+        <header className="border-b border-line">
+          <Container className="py-14 sm:py-20">
+            <AppLink to="projects" className="text-sm text-muted transition-colors hover:text-ink">
+              ← {copy.back}
+            </AppLink>
+            <div className="mt-6 flex flex-wrap gap-2">
+              <Tag>{localize(project.category)}</Tag>
+              <Tag>{localize(project.status)}</Tag>
             </div>
-          </section>
-
-          {/* Main Image */}
-          <section className="py-8 px-4 md:px-8">
-            <motion.div
-              initial={{
-                opacity: 0,
-                scale: 0.95,
-              }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-              }}
-              transition={{
-                duration: brandConfig.animation.duration.slow,
-                delay: 0.2,
-              }}
-              className="max-w-7xl mx-auto"
-            >
-              <div
-                className="w-full aspect-video overflow-hidden border-4"
-                style={{
-                  borderColor: brandConfig.colors.primary.black,
-                }}
-              >
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </motion.div>
-          </section>
-
-          {/* Content Sections */}
-          <section className="py-16 px-4 md:px-8">
-            <div className="max-w-4xl mx-auto space-y-16">
-              {/* Challenge */}
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  y: 30,
-                }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                viewport={{
-                  once: true,
-                }}
-                transition={{
-                  duration: 0.6,
-                }}
-              >
-                <h2
-                  className="text-3xl md:text-4xl font-display font-bold mb-6 border-b-4 inline-block pb-2"
-                  style={{
-                    color: brandConfig.colors.primary.black,
-                    borderColor: brandConfig.colors.primary.black,
-                  }}
+            <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
+              {project.title}
+            </h1>
+            <p className="mt-5 max-w-prose text-lg text-muted">{description}</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              {project.link && (
+                <ExternalLink href={project.link} className={buttonStyles()}>
+                  {copy.visit} <ArrowUpRight size={16} aria-hidden />
+                </ExternalLink>
+              )}
+              {project.github && (
+                <ExternalLink
+                  href={project.github}
+                  className={buttonStyles({ variant: 'secondary' })}
                 >
-                  {content.projects.challenge}
-                </h2>
-                <p
-                  className="text-lg md:text-xl leading-relaxed"
-                  style={{
-                    color: brandConfig.colors.neutral.gray700,
-                  }}
-                >
-                  {project.challenge[language]}
-                </p>
-              </motion.div>
-
-              {/* Solution */}
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  y: 30,
-                }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                viewport={{
-                  once: true,
-                }}
-                transition={{
-                  duration: 0.6,
-                }}
-              >
-                <h2
-                  className="text-3xl md:text-4xl font-display font-bold mb-6 border-b-4 inline-block pb-2"
-                  style={{
-                    color: brandConfig.colors.primary.black,
-                    borderColor: brandConfig.colors.primary.black,
-                  }}
-                >
-                  {content.projects.solution}
-                </h2>
-                <p
-                  className="text-lg md:text-xl leading-relaxed"
-                  style={{
-                    color: brandConfig.colors.neutral.gray700,
-                  }}
-                >
-                  {project.solution[language]}
-                </p>
-              </motion.div>
-
-              {/* Results */}
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  y: 30,
-                }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                viewport={{
-                  once: true,
-                }}
-                transition={{
-                  duration: 0.6,
-                }}
-              >
-                <h2
-                  className="text-3xl md:text-4xl font-display font-bold mb-6 border-b-4 inline-block pb-2"
-                  style={{
-                    color: brandConfig.colors.primary.black,
-                    borderColor: brandConfig.colors.primary.black,
-                  }}
-                >
-                  {content.projects.results}
-                </h2>
-                <ul className="space-y-4">
-                  {project.results[language].map((result, index) => (
-                    <motion.li
-                      key={index}
-                      initial={{
-                        opacity: 0,
-                        x: -20,
-                      }}
-                      whileInView={{
-                        opacity: 1,
-                        x: 0,
-                      }}
-                      viewport={{
-                        once: true,
-                      }}
-                      transition={{
-                        delay: index * 0.1,
-                      }}
-                      className="flex items-start gap-4"
-                    >
-                      <span
-                        className="text-2xl font-bold"
-                        style={{
-                          color: brandConfig.colors.accent.red,
-                        }}
-                      >
-                        →
-                      </span>
-                      <span
-                        className="text-lg md:text-xl"
-                        style={{
-                          color: brandConfig.colors.neutral.gray700,
-                        }}
-                      >
-                        {result}
-                      </span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.div>
-
-              {/* Technologies */}
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  y: 30,
-                }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                viewport={{
-                  once: true,
-                }}
-                transition={{
-                  duration: 0.6,
-                }}
-              >
-                <h2
-                  className="text-3xl md:text-4xl font-display font-bold mb-6 border-b-4 inline-block pb-2"
-                  style={{
-                    color: brandConfig.colors.primary.black,
-                    borderColor: brandConfig.colors.primary.black,
-                  }}
-                >
-                  {content.projects.technologies}
-                </h2>
-                <div className="flex flex-wrap gap-3">
-                  {project.technologies.map((tech, index) => (
-                    <motion.span
-                      key={index}
-                      initial={{
-                        opacity: 0,
-                        scale: 0.8,
-                      }}
-                      whileInView={{
-                        opacity: 1,
-                        scale: 1,
-                      }}
-                      viewport={{
-                        once: true,
-                      }}
-                      transition={{
-                        delay: index * 0.05,
-                      }}
-                      className="px-4 py-2 font-mono text-sm border-2"
-                      style={{
-                        borderColor: brandConfig.colors.primary.black,
-                        color: brandConfig.colors.primary.black,
-                      }}
-                    >
-                      {tech}
-                    </motion.span>
-                  ))}
-                </div>
-              </motion.div>
+                  <Github size={16} aria-hidden /> {copy.source}
+                </ExternalLink>
+              )}
             </div>
-          </section>
+          </Container>
+        </header>
 
-          {/* Gallery */}
-          {project.gallery && project.gallery.length > 0 && (
-            <section className="py-16 px-4 md:px-8">
-              <div className="max-w-7xl mx-auto">
-                <h2
-                  className="text-3xl md:text-4xl font-display font-bold mb-12 text-center"
-                  style={{
-                    color: brandConfig.colors.primary.black,
-                  }}
-                >
-                  {content.projects.gallery}
-                </h2>
-                <div className="grid md:grid-cols-2 gap-8">
-                  {project.gallery.map((image, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{
-                        opacity: 0,
-                        y: 30,
-                      }}
-                      whileInView={{
-                        opacity: 1,
-                        y: 0,
-                      }}
-                      viewport={{
-                        once: true,
-                      }}
-                      transition={{
-                        delay: index * 0.1,
-                      }}
-                      className="aspect-video overflow-hidden border-4"
-                      style={{
-                        borderColor: brandConfig.colors.primary.black,
-                      }}
-                    >
-                      <img
-                        src={image}
-                        alt={`${project.title} - ${index + 1}`}
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                      />
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
+        <Container className="grid gap-12 py-16 lg:grid-cols-[1fr_18rem]">
+          <div className="space-y-12">
+            <section aria-labelledby="challenge">
+              <h2 id="challenge" className="text-2xl font-semibold tracking-tight">
+                {copy.challenge}
+              </h2>
+              <p className="mt-3 max-w-prose text-muted">{localize(project.challenge)}</p>
             </section>
-          )}
+            <section aria-labelledby="solution">
+              <h2 id="solution" className="text-2xl font-semibold tracking-tight">
+                {copy.solution}
+              </h2>
+              <p className="mt-3 max-w-prose text-muted">{localize(project.solution)}</p>
+            </section>
+            <section aria-labelledby="results">
+              <h2 id="results" className="text-2xl font-semibold tracking-tight">
+                {copy.results}
+              </h2>
+              <ul className="mt-3 max-w-prose list-disc space-y-2 pl-5 text-muted marker:text-accent">
+                {localize(project.results).map((result) => (
+                  <li key={result}>{result}</li>
+                ))}
+              </ul>
+            </section>
+          </div>
 
-          {/* Next Project CTA */}
-          <section
-            className="py-24 px-4 md:px-8 border-t-4"
-            style={{
-              borderColor: brandConfig.colors.primary.black,
-            }}
-          >
-            <div className="max-w-4xl mx-auto text-center">
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  scale: 0.9,
-                }}
-                whileInView={{
-                  opacity: 1,
-                  scale: 1,
-                }}
-                viewport={{
-                  once: true,
-                }}
-                transition={{
-                  type: 'spring',
-                  stiffness: 100,
-                }}
-              >
-                <ShadowButton to="/projects" size="large">
-                  {content.projects.viewAllProjects}
-                </ShadowButton>
-              </motion.div>
-            </div>
-          </section>
-        </div>
+          <aside aria-labelledby="stack" className="lg:border-l lg:border-line lg:pl-8">
+            <h2 id="stack" className="font-mono text-xs uppercase tracking-widest text-muted">
+              {copy.technologies}
+            </h2>
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {project.technologies.map((tech) => (
+                <li key={tech}>
+                  <Tag>{tech}</Tag>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        </Container>
 
-        <Footer />
-      </div>
+        <section aria-labelledby="gallery" className="border-t border-line bg-surface py-16">
+          <Container>
+            <h2 id="gallery" className="text-2xl font-semibold tracking-tight">
+              {copy.gallery}
+            </h2>
+            <ul className="mt-8 grid gap-6 md:grid-cols-2">
+              {project.gallery.map((src, index) => (
+                <li key={src} className="overflow-hidden rounded-lg border border-line bg-canvas">
+                  <img
+                    src={src}
+                    alt={`${project.title} — ${copy.imageOf} ${index + 1}`}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-auto w-full"
+                  />
+                </li>
+              ))}
+            </ul>
+          </Container>
+        </section>
+      </article>
     </>
   )
 }
