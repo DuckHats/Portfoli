@@ -130,3 +130,6 @@ export const projects: Project[] = [
 ]
 
 export const findProject = (id: string | undefined) => projects.find((p) => p.id === id)
+
+/** The project that opens the home page: the one whose screenshots read best at first glance. */
+export const featuredProject = findProject('sushi-sudoku') ?? projects[0]

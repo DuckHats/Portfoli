@@ -1,5 +1,5 @@
 import { ArrowRight } from 'lucide-react'
-import { projects } from '@/content/projects'
+import { featuredProject } from '@/content/projects'
 import { useLocalize, useMessages } from '@/lib/i18n'
 import { displayUrl, showcaseImages } from '@/lib/projectUrl'
 import { AppLink } from '../ui/AppLink'
@@ -9,7 +9,7 @@ import { Container } from '../ui/Container'
 import { Scribble } from '../ui/Scribble'
 import { ShowcaseCarousel } from './ShowcaseCarousel'
 
-const featured = projects[0]
+const featured = featuredProject
 
 /** Opens with the work itself: a real project in a live browser window beside the pitch. */
 export function Hero() {
@@ -51,7 +51,7 @@ export function Hero() {
         </div>
 
         {featured && (
-          <figure className="animate-rise [animation-delay:160ms] lg:col-span-7">
+          <figure className="lg:col-span-7">
             <BrowserFrame url={displayUrl(featured)}>
               <ShowcaseCarousel slides={slides} priority />
             </BrowserFrame>

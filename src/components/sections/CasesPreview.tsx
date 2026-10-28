@@ -1,5 +1,5 @@
 import { ArrowRight } from 'lucide-react'
-import { projects } from '@/content/projects'
+import { featuredProject, projects } from '@/content/projects'
 import { useMessages } from '@/lib/i18n'
 import { AppLink } from '../ui/AppLink'
 import { Reveal } from '../ui/Reveal'
@@ -25,11 +25,14 @@ export function CasesPreview() {
       }
     >
       <div className="space-y-28 sm:space-y-36">
-        {projects.slice(1, 3).map((project, index) => (
-          <Reveal key={project.id}>
-            <ProjectShowcase project={project} reverse={index % 2 === 1} />
-          </Reveal>
-        ))}
+        {projects
+          .filter((project) => project !== featuredProject)
+          .slice(0, 2)
+          .map((project, index) => (
+            <Reveal key={project.id}>
+              <ProjectShowcase project={project} reverse={index % 2 === 1} />
+            </Reveal>
+          ))}
       </div>
     </Section>
   )

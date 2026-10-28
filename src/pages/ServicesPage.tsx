@@ -67,7 +67,7 @@ export function ServicesPage() {
           ))}
         </div>
 
-        <p className="mt-20 max-w-prose border-l-2 border-accent pl-5 text-muted">
+        <p className="mt-20 max-w-prose border-2 border-ink bg-tint p-5 text-muted">
           {services.disclaimer}
         </p>
 

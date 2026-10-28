@@ -9,9 +9,14 @@ interface PageHeaderProps {
 
 export function PageHeader({ title, intro, children }: PageHeaderProps) {
   return (
-    <header className="border-b-2 border-ink bg-tint">
-      <Container className="py-16 sm:py-24">
-        <h1 className="max-w-3xl text-5xl leading-[1.05] sm:text-6xl">{title}</h1>
+    <header className="relative overflow-hidden border-b-2 border-ink">
+      {/* A solid accent block anchors the title; purely decorative. */}
+      <div
+        aria-hidden
+        className="absolute right-0 top-0 hidden h-full w-1/5 border-l-2 border-ink bg-accent sm:block"
+      />
+      <Container className="relative py-14 sm:py-20">
+        <h1 className="max-w-4xl text-6xl leading-[0.98] sm:text-8xl">{title}</h1>
         {intro && <p className="mt-6 max-w-prose text-lg text-muted">{intro}</p>}
         {children}
       </Container>

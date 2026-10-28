@@ -26,9 +26,16 @@ export function ServicesOverview() {
         {services.items.map((item, index) => (
           <li key={item.title}>
             <Reveal delay={index * 0.05}>
-              <div className="grid gap-3 py-8 transition-colors hover:bg-tint md:grid-cols-[1fr_1.2fr] md:items-baseline md:gap-12 md:px-4">
+              <div className="group grid gap-3 px-4 py-8 transition-colors hover:bg-accent hover:text-on-accent md:grid-cols-[1fr_1.2fr_2rem] md:items-center md:gap-12">
                 <h3 className="text-3xl sm:text-4xl">{item.title}</h3>
-                <p className="text-lg text-muted">{item.description}</p>
+                <p className="text-lg text-muted transition-colors group-hover:text-on-accent">
+                  {item.description}
+                </p>
+                <ArrowRight
+                  size={24}
+                  aria-hidden
+                  className="hidden opacity-0 transition-opacity group-hover:opacity-100 md:block"
+                />
               </div>
             </Reveal>
           </li>

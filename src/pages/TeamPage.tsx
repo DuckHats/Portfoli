@@ -19,7 +19,10 @@ export function TeamPage() {
             </div>
           ))}
         </div>
-        <section aria-labelledby="work" className="mt-24 max-w-prose border-l-2 border-accent pl-6">
+        <section
+          aria-labelledby="work"
+          className="mt-24 max-w-prose border-2 border-ink bg-tint p-6 sm:p-8"
+        >
           <h2 id="work" className="text-3xl sm:text-4xl">
             {team.workTitle}
           </h2>

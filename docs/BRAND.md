@@ -56,6 +56,15 @@ White text on `#E63946` is only 4.2:1, so text on the accent is ink.
   towards the final call to action. Single clean stroke, decorative, nothing else is hand-drawn.
 - **Keyboard**: on the home page ←/→ (or J/K) jump between sections (`hooks/useSectionKeys`). It
   never captures Tab, Space, modified keys or form fields.
+- **Colour with purpose**: the accent also fills two big areas: the technology marquee band on the
+  home page and the block on the right of every page header. Nothing else is filled red.
+- **Page headers** are white with an ink rule and the accent block; titles are set very large.
+- The home hero features Sushi Sudoku (`featuredProject` in `content/projects.ts`) because its
+  dark screenshots read best at first glance; the other projects follow in the showcase.
+- Service rows turn accent on hover. Notices are a tint block with a full ink border; never a
+  coloured left border.
+- The cookie notice is a small card in the bottom-left corner so it never covers the content.
+- The footer ends with the wordmark oversized and cropped by the bottom edge (decorative).
 - Team portraits are square, grayscale, colour on hover.
 - The logo mark is a silhouette (`.mark-mask`) on the call-to-action band.
 - Browser surfaces are themed too: selection colour, caret, thin scrollbar, focus ring (3px accent).

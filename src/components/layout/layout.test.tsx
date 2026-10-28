@@ -90,7 +90,9 @@ describe('<SEO>', () => {
 
   it('renders title, canonical, hreflang and social tags for the current page', async () => {
     inEnglish(<SEO title="Services" description="What we do" jsonLd={{ '@type': 'Thing' }} />)
+    // Helmet applies title and link tags in separate frames: wait for the last one we assert on.
     await waitFor(() => expect(document.title).toBe('Services | DuckHats'))
+    await waitFor(() => expect(head('link[rel="alternate"][hreflang]')).toHaveLength(4))
 
     expect(document.documentElement.lang).toBe('en')
     expect(head('meta[name="description"]')[0]).toHaveAttribute('content', 'What we do')
@@ -111,8 +113,8 @@ describe('<SEO>', () => {
   it('uses noindex and omits canonical and hreflang when asked', async () => {
     inEnglish(<SEO noindex title="Missing" description="Nope" />)
     await waitFor(() => expect(document.title).toBe('Missing | DuckHats'))
+    await waitFor(() => expect(head('link[rel="canonical"]')).toHaveLength(0))
     expect(head('meta[name="robots"]')[0]).toHaveAttribute('content', 'noindex')
-    expect(head('link[rel="canonical"]')).toHaveLength(0)
     expect(head('link[rel="alternate"][hreflang]')).toHaveLength(0)
   })
 
