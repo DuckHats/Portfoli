@@ -96,8 +96,6 @@ Each piece has a job; none is decoration only.
 - **Reactive marquee** (`sections/ServiceMarquee`): what we build, in the words of the project
   brief (never a list of tools, which would box us in). Speeds up and leans with scroll velocity, turns round when scrolling up,
   pauses on hover and off screen.
-- **Act index**: numbered pill on the right of the home page on wide screens; marks the section in
-  view and jumps to any of them.
 - **Lively headline**: hero words lift and take the accent under the mouse (`Headline lively`).
 - **Footer**: the cropped wordmark's letters rise toward the pointer (`layout/Wordmark`) and a live
   clock shows the local time in Catalonia (`layout/LocalTime`). It states a fact only, never

@@ -87,7 +87,6 @@ export const en: Messages = {
     copied: 'Email copied',
     language: 'Switch to {name}',
   },
-  actIndex: 'Page sections',
   home: {
     hero: {
       title: 'Custom software for businesses that have to work.',

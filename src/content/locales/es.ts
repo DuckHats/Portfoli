@@ -88,7 +88,6 @@ export const es: Messages = {
     copied: 'Correo copiado',
     language: 'Cambia a {name}',
   },
-  actIndex: 'Secciones de la página',
   home: {
     hero: {
       title: 'Software a medida para negocios que tienen que funcionar.',

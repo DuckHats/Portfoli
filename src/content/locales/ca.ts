@@ -88,7 +88,6 @@ export const ca = {
     copied: 'Correu copiat',
     language: 'Canvia a {name}',
   },
-  actIndex: 'Seccions de la pàgina',
   home: {
     hero: {
       title: 'Programari a mida per a negocis que han de funcionar.',

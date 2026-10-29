@@ -39,9 +39,8 @@ Read README.md first. Things that are not obvious from the code:
   Use `m.*`, never `motion.*` (strict mode throws). Motion hooks (`useScroll`, springs) are in the entry
   chunk; the features are a separate lazy chunk. `pnpm check:bundle` keeps the entry under 60 KB gzip
   and the features chunk under 35 KB. Headline entrances stay CSS so the LCP text needs no script.
-- **Lazy interaction layer**: quick search, the home act index and everything below the home fold
-  are separate chunks. Keep new effects off the entry chunk and stop per-frame work when off screen
-  (see `ServiceMarquee`). Content modules such as `services.ts` are large: do not import them from
+- **Lazy interaction layer**: quick search and everything below the home fold are separate chunks.
+  Keep new effects off the entry chunk and stop per-frame work when off screen (see `ServiceMarquee`). Content modules such as `services.ts` are large: do not import them from
   anything on the home's first screen.
 - **Project brief**: the contact form's fields, choices and steps live in `src/lib/schemas.ts`
   (`PROJECT_*`, `FEATURES_BY_TYPE`, `CONTACT_STEPS`, `contactStepSchema`), shared with
