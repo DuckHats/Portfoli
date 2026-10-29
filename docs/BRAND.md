@@ -76,3 +76,30 @@ with the `domMax` features in a lazy chunk, `m.*` components only (`strict`), an
 - Primary calls to action are magnetic (`ui/Magnetic`, mouse only). Form results animate in.
 - The technology marquee and the carousel keep their pause rules (hover, focus, off screen,
   reduced motion).
+
+## Interaction layer
+
+Each piece has a job; none is decoration only.
+
+- **Stage cursor** (`ui/StageCursor`): a ring that trails the mouse, grows over anything clickable
+  and shows a short label where an element sets `data-cursor` (e.g. "Enlarge" on gallery
+  thumbnails). Mouse only, never for touch or reduced motion, and the native cursor stays.
+- **Scroll progress**: a hairline along the bottom of the header (`layout/ScrollProgress`).
+- **Page curtain**: a dark panel rises over the old page and lifts off the new one (about 0.55 s);
+  reduced motion gets a short fade instead.
+- **Quick search** (`Ctrl K` / `⌘K`, or the search button in the header): pages, projects,
+  language, theme and copying the email address. Accent-insensitive, keyboard first, loaded on
+  first use (`layout/QuickSearch`, `layout/CommandPalette`).
+- **Reactive marquee**: speeds up and leans with scroll velocity, turns round when scrolling up,
+  pauses on hover and off screen.
+- **Act index**: numbered pill on the right of the home page on wide screens; marks the section in
+  view and jumps to any of them.
+- **Lively headline**: hero words lift and take the accent under the mouse (`Headline lively`).
+- **Footer**: the cropped wordmark's letters rise toward the pointer (`layout/Wordmark`) and a live
+  clock shows the local time in Catalonia (`layout/LocalTime`). It states a fact only, never
+  availability.
+- **Project gallery**: thumbnails open full screen, growing out of their place (shared layout);
+  arrows move, Escape closes and focus returns (`sections/ProjectGallery`). Each project ends on a
+  red "next project" act whose screenshot trails the pointer (`sections/NextProject`).
+- **Forms**: the submit button shows sending, a check that draws itself, or a short shake
+  (`ui/SubmitButton`); the focus line draws in under the active field and errors slide in.

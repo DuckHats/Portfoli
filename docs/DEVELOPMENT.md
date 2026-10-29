@@ -39,6 +39,11 @@ Read README.md first. Things that are not obvious from the code:
   Use `m.*`, never `motion.*` (strict mode throws). Motion hooks (`useScroll`, springs) are in the entry
   chunk; the features are a separate lazy chunk. `pnpm check:bundle` keeps the entry under 60 KB gzip
   and the features chunk under 35 KB. Headline entrances stay CSS so the LCP text needs no script.
+- **Lazy interaction layer**: quick search, the stage cursor (only requested on fine pointers),
+  the home act index and everything below the home fold are separate chunks. Keep new effects off
+  the entry chunk and stop per-frame work when off screen (see `TechMarquee`).
+- **Theme state** lives in `src/lib/theme.ts` (`toggleTheme`, `useTheme`), shared by the header
+  button and quick search.
 - **Acts**: every top-level block on a page declares `data-act` (`paper`, `ink`, `red`); the header
   reads it (`useActiveAct`) and the tokens are redefined per act in `src/index.css`.
 - React 18 and Tailwind 3 are intentional; upgrading either needs its own change.
