@@ -1,13 +1,14 @@
 /**
- * Tiny static server that resolves URLs the way Vercel does with `cleanUrls: true` and the SPA
- * rewrite in vercel.json: exact file, then `<path>.html`, then `<path>/index.html`, then
- * index.html for anything outside /api. Used by the e2e tests and Lighthouse so they exercise
- * the prerendered shells instead of Vite's own preview routing.
+ * Tiny static server that resolves URLs the way Vercel does with vercel.json: the redirects
+ * (scripts/lib/redirects.ts), then with `cleanUrls: true` the exact file, `<path>.html` or
+ * `<path>/index.html`, and otherwise 404.html with a real 404 status. Used by the e2e tests and
+ * Lighthouse so they exercise the prerendered pages instead of Vite's own preview routing.
  */
 import { createReadStream } from 'node:fs'
 import { stat } from 'node:fs/promises'
 import { createServer } from 'node:http'
 import path from 'node:path'
+import { resolveRedirect } from './lib/redirects'
 
 const DIST = path.resolve('dist')
 const PORT = Number(process.env.PORT ?? 4173)
@@ -34,16 +35,23 @@ async function resolve(urlPath: string): Promise<string | null> {
   for (const candidate of [base, `${base}.html`, path.join(base, 'index.html')]) {
     if (candidate.startsWith(DIST) && (await isFile(candidate))) return candidate
   }
-  return clean.startsWith('/api/') ? null : path.join(DIST, 'index.html')
+  return null
 }
 
 createServer(async (req, res) => {
-  const file = await resolve(new URL(req.url ?? '/', 'http://x').pathname)
-  if (!file) {
+  const url = new URL(req.url ?? '/', 'http://x')
+  const redirect = resolveRedirect(url.pathname, req.headers['accept-language'] ?? '')
+  if (redirect) {
+    res.writeHead(redirect.status, { Location: `${redirect.location}${url.search}` }).end()
+    return
+  }
+  const found = await resolve(url.pathname)
+  const file = found ?? path.join(DIST, '404.html')
+  if (!found && !(await isFile(file))) {
     res.writeHead(404).end('Not found')
     return
   }
-  res.writeHead(200, {
+  res.writeHead(found ? 200 : 404, {
     'Content-Type': TYPES[path.extname(file)] ?? 'application/octet-stream',
     'Cache-Control': 'no-cache',
   })

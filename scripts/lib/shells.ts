@@ -30,9 +30,11 @@ export interface PageMeta {
   image: string
   home: boolean
   jsonLd: Record<string, unknown>[]
+  /** Not to be indexed: no canonical or hreflang (the 404 page). */
+  noindex?: boolean
 }
 
-// `cleanUrls: true` in vercel.json serves `ca/services.html` at `/ca/services`.
+// `cleanUrls: true` in vercel.json serves `ca/serveis.html` at `/ca/serveis`.
 const fileFor = (pathname: string) => `${pathname.replace(/^\//, '')}.html`
 
 export function buildPages(): PageMeta[] {
@@ -80,6 +82,19 @@ export function buildPages(): PageMeta[] {
   return pages
 }
 
+/** The page Vercel serves, with a 404 status, for any URL that matches nothing. */
+export const notFoundPage = (): PageMeta => ({
+  language: 'ca',
+  pathname: '/ca/404',
+  file: '404.html',
+  title: messages.ca.seo.notFound.title,
+  description: messages.ca.seo.notFound.description,
+  image: SITE.ogImage,
+  home: false,
+  jsonLd: [],
+  noindex: true,
+})
+
 const escapeHtml = (value: string) =>
   value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 
@@ -98,11 +113,15 @@ function headTags(page: PageMeta, base: string): string {
   return [
     `<title data-rh="true">${t}</title>`,
     meta('name', 'description', d),
-    `<link rel="canonical" href="${escapeHtml(canonical)}" data-rh="true" />`,
-    ...alternateLinks(page.pathname, base).map(
-      (a) =>
-        `<link rel="alternate" hreflang="${a.hrefLang}" href="${escapeHtml(a.href)}" data-rh="true" />`,
-    ),
+    ...(page.noindex
+      ? [meta('name', 'robots', 'noindex')]
+      : [
+          `<link rel="canonical" href="${escapeHtml(canonical)}" data-rh="true" />`,
+          ...alternateLinks(page.pathname, base).map(
+            (a) =>
+              `<link rel="alternate" hreflang="${a.hrefLang}" href="${escapeHtml(a.href)}" data-rh="true" />`,
+          ),
+        ]),
     meta('property', 'og:type', 'website'),
     meta('property', 'og:site_name', escapeHtml(SITE.name)),
     meta('property', 'og:locale', messages[page.language].meta.ogLocale),

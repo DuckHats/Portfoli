@@ -73,7 +73,7 @@ describe('renderShell', () => {
   it('writes canonical, every hreflang and absolute og:image', () => {
     expect(html).toContain(`<link rel="canonical" href="${BASE}/en/services" data-rh="true" />`)
     for (const code of [...LANGUAGES, 'x-default']) expect(html).toContain(`hreflang="${code}"`)
-    expect(html).toContain(`href="${BASE}/ca/services"`)
+    expect(html).toContain(`href="${BASE}/ca/serveis"`)
     expect(html).toContain(`content="${BASE}/og-cover.png"`)
   })
 
@@ -107,10 +107,10 @@ describe('renderShell', () => {
   })
 
   it('adds a project breadcrumb to project pages', () => {
-    const project = pages.find((p) => p.pathname === '/es/projects/menu-ginebro')!
+    const project = pages.find((p) => p.pathname === '/es/proyectos/menu-ginebro')!
     const out = renderShell(template, project, BASE)
     expect(out).toContain('"BreadcrumbList"')
-    expect(out).toContain(`${BASE}/es/projects/menu-ginebro`)
+    expect(out).toContain(`${BASE}/es/proyectos/menu-ginebro`)
   })
 
   it('includes a noscript fallback', () => {

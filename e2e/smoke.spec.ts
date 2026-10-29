@@ -48,7 +48,7 @@ test('dark theme passes axe', async ({ browser }) => {
   // A bare context does not inherit the config's reduced motion, which also keeps the intro away.
   const context = await browser.newContext({ colorScheme: 'dark', reducedMotion: 'reduce' })
   const page = await context.newPage()
-  for (const path of ['/ca', '/en/services', '/es/contact']) {
+  for (const path of ['/ca', '/en/services', '/es/contacto']) {
     await page.goto(path)
     await page.waitForLoadState('networkidle')
     const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze()
@@ -57,11 +57,22 @@ test('dark theme passes axe', async ({ browser }) => {
   await context.close()
 })
 
-test('root and legacy URLs redirect to a language', async ({ page }) => {
+test('root, legacy and old English URLs redirect, and unknown ones get a real 404', async ({
+  page,
+  request,
+}) => {
   await page.goto('/')
   await expect(page).toHaveURL(/\/(ca|es|en)$/)
   await page.goto('/join-us')
-  await expect(page).toHaveURL(/\/(ca|es|en)\/careers$/)
+  await expect(page).toHaveURL(/\/ca\/treballa-amb-nosaltres$/)
+  await page.goto('/es/services')
+  await expect(page).toHaveURL(/\/es\/servicios$/)
+  await page.goto('/ca/team')
+  await expect(page).toHaveURL(/\/ca\/nosaltres$/)
+
+  const missing = await request.get('/ca/no-existeix')
+  expect(missing.status()).toBe(404)
+  expect(await missing.text()).toContain('noindex')
 })
 
 test('analytics stays off until consent is given', async ({ page }) => {
@@ -139,13 +150,16 @@ test('switching language keeps the page visible (no curtain left behind)', async
   page,
   isMobile,
 }) => {
-  for (const path of ['/ca', '/ca/services']) {
+  for (const [path, spanish] of [
+    ['/ca', '/es'],
+    ['/ca/serveis', '/es/servicios'],
+  ] as const) {
     await page.goto(path)
     await page.waitForLoadState('networkidle')
     // On phones the language links live in the menu.
     if (isMobile) await page.getByRole('button', { name: 'Obre el menú' }).click()
     await page.locator('a[hreflang="es"]:visible').first().click()
-    await expect(page).toHaveURL(new RegExp(`^.*${path.replace('/ca', '/es')}$`))
+    await expect(page).toHaveURL(new RegExp(`^.*${spanish}$`))
     await expect(page.locator('html')).toHaveAttribute('lang', 'es')
     await page.waitForTimeout(1200)
     const covered = await page.evaluate(() =>
@@ -252,8 +266,8 @@ test('the footer legal links can be clicked (nothing covers them)', async ({ pag
   await page.goto('/ca')
   await page.getByRole('button', { name: 'Rebutja' }).click()
   for (const [name, url] of [
-    ['Política de privacitat', /\/ca\/privacy$/],
-    ['Avís legal', /\/ca\/legal$/],
+    ['Política de privacitat', /\/ca\/privacitat$/],
+    ['Avís legal', /\/ca\/avis-legal$/],
   ] as const) {
     await page.goto('/ca')
     // A real click (no force): it fails if anything sits on top of the link.

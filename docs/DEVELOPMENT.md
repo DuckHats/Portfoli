@@ -31,7 +31,7 @@ Read README.md first. Things that are not obvious from the code:
 - **SEO shells**: `scripts/lib/shells.ts` writes `dist/<lang>/<page>.html` after the build. Tags it
   emits (and the managed ones in `index.html`) carry `data-rh="true"` so react-helmet-async replaces
   them. Keep `src/lib/seo.ts` as the only place that formats titles, canonicals and hreflang.
-- **`cleanUrls: true` + `trailingSlash: false`** in `vercel.json` are what make `/ca/services` resolve
+- **`cleanUrls: true` + `trailingSlash: false`** in `vercel.json` are what make `/ca/serveis` resolve
   to the prerendered file. `vite preview` does not do this: use `scripts/serve-dist.ts` (e2e does).
 - **Dependency overrides** in `package.json` (`pnpm.overrides`) pin patched transitive versions so
   `pnpm audit` stays clean; remove an entry once its parent ships the fix.

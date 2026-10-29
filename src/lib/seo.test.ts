@@ -27,9 +27,9 @@ describe('seo helpers', () => {
   })
 
   it('returns one alternate per language plus x-default pointing to Catalan', () => {
-    const links = alternateLinks('/es/projects/x', 'https://a.test')
+    const links = alternateLinks('/es/proyectos/x', 'https://a.test')
     expect(links.map((l) => l.hrefLang)).toEqual(['ca', 'es', 'en', 'x-default'])
-    expect(links.at(-1)!.href).toBe('https://a.test/ca/projects/x')
+    expect(links.at(-1)!.href).toBe('https://a.test/ca/projectes/x')
     expect(links[2]!.href).toBe('https://a.test/en/projects/x')
   })
 

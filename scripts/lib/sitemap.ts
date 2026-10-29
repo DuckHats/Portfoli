@@ -1,5 +1,5 @@
 import { alternateLinks, canonicalUrl } from '../../src/lib/seo'
-import { ROUTES } from '../../src/lib/routes'
+import { routeKeyFor } from '../../src/lib/routes'
 import type { RouteKey } from '../../src/lib/routes'
 import { buildPages } from './shells'
 
@@ -15,9 +15,9 @@ const PRIORITY: Partial<Record<RouteKey, string>> = {
 const priorityFor = (pathname: string): string => {
   const [, ...segments] = pathname.split('/').filter(Boolean)
   if (segments.length === 0) return PRIORITY.home!
-  const route = ROUTES.find((r) => r.path === segments[0])
+  const key = routeKeyFor(segments[0]!)
   if (segments.length > 1) return '0.7'
-  return (route && PRIORITY[route.key]) ?? '0.5'
+  return (key && PRIORITY[key]) ?? '0.5'
 }
 
 /** Same page set as the prerendered shells, so sitemap and HTML can never disagree. */

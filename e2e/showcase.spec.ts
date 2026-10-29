@@ -80,10 +80,10 @@ test.describe('theme and layout', () => {
 
   for (const path of [
     '/ca',
-    '/es/projects',
+    '/es/proyectos',
     '/en/projects/menu-ginebro',
-    '/ca/services',
-    '/ca/about',
+    '/ca/serveis',
+    '/ca/nosaltres',
   ]) {
     test(`${path} has no horizontal scroll`, async ({ page }) => {
       await page.goto(path)

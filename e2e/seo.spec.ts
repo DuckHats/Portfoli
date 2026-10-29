@@ -30,7 +30,7 @@ for (const page of pages) {
 }
 
 for (const page of pages.filter((p) =>
-  ['/ca', '/en/services', '/es/projects/menu-ginebro'].includes(p.pathname),
+  ['/ca', '/en/services', '/es/proyectos/menu-ginebro'].includes(p.pathname),
 )) {
   test(`${page.pathname}: hydrated head has no duplicate or stale tags`, async ({
     page: browser,
@@ -59,7 +59,7 @@ for (const page of pages.filter((p) =>
 }
 
 test('switching language updates the head and URL without leaving stale tags', async ({ page }) => {
-  await page.goto('/ca/services')
+  await page.goto('/ca/serveis')
   await page.getByRole('link', { name: 'English' }).first().click()
   await expect(page).toHaveURL(/\/en\/services$/)
   await expect(page.locator('html')).toHaveAttribute('lang', 'en')

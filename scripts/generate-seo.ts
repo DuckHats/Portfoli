@@ -8,7 +8,7 @@ import { execFileSync } from 'node:child_process'
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { SITE } from '../src/config/site'
-import { buildPages, renderShell } from './lib/shells'
+import { buildPages, notFoundPage, renderShell } from './lib/shells'
 import { renderRobots, renderSecurityTxt, renderSitemap } from './lib/sitemap'
 
 const DIST = path.resolve('dist')
@@ -46,7 +46,7 @@ const preloaded = await withFontPreload(await readFile(path.join(DIST, 'index.ht
 await writeFile(path.join(DIST, 'index.html'), preloaded)
 const template = preloaded
 
-const pages = buildPages()
+const pages = [...buildPages(), notFoundPage()]
 for (const page of pages) {
   const target = path.join(DIST, page.file)
   await mkdir(path.dirname(target), { recursive: true })

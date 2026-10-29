@@ -46,17 +46,19 @@ e2e/  test/       Playwright specs; API and config tests
 
 ## Content and languages
 
-- Languages live in the URL: `/ca`, `/es`, `/en`. `/` and legacy URLs redirect.
+- Languages live in the URL and slugs are localised: `/ca/serveis`, `/es/servicios`,
+  `/en/services`. `/`, the old English slugs and legacy URLs redirect on the server (`vercel.json`).
 - Add or edit copy in `src/content/locales/ca.ts` first; `es.ts` and `en.ts` are typed as
   `Messages`, so the compiler and `translations.test.ts` fail if a key is missing.
 - Use `useMessages()` for objects and `useT()('home.hero.title')` for typed key lookups.
 - Projects, team and services are typed data with `{ca, es, en}` fields.
-- Add a page: add it to `ROUTES` in `src/lib/routes.ts`, create the page, register it in
-  `src/app/App.tsx`, and add `seo.<key>` and `nav.<key>` messages.
+- Add a page: add it to `ROUTES` in `src/lib/routes.ts` with a slug per language, create the page,
+  add it to `PAGES` in `src/app/App.tsx`, add `seo.<key>` and `nav.<key>` messages and run
+  `pnpm redirects` (a test fails if `vercel.json` is out of date).
 
 ## SEO
 
-- `pnpm build` writes one prerendered HTML file per route and language (`dist/ca/services.html`, ...)
+- `pnpm build` writes one prerendered HTML file per route and language (`dist/ca/serveis.html`, ...)
   with the right title, description, canonical, hreflang, Open Graph and JSON-LD, so crawlers and
   link previews work without JavaScript. The same helpers (`src/lib/seo.ts`) feed the client
   `<SEO>` component, and every prerendered tag carries `data-rh` so react-helmet-async replaces it
@@ -81,9 +83,10 @@ and exposed through `tailwind.config.js`. Use `bg-canvas`, `text-ink`, `text-mut
 
 ## Deployment
 
-Vercel. `vercel.json` enables `cleanUrls` (so `ca/services.html` is served at `/ca/services`), rewrites
-anything else except `/api/*` to `index.html`, and sets the security headers (CSP, HSTS, ...), which
-are covered by `test/vercel.test.ts`. `scripts/serve-dist.ts` reproduces that URL resolution locally
+Vercel. `vercel.json` enables `cleanUrls` (so `ca/serveis.html` is served at `/ca/serveis`), holds
+the permanent redirects generated from `ROUTES` (`pnpm redirects`), serves `404.html` with a real 404
+for anything else, and sets the security headers (CSP, HSTS, ...), all covered by
+`test/vercel.test.ts`. `scripts/serve-dist.ts` reproduces that URL resolution locally
 and is what the e2e tests and Lighthouse run against.
 
 ## Pending before launch
