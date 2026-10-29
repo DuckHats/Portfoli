@@ -21,7 +21,8 @@ Read README.md first. Things that are not obvious from the code:
   `data-theme` plus the system preference, so `dark:invert` etc. react to the theme button.
 - **Hero and showcase**: `Hero` reuses `BrowserFrame` + `ShowcaseCarousel` (`priority` loads the first
   screenshot eagerly). `ProjectShowcase` > `BrowserFrame` > `ShowcaseCarousel` (`useCarousel`). Autoplay is
-  off for reduced motion, hover, focus and off-screen; parallax is `useScrollProgress` writing `--p`.
+  off for reduced motion, hover, focus and off-screen. The 3D tilt and scroll settle live in `Hero`;
+  `ProjectStack` makes the sticky stack (desktop only, via `useMediaQuery`).
   Keep the 16:10 box fixed so it never shifts layout.
 - **Images**: add originals under `public/projects` or `public/team`, run `pnpm images`
   (WebP, originals deleted), and reference the `.webp` path.
@@ -34,7 +35,12 @@ Read README.md first. Things that are not obvious from the code:
   to the prerendered file. `vite preview` does not do this: use `scripts/serve-dist.ts` (e2e does).
 - **Dependency overrides** in `package.json` (`pnpm.overrides`) pin patched transitive versions so
   `pnpm audit` stays clean; remove an entry once its parent ships the fix.
-- **Motion**: `Reveal` is CSS + IntersectionObserver; there is no animation library. Keep it that way.
+- **Motion**: `motion` (Framer Motion) through `MotionProvider` (`LazyMotion strict` + lazy `domMax`).
+  Use `m.*`, never `motion.*` (strict mode throws). Motion hooks (`useScroll`, springs) are in the entry
+  chunk; the features are a separate lazy chunk. `pnpm check:bundle` keeps the entry under 60 KB gzip
+  and the features chunk under 35 KB. Headline entrances stay CSS so the LCP text needs no script.
+- **Acts**: every top-level block on a page declares `data-act` (`paper`, `ink`, `red`); the header
+  reads it (`useActiveAct`) and the tokens are redefined per act in `src/index.css`.
 - React 18 and Tailwind 3 are intentional; upgrading either needs its own change.
 - Local hooks (husky): pre-commit lint-staged, commit-msg commitlint (Conventional Commits),
   pre-push unit tests.

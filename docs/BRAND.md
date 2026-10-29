@@ -2,10 +2,9 @@
 
 ## Positioning
 
-A small, direct software studio shown as an engineer's workbook: the design exposes the process
-(measure, draw, test, deliver) instead of describing it. Adult voice, never childish. The red of the
-original identity is kept as the single accent. The duck lives in the logo, used as a silhouette
-rather than a mascot; no animal metaphors in the copy.
+A small, direct software studio presented as a stage: directed light, full-bleed acts of colour
+and work that floats in depth. The silhouette in the logo gives the mood; the copy never plays a
+role or tells a story. Adult voice, never childish. The red of the original identity is kept.
 
 ## Voice
 
@@ -15,61 +14,65 @@ rather than a mascot; no animal metaphors in the copy.
 - Never invent clients, numbers, prices or testimonials. Mark gaps with `TODO(client)`.
 - Every string exists in ca, es and en with the same meaning. No `*` markers anywhere (tested).
 
-## Colour
+## Colour and acts
 
-All colours are tokens (`src/index.css`, light and dark). Never hardcode hex values; use the
-Tailwind names. `test/contrast.test.ts` enforces WCAG AA for every text pairing.
+All colours are tokens (`src/index.css`). Never hardcode hex values; use the Tailwind names.
+`test/contrast.test.ts` enforces WCAG AA for every theme and every act.
 
-| Token         | Light     | Dark      | Use                                         |
-| ------------- | --------- | --------- | ------------------------------------------- |
-| `canvas`      | `#EFEBE3` | `#14130F` | Page background                             |
-| `surface`     | `#F7F4EE` | `#1D1C17` | Inputs, browser frames                      |
-| `tint`        | `#E4DFD4` | `#26241E` | Alternate sections, page headers            |
-| `ink`         | `#14130F` | `#EFEBE3` | Text and borders                            |
-| `muted`       | `#58544B` | `#ACA79C` | Secondary text                              |
-| `line`        | `#BEB8AB` | `#4A473F` | Hairline dividers between rows              |
-| `accent`      | `#E63946` | `#FF5964` | Buttons, marks, graphics (never small text) |
-| `accent-text` | `#B01E2B` | `#FF8A92` | Accent colour for text and links            |
-| `on-accent`   | `#080704` | `#14130F` | Text on the accent colour                   |
-| `inverse`     | `#14130F` | `#1D1C17` | Call-to-action band and footer              |
-| `on-inverse`  | `#EFEBE3` | `#EFEBE3` | Text on `inverse`                           |
+The page is built in **acts**: full-bleed sections with their own palette, declared with
+`data-act` (`paper`, `ink`, `red`). An act redefines the tokens locally, so `bg-canvas text-ink`
+always does the right thing and components never know which act they are in. Every top-level block
+declares its act (paper included) because the sticky header takes the colours of the act under it
+(`hooks/useActiveAct`).
 
-White text on `#E63946` is only 4.2:1, so text on the accent is ink.
+| Act     | Light theme                    | Dark theme          | Used for                           |
+| ------- | ------------------------------ | ------------------- | ---------------------------------- |
+| `paper` | `#F3EFE6` paper, `#0D0D0C` ink | `#1E1D1A` warm grey | Reading content, projects, team    |
+| `ink`   | `#0D0D0C` stage, paper text    | same                | Hero, page headers, method, footer |
+| `red`   | `#E63946`, ink text            | same                | Services, closing call to action   |
+
+Inside the red act the "accent" is ink (buttons, graphics); white on `#E63946` is only 4.2:1.
+Home rhythm: ink → paper → red → paper → ink → paper → red → ink.
 
 ## Typography
 
-- **Archivo** (variable, width axis at 72%) for headlines and the wordmark: extra bold, set globally
-  on `h1`-`h3` and on `.font-display`. Headlines are very large; sentence case, balanced wrapping.
-- **Inter** (variable) for body text, measure under 70ch.
-- **JetBrains Mono** only for the annotation layer (`.meta`: section indexes, dimension labels,
-  tags). Small, uppercase, muted. Never for body text.
+- **Archivo** (variable) at its widest (`font-stretch: 125%`), black weight, uppercase, for
+  headlines and the wordmark; set on `h1`-`h3` and `.font-display`. Phones narrow it to 100% so
+  long Catalan and Spanish words fit.
+- **Inter** (variable) for body text, measure under 70ch. `.label` is Inter in small spaced
+  capitals for indexes and categories.
 
 ## Components and layout
 
-- Square corners, 1px ink rules, no shadows. Depth comes from scale and overlap.
-- **Sheet**: the home hero sits on a faint 12-column grid (`.sheet-grid`, desktop only) and the
-  featured project overlaps the headline column.
-- **Dimension** (`ui/Dimension`): a drafting dimension line with end ticks and a mono label; draws
-  itself once. Used under the hero and every page title. Decorative.
-- **Section index** (`Section no="02 / 06"`): sits in the margin, aria-hidden.
-- Services are an index table (`.row-shift`), the method is a vertical timeline with accent nodes,
-  the team is a list with small greyscale portraits. No grids of identical cards.
-- Buttons (`buttonStyles`): primary fills ink on hover, secondary wipes ink in from the left.
-- **Project showcase**: real screenshots inside a browser frame with a live carousel; the home hero
-  features Sushi Sudoku (`featuredProject`), the others follow with a gentle parallax.
+- `Section` (`act`, `label`, oversized `Headline` title) and `PageHeader` (always the ink act) are
+  the two building blocks. Rounded 16px panels (`bg-surface ring-1 ring-ink/10`) group content on
+  paper; pills (`rounded-full`) for buttons and tags.
+- **Hero**: the featured project (`featuredProject`, Sushi Sudoku) floats in a browser window in
+  3D perspective, with its caption lifted off the window in depth.
+- **Services**: giant type rows that are real disclosure buttons; the open one faces the viewer.
+- **Projects**: a stack of pages (`sections/ProjectStack`) on wide screens, a list on phones.
+- **Method**: four large outlined numerals on the dark stage. **Team**: a strip of portraits where
+  the active one widens and turns to colour (`sections/TeamStrip`); a list on phones.
 - **Keyboard**: on the home page ←/→ (or J/K) jump between sections (`hooks/useSectionKeys`).
-- **Colour with purpose**: the accent fills the technology marquee band and the timeline nodes, and
-  is the primary button. Nothing else is filled red.
-- Notices are a tint block with a full ink border; never a coloured left border.
-- The cookie notice is a small card in the bottom-left corner.
-- The footer ends with the wordmark oversized and cropped by the bottom edge (decorative).
-- The logo mark is a silhouette (`.mark-mask`) on the call-to-action band.
-- Browser surfaces are themed too: selection colour, caret, thin scrollbar, focus ring (3px accent).
+- The logo is drawn as a mask (`.mark-mask`) so it takes the act's ink colour, and appears as a
+  large faint silhouette on page headers and the closing act.
+- Notices are tinted panels; never a coloured left border. The cookie notice is a small dark card.
+- Shadows exist only where they explain depth: windows that float in 3D and floating cards.
 
 ## Motion
 
-Only opacity and transform, ease-out. The hero entrance and the dimension line drawing are the
-authored moments; then scroll reveals (`ui/Reveal`), the row shift on index tables, page crossfade
-through the View Transitions API (`@view-transition`, ignored where unsupported), the carousel
-cross-fade, the showcase parallax and the technology marquee. Everything stops or shows its final
-state under `prefers-reduced-motion`, and the carousel pauses on hover, focus and when off screen.
+Library: `motion` (Framer Motion), loaded through `components/motion/MotionProvider`: `LazyMotion`
+with the `domMax` features in a lazy chunk, `m.*` components only (`strict`), and
+`MotionConfig reducedMotion="user"`. Only transform and opacity are animated.
+
+- Headlines turn up word by word (`ui/Headline`, CSS `.line-up`), so the LCP text never waits for
+  script.
+- Hero: the window tilts toward the mouse (springs, at most 10°) and settles flat as you scroll; a
+  soft light follows the pointer. Touch gets the scroll settle only; reduced motion, nothing.
+- `ui/Reveal` tips content up in depth when it first scrolls into view; the method steps turn in
+  from the side; covered project pages sink back in the stack.
+- Page transitions: the old page sinks back and the new one rises (`Layout`, `AnimatePresence`);
+  scroll and focus reset once the old page has left. The first load is not animated.
+- Primary calls to action are magnetic (`ui/Magnetic`, mouse only). Form results animate in.
+- The technology marquee and the carousel keep their pause rules (hover, focus, off screen,
+  reduced motion).
