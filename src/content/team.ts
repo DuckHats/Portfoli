@@ -9,6 +9,8 @@ export interface TeamMember {
 }
 
 // TODO(client): add the missing LinkedIn/GitHub profiles and confirm every role title.
+// TODO(client): replace the photos in public/team with real portraits of the team (same file names,
+// at least 640 px, portrait or square, face centred; the cards crop them to tall portraits).
 export const teamMembers: TeamMember[] = [
   {
     id: 'sergi',

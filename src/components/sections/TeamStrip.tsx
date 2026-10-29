@@ -1,4 +1,3 @@
-import { m } from 'motion/react'
 import { useState } from 'react'
 import { teamMembers } from '@/content/team'
 import type { TeamMember } from '@/content/team'
@@ -14,37 +13,35 @@ export function TeamStrip({ heading: Heading = 'h3' }: { heading?: 'h2' | 'h3' }
   return (
     <>
       <ul className="hidden h-[34rem] gap-3 lg:flex">
-        {teamMembers.map((member, index) => (
-          <m.li
-            key={member.id}
-            layout
-            onPointerEnter={() => setActive(index)}
-            onFocus={() => setActive(index)}
-            style={{ flexGrow: active === index ? 3 : 1, flexBasis: 0 }}
-            transition={{ type: 'spring', stiffness: 160, damping: 24 }}
-            className="relative overflow-hidden rounded-2xl bg-tint"
-          >
-            <m.img
-              layout
-              src={member.photo}
-              alt={member.name}
-              width={640}
-              height={640}
-              loading="lazy"
-              decoding="async"
-              className={`absolute inset-0 h-full w-full object-cover transition-[filter] duration-500 ${
-                active === index ? '' : 'grayscale'
-              }`}
-            />
-            <m.div
-              layout="position"
-              className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-6 pt-24 text-white"
+        {teamMembers.map((member, index) => {
+          const open = active === index
+          return (
+            // Width eases in CSS; nothing inside is scaled, so photos and names never stretch.
+            <li
+              key={member.id}
+              onPointerEnter={() => setActive(index)}
+              onFocus={() => setActive(index)}
+              style={{ flexGrow: open ? 3 : 1, flexBasis: 0 }}
+              className="relative min-w-0 overflow-hidden rounded-2xl bg-tint transition-[flex-grow] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
             >
-              <Heading className="text-2xl">{member.name}</Heading>
-              <MemberMeta member={member} light hidden={active !== index} />
-            </m.div>
-          </m.li>
-        ))}
+              <img
+                src={member.photo}
+                alt={member.name}
+                width={640}
+                height={640}
+                loading="lazy"
+                decoding="async"
+                className={`absolute inset-0 h-full w-full object-cover transition-[filter] duration-500 ${
+                  open ? '' : 'grayscale'
+                }`}
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-5 pt-24 text-white xl:p-6 xl:pt-24">
+                <MemberName member={member} open={open} Heading={Heading} />
+                <MemberMeta member={member} light hidden={!open} />
+              </div>
+            </li>
+          )
+        })}
       </ul>
 
       <ul className="border-t border-ink/20 lg:hidden">
@@ -63,13 +60,41 @@ export function TeamStrip({ heading: Heading = 'h3' }: { heading?: 'h2' | 'h3' }
               className="h-[4.5rem] w-[4.5rem] rounded-full object-cover grayscale"
             />
             <div>
-              <Heading className="text-xl">{member.name}</Heading>
+              <Heading className="text-xl [hyphens:none] [overflow-wrap:normal]">
+                {member.name}
+              </Heading>
               <MemberMeta member={member} />
             </div>
           </li>
         ))}
       </ul>
     </>
+  )
+}
+
+/**
+ * First name over surname, never hyphenated. A closed portrait is too narrow for the surname, so it
+ * shows the first name only (narrowed) and keeps the full name for screen readers.
+ */
+function MemberName({
+  member,
+  open,
+  Heading,
+}: {
+  member: TeamMember
+  open: boolean
+  Heading: 'h2' | 'h3'
+}) {
+  const [first, ...rest] = member.name.split(' ')
+  return (
+    <Heading
+      className={`whitespace-nowrap text-xl transition-[font-stretch] duration-500 [hyphens:none] xl:text-2xl ${
+        open ? '' : '[font-stretch:75%]'
+      }`}
+    >
+      <span className="block">{first}</span>
+      <span className={open ? 'block' : 'sr-only'}> {rest.join(' ')}</span>
+    </Heading>
   )
 }
 
