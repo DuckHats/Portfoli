@@ -418,7 +418,7 @@ export const en: Messages = {
         },
         {
           title: 'Analytics',
-          body: 'We use Google Analytics only if you accept it in the analytics notice. You can change your decision by clearing the site data in your browser.',
+          body: 'We use Google Analytics only if you accept it in the analytics notice. You can change your decision by clearing the site data in your browser. We also use Vercel Web Analytics, which counts visits in aggregate without cookies and without identifying you.',
         },
         {
           title: 'Your rights',

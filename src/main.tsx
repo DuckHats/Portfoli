@@ -7,8 +7,11 @@ import { loadFeatures } from './components/motion/loadFeatures'
 import { getConsent, loadAnalytics } from './lib/consent'
 import './index.css'
 
-// Analytics only runs after the visitor has accepted it (see CookieBanner).
+// Google Analytics only runs after the visitor has accepted it (see CookieBanner).
 if (getConsent() === 'granted') loadAnalytics()
+// Vercel Web Analytics: cookieless, aggregate page views (also on client-side navigation), so it
+// needs no consent (it is listed in the privacy policy). Loaded apart to keep the entry small.
+void import('@vercel/analytics').then(({ inject }) => inject())
 
 const root = document.getElementById('root')
 if (!root) throw new Error('Missing #root element')

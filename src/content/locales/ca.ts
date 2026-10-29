@@ -420,7 +420,7 @@ export const ca = {
         },
         {
           title: 'Analítica',
-          body: 'Fem servir Google Analytics només si ho acceptes al bàner d’analítica. Pots canviar la teva decisió esborrant les dades del lloc al navegador.',
+          body: 'Fem servir Google Analytics només si ho acceptes al bàner d’analítica. Pots canviar la teva decisió esborrant les dades del lloc al navegador. També fem servir Vercel Web Analytics, que compta visites de manera agregada sense galetes i sense identificar-te.',
         },
         {
           title: 'Drets',

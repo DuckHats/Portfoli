@@ -2,7 +2,8 @@
  * Tiny static server that resolves URLs the way Vercel does with vercel.json: the redirects
  * (scripts/lib/redirects.ts), then with `cleanUrls: true` the exact file, `<path>.html` or
  * `<path>/index.html`, and otherwise 404.html with a real 404 status. Used by the e2e tests and
- * Lighthouse so they exercise the prerendered pages instead of Vite's own preview routing.
+ * Lighthouse so they exercise the prerendered pages instead of Vite's own preview routing. The
+ * Web Analytics script that Vercel injects is answered with an empty stand-in.
  */
 import { createReadStream } from 'node:fs'
 import { stat } from 'node:fs/promises'
@@ -40,6 +41,11 @@ async function resolve(urlPath: string): Promise<string | null> {
 
 createServer(async (req, res) => {
   const url = new URL(req.url ?? '/', 'http://x')
+  // Vercel serves the Web Analytics script itself; locally a silent stand-in keeps pages error-free.
+  if (url.pathname.startsWith('/_vercel/insights/')) {
+    res.writeHead(200, { 'Content-Type': 'text/javascript; charset=utf-8' }).end('')
+    return
+  }
   const redirect = resolveRedirect(url.pathname, req.headers['accept-language'] ?? '')
   if (redirect) {
     res.writeHead(redirect.status, { Location: `${redirect.location}${url.search}` }).end()

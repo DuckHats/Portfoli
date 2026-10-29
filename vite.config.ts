@@ -26,6 +26,7 @@ export default defineConfig(({ isSsrBuild }) => ({
           output: {
             manualChunks: {
               react: ['react', 'react-dom', 'react-router-dom'],
+              analytics: ['@vercel/analytics'],
             },
           },
         },

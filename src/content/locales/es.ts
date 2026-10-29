@@ -426,7 +426,7 @@ export const es: Messages = {
         },
         {
           title: 'Analítica',
-          body: 'Usamos Google Analytics solo si lo aceptas en el aviso de analítica. Puedes cambiar tu decisión borrando los datos del sitio en el navegador.',
+          body: 'Usamos Google Analytics solo si lo aceptas en el aviso de analítica. Puedes cambiar tu decisión borrando los datos del sitio en el navegador. También usamos Vercel Web Analytics, que cuenta visitas de forma agregada sin cookies y sin identificarte.',
         },
         {
           title: 'Derechos',
