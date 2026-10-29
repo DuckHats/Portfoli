@@ -126,15 +126,4 @@ describe('structured content', () => {
       }
     }
   })
-
-  it('frames team photos inside the picture', () => {
-    for (const { id, photoFocus } of teamMembers) {
-      if (!photoFocus) continue
-      for (const value of [photoFocus.x, photoFocus.y]) {
-        expect(value, id).toBeGreaterThanOrEqual(0)
-        expect(value, id).toBeLessThanOrEqual(100)
-      }
-      expect(photoFocus.zoom ?? 1, id).toBeGreaterThanOrEqual(1)
-    }
-  })
 })

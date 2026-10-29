@@ -52,9 +52,7 @@ Home rhythm: ink → paper → red → paper → ink → paper → red → ink.
 - **Services**: giant type rows that are real disclosure buttons; the open one faces the viewer.
 - **Projects**: a stack of pages (`sections/ProjectStack`) on wide screens, a list on phones.
 - **Method**: four large outlined numerals on the dark stage. **Team**: a strip of portraits where
-  the active one widens and turns to colour (`sections/TeamStrip`); a list on phones. Portraits sit
-  in the brand duotone (grey, contrasted, tinted red) so mismatched photos read as one set, and
-  each is framed on the face with `photoFocus` in `content/team.ts`.
+  the active one widens and turns to colour (`sections/TeamStrip`); a list on phones.
 - **Keyboard**: on the home page ←/→ (or J/K) jump between sections (`hooks/useSectionKeys`).
 - The logo is drawn as a mask (`.mark-mask`) so it takes the act's ink colour, and appears as a
   large faint silhouette on page headers and, centred, in the closing act.

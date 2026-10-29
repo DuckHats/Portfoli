@@ -16,7 +16,7 @@ export function TeamStrip({ heading: Heading = 'h3' }: { heading?: 'h2' | 'h3' }
         {teamMembers.map((member, index) => {
           const open = active === index
           return (
-            // Only the width eases (CSS); the photo zooms inside its own frame, so nothing stretches.
+            // Width eases in CSS; nothing inside is scaled, so photos and names never stretch.
             <li
               key={member.id}
               onPointerEnter={() => setActive(index)}
@@ -24,7 +24,17 @@ export function TeamStrip({ heading: Heading = 'h3' }: { heading?: 'h2' | 'h3' }
               style={{ flexGrow: open ? 3 : 1, flexBasis: 0 }}
               className="relative min-w-0 overflow-hidden rounded-2xl bg-tint transition-[flex-grow] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
             >
-              <MemberPhoto member={member} color={open} className="absolute inset-0" />
+              <img
+                src={member.photo}
+                alt={member.name}
+                width={640}
+                height={640}
+                loading="lazy"
+                decoding="async"
+                className={`absolute inset-0 h-full w-full object-cover transition-[filter] duration-500 ${
+                  open ? '' : 'grayscale'
+                }`}
+              />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-5 pt-24 text-white xl:p-6 xl:pt-24">
                 <MemberName member={member} open={open} Heading={Heading} />
                 <MemberMeta member={member} light hidden={!open} />
@@ -40,11 +50,14 @@ export function TeamStrip({ heading: Heading = 'h3' }: { heading?: 'h2' | 'h3' }
             key={member.id}
             className="grid grid-cols-[4.5rem_1fr] items-center gap-5 border-b border-ink/20 py-5"
           >
-            <MemberPhoto
-              member={member}
-              color={false}
-              small
-              className="relative h-[4.5rem] w-[4.5rem] rounded-full"
+            <img
+              src={member.photo}
+              alt={member.name}
+              width={160}
+              height={160}
+              loading="lazy"
+              decoding="async"
+              className="h-[4.5rem] w-[4.5rem] rounded-full object-cover grayscale"
             />
             <div>
               <Heading className="text-xl [hyphens:none] [overflow-wrap:normal]">
@@ -56,59 +69,6 @@ export function TeamStrip({ heading: Heading = 'h3' }: { heading?: 'h2' | 'h3' }
         ))}
       </ul>
     </>
-  )
-}
-
-/**
- * A portrait framed on the face (`photoFocus`) and, until it is the active one, set in the brand's
- * duotone: grey, contrasted and tinted red, so personal photos of every kind read as one set.
- * The active portrait turns back to colour.
- */
-function MemberPhoto({
-  member,
-  color,
-  small = false,
-  className,
-}: {
-  member: TeamMember
-  color: boolean
-  small?: boolean
-  className: string
-}) {
-  const { x = 50, y = 50, zoom = 1 } = member.photoFocus ?? {}
-  const size = small ? 160 : 640
-  return (
-    <div className={`overflow-hidden bg-ink ${className}`}>
-      <img
-        src={member.photo}
-        alt={member.name}
-        width={size}
-        height={size}
-        loading="lazy"
-        decoding="async"
-        style={{
-          objectPosition: `${x}% ${y}%`,
-          transformOrigin: `${x}% ${y}%`,
-          transform: `scale(${color ? zoom * 1.04 : zoom})`,
-        }}
-        className={`h-full w-full object-cover transition-[filter,transform] duration-700 ease-out motion-reduce:transition-none ${
-          color ? '' : 'contrast-125 brightness-90 grayscale'
-        }`}
-      />
-      {/* The duotone: red in the shadows and mid-tones, lifted blacks. */}
-      <span
-        aria-hidden
-        className={`absolute inset-0 bg-accent mix-blend-multiply transition-opacity duration-700 motion-reduce:transition-none ${
-          color ? 'opacity-0' : 'opacity-60'
-        }`}
-      />
-      <span
-        aria-hidden
-        className={`absolute inset-0 bg-[rgb(40_12_16)] mix-blend-screen transition-opacity duration-700 motion-reduce:transition-none ${
-          color ? 'opacity-0' : 'opacity-70'
-        }`}
-      />
-    </div>
   )
 }
 
