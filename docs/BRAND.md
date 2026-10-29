@@ -55,7 +55,13 @@ Home rhythm: ink → paper → red → paper → ink → paper → red → ink.
   the active one widens and turns to colour (`sections/TeamStrip`); a list on phones.
 - **Keyboard**: on the home page ←/→ (or J/K) jump between sections (`hooks/useSectionKeys`).
 - The logo is drawn as a mask (`.mark-mask`) so it takes the act's ink colour, and appears as a
-  large faint silhouette on page headers and the closing act.
+  large faint silhouette on page headers and, centred, in the closing act.
+- The header and the top of the footer show the mark alone; the name is spoken by the intro and
+  the giant footer wordmark, never set next to the mark.
+- **Intro**: on the first visit to the home page in a session, the name rises on the dark stage and
+  the stage lifts away (about 1.6 s). Pure CSS from `index.html` (`#intro`, flagged by
+  `public/theme-init.js`), so it plays from the first paint, never takes clicks and never runs with
+  reduced motion.
 - Notices are tinted panels; never a coloured left border. The cookie notice is a small dark card.
 - Shadows exist only where they explain depth: windows that float in 3D and floating cards.
 
@@ -74,23 +80,21 @@ with the `domMax` features in a lazy chunk, `m.*` components only (`strict`), an
 - Page transitions: the old page sinks back and the new one rises (`Layout`, `AnimatePresence`);
   scroll and focus reset once the old page has left. The first load is not animated.
 - Primary calls to action are magnetic (`ui/Magnetic`, mouse only). Form results animate in.
-- The technology marquee and the carousel keep their pause rules (hover, focus, off screen,
+- The service marquee and the carousel keep their pause rules (hover, focus, off screen,
   reduced motion).
 
 ## Interaction layer
 
 Each piece has a job; none is decoration only.
 
-- **Stage cursor** (`ui/StageCursor`): a ring that trails the mouse, grows over anything clickable
-  and shows a short label where an element sets `data-cursor` (e.g. "Enlarge" on gallery
-  thumbnails). Mouse only, never for touch or reduced motion, and the native cursor stays.
 - **Scroll progress**: a hairline along the bottom of the header (`layout/ScrollProgress`).
 - **Page curtain**: a dark panel rises over the old page and lifts off the new one (about 0.55 s);
   reduced motion gets a short fade instead.
 - **Quick search** (`Ctrl K` / `⌘K`, or the search button in the header): pages, projects,
   language, theme and copying the email address. Accent-insensitive, keyboard first, loaded on
   first use (`layout/QuickSearch`, `layout/CommandPalette`).
-- **Reactive marquee**: speeds up and leans with scroll velocity, turns round when scrolling up,
+- **Reactive marquee** (`sections/ServiceMarquee`): what we build, in the words of the project
+  brief (never a list of tools, which would box us in). Speeds up and leans with scroll velocity, turns round when scrolling up,
   pauses on hover and off screen.
 - **Act index**: numbered pill on the right of the home page on wide screens; marks the section in
   view and jumps to any of them.
@@ -101,5 +105,9 @@ Each piece has a job; none is decoration only.
 - **Project gallery**: thumbnails open full screen, growing out of their place (shared layout);
   arrows move, Escape closes and focus returns (`sections/ProjectGallery`). Each project ends on a
   red "next project" act whose screenshot trails the pointer (`sections/NextProject`).
+- **Project brief** (`forms/ContactForm`): "Let's talk about your project" is a guided brief, one
+  question per screen (type, starting point, features, timeline and budget, contact, review).
+  Cards, chips and dropdowns; the features offered follow the project type; a click on a complete
+  card moves on by itself; every answer can be edited from the review.
 - **Forms**: the submit button shows sending, a check that draws itself, or a short shake
   (`ui/SubmitButton`); the focus line draws in under the active field and errors slide in.

@@ -39,9 +39,16 @@ Read README.md first. Things that are not obvious from the code:
   Use `m.*`, never `motion.*` (strict mode throws). Motion hooks (`useScroll`, springs) are in the entry
   chunk; the features are a separate lazy chunk. `pnpm check:bundle` keeps the entry under 60 KB gzip
   and the features chunk under 35 KB. Headline entrances stay CSS so the LCP text needs no script.
-- **Lazy interaction layer**: quick search, the stage cursor (only requested on fine pointers),
-  the home act index and everything below the home fold are separate chunks. Keep new effects off
-  the entry chunk and stop per-frame work when off screen (see `TechMarquee`).
+- **Lazy interaction layer**: quick search, the home act index and everything below the home fold
+  are separate chunks. Keep new effects off the entry chunk and stop per-frame work when off screen
+  (see `ServiceMarquee`). Content modules such as `services.ts` are large: do not import them from
+  anything on the home's first screen.
+- **Project brief**: the contact form's fields, choices and steps live in `src/lib/schemas.ts`
+  (`PROJECT_*`, `FEATURES_BY_TYPE`, `CONTACT_STEPS`, `contactStepSchema`), shared with
+  `api/submit-contact.ts`. `features` travels as one JSON field (`parseStringList`). The budget
+  choices are placeholders until the real ranges exist (TODO(client) in the locales).
+- **Intro**: `#intro` in `index.html` + `public/theme-init.js` + CSS in `src/index.css`. e2e runs
+  with reduced motion, so it never shows there except in its own test.
 - **Theme state** lives in `src/lib/theme.ts` (`toggleTheme`, `useTheme`), shared by the header
   button and quick search.
 - **Acts**: every top-level block on a page declares `data-act` (`paper`, `ink`, `red`); the header
