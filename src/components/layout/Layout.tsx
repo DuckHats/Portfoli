@@ -38,6 +38,10 @@ function PageFallback() {
 export function Layout() {
   const { a11y } = useMessages()
   const { pathname } = useLocation()
+  // The page identity without its language prefix: switching language re-renders the same page in
+  // place instead of playing a page transition (an exiting page re-rendered in the new language
+  // never finished leaving and left the curtain covering the screen).
+  const pageKey = pathname.replace(/^\/[^/]+/, '') || '/'
   const mainRef = useRef<HTMLElement>(null)
   const outlet = useOutlet()
   const reduce = useReducedMotion()
@@ -65,7 +69,7 @@ export function Layout() {
         */}
         <AnimatePresence mode="wait" initial={false} onExitComplete={onPageLeft}>
           <m.div
-            key={pathname}
+            key={pageKey}
             initial={{ opacity: reduce ? 0 : 1 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: reduce ? 0 : 1 }}
@@ -74,6 +78,7 @@ export function Layout() {
             {!reduce && (
               <m.div
                 aria-hidden
+                data-curtain
                 data-act="ink"
                 className="pointer-events-none fixed inset-0 z-[55] bg-canvas"
                 initial={{ scaleY: 1, originY: 0 }}

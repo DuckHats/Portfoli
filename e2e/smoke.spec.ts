@@ -132,3 +132,25 @@ test('project screenshots open full screen and close with Escape', async ({ page
   await expect(page.getByRole('dialog')).toHaveCount(0)
   await expect(page.getByRole('button', { name: 'Enlarge screenshot 3' })).toBeFocused()
 })
+
+test('switching language keeps the page visible (no curtain left behind)', async ({
+  page,
+  isMobile,
+}) => {
+  for (const path of ['/ca', '/ca/services']) {
+    await page.goto(path)
+    await page.waitForLoadState('networkidle')
+    // On phones the language links live in the menu.
+    if (isMobile) await page.getByRole('button', { name: 'Obre el menú' }).click()
+    await page.locator('a[hreflang="es"]:visible').first().click()
+    await expect(page).toHaveURL(new RegExp(`^.*${path.replace('/ca', '/es')}$`))
+    await expect(page.locator('html')).toHaveAttribute('lang', 'es')
+    await page.waitForTimeout(1200)
+    const covered = await page.evaluate(() =>
+      [...document.querySelectorAll('[data-curtain]')].some(
+        (node) => new DOMMatrix(getComputedStyle(node).transform).d > 0.01,
+      ),
+    )
+    expect(covered).toBe(false)
+  }
+})
