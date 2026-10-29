@@ -1,5 +1,5 @@
-import { AnimatePresence, m } from 'motion/react'
-import { Suspense, useRef } from 'react'
+import { AnimatePresence, m, useReducedMotion } from 'motion/react'
+import { Suspense, lazy, useRef } from 'react'
 import { useLocation, useOutlet } from 'react-router-dom'
 import { useMessages } from '@/lib/i18n'
 import { ErrorBoundary } from '../ErrorBoundary'
@@ -9,6 +9,13 @@ import { Container } from '../ui/Container'
 import { CookieBanner } from './CookieBanner'
 import { Footer } from './Footer'
 import { Header } from './Header'
+import { QuickSearch } from './QuickSearch'
+
+const StageCursor = lazy(() => import('../ui/StageCursor'))
+// Only mouse users ever see the cursor, so nobody else downloads it.
+const finePointer = () =>
+  typeof window.matchMedia === 'function' &&
+  window.matchMedia('(hover: hover) and (pointer: fine)').matches
 
 function RouteError({ reset }: { reset: () => void }) {
   const { error } = useMessages()
@@ -33,6 +40,7 @@ export function Layout() {
   const { pathname } = useLocation()
   const mainRef = useRef<HTMLElement>(null)
   const outlet = useOutlet()
+  const reduce = useReducedMotion()
 
   // Once the old page has left: reset scroll and move focus to <main>, so keyboard and
   // screen-reader users land on the new page.
@@ -51,15 +59,37 @@ export function Layout() {
       </a>
       <Header />
       <main id="main-content" ref={mainRef} tabIndex={-1} className="flex-1 outline-none">
-        {/* Pages leave by sinking back and arrive rising forward; the first load is not animated. */}
+        {/*
+          Page change as a curtain: a dark panel rises over the old page, the new page mounts behind it
+          and the panel lifts away. The first load is not animated; reduced motion gets a plain fade.
+        */}
         <AnimatePresence mode="wait" initial={false} onExitComplete={onPageLeft}>
           <m.div
             key={pathname}
-            initial={{ opacity: 0, y: 40, scale: 0.985 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -24, scale: 0.985 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: reduce ? 0 : 1 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: reduce ? 0 : 1 }}
+            transition={{ duration: reduce ? 0.15 : 0.3 }}
           >
+            {!reduce && (
+              <m.div
+                aria-hidden
+                data-act="ink"
+                className="pointer-events-none fixed inset-0 z-[55] bg-canvas"
+                initial={{ scaleY: 1, originY: 0 }}
+                animate={{
+                  scaleY: 0,
+                  originY: 0,
+                  transition: { duration: 0.3, ease: [0.65, 0, 0.35, 1] },
+                }}
+                exit={{
+                  scaleY: 1,
+                  originY: 1,
+                  transition: { duration: 0.25, ease: [0.65, 0, 0.35, 1] },
+                }}
+                style={{ scaleY: 0 }}
+              />
+            )}
             <ErrorBoundary fallback={(reset) => <RouteError reset={reset} />}>
               <Suspense fallback={<PageFallback />}>{outlet}</Suspense>
             </ErrorBoundary>
@@ -68,6 +98,12 @@ export function Layout() {
       </main>
       <Footer />
       <CookieBanner />
+      <QuickSearch />
+      {finePointer() && (
+        <Suspense fallback={null}>
+          <StageCursor />
+        </Suspense>
+      )}
     </div>
   )
 }

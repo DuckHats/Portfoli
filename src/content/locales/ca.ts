@@ -75,6 +75,24 @@ export const ca = {
       description: 'La pàgina que busques no existeix.',
     },
   },
+  palette: {
+    open: 'Obre la cerca ràpida',
+    title: 'Cerca ràpida',
+    placeholder: 'Cerca una pàgina, un projecte o una acció',
+    empty: 'Cap resultat',
+    pages: 'Pàgines',
+    projects: 'Projectes',
+    actions: 'Accions',
+    theme: 'Canvia el tema clar o fosc',
+    copyEmail: 'Copia el correu',
+    copied: 'Correu copiat',
+    language: 'Canvia a {name}',
+  },
+  cursor: {
+    view: 'Veure',
+    enlarge: 'Amplia',
+  },
+  actIndex: 'Seccions de la pàgina',
   home: {
     hero: {
       title: 'Programari a mida per a negocis que han de funcionar.',
@@ -178,6 +196,9 @@ export const ca = {
     next: 'Captura següent',
     goTo: 'Mostra la captura {n}',
     slide: 'Captura {n} de {total}',
+    nextProject: 'Projecte següent',
+    enlarge: 'Amplia la captura {n}',
+    close: 'Tanca',
   },
   team: {
     title: 'Equip',
@@ -297,6 +318,7 @@ export const ca = {
     social: 'Xarxes',
     legal: 'Legal',
     rights: 'Tots els drets reservats.',
+    localTime: 'Hora local a Catalunya',
   },
   legalPages: {
     updated: 'Última actualització',

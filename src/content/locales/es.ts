@@ -75,6 +75,24 @@ export const es: Messages = {
       description: 'La página que buscas no existe.',
     },
   },
+  palette: {
+    open: 'Abre la búsqueda rápida',
+    title: 'Búsqueda rápida',
+    placeholder: 'Busca una página, un proyecto o una acción',
+    empty: 'Sin resultados',
+    pages: 'Páginas',
+    projects: 'Proyectos',
+    actions: 'Acciones',
+    theme: 'Cambia el tema claro u oscuro',
+    copyEmail: 'Copia el correo',
+    copied: 'Correo copiado',
+    language: 'Cambia a {name}',
+  },
+  cursor: {
+    view: 'Ver',
+    enlarge: 'Amplía',
+  },
+  actIndex: 'Secciones de la página',
   home: {
     hero: {
       title: 'Software a medida para negocios que tienen que funcionar.',
@@ -181,6 +199,9 @@ export const es: Messages = {
     next: 'Captura siguiente',
     goTo: 'Mostrar la captura {n}',
     slide: 'Captura {n} de {total}',
+    nextProject: 'Proyecto siguiente',
+    enlarge: 'Amplía la captura {n}',
+    close: 'Cerrar',
   },
   team: {
     title: 'Equipo',
@@ -300,6 +321,7 @@ export const es: Messages = {
     social: 'Redes',
     legal: 'Legal',
     rights: 'Todos los derechos reservados.',
+    localTime: 'Hora local en Cataluña',
   },
   legalPages: {
     updated: 'Última actualización',

@@ -91,3 +91,44 @@ test('arrow keys move between sections of the home page', async ({ page, isMobil
   await page.keyboard.press('ArrowLeft')
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBeLessThan(50)
 })
+
+test('quick search opens from the keyboard and goes to a project', async ({ page, isMobile }) => {
+  test.skip(isMobile, 'keyboard shortcut is a desktop affordance')
+  await page.goto('/en')
+  await page.waitForLoadState('networkidle')
+  await page.keyboard.press('Control+k')
+  const dialog = page.getByRole('dialog', { name: 'Quick search' })
+  await expect(dialog).toBeVisible()
+
+  const results = await new AxeBuilder({ page })
+    .include('[role="dialog"]')
+    .withTags(['wcag2a', 'wcag2aa'])
+    .analyze()
+  expect(results.violations.map((v) => v.id)).toEqual([])
+
+  await page.keyboard.type('menu')
+  await page.keyboard.press('Enter')
+  await expect(page).toHaveURL(/\/en\/projects\/menu-ginebro$/)
+  await expect(page.locator('h1')).toContainText('Menú Ginebró')
+})
+
+test('project screenshots open full screen and close with Escape', async ({ page }) => {
+  await page.goto('/en/projects/menu-ginebro')
+  const thumb = page.getByRole('button', { name: 'Enlarge screenshot 2' })
+  await thumb.scrollIntoViewIfNeeded()
+  await thumb.click()
+  const dialog = page.getByRole('dialog', { name: /Screenshot 2 of/ })
+  await expect(dialog).toBeVisible()
+
+  const results = await new AxeBuilder({ page })
+    .include('[role="dialog"]')
+    .withTags(['wcag2a', 'wcag2aa'])
+    .analyze()
+  expect(results.violations.map((v) => v.id)).toEqual([])
+
+  await page.keyboard.press('ArrowRight')
+  await expect(page.getByRole('dialog', { name: /Screenshot 3 of/ })).toBeVisible()
+  await page.keyboard.press('Escape')
+  await expect(page.getByRole('dialog')).toHaveCount(0)
+  await expect(page.getByRole('button', { name: 'Enlarge screenshot 3' })).toBeFocused()
+})

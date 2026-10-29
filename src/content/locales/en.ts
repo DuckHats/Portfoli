@@ -74,6 +74,24 @@ export const en: Messages = {
       description: 'The page you are looking for does not exist.',
     },
   },
+  palette: {
+    open: 'Open quick search',
+    title: 'Quick search',
+    placeholder: 'Search for a page, a project or an action',
+    empty: 'No results',
+    pages: 'Pages',
+    projects: 'Projects',
+    actions: 'Actions',
+    theme: 'Switch between light and dark',
+    copyEmail: 'Copy the email address',
+    copied: 'Email copied',
+    language: 'Switch to {name}',
+  },
+  cursor: {
+    view: 'View',
+    enlarge: 'Enlarge',
+  },
+  actIndex: 'Page sections',
   home: {
     hero: {
       title: 'Custom software for businesses that have to work.',
@@ -176,6 +194,9 @@ export const en: Messages = {
     next: 'Next screenshot',
     goTo: 'Show screenshot {n}',
     slide: 'Screenshot {n} of {total}',
+    nextProject: 'Next project',
+    enlarge: 'Enlarge screenshot {n}',
+    close: 'Close',
   },
   team: {
     title: 'Team',
@@ -294,6 +315,7 @@ export const en: Messages = {
     social: 'Social',
     legal: 'Legal',
     rights: 'All rights reserved.',
+    localTime: 'Local time in Catalonia',
   },
   legalPages: {
     updated: 'Last updated',

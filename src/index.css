@@ -212,3 +212,28 @@
   transform-origin: 50% 100%;
   animation: line-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+
+/* Hero words: lift and take the accent under a mouse pointer. */
+.word-lift {
+  display: inline-block;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.2s ease-out;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .word-lift:hover {
+    color: rgb(var(--color-accent));
+    transform: translateY(-0.06em) rotate(-2deg);
+  }
+}
+
+/* Field errors slide in once; reduced motion shows them in place. */
+@keyframes error-in {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+}
+.error-in {
+  animation: error-in 0.25s ease-out both;
+}

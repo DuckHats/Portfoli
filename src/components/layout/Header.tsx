@@ -1,4 +1,4 @@
-import { Menu, X } from 'lucide-react'
+import { Menu, Search, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useActiveAct } from '@/hooks/useActiveAct'
@@ -10,6 +10,8 @@ import { Container } from '../ui/Container'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import { ThemeToggle } from './ThemeToggle'
 import { PRIMARY_NAV } from './navigation'
+import { openQuickSearch } from './quickSearchEvent'
+import { ScrollProgress } from './ScrollProgress'
 
 const linkStyles = ({ isActive }: { isActive: boolean }) =>
   `px-3 py-2 text-sm font-medium transition-colors ${
@@ -19,7 +21,7 @@ const linkStyles = ({ isActive }: { isActive: boolean }) =>
   }`
 
 export function Header() {
-  const { nav, a11y } = useMessages()
+  const { nav, a11y, palette } = useMessages()
   const language = useLanguage()
   const { pathname } = useLocation()
   // The menu is open only for the page it was opened on, so navigating or switching language closes it.
@@ -59,6 +61,16 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
+          <button
+            type="button"
+            onClick={openQuickSearch}
+            aria-label={palette.open}
+            aria-keyshortcuts="Control+K Meta+K"
+            className="inline-flex h-10 items-center gap-2 rounded-full px-3 text-sm text-muted transition-colors hover:bg-ink/10 hover:text-ink"
+          >
+            <Search size={16} aria-hidden />
+            <kbd className="hidden font-sans text-xs lg:inline">Ctrl K</kbd>
+          </button>
           <LanguageSwitcher />
           <ThemeToggle />
           <AppLink to="contact" className={buttonStyles({ variant: 'primary' })}>
@@ -77,6 +89,7 @@ export function Header() {
           {open ? <X size={20} aria-hidden /> : <Menu size={20} aria-hidden />}
         </button>
       </Container>
+      <ScrollProgress />
 
       {open && (
         <div id="mobile-menu" className="border-t border-ink/15 bg-canvas md:hidden">
