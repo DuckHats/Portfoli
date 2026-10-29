@@ -6,8 +6,10 @@ export const SITE = {
   foundedYear: 2023,
   logo: '/brand/logo-mark.png',
   ogImage: '/og-cover.png',
+  ogImageSize: { width: 1200, height: 630 },
   email: 'info@duckhats.cat',
-  // TODO(client): add a corporate phone number (the personal one was removed on purpose).
+  // TODO(client): add a corporate phone number (the personal one was removed on purpose) and the
+  // studio's address; with both, the Organization JSON-LD can become a LocalBusiness.
   phone: null as string | null,
   social: {
     github: 'https://github.com/DuckHats',

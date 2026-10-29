@@ -1,17 +1,23 @@
 import { TeamStrip } from '@/components/sections/TeamStrip'
 import { SEO } from '@/components/SEO'
+import { pageJsonLd } from '@/lib/jsonLd'
 import { Container } from '@/components/ui/Container'
 import { PageHeader } from '@/components/ui/PageHeader'
 import { Reveal } from '@/components/ui/Reveal'
 import { SITE } from '@/config/site'
-import { useMessages, useT } from '@/lib/i18n'
+import { useMessages, useT, useLanguage } from '@/lib/i18n'
 
 export function AboutPage() {
+  const language = useLanguage()
   const { seo, about, team } = useMessages()
   const t = useT()
   return (
     <>
-      <SEO title={seo.about.title} description={seo.about.description} />
+      <SEO
+        title={seo.about.title}
+        description={seo.about.description}
+        jsonLd={pageJsonLd('about', language)}
+      />
       <PageHeader title={about.title} intro={about.intro} />
       <section data-act="paper" aria-labelledby="team" className="bg-canvas text-ink">
         <Container className="py-24 sm:py-32">

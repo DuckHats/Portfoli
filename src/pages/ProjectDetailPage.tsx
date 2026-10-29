@@ -14,8 +14,8 @@ import { Tag } from '@/components/ui/Tag'
 import { findProject, projects } from '@/content/projects'
 import { useLanguage, useLocalize, useMessages } from '@/lib/i18n'
 import { displayUrl } from '@/lib/projectUrl'
-import { buildPath, projectPath } from '@/lib/routes'
-import { breadcrumbJsonLd } from '@/lib/seo'
+import { projectJsonLd } from '@/lib/jsonLd'
+import { metaDescription } from '@/lib/seo'
 import { NotFoundPage } from './NotFoundPage'
 
 export function ProjectDetailPage() {
@@ -23,17 +23,13 @@ export function ProjectDetailPage() {
   const project = findProject(projectId)
   const language = useLanguage()
   const localize = useLocalize()
-  const { projects: copy, nav } = useMessages()
+  const { projects: copy } = useMessages()
 
   if (!project) return <NotFoundPage />
 
   const description = localize(project.summary)
   const nextProject = projects[(projects.indexOf(project) + 1) % projects.length]!
-  const jsonLd = breadcrumbJsonLd([
-    { name: nav.home, path: buildPath(language, 'home') },
-    { name: nav.projects, path: buildPath(language, 'projects') },
-    { name: project.title, path: projectPath(language, project.id) },
-  ])
+  const jsonLd = projectJsonLd(project, language)
   const slides = project.gallery.map((src, i) => ({
     src,
     alt: `${project.title} — ${copy.imageOf} ${i + 1}`,
@@ -41,7 +37,12 @@ export function ProjectDetailPage() {
 
   return (
     <>
-      <SEO title={project.title} description={description} image={project.image} jsonLd={jsonLd} />
+      <SEO
+        title={project.title}
+        description={metaDescription(description)}
+        image={project.image}
+        jsonLd={jsonLd}
+      />
       <article>
         <header data-act="ink" className="bg-canvas text-ink">
           <Container className="pb-16 pt-14 sm:pb-24 sm:pt-20">

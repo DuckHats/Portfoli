@@ -4,6 +4,7 @@ import { ROUTES } from '../src/lib/routes'
 import { projects } from '../src/content/projects'
 import { buildPages, renderShell } from '../scripts/lib/shells'
 import { renderRobots, renderSecurityTxt, renderSitemap } from '../scripts/lib/sitemap'
+import { formatTitle, metaDescription } from '../src/lib/seo'
 
 const BASE = 'https://example.test'
 
@@ -99,10 +100,12 @@ describe('renderShell', () => {
     const blocks = [
       ...out.matchAll(/<script type="application\/ld\+json" data-rh="true">(.*?)<\/script>/g),
     ]
-    expect(blocks).toHaveLength(1)
-    const json = JSON.parse(blocks[0]![1]!)
-    expect(json['@type']).toBe('WebSite')
-    expect(json.url).toBe(`${BASE}/ca`)
+    const [organization, website] = blocks.map((b) => JSON.parse(b[1]!))
+    expect(organization['@type']).toBe('Organization')
+    expect(organization['@id']).toBe(`${BASE}/#organization`)
+    expect(website['@type']).toBe('WebSite')
+    expect(website.url).toBe(`${BASE}/ca`)
+    expect(website.publisher).toEqual({ '@id': `${BASE}/#organization` })
     expect(out).not.toContain('%BASE%')
   })
 
@@ -168,5 +171,73 @@ describe('robots and security.txt', () => {
     expect(txt).toContain('Contact: mailto:sec@example.test')
     expect(txt).toContain('Expires: 2027-10-28T08:00:00Z')
     expect(txt).toContain(`Canonical: ${BASE}/.well-known/security.txt`)
+  })
+})
+
+describe('search snippets', () => {
+  // Search engines cut titles around 60 characters and descriptions around 155-160.
+  it.each(buildPages().map((p) => [p.pathname, p] as const))(
+    '%s has a title of at most 60 characters and a description of 70-160',
+    (_, page) => {
+      expect(formatTitle(page.title, page.home).length).toBeLessThanOrEqual(60)
+      expect(page.description.length).toBeGreaterThanOrEqual(70)
+      expect(page.description.length).toBeLessThanOrEqual(160)
+    },
+  )
+
+  it('shortens long descriptions at a word boundary', () => {
+    const long = `${'word '.repeat(40)}end`
+    const out = metaDescription(long)
+    expect(out.length).toBeLessThanOrEqual(155)
+    expect(out).toMatch(/word…$/)
+    expect(metaDescription('Short.')).toBe('Short.')
+  })
+})
+
+describe('structured data', () => {
+  const blocksOf = (page: (typeof pages)[number]) =>
+    page.jsonLd.map((entry) => JSON.parse(JSON.stringify(entry).replaceAll('%BASE%', BASE)))
+
+  it('gives every page the Organization first, with an id the other nodes point to', () => {
+    for (const page of pages) {
+      const [organization, ...rest] = blocksOf(page)
+      expect(organization['@type'], page.pathname).toBe('Organization')
+      expect(organization['@id']).toBe(`${BASE}/#organization`)
+      expect(organization.sameAs.length).toBeGreaterThan(0)
+      for (const block of rest) expect(block['@context']).toBe('https://schema.org')
+    }
+  })
+
+  it('describes each kind of page with the right types', () => {
+    const typesAt = (pathname: string) =>
+      blocksOf(pages.find((p) => p.pathname === pathname)!).map((b) => b['@type'])
+    expect(typesAt('/ca')).toEqual(['Organization', 'WebSite'])
+    expect(typesAt('/ca/serveis')).toEqual(['Organization', 'BreadcrumbList', 'ItemList'])
+    expect(typesAt('/es/nosotros')).toEqual(['Organization', 'BreadcrumbList', 'AboutPage'])
+    expect(typesAt('/en/contact')).toEqual(['Organization', 'BreadcrumbList', 'ContactPage'])
+    expect(typesAt('/en/projects/menu-ginebro')).toEqual([
+      'Organization',
+      'BreadcrumbList',
+      'CreativeWork',
+    ])
+  })
+
+  it('uses absolute URLs that resolve to real pages in breadcrumbs', () => {
+    const known = new Set(pages.map((p) => `${BASE}${p.pathname}`))
+    for (const page of pages) {
+      for (const block of blocksOf(page).filter((b) => b['@type'] === 'BreadcrumbList')) {
+        for (const item of block.itemListElement) expect(known.has(item.item), item.item).toBe(true)
+      }
+    }
+  })
+})
+
+describe('image sitemap', () => {
+  const { xml } = renderSitemap(BASE, '2026-01-01')
+
+  it('lists project screenshots and team portraits as absolute URLs', () => {
+    expect(xml).toContain('xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"')
+    expect(xml).toContain(`<image:loc>${BASE}${projects[0]!.gallery[0]}</image:loc>`)
+    expect(xml).toContain(`<image:loc>${BASE}/team/`)
   })
 })

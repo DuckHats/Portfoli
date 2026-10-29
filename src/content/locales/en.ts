@@ -42,7 +42,8 @@ export const en: Messages = {
     },
     projects: {
       title: 'Projects',
-      description: 'A selection of the projects we have designed and built for clients.',
+      description:
+        'A selection of the projects we have designed and built for clients: the challenge, the solution and the result of each one.',
     },
     about: {
       title: 'About us and the team',
@@ -51,7 +52,8 @@ export const en: Messages = {
     },
     contact: {
       title: 'Contact',
-      description: 'Tell us about your project and we will propose the next steps.',
+      description:
+        'Tell us about your project step by step: what you need, timeline and approximate budget. We will reply by email with the next steps.',
     },
     careers: {
       title: 'Work with us',
@@ -59,11 +61,13 @@ export const en: Messages = {
     },
     privacy: {
       title: 'Privacy policy',
-      description: 'How we handle the personal data you provide through this website.',
+      description:
+        'How we handle the personal data you provide through this website: purpose, legal basis, retention, analytics and your rights.',
     },
     legal: {
       title: 'Legal notice',
-      description: 'Legal information about the owner and the use of this website.',
+      description:
+        'Legal information about the owner of this website, the terms of use, intellectual property and liability.',
     },
     notFound: {
       title: 'Page not found',

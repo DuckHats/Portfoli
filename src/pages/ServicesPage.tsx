@@ -1,17 +1,23 @@
 import { SEO } from '@/components/SEO'
+import { pageJsonLd } from '@/lib/jsonLd'
 import { AppLink } from '@/components/ui/AppLink'
 import { buttonStyles } from '@/components/ui/buttonStyles'
 import { Container } from '@/components/ui/Container'
 import { PageHeader } from '@/components/ui/PageHeader'
 import { serviceCategories } from '@/content/services'
-import { useLocalize, useMessages } from '@/lib/i18n'
+import { useLocalize, useMessages, useLanguage } from '@/lib/i18n'
 
 export function ServicesPage() {
+  const language = useLanguage()
   const { seo, services, home } = useMessages()
   const localize = useLocalize()
   return (
     <>
-      <SEO title={seo.services.title} description={seo.services.description} />
+      <SEO
+        title={seo.services.title}
+        description={seo.services.description}
+        jsonLd={pageJsonLd('services', language)}
+      />
       <PageHeader title={services.title} intro={services.intro} />
       <div data-act="paper" className="bg-canvas">
         <Container className="py-20 sm:py-28">

@@ -48,6 +48,8 @@ for (const page of pages.filter((p) =>
     expect(await count('head meta[property="og:image"]')).toBe(1)
     expect(await count('head link[rel="alternate"][hreflang]')).toBe(LANGUAGES.length + 1)
     expect(await count('h1')).toBe(1)
+    expect(await count('head meta[name="robots"]')).toBe(1)
+    expect(await count('head script[type="application/ld+json"]')).toBe(page.jsonLd.length)
     await expect(browser.locator('head link[rel="canonical"]')).toHaveAttribute(
       'href',
       canonicalUrl(page.pathname, BASE),

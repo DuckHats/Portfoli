@@ -1,17 +1,23 @@
 import { Github, Instagram, Mail, Phone } from 'lucide-react'
 import { ContactForm } from '@/components/forms/ContactForm'
 import { SEO } from '@/components/SEO'
+import { pageJsonLd } from '@/lib/jsonLd'
 import { ExternalLink } from '@/components/ui/AppLink'
 import { Container } from '@/components/ui/Container'
 import { PageHeader } from '@/components/ui/PageHeader'
 import { SITE } from '@/config/site'
-import { useMessages } from '@/lib/i18n'
+import { useMessages, useLanguage } from '@/lib/i18n'
 
 export function ContactPage() {
+  const language = useLanguage()
   const { seo, contact } = useMessages()
   return (
     <>
-      <SEO title={seo.contact.title} description={seo.contact.description} />
+      <SEO
+        title={seo.contact.title}
+        description={seo.contact.description}
+        jsonLd={pageJsonLd('contact', language)}
+      />
       <PageHeader title={contact.title} intro={contact.intro} />
       <div data-act="paper" className="bg-canvas">
         <Container className="grid gap-12 py-20 sm:py-28 lg:grid-cols-[1fr_24rem] lg:gap-20">

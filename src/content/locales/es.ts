@@ -52,11 +52,13 @@ export const es: Messages = {
     },
     contact: {
       title: 'Contacto',
-      description: 'Cuéntanos tu proyecto y te propondremos los siguientes pasos.',
+      description:
+        'Cuéntanos tu proyecto paso a paso: qué necesitas, plazos y presupuesto orientativo. Te responderemos por correo con los siguientes pasos.',
     },
     careers: {
       title: 'Trabaja con nosotros',
-      description: 'Envíanos tu candidatura si quieres colaborar con DuckHats.',
+      description:
+        'Envíanos tu candidatura si eres desarrollador, diseñador o perfil de producto y te interesa colaborar con DuckHats.',
     },
     privacy: {
       title: 'Política de privacidad',
@@ -64,7 +66,8 @@ export const es: Messages = {
     },
     legal: {
       title: 'Aviso legal',
-      description: 'Información legal sobre el titular y el uso de este sitio web.',
+      description:
+        'Información legal sobre el titular de este sitio web, las condiciones de uso, la propiedad intelectual y la responsabilidad.',
     },
     notFound: {
       title: 'Página no encontrada',

@@ -8,16 +8,18 @@
 import { SITE } from '../../src/config/site'
 import { messages } from '../../src/content/messages'
 import { featuredProject, projects } from '../../src/content/projects'
+import { teamMembers } from '../../src/content/team'
 import { LANGUAGES } from '../../src/lib/languages'
 import type { Language } from '../../src/lib/languages'
 import { ROUTES, buildPath, projectPath } from '../../src/lib/routes'
+import { pageJsonLd, projectJsonLd } from '../../src/lib/jsonLd'
 import {
   absoluteUrl,
   alternateLinks,
-  breadcrumbJsonLd,
   canonicalUrl,
   formatTitle,
-  websiteJsonLd,
+  metaDescription,
+  organizationJsonLd,
 } from '../../src/lib/seo'
 
 export interface PageMeta {
@@ -30,6 +32,8 @@ export interface PageMeta {
   image: string
   home: boolean
   jsonLd: Record<string, unknown>[]
+  /** Images worth listing in the image sitemap (project screenshots, team portraits). */
+  images?: string[]
   /** Not to be indexed: no canonical or hreflang (the 404 page). */
   noindex?: boolean
 }
@@ -40,7 +44,7 @@ const fileFor = (pathname: string) => `${pathname.replace(/^\//, '')}.html`
 export function buildPages(): PageMeta[] {
   const pages: PageMeta[] = []
   for (const language of LANGUAGES) {
-    const { seo, nav } = messages[language]
+    const { seo } = messages[language]
 
     for (const route of ROUTES) {
       const pathname = buildPath(language, route.key)
@@ -52,7 +56,11 @@ export function buildPages(): PageMeta[] {
         description: seo[route.key].description,
         image: SITE.ogImage,
         home: route.key === 'home',
-        jsonLd: route.key === 'home' ? [websiteJsonLd(language, '%BASE%')] : [],
+        images: route.key === 'about' ? teamMembers.map((member) => member.photo) : undefined,
+        jsonLd: [
+          organizationJsonLd(language, '%BASE%'),
+          ...pageJsonLd(route.key, language, '%BASE%'),
+        ],
       })
     }
 
@@ -63,18 +71,13 @@ export function buildPages(): PageMeta[] {
         pathname,
         file: fileFor(pathname),
         title: project.title,
-        description: project.summary[language],
+        description: metaDescription(project.summary[language]),
         image: project.image,
         home: false,
+        images: [project.image, ...project.gallery],
         jsonLd: [
-          breadcrumbJsonLd(
-            [
-              { name: nav.home, path: buildPath(language, 'home') },
-              { name: nav.projects, path: buildPath(language, 'projects') },
-              { name: project.title, path: pathname },
-            ],
-            '%BASE%',
-          ),
+          organizationJsonLd(language, '%BASE%'),
+          ...projectJsonLd(project, language, '%BASE%'),
         ],
       })
     }
@@ -116,6 +119,7 @@ function headTags(page: PageMeta, base: string): string {
     ...(page.noindex
       ? [meta('name', 'robots', 'noindex')]
       : [
+          meta('name', 'robots', 'index, follow, max-image-preview:large'),
           `<link rel="canonical" href="${escapeHtml(canonical)}" data-rh="true" />`,
           ...alternateLinks(page.pathname, base).map(
             (a) =>
@@ -132,10 +136,18 @@ function headTags(page: PageMeta, base: string): string {
     meta('property', 'og:description', d),
     meta('property', 'og:url', escapeHtml(canonical)),
     meta('property', 'og:image', escapeHtml(image)),
+    meta('property', 'og:image:alt', t),
+    ...(page.image === SITE.ogImage
+      ? [
+          meta('property', 'og:image:width', String(SITE.ogImageSize.width)),
+          meta('property', 'og:image:height', String(SITE.ogImageSize.height)),
+        ]
+      : []),
     meta('name', 'twitter:card', 'summary_large_image'),
     meta('name', 'twitter:title', t),
     meta('name', 'twitter:description', d),
     meta('name', 'twitter:image', escapeHtml(image)),
+    meta('name', 'twitter:image:alt', t),
     ...page.jsonLd.map(
       (entry) =>
         `<script type="application/ld+json" data-rh="true">${jsonForScript(entry, base)}</script>`,

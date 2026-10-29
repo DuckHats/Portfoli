@@ -1,4 +1,4 @@
-import { alternateLinks, canonicalUrl } from '../../src/lib/seo'
+import { absoluteUrl, alternateLinks, canonicalUrl } from '../../src/lib/seo'
 import { routeKeyFor } from '../../src/lib/routes'
 import type { RouteKey } from '../../src/lib/routes'
 import { buildPages } from './shells'
@@ -26,18 +26,23 @@ export function renderSitemap(base: string, lastmod: string): { xml: string; cou
     const alternates = alternateLinks(page.pathname, base)
       .map((a) => `    <xhtml:link rel="alternate" hreflang="${a.hrefLang}" href="${a.href}"/>`)
       .join('\n')
+    const images = [...new Set(page.images ?? [])]
+      .map(
+        (src) => `    <image:image><image:loc>${absoluteUrl(src, base)}</image:loc></image:image>`,
+      )
+      .join('\n')
     return `  <url>
     <loc>${canonicalUrl(page.pathname, base)}</loc>
     <lastmod>${lastmod}</lastmod>
     <priority>${priorityFor(page.pathname)}</priority>
-${alternates}
+${alternates}${images ? `\n${images}` : ''}
   </url>`
   })
 
   return {
     count: urls.length,
     xml: `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${urls.join('\n')}
 </urlset>
 `,

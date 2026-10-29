@@ -111,7 +111,11 @@ describe('<SEO>', () => {
       'content',
       'https://duckhats.cat/og-cover.png',
     )
-    expect(head('script[type="application/ld+json"]')).toHaveLength(1)
+    // The Organization on every page, then the page's own data.
+    const types = [...head('script[type="application/ld+json"]')].map(
+      (script) => (JSON.parse(script.textContent!) as { '@type': string })['@type'],
+    )
+    expect(types).toEqual(['Organization', 'Thing'])
   })
 
   it('uses noindex and omits canonical and hreflang when asked', async () => {
@@ -124,8 +128,8 @@ describe('<SEO>', () => {
 
   it('escapes < in JSON-LD so it cannot close the script tag', async () => {
     inEnglish(<SEO title="X" description="Y" jsonLd={{ name: '</script><b>' }} />)
-    await waitFor(() => expect(head('script[type="application/ld+json"]')).toHaveLength(1))
-    expect(head('script[type="application/ld+json"]')[0]!.textContent).not.toContain('</script>')
+    await waitFor(() => expect(head('script[type="application/ld+json"]')).toHaveLength(2))
+    expect(head('script[type="application/ld+json"]')[1]!.textContent).not.toContain('</script>')
   })
 })
 

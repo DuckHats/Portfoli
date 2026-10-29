@@ -51,19 +51,23 @@ export const ca = {
     },
     contact: {
       title: 'Contacte',
-      description: 'Explica’ns el teu projecte i et proposarem els propers passos.',
+      description:
+        'Explica’ns el teu projecte pas a pas: què necessites, terminis i pressupost orientatiu. Et respondrem per correu amb els propers passos.',
     },
     careers: {
       title: 'Treballa amb nosaltres',
-      description: 'Envia’ns la teva candidatura si vols col·laborar amb DuckHats.',
+      description:
+        'Envia’ns la teva candidatura si ets desenvolupador, dissenyador o perfil de producte i t’interessa col·laborar amb DuckHats.',
     },
     privacy: {
       title: 'Política de privacitat',
-      description: 'Com tractem les dades personals que ens facilites a través del web.',
+      description:
+        'Com tractem les dades personals que ens facilites a través del web: finalitat, base jurídica, conservació, analítica i els teus drets.',
     },
     legal: {
       title: 'Avís legal',
-      description: 'Informació legal sobre el titular i l’ús d’aquest web.',
+      description:
+        'Informació legal sobre el titular d’aquest web, les condicions d’ús, la propietat intel·lectual i la responsabilitat.',
     },
     notFound: {
       title: 'Pàgina no trobada',

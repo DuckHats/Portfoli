@@ -1,18 +1,24 @@
 import { SEO } from '@/components/SEO'
+import { pageJsonLd } from '@/lib/jsonLd'
 import { Container } from '@/components/ui/Container'
 import { PageHeader } from '@/components/ui/PageHeader'
 import { SITE } from '@/config/site'
-import { useMessages, useT } from '@/lib/i18n'
+import { useLanguage, useMessages, useT } from '@/lib/i18n'
 
 // TODO(client): have the privacy policy and legal notice reviewed by a legal advisor and add the
 // registered company details (legal name, tax ID, address) required for a commercial website.
 export function LegalPage({ kind }: { kind: 'privacy' | 'legal' }) {
   const { seo, legalPages } = useMessages()
+  const language = useLanguage()
   const t = useT()
   const sections = legalPages[kind].sections
   return (
     <>
-      <SEO title={seo[kind].title} description={seo[kind].description} />
+      <SEO
+        title={seo[kind].title}
+        description={seo[kind].description}
+        jsonLd={pageJsonLd(kind, language)}
+      />
       <PageHeader title={seo[kind].title} />
       <div data-act="paper" className="bg-canvas">
         <Container className="py-20">
