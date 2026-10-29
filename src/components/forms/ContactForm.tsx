@@ -4,7 +4,7 @@ import { useFormSubmit } from '@/hooks/useFormSubmit'
 import { useMessages } from '@/lib/i18n'
 import type { ValidationKey } from '@/lib/schemas'
 import { contactSchema, fieldErrors } from '@/lib/schemas'
-import { buttonStyles } from '../ui/buttonStyles'
+import { SubmitButton } from '../ui/SubmitButton'
 import { FormField } from '../ui/FormField'
 import { inputStyles } from '../ui/inputStyles'
 import { ConsentNote } from './ConsentNote'
@@ -72,13 +72,7 @@ export function ContactForm() {
         />
       </FormField>
       <ConsentNote />
-      <button
-        type="submit"
-        disabled={status === 'submitting'}
-        className={buttonStyles({ size: 'lg' })}
-      >
-        {status === 'submitting' ? copy.sending : copy.submit}
-      </button>
+      <SubmitButton status={status} label={copy.submit} sendingLabel={copy.sending} />
       <FormStatus status={status} success={copy.success} error={copy.error} />
     </form>
   )
