@@ -46,8 +46,9 @@ Read README.md first. Things that are not obvious from the code:
   (`PROJECT_*`, `FEATURES_BY_TYPE`, `CONTACT_STEPS`, `contactStepSchema`), shared with
   `api/submit-contact.ts`. `features` travels as one JSON field (`parseStringList`). The budget
   choices are placeholders until the real ranges exist (TODO(client) in the locales).
-- **Intro**: `#intro` in `index.html` + `public/theme-init.js` + CSS in `src/index.css`. e2e runs
-  with reduced motion, so it never shows there except in its own test.
+- **Loader**: `#intro` markup and its inline `<style>` in `index.html`, flagged once per session
+  by `public/theme-init.js`. e2e runs with reduced motion, so it never shows there except in its
+  own test.
 - **Theme state** lives in `src/lib/theme.ts` (`toggleTheme`, `useTheme`), shared by the header
   button and quick search.
 - **Acts**: every top-level block on a page declares `data-act` (`paper`, `ink`, `red`); the header

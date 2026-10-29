@@ -52,16 +52,18 @@ Home rhythm: ink → paper → red → paper → ink → paper → red → ink.
 - **Services**: giant type rows that are real disclosure buttons; the open one faces the viewer.
 - **Projects**: a stack of pages (`sections/ProjectStack`) on wide screens, a list on phones.
 - **Method**: four large outlined numerals on the dark stage. **Team**: a strip of portraits where
-  the active one widens and turns to colour (`sections/TeamStrip`); a list on phones.
+  the active one widens and turns to colour (`sections/TeamStrip`); a list on phones. Portraits sit
+  in the brand duotone (grey, contrasted, tinted red) so mismatched photos read as one set, and
+  each is framed on the face with `photoFocus` in `content/team.ts`.
 - **Keyboard**: on the home page ←/→ (or J/K) jump between sections (`hooks/useSectionKeys`).
 - The logo is drawn as a mask (`.mark-mask`) so it takes the act's ink colour, and appears as a
   large faint silhouette on page headers and, centred, in the closing act.
 - The header and the top of the footer show the mark alone; the name is spoken by the intro and
   the giant footer wordmark, never set next to the mark.
-- **Intro**: on the first visit to the home page in a session, the name rises on the dark stage and
-  the stage lifts away (about 1.6 s). Pure CSS from `index.html` (`#intro`, flagged by
-  `public/theme-init.js`), so it plays from the first paint, never takes clicks and never runs with
-  reduced motion.
+- **Loader**: on the first page of each browser session, the mark wipes in, the name rises letter
+  by letter over a filling red line and the dark curtain splits open (about 1.6 s). Pure CSS inline
+  in `index.html` (`#intro`, flagged by `public/theme-init.js`), so it plays from the first paint,
+  never takes clicks and never runs with reduced motion.
 - Notices are tinted panels; never a coloured left border. The cookie notice is a small dark card.
 - Shadows exist only where they explain depth: windows that float in 3D and floating cards.
 
