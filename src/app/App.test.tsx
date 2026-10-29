@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { HelmetProvider } from 'react-helmet-async'
 import { MemoryRouter } from 'react-router-dom'
@@ -73,32 +73,16 @@ describe('routing and language', () => {
 })
 
 describe('contact form', () => {
-  it('shows validation errors and does not call the API', async () => {
+  // The whole brief (steps, review, sending) is covered in forms/ContactForm.test.tsx.
+  it('opens the project brief on its first question and will not move on unanswered', async () => {
     const fetchMock = vi.spyOn(globalThis, 'fetch')
-    renderAt('/en/contact')
-    await userEvent.click(
-      await screen.findByRole('button', { name: messages.en.contact.form.submit }),
-    )
-    expect((await screen.findAllByRole('alert')).length).toBeGreaterThanOrEqual(3)
-    expect(fetchMock).not.toHaveBeenCalled()
-  })
-
-  it('submits a valid form to the API', async () => {
-    const fetchMock = vi
-      .spyOn(globalThis, 'fetch')
-      .mockResolvedValue(new Response('{}', { status: 200 }))
-    renderAt('/en/contact')
     const copy = messages.en.contact.form
-    await userEvent.type(await screen.findByLabelText(copy.name), 'Ada')
-    await userEvent.type(screen.getByLabelText(copy.email), 'ada@example.com')
-    await userEvent.type(screen.getByLabelText(copy.message), 'Hello there')
-    await userEvent.click(screen.getByRole('button', { name: copy.submit }))
-    await waitFor(() =>
-      expect(fetchMock).toHaveBeenCalledWith(
-        '/api/submit-contact',
-        expect.objectContaining({ method: 'POST' }),
-      ),
-    )
-    expect(await screen.findByText(copy.success)).toBeInTheDocument()
+    renderAt('/en/contact')
+    expect(
+      await screen.findByRole('heading', { level: 2, name: copy.steps.type.title }),
+    ).toBeInTheDocument()
+    await userEvent.click(screen.getByRole('button', { name: copy.next }))
+    expect(await screen.findByRole('alert')).toHaveTextContent(messages.en.validation.required)
+    expect(fetchMock).not.toHaveBeenCalled()
   })
 })

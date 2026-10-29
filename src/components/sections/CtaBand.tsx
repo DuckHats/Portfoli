@@ -18,7 +18,7 @@ export function CtaBand() {
     >
       <div
         aria-hidden
-        className="mark-mask pointer-events-none absolute -right-24 -top-16 hidden aspect-square w-[36rem] bg-ink/10 sm:block"
+        className="mark-mask pointer-events-none absolute left-1/2 top-1/2 hidden aspect-square w-[34rem] -translate-x-1/2 -translate-y-1/2 bg-ink/[0.06] sm:block"
       />
       <Container className="relative py-28 sm:py-40">
         <Headline

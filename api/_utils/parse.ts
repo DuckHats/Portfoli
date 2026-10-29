@@ -59,3 +59,13 @@ export const sanitiseFilename = (name: string | null) =>
     .replace(/[^\w.-]+/g, '_')
     .replace(/^\.+/, '')
     .slice(0, 80) || 'cv.pdf'
+
+/** A list sent as one JSON-encoded multipart field (links, features); anything else is empty. */
+export const parseStringList = (raw: string | undefined): string[] => {
+  try {
+    const parsed: unknown = JSON.parse(raw ?? '[]')
+    return Array.isArray(parsed) ? parsed.filter((l): l is string => typeof l === 'string') : []
+  } catch {
+    return []
+  }
+}

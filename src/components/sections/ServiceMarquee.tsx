@@ -9,10 +9,8 @@ import {
   useVelocity,
 } from 'motion/react'
 import { useEffect, useRef } from 'react'
-import { projects } from '@/content/projects'
 import { useMessages } from '@/lib/i18n'
 
-const technologies = [...new Set(projects.flatMap((project) => project.technologies))]
 /** Percent of one row's width travelled per second when the page is still. */
 const BASE_SPEED = 2
 
@@ -22,12 +20,16 @@ const wrap = (min: number, max: number, value: number) => {
 }
 
 /**
- * The technologies used in real projects, on a band that reacts to scrolling: it speeds up and
+ * The services we offer, on a band that reacts to scrolling: it speeds up and
  * leans with the scroll velocity and turns round when you scroll back up. It pauses on hover and
  * is a static, wrapped list for reduced motion.
  */
-export function TechMarquee() {
-  const { home } = useMessages()
+export function ServiceMarquee() {
+  const { home, contact } = useMessages()
+  // What we build, in the same words the project brief offers (its open "other" choice aside).
+  const services = Object.entries(contact.form.projectTypes)
+    .filter(([id]) => id !== 'other')
+    .map(([id, kind]) => ({ id, name: kind.label }))
   const reduce = useReducedMotion()
   const offset = useMotionValue(0)
   const { scrollY } = useScroll()
@@ -66,10 +68,10 @@ export function TechMarquee() {
         hidden ? 'motion-reduce:hidden' : ''
       }`}
     >
-      {technologies.map((name) => (
-        <li key={name} className="flex items-center gap-12 whitespace-nowrap">
+      {services.map((service) => (
+        <li key={service.id} className="flex items-center gap-12 whitespace-nowrap">
           <span className="font-display text-5xl font-black uppercase tracking-tight sm:text-6xl">
-            {name}
+            {service.name}
           </span>
           <span aria-hidden className="mark-mask h-8 w-8 bg-accent" />
         </li>
@@ -81,7 +83,7 @@ export function TechMarquee() {
     <section
       ref={band}
       data-act="paper"
-      aria-label={home.tech.label}
+      aria-label={home.marquee.label}
       className="overflow-hidden bg-canvas py-8 text-ink"
       onPointerEnter={() => (paused.current = true)}
       onPointerLeave={() => (paused.current = false)}

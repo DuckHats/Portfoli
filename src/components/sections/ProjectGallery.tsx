@@ -10,7 +10,6 @@ import { useMessages, useT } from '@/lib/i18n'
  * thumbnail it came from.
  */
 export function ProjectGallery({ slides }: { slides: Slide[] }) {
-  const { cursor } = useMessages()
   const t = useT()
   const [open, setOpen] = useState<number | null>(null)
   const thumbs = useRef<(HTMLButtonElement | null)[]>([])
@@ -31,7 +30,6 @@ export function ProjectGallery({ slides }: { slides: Slide[] }) {
                 thumbs.current[index] = node
               }}
               type="button"
-              data-cursor={cursor.enlarge}
               aria-label={t('projects.enlarge', { n: index + 1 })}
               onClick={() => show(index)}
               className="group block aspect-[16/10] w-full overflow-hidden rounded-xl bg-surface ring-1 ring-ink/15"

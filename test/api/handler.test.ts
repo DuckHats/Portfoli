@@ -5,7 +5,16 @@ import { createFormHandler } from '../../api/_utils/handler'
 import { PayloadError } from '../../api/_utils/parse'
 import { createRateLimiter } from '../../api/_utils/rateLimit'
 
-const valid = { name: 'Ada', email: 'ada@example.com', message: 'Hola' }
+const valid = {
+  projectType: 'website',
+  stage: 'idea',
+  goal: 'A new website',
+  timeline: 'flexible',
+  budget: 'unknown',
+  name: 'Ada',
+  email: 'ada@example.com',
+  message: 'Hola',
+}
 
 function setup(fields: Record<string, string> = valid, limit = 5) {
   const parse = vi.fn().mockResolvedValue({ fields })

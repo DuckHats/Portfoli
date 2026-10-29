@@ -15,7 +15,7 @@ export function ContactPage() {
       <PageHeader title={contact.title} intro={contact.intro} />
       <div data-act="paper" className="bg-canvas">
         <Container className="grid gap-12 py-20 sm:py-28 lg:grid-cols-[1fr_24rem] lg:gap-20">
-          <div className="max-w-xl">
+          <div className="max-w-2xl">
             <ContactForm />
           </div>
           <aside

@@ -1,5 +1,5 @@
 import { AnimatePresence, m, useReducedMotion } from 'motion/react'
-import { Suspense, lazy, useRef } from 'react'
+import { Suspense, useRef } from 'react'
 import { useLocation, useOutlet } from 'react-router-dom'
 import { useMessages } from '@/lib/i18n'
 import { ErrorBoundary } from '../ErrorBoundary'
@@ -10,12 +10,6 @@ import { CookieBanner } from './CookieBanner'
 import { Footer } from './Footer'
 import { Header } from './Header'
 import { QuickSearch } from './QuickSearch'
-
-const StageCursor = lazy(() => import('../ui/StageCursor'))
-// Only mouse users ever see the cursor, so nobody else downloads it.
-const finePointer = () =>
-  typeof window.matchMedia === 'function' &&
-  window.matchMedia('(hover: hover) and (pointer: fine)').matches
 
 function RouteError({ reset }: { reset: () => void }) {
   const { error } = useMessages()
@@ -104,11 +98,6 @@ export function Layout() {
       <Footer />
       <CookieBanner />
       <QuickSearch />
-      {finePointer() && (
-        <Suspense fallback={null}>
-          <StageCursor />
-        </Suspense>
-      )}
     </div>
   )
 }

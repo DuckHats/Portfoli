@@ -44,7 +44,8 @@ for (const path of pages) {
 }
 
 test('dark theme passes axe', async ({ browser }) => {
-  const context = await browser.newContext({ colorScheme: 'dark' })
+  // A bare context does not inherit the config's reduced motion, which also keeps the intro away.
+  const context = await browser.newContext({ colorScheme: 'dark', reducedMotion: 'reduce' })
   const page = await context.newPage()
   for (const path of ['/ca', '/en/services', '/es/contact']) {
     await page.goto(path)
@@ -153,4 +154,76 @@ test('switching language keeps the page visible (no curtain left behind)', async
     )
     expect(covered).toBe(false)
   }
+})
+
+test('the name intro plays once per session, on the home page only, and never blocks the page', async ({
+  browser,
+}) => {
+  const context = await browser.newContext({ reducedMotion: 'no-preference' })
+  const page = await context.newPage()
+  await page.goto('/en/services')
+  await expect(page.locator('#intro')).toBeHidden()
+
+  await page.goto('/en')
+  await expect(page.locator('html')).toHaveAttribute('data-intro', '')
+  const intro = page.locator('#intro')
+  await expect(intro).toBeVisible()
+  // Clicks go through it while it plays.
+  await page.getByRole('banner').getByRole('link', { name: 'DuckHats' }).click({ timeout: 2000 })
+  await expect(intro).toBeHidden({ timeout: 4000 })
+
+  await page.reload()
+  await expect(page.locator('html')).not.toHaveAttribute('data-intro', '')
+  await context.close()
+})
+
+test('the project brief walks through its steps, passes axe on each and sends', async ({
+  page,
+}) => {
+  await page.route('/api/submit-contact', (route) =>
+    route.fulfill({ status: 200, contentType: 'application/json', body: '{"success":true}' }),
+  )
+  await page.goto('/en/contact')
+  const axe = async (step: string) => {
+    const results = await new AxeBuilder({ page })
+      .include('form')
+      .withTags(['wcag2a', 'wcag2aa'])
+      .analyze()
+    expect(results.violations.map((v) => `${step} ${v.id}`)).toEqual([])
+  }
+  const next = page.getByRole('button', { name: 'Next' })
+  const step = (name: string) => expect(page.getByRole('heading', { level: 2, name })).toBeVisible()
+
+  await step('What do you need?')
+  await axe('type')
+  await page.getByText('Online shop').click()
+
+  await step('Where are we starting from?')
+  await axe('stage')
+  await page.getByText('It already exists').click()
+  await page.getByLabel('Current address (optional)').fill('https://shop.example.com')
+  await next.click()
+
+  await step('What should it do?')
+  await page.getByText('Online payments').click()
+  await axe('features')
+  await page.getByLabel('The goal, in one sentence').fill('Sell our wine online')
+  await next.click()
+
+  await step('Timeline and budget')
+  await page.getByLabel('When would you like it?').selectOption({ label: 'In 1 to 3 months' })
+  await page.getByLabel('Approximate budget').selectOption({ label: 'I do not know yet' })
+  await axe('plan')
+  await next.click()
+
+  await step('Who are you?')
+  await page.getByLabel('Name', { exact: true }).fill('Ada')
+  await page.getByLabel('Email').fill('ada@example.com')
+  await axe('contact')
+  await next.click()
+
+  await step('Review and send')
+  await axe('summary')
+  await page.getByRole('button', { name: 'Send the request' }).click()
+  await expect(page.getByRole('heading', { level: 2, name: 'Request sent' })).toBeFocused()
 })

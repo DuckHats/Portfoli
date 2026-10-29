@@ -1,7 +1,7 @@
 import { Suspense, lazy } from 'react'
 import { SEO } from '@/components/SEO'
 import { Hero } from '@/components/sections/Hero'
-import { TechMarquee } from '@/components/sections/TechMarquee'
+import { ServiceMarquee } from '@/components/sections/ServiceMarquee'
 import { useSectionKeys } from '@/hooks/useSectionKeys'
 import { useLanguage, useMessages } from '@/lib/i18n'
 import { websiteJsonLd } from '@/lib/seo'
@@ -25,7 +25,7 @@ export function HomePage() {
         jsonLd={websiteJsonLd(language)}
       />
       <Hero />
-      <TechMarquee />
+      <ServiceMarquee />
       {/* Tall placeholder keeps the footer out of view while the rest of the page loads. */}
       <Suspense fallback={<div className="min-h-screen" aria-hidden />}>
         <HomeBelowFold />
