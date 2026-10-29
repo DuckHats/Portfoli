@@ -41,7 +41,7 @@ export function Wordmark() {
       aria-hidden
       onPointerMove={onMove}
       onPointerLeave={() => lift(null)}
-      className="mt-4 flex select-none justify-center whitespace-nowrap font-display text-[14vw] font-black uppercase leading-[0.78] text-ink/[0.07]"
+      className="mt-4 flex select-none justify-center whitespace-nowrap font-display text-[12.5vw] font-black uppercase leading-[0.78] text-ink/[0.07]"
     >
       {[...SITE.name].map((char, index) => (
         <span

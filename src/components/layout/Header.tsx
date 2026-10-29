@@ -44,12 +44,8 @@ export function Header() {
       className="sticky top-0 z-40 bg-canvas text-ink transition-colors duration-500"
     >
       <Container className="flex h-[4.5rem] items-center justify-between gap-4">
-        <AppLink
-          to="home"
-          className="flex items-center gap-3 font-display text-3xl font-extrabold uppercase"
-        >
-          <span aria-hidden className="mark-mask h-9 w-9 bg-ink" />
-          <span>{SITE.name}</span>
+        <AppLink to="home" aria-label={SITE.name} className="flex items-center rounded-full p-1">
+          <span aria-hidden className="mark-mask h-10 w-10 bg-ink" />
         </AppLink>
 
         <nav aria-label={a11y.mainNav} className="hidden items-center md:flex">

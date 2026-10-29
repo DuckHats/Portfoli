@@ -28,11 +28,9 @@ export function Footer() {
       <Container className="pt-14">
         <div className="grid gap-12 md:grid-cols-[1.6fr_1fr_1fr]">
           <div>
-            <p className="flex items-center gap-3 font-display text-4xl font-black sm:text-6xl uppercase">
-              <span aria-hidden className="mark-mask h-11 w-11 bg-ink" />
-              {SITE.name}
-            </p>
-            <p className="mt-5 max-w-xs text-ink/70">{footer.tagline}</p>
+            {/* The name itself is the wordmark across the bottom; up here, only the mark. */}
+            <span aria-hidden className="mark-mask block h-14 w-14 bg-ink" />
+            <p className="mt-5 max-w-xs text-lg text-ink/80">{footer.tagline}</p>
             <div className="mt-6">
               <LocalTime />
             </div>

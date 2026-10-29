@@ -8,3 +8,19 @@ try {
 } catch {
   // storage unavailable: fall back to the system preference
 }
+
+// The name intro (#intro in index.html, animated in CSS): home only, once per browser session,
+// never with reduced motion. Decided here so it is on screen from the very first paint.
+try {
+  if (/^\/(?:ca|es|en)?\/?$/.test(location.pathname)) {
+    if (
+      !sessionStorage.getItem('dh-intro') &&
+      !matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      document.documentElement.setAttribute('data-intro', '')
+    }
+    sessionStorage.setItem('dh-intro', '1')
+  }
+} catch {
+  // storage unavailable: no intro
+}
