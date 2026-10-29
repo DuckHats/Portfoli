@@ -1,5 +1,7 @@
 import { ArrowUpRight, Github } from 'lucide-react'
 import { useParams } from 'react-router-dom'
+import { NextProject } from '@/components/sections/NextProject'
+import { ProjectGallery } from '@/components/sections/ProjectGallery'
 import { ShowcaseCarousel } from '@/components/sections/ShowcaseCarousel'
 import { SEO } from '@/components/SEO'
 import { AppLink, ExternalLink } from '@/components/ui/AppLink'
@@ -9,7 +11,7 @@ import { Container } from '@/components/ui/Container'
 import { Headline } from '@/components/ui/Headline'
 import { Reveal } from '@/components/ui/Reveal'
 import { Tag } from '@/components/ui/Tag'
-import { findProject } from '@/content/projects'
+import { findProject, projects } from '@/content/projects'
 import { useLanguage, useLocalize, useMessages } from '@/lib/i18n'
 import { displayUrl } from '@/lib/projectUrl'
 import { buildPath, projectPath } from '@/lib/routes'
@@ -26,6 +28,7 @@ export function ProjectDetailPage() {
   if (!project) return <NotFoundPage />
 
   const description = localize(project.summary)
+  const nextProject = projects[(projects.indexOf(project) + 1) % projects.length]!
   const jsonLd = breadcrumbJsonLd([
     { name: nav.home, path: buildPath(language, 'home') },
     { name: nav.projects, path: buildPath(language, 'projects') },
@@ -141,23 +144,12 @@ export function ProjectDetailPage() {
             <h2 id="gallery" className="text-4xl sm:text-6xl">
               {copy.gallery}
             </h2>
-            <ul className="mt-10 grid gap-8 md:grid-cols-2">
-              {slides.map((slide) => (
-                <li key={slide.src}>
-                  <BrowserFrame>
-                    <img
-                      src={slide.src}
-                      alt={slide.alt}
-                      loading="lazy"
-                      decoding="async"
-                      className="h-auto w-full"
-                    />
-                  </BrowserFrame>
-                </li>
-              ))}
-            </ul>
+            <div className="mt-10">
+              <ProjectGallery slides={slides} />
+            </div>
           </Container>
         </section>
+        <NextProject project={nextProject} />
       </article>
     </>
   )
