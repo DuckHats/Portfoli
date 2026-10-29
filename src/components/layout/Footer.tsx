@@ -22,11 +22,11 @@ const headingStyles = 'font-sans text-sm font-semibold text-on-inverse'
 export function Footer() {
   const { footer, nav, a11y } = useMessages()
   return (
-    <footer className="overflow-hidden border-t-2 border-ink bg-inverse text-on-inverse">
+    <footer className="overflow-hidden border-t border-ink bg-inverse text-on-inverse">
       <Container className="pt-14">
         <div className="grid gap-12 md:grid-cols-[1.6fr_1fr_1fr]">
           <div>
-            <p className="flex items-center gap-3 font-display text-5xl font-bold tracking-tight">
+            <p className="flex items-center gap-3 font-display text-6xl font-extrabold uppercase">
               <img src={SITE.logo} alt="" width={44} height={44} className="h-11 w-11 invert" />
               {SITE.name}
             </p>
@@ -97,7 +97,7 @@ export function Footer() {
       <div
         aria-hidden
         data-text={SITE.name}
-        className="mt-4 select-none whitespace-nowrap text-center font-display text-[24vw] font-bold leading-[0.78] text-on-inverse/10 before:content-[attr(data-text)] sm:text-[17rem]"
+        className="mt-4 select-none whitespace-nowrap text-center font-display text-[28vw] font-extrabold uppercase leading-[0.78] text-on-inverse/10 before:content-[attr(data-text)] sm:text-[22rem]"
       />
     </footer>
   )

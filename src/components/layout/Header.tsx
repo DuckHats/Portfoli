@@ -13,7 +13,7 @@ import { PRIMARY_NAV } from './navigation'
 const linkStyles = ({ isActive }: { isActive: boolean }) =>
   `px-3 py-2 text-sm font-medium transition-colors ${
     isActive
-      ? 'text-ink underline decoration-accent decoration-4 underline-offset-[10px]'
+      ? 'text-ink underline decoration-accent decoration-2 underline-offset-[10px]'
       : 'text-muted hover:text-ink'
   }`
 
@@ -34,11 +34,11 @@ export function Header() {
   }, [open])
 
   return (
-    <header className="sticky top-0 z-40 border-b-2 border-ink bg-canvas">
+    <header className="sticky top-0 z-40 border-b border-ink bg-canvas">
       <Container className="flex h-[4.5rem] items-center justify-between gap-4">
         <AppLink
           to="home"
-          className="flex items-center gap-3 font-display text-2xl font-bold tracking-tight"
+          className="flex items-center gap-3 font-display text-3xl font-extrabold uppercase"
         >
           <img src={SITE.logo} alt="" width={36} height={36} className="h-9 w-9 dark:invert" />
           <span>{SITE.name}</span>
@@ -62,7 +62,7 @@ export function Header() {
 
         <button
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center border-2 border-ink hover:bg-tint md:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center border border-ink hover:bg-tint md:hidden"
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? a11y.closeMenu : a11y.openMenu}
@@ -73,7 +73,7 @@ export function Header() {
       </Container>
 
       {open && (
-        <div id="mobile-menu" className="border-t-2 border-ink bg-canvas md:hidden">
+        <div id="mobile-menu" className="border-t border-ink bg-canvas md:hidden">
           <Container className="flex flex-col gap-1 py-4">
             <nav aria-label={a11y.mainNav} className="flex flex-col">
               {PRIMARY_NAV.map((key) => (

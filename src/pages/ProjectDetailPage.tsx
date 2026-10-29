@@ -38,7 +38,7 @@ export function ProjectDetailPage() {
     <>
       <SEO title={project.title} description={description} image={project.image} jsonLd={jsonLd} />
       <article>
-        <header className="border-b-2 border-ink bg-tint">
+        <header className="border-b border-ink bg-tint">
           <Container className="py-14 sm:py-20">
             <AppLink
               to="projects"
@@ -122,7 +122,7 @@ export function ProjectDetailPage() {
           </aside>
         </Container>
 
-        <section aria-labelledby="gallery" className="border-t-2 border-ink bg-tint py-16 sm:py-24">
+        <section aria-labelledby="gallery" className="border-t border-ink bg-tint py-16 sm:py-24">
           <Container>
             <h2 id="gallery" className="text-3xl sm:text-4xl">
               {copy.gallery}

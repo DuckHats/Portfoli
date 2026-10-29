@@ -49,7 +49,7 @@ export function ShowcaseCarousel({
       </div>
 
       {slides.length > 1 && (
-        <div className="absolute bottom-3 right-3 flex items-center border-2 border-ink bg-canvas px-1">
+        <div className="absolute bottom-3 right-3 flex items-center border border-ink bg-canvas px-1">
           <button
             type="button"
             onClick={prev}

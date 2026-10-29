@@ -12,8 +12,8 @@ import sharp from 'sharp'
 const PUBLIC = path.resolve('public')
 const LOGO_SOURCE = path.resolve('brand-src/logo-source.png')
 const MAX_WIDTH: Record<string, number> = { projects: 1600, team: 640 }
-const PAPER = '#FFFFFF'
-const INK = '#0F0F0F'
+const PAPER = '#EFEBE3'
+const INK = '#14130F'
 
 async function walk(dir: string): Promise<string[]> {
   const entries = await readdir(dir, { withFileTypes: true })
@@ -85,7 +85,7 @@ async function brandAssets() {
 
   const text = Buffer.from(
     `<svg width="640" height="300" xmlns="http://www.w3.org/2000/svg">
-      <text x="0" y="110" font-family="Oswald, 'Arial Narrow', Helvetica, Arial, sans-serif" font-size="112" font-weight="700" fill="#FFFFFF">DuckHats</text>
+      <text x="0" y="110" font-family="Archivo, 'Arial Narrow', Helvetica, Arial, sans-serif" font-size="112" font-weight="700" fill="#EFEBE3">DuckHats</text>
       <text x="0" y="170" font-family="Inter, Helvetica, Arial, sans-serif" font-size="34" fill="#F4F4F2">Software and digital services</text>
       <text x="0" y="214" font-family="Inter, Helvetica, Arial, sans-serif" font-size="34" fill="#F4F4F2">for businesses</text>
     </svg>`,

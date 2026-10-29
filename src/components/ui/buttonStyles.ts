@@ -1,18 +1,18 @@
 const base =
-  'inline-flex items-center justify-center gap-2 border-2 border-ink font-semibold transition duration-150 ease-out disabled:pointer-events-none disabled:opacity-60'
+  'inline-flex items-center justify-center gap-2 border border-ink font-semibold transition duration-200 ease-out disabled:pointer-events-none disabled:opacity-60'
 
 const sizes = {
   md: 'h-10 px-5 text-sm',
   lg: 'h-12 px-7 text-base',
 } as const
 
-// Primary and secondary share the hard shadow: it lifts toward the pointer and presses flat on click.
-const lift =
-  'shadow-hard-sm hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-hard active:translate-x-0 active:translate-y-0 active:shadow-none'
+// Fills slide in from the left edge; only the background position changes.
+const fill =
+  'bg-[linear-gradient(rgb(var(--color-ink)),rgb(var(--color-ink)))] bg-[length:0%_100%] bg-no-repeat hover:bg-[length:100%_100%] hover:text-canvas'
 
 const variants = {
-  primary: `bg-accent text-on-accent ${lift}`,
-  secondary: `bg-canvas text-ink ${lift}`,
+  primary: 'bg-accent text-on-accent hover:bg-ink hover:text-canvas',
+  secondary: `bg-transparent text-ink ${fill}`,
   ghost: 'border-transparent text-ink hover:border-ink',
 } as const
 

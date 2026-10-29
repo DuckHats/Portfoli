@@ -17,10 +17,7 @@ export function ContactPage() {
         <div className="max-w-xl">
           <ContactForm />
         </div>
-        <aside
-          aria-labelledby="details"
-          className="self-start border-2 border-ink bg-tint p-8 shadow-hard"
-        >
+        <aside aria-labelledby="details" className="self-start border border-ink bg-tint p-8">
           <h2 id="details" className="text-2xl">
             {contact.detailsTitle}
           </h2>

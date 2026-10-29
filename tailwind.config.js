@@ -16,7 +16,8 @@ export default {
     extend: {
       fontFamily: {
         sans: ['"Inter Variable"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        display: ['"Oswald Variable"', 'Impact', 'ui-sans-serif', 'sans-serif'],
+        display: ['"Archivo Variable"', 'Impact', 'ui-sans-serif', 'sans-serif'],
+        mono: ['"JetBrains Mono Variable"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       colors: {
         canvas: token('canvas'),
@@ -34,11 +35,6 @@ export default {
       maxWidth: { content: '76rem', prose: '42rem' },
       // Square corners are part of the look; only `rounded-full` (dots, icon buttons) stays round.
       borderRadius: { DEFAULT: '0', lg: '0', xl: '0', '2xl': '0' },
-      boxShadow: {
-        hard: '6px 6px 0 0 rgb(var(--color-ink))',
-        'hard-lg': '10px 10px 0 0 rgb(var(--color-ink))',
-        'hard-sm': '3px 3px 0 0 rgb(var(--color-ink))',
-      },
       transitionTimingFunction: { out: 'cubic-bezier(0.22, 1, 0.36, 1)' },
       keyframes: {
         rise: {

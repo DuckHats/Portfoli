@@ -28,11 +28,11 @@ function lastModified(): string {
 
 /**
  * The body font is discovered late (HTML -> CSS -> font file). Preloading the Latin subsets of
- * Inter and Oswald, which cover ca/es/en, brings it into the first round trip and improves LCP.
+ * Inter and Archivo, which cover ca/es/en, brings it into the first round trip and improves LCP.
  */
 async function withFontPreload(html: string): Promise<string> {
   const files = await readdir(path.join(DIST, 'assets'))
-  const tags = [/^inter-latin-wght-normal-.*\.woff2$/, /^oswald-latin-wght-normal-.*\.woff2$/]
+  const tags = [/^inter-latin-wght-normal-.*\.woff2$/, /^archivo-latin-wdth-normal-.*\.woff2$/]
     .map((pattern) => files.find((f) => pattern.test(f)))
     .filter((f): f is string => Boolean(f))
     .map(

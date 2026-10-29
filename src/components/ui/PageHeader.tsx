@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { Container } from './Container'
+import { Dimension } from './Dimension'
 
 interface PageHeaderProps {
   title: string
@@ -9,15 +10,15 @@ interface PageHeaderProps {
 
 export function PageHeader({ title, intro, children }: PageHeaderProps) {
   return (
-    <header className="relative overflow-hidden border-b-2 border-ink">
-      {/* A solid accent block anchors the title; purely decorative. */}
-      <div
-        aria-hidden
-        className="absolute right-0 top-0 hidden h-full w-1/5 border-l-2 border-ink bg-accent sm:block"
-      />
-      <Container className="relative py-14 sm:py-20">
-        <h1 className="max-w-4xl text-6xl leading-[0.98] sm:text-8xl">{title}</h1>
-        {intro && <p className="mt-6 max-w-prose text-lg text-muted">{intro}</p>}
+    <header className="border-b border-ink">
+      <Container className="py-14 sm:py-24">
+        <h1 className="max-w-5xl text-7xl leading-[0.9] sm:text-[9rem]">{title}</h1>
+        <Dimension label="DuckHats" className="mt-8 max-w-xl" />
+        <div className="mt-8 grid lg:grid-cols-12">
+          {intro && (
+            <p className="max-w-prose text-lg text-muted lg:col-span-6 lg:col-start-4">{intro}</p>
+          )}
+        </div>
         {children}
       </Container>
     </header>

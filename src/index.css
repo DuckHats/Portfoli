@@ -5,50 +5,48 @@
 /* Design tokens: space-separated RGB so Tailwind opacity modifiers work. */
 @layer base {
   :root {
-    --color-canvas: 255 255 255;
-    --color-surface: 255 255 255;
-    --color-tint: 241 240 236;
-    --color-ink: 15 15 15;
-    --color-muted: 85 82 76;
-    --color-line: 208 205 197;
+    --color-canvas: 239 235 227;
+    --color-surface: 247 244 238;
+    --color-tint: 228 223 212;
+    --color-ink: 20 19 15;
+    --color-muted: 88 84 75;
+    --color-line: 190 184 171;
     --color-accent: 230 57 70;
-    --color-accent-text: 184 34 47;
-    --color-on-accent: 15 15 15;
-    --color-inverse: 15 15 15;
-    --color-on-inverse: 255 255 255;
+    --color-accent-text: 176 30 43;
+    --color-on-accent: 8 7 4;
+    --color-inverse: 20 19 15;
+    --color-on-inverse: 239 235 227;
     color-scheme: light;
   }
 
   :root[data-theme='dark'] {
-    --color-canvas: 14 14 14;
-    --color-surface: 23 23 23;
-    --color-tint: 32 32 32;
-    --color-ink: 244 244 242;
-    --color-muted: 168 166 160;
-    --color-line: 66 66 64;
+    --color-canvas: 20 19 15;
+    --color-surface: 29 28 23;
+    --color-tint: 38 36 30;
+    --color-ink: 239 235 227;
+    --color-muted: 172 167 156;
+    --color-line: 74 71 63;
     --color-accent: 255 89 100;
     --color-accent-text: 255 138 146;
-    --color-on-accent: 14 14 14;
-    --color-inverse: 23 23 23;
-    --color-on-inverse: 244 244 242;
+    --color-on-accent: 20 19 15;
+    --color-inverse: 29 28 23;
+    --color-on-inverse: 239 235 227;
     color-scheme: dark;
   }
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme='light']) {
-      --color-canvas: 14 14 14;
-      --color-surface: 23 23 23;
-      --color-tint: 32 32 32;
-      --color-ink: 244 244 242;
-      --color-muted: 168 166 160;
-      --color-line: 66 66 64;
+      --color-canvas: 20 19 15;
+      --color-surface: 29 28 23;
+      --color-tint: 38 36 30;
+      --color-ink: 239 235 227;
+      --color-muted: 172 167 156;
+      --color-line: 74 71 63;
       --color-accent: 255 89 100;
       --color-accent-text: 255 138 146;
-      --color-on-accent: 14 14 14;
-      --color-inverse: 23 23 23;
-      --color-on-inverse: 244 244 242;
-      --color-inverse: 23 23 23;
-      --color-on-inverse: 244 244 242;
+      --color-on-accent: 20 19 15;
+      --color-inverse: 29 28 23;
+      --color-on-inverse: 239 235 227;
       color-scheme: dark;
     }
   }
@@ -63,10 +61,13 @@
     font-variant-numeric: tabular-nums;
   }
 
+  /* Condensed grotesque headlines: Archivo's width axis does the work, so there is one family to load. */
   h1,
   h2,
   h3 {
-    @apply font-display font-bold tracking-tight;
+    @apply font-display font-extrabold;
+    font-stretch: 72%;
+    letter-spacing: -0.005em;
     text-wrap: balance;
   }
 
@@ -102,7 +103,7 @@
     html {
       scroll-behavior: auto;
     }
-    .scribble-path {
+    .draw-line {
       animation: none;
     }
     *,
@@ -137,17 +138,54 @@
   }
 }
 
-/* The hand-drawn underline draws itself once on load (see ui/Scribble). */
-@keyframes scribble-draw {
+/* The width axis applies wherever the display family is used, not only in headings. */
+.font-display {
+  font-stretch: 72%;
+}
+
+/* Guide lines and dimension marks draw themselves once (see ui/GuideLine). */
+@keyframes draw {
   from {
-    stroke-dashoffset: 1;
+    transform: scaleX(0);
   }
   to {
-    stroke-dashoffset: 0;
+    transform: scaleX(1);
   }
 }
-.scribble-path {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 0;
-  animation: scribble-draw 0.9s 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+.draw-line {
+  transform-origin: left center;
+  animation: draw 1s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Visible 12-column sheet behind wide layouts; desktop only and very faint. */
+.sheet-grid {
+  background-image: repeating-linear-gradient(
+    to right,
+    rgb(var(--color-line) / 0.35) 0,
+    rgb(var(--color-line) / 0.35) 1px,
+    transparent 1px,
+    transparent calc(100% / 12)
+  );
+}
+
+/* Technical annotation layer: index numbers, dimensions, labels. */
+.meta {
+  @apply font-mono text-xs uppercase tracking-wider text-muted;
+}
+
+/* Rows of the index tables shift on hover; only transform changes. */
+.row-shift > * {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (hover: hover) {
+  .row-shift:hover > :first-child {
+    transform: translateX(0.75rem);
+  }
+}
+
+/* Page-to-page crossfade where the browser supports view transitions. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
 }

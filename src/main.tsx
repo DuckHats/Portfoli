@@ -1,5 +1,6 @@
 import '@fontsource-variable/inter'
-import '@fontsource-variable/oswald/wght.css'
+import '@fontsource-variable/archivo/wdth.css'
+import '@fontsource-variable/jetbrains-mono/index.css'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { App } from './app/App'

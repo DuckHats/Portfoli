@@ -28,7 +28,7 @@ export function ServicesPage() {
                 {localize(category.title)}
               </h2>
               <div>
-                <ul className="divide-y divide-line border-y-2 border-ink">
+                <ul className="divide-y divide-line border-y border-ink">
                   {category.items.map((item) => (
                     <li key={item.id} className="py-7">
                       <h3 className="text-2xl">{localize(item.name)}</h3>
@@ -67,11 +67,11 @@ export function ServicesPage() {
           ))}
         </div>
 
-        <p className="mt-20 max-w-prose border-2 border-ink bg-tint p-5 text-muted">
+        <p className="mt-20 max-w-prose border border-ink bg-tint p-5 text-muted">
           {services.disclaimer}
         </p>
 
-        <div className="mt-14 flex flex-col items-start gap-6 border-2 border-ink bg-tint p-8 sm:flex-row sm:items-center sm:justify-between sm:p-12">
+        <div className="mt-14 flex flex-col items-start gap-6 border border-ink bg-tint p-8 sm:flex-row sm:items-center sm:justify-between sm:p-12">
           <div>
             <h2 className="text-3xl sm:text-4xl">{home.cta.title}</h2>
             <p className="mt-2 text-muted">{home.cta.description}</p>
