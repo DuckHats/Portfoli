@@ -10,11 +10,13 @@ export function CareersPage() {
     <>
       <SEO title={seo.careers.title} description={seo.careers.description} />
       <PageHeader title={careers.title} intro={careers.intro} />
-      <Container className="py-16">
-        <div className="max-w-xl">
-          <CareersForm />
-        </div>
-      </Container>
+      <div data-act="paper" className="bg-canvas">
+        <Container className="py-20 sm:py-28">
+          <div className="max-w-xl">
+            <CareersForm />
+          </div>
+        </Container>
+      </div>
     </>
   )
 }

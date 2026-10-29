@@ -6,6 +6,8 @@ import { AppLink, ExternalLink } from '@/components/ui/AppLink'
 import { BrowserFrame } from '@/components/ui/BrowserFrame'
 import { buttonStyles } from '@/components/ui/buttonStyles'
 import { Container } from '@/components/ui/Container'
+import { Headline } from '@/components/ui/Headline'
+import { Reveal } from '@/components/ui/Reveal'
 import { Tag } from '@/components/ui/Tag'
 import { findProject } from '@/content/projects'
 import { useLanguage, useLocalize, useMessages } from '@/lib/i18n'
@@ -38,19 +40,19 @@ export function ProjectDetailPage() {
     <>
       <SEO title={project.title} description={description} image={project.image} jsonLd={jsonLd} />
       <article>
-        <header className="border-b border-ink bg-tint">
-          <Container className="py-14 sm:py-20">
+        <header data-act="ink" className="bg-canvas text-ink">
+          <Container className="pb-16 pt-14 sm:pb-24 sm:pt-20">
             <AppLink
               to="projects"
               className="link-underline pb-0.5 text-sm text-muted hover:text-ink"
             >
               ← {copy.back}
             </AppLink>
-            <p className="mt-8 text-sm text-muted">
+            <p className="label mt-10">
               {localize(project.category)} · {localize(project.status)}
             </p>
-            <h1 className="mt-3 text-5xl sm:text-6xl">{project.title}</h1>
-            <p className="mt-6 max-w-prose text-lg text-ink/85">{description}</p>
+            <Headline text={project.title} className="mt-4 text-5xl sm:text-8xl" />
+            <p className="mt-8 max-w-prose text-lg text-muted sm:text-xl">{description}</p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
               {project.link && (
                 <ExternalLink href={project.link} className={buttonStyles()}>
@@ -69,62 +71,74 @@ export function ProjectDetailPage() {
           </Container>
         </header>
 
-        <Container className="overflow-x-clip py-16 sm:py-20">
-          <div className="relative">
-            <div className="relative">
+        <div data-act="paper" className="bg-canvas">
+          <Container className="overflow-x-clip py-16 sm:py-20">
+            <Reveal>
               <BrowserFrame url={displayUrl(project)}>
                 <ShowcaseCarousel slides={slides} />
               </BrowserFrame>
-            </div>
-          </div>
-        </Container>
+            </Reveal>
+          </Container>
 
-        <Container className="grid gap-14 pb-20 lg:grid-cols-[1fr_18rem] lg:pb-28">
-          <div className="space-y-14">
-            <section aria-labelledby="challenge">
-              <h2 id="challenge" className="text-3xl sm:text-4xl">
-                {copy.challenge}
+          <Container className="grid gap-14 pb-20 lg:grid-cols-[1fr_18rem] lg:pb-28">
+            <div className="space-y-14">
+              <section aria-labelledby="challenge">
+                <h2 id="challenge" className="text-3xl sm:text-5xl">
+                  {copy.challenge}
+                </h2>
+                <p className="mt-4 max-w-prose text-lg text-ink/85">
+                  {localize(project.challenge)}
+                </p>
+              </section>
+              <section aria-labelledby="solution">
+                <h2 id="solution" className="text-3xl sm:text-5xl">
+                  {copy.solution}
+                </h2>
+                <p className="mt-4 max-w-prose text-lg text-ink/85">{localize(project.solution)}</p>
+              </section>
+              <section aria-labelledby="results">
+                <h2 id="results" className="text-3xl sm:text-5xl">
+                  {copy.results}
+                </h2>
+                <ul className="mt-4 max-w-prose space-y-3 text-lg text-ink/85">
+                  {localize(project.results).map((result) => (
+                    <li key={result} className="flex gap-3">
+                      <span
+                        aria-hidden
+                        className="mt-2.5 h-2 w-2 shrink-0 rounded-full bg-accent"
+                      />
+                      {result}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            </div>
+
+            <aside
+              aria-labelledby="stack"
+              className="self-start rounded-2xl bg-surface p-6 ring-1 ring-ink/10 lg:sticky lg:top-28"
+            >
+              <h2 id="stack" className="text-xl">
+                {copy.technologies}
               </h2>
-              <p className="mt-4 max-w-prose text-lg text-ink/85">{localize(project.challenge)}</p>
-            </section>
-            <section aria-labelledby="solution">
-              <h2 id="solution" className="text-3xl sm:text-4xl">
-                {copy.solution}
-              </h2>
-              <p className="mt-4 max-w-prose text-lg text-ink/85">{localize(project.solution)}</p>
-            </section>
-            <section aria-labelledby="results">
-              <h2 id="results" className="text-3xl sm:text-4xl">
-                {copy.results}
-              </h2>
-              <ul className="mt-4 max-w-prose space-y-3 text-lg text-ink/85">
-                {localize(project.results).map((result) => (
-                  <li key={result} className="flex gap-3">
-                    <span aria-hidden className="mt-3.5 h-px w-5 shrink-0 bg-accent" />
-                    {result}
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {project.technologies.map((tech) => (
+                  <li key={tech}>
+                    <Tag>{tech}</Tag>
                   </li>
                 ))}
               </ul>
-            </section>
-          </div>
+            </aside>
+          </Container>
+        </div>
 
-          <aside aria-labelledby="stack" className="lg:border-l lg:border-line lg:pl-8">
-            <h2 id="stack" className="text-xl">
-              {copy.technologies}
-            </h2>
-            <ul className="mt-4 flex flex-wrap gap-2">
-              {project.technologies.map((tech) => (
-                <li key={tech}>
-                  <Tag>{tech}</Tag>
-                </li>
-              ))}
-            </ul>
-          </aside>
-        </Container>
-
-        <section aria-labelledby="gallery" className="border-t border-ink bg-tint py-16 sm:py-24">
+        <section
+          data-act="ink"
+          aria-labelledby="gallery"
+          className="bg-canvas py-20 text-ink sm:py-28"
+        >
           <Container>
-            <h2 id="gallery" className="text-3xl sm:text-4xl">
+            <h2 id="gallery" className="text-4xl sm:text-6xl">
               {copy.gallery}
             </h2>
             <ul className="mt-10 grid gap-8 md:grid-cols-2">

@@ -1,19 +1,15 @@
 const base =
-  'inline-flex items-center justify-center gap-2 border border-ink font-semibold transition duration-200 ease-out disabled:pointer-events-none disabled:opacity-60'
+  'inline-flex items-center justify-center gap-2 rounded-full font-semibold transition duration-200 ease-out active:scale-[0.97] disabled:pointer-events-none disabled:opacity-60'
 
 const sizes = {
   md: 'h-10 px-5 text-sm',
-  lg: 'h-12 px-7 text-base',
+  lg: 'h-14 px-8 text-base',
 } as const
-
-// Fills slide in from the left edge; only the background position changes.
-const fill =
-  'bg-[linear-gradient(rgb(var(--color-ink)),rgb(var(--color-ink)))] bg-[length:0%_100%] bg-no-repeat hover:bg-[length:100%_100%] hover:text-canvas'
 
 const variants = {
   primary: 'bg-accent text-on-accent hover:bg-ink hover:text-canvas',
-  secondary: `bg-transparent text-ink ${fill}`,
-  ghost: 'border-transparent text-ink hover:border-ink',
+  secondary: 'border border-ink text-ink hover:bg-ink hover:text-canvas',
+  ghost: 'text-ink hover:bg-ink/10',
 } as const
 
 export interface ButtonStyleProps {

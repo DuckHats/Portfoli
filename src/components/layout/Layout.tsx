@@ -1,5 +1,6 @@
-import { Suspense, useEffect, useRef } from 'react'
-import { Outlet, useLocation } from 'react-router-dom'
+import { AnimatePresence, m } from 'motion/react'
+import { Suspense, useRef } from 'react'
+import { useLocation, useOutlet } from 'react-router-dom'
 import { useMessages } from '@/lib/i18n'
 import { ErrorBoundary } from '../ErrorBoundary'
 import { AppLink } from '../ui/AppLink'
@@ -13,7 +14,7 @@ function RouteError({ reset }: { reset: () => void }) {
   const { error } = useMessages()
   return (
     <Container className="py-24">
-      <h1 className="text-3xl font-semibold tracking-tight">{error.title}</h1>
+      <h1 className="text-4xl">{error.title}</h1>
       <p className="mt-3 text-muted">{error.body}</p>
       <button type="button" onClick={reset} className={`${buttonStyles()} mt-6`}>
         {error.retry}
@@ -31,17 +32,14 @@ export function Layout() {
   const { a11y } = useMessages()
   const { pathname } = useLocation()
   const mainRef = useRef<HTMLElement>(null)
-  const first = useRef(true)
+  const outlet = useOutlet()
 
-  // Reset scroll and move focus to <main> on navigation so keyboard and screen-reader users land on the new page.
-  useEffect(() => {
-    if (first.current) {
-      first.current = false
-      return
-    }
+  // Once the old page has left: reset scroll and move focus to <main>, so keyboard and
+  // screen-reader users land on the new page.
+  const onPageLeft = () => {
     window.scrollTo(0, 0)
     mainRef.current?.focus({ preventScroll: true })
-  }, [pathname])
+  }
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -53,11 +51,20 @@ export function Layout() {
       </a>
       <Header />
       <main id="main-content" ref={mainRef} tabIndex={-1} className="flex-1 outline-none">
-        <ErrorBoundary key={pathname} fallback={(reset) => <RouteError reset={reset} />}>
-          <Suspense fallback={<PageFallback />}>
-            <Outlet />
-          </Suspense>
-        </ErrorBoundary>
+        {/* Pages leave by sinking back and arrive rising forward; the first load is not animated. */}
+        <AnimatePresence mode="wait" initial={false} onExitComplete={onPageLeft}>
+          <m.div
+            key={pathname}
+            initial={{ opacity: 0, y: 40, scale: 0.985 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -24, scale: 0.985 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <ErrorBoundary fallback={(reset) => <RouteError reset={reset} />}>
+              <Suspense fallback={<PageFallback />}>{outlet}</Suspense>
+            </ErrorBoundary>
+          </m.div>
+        </AnimatePresence>
       </main>
       <Footer />
       <CookieBanner />

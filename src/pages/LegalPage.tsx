@@ -14,19 +14,21 @@ export function LegalPage({ kind }: { kind: 'privacy' | 'legal' }) {
     <>
       <SEO title={seo[kind].title} description={seo[kind].description} />
       <PageHeader title={seo[kind].title} />
-      <Container className="py-16">
-        <div className="max-w-prose space-y-10">
-          {sections.map((section) => (
-            <section key={section.title}>
-              <h2 className="text-xl font-semibold tracking-tight">{section.title}</h2>
-              <p className="mt-2 text-muted">{section.body.replace('{email}', SITE.email)}</p>
-            </section>
-          ))}
-          <p className="text-sm text-muted">
-            {t('legalPages.updated')}: {SITE.legalUpdated}
-          </p>
-        </div>
-      </Container>
+      <div data-act="paper" className="bg-canvas">
+        <Container className="py-20">
+          <div className="max-w-prose space-y-10">
+            {sections.map((section) => (
+              <section key={section.title}>
+                <h2 className="text-2xl">{section.title}</h2>
+                <p className="mt-2 text-muted">{section.body.replace('{email}', SITE.email)}</p>
+              </section>
+            ))}
+            <p className="text-sm text-muted">
+              {t('legalPages.updated')}: {SITE.legalUpdated}
+            </p>
+          </div>
+        </Container>
+      </div>
     </>
   )
 }

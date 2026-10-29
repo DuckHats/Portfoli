@@ -61,24 +61,20 @@ test.describe('project showcase carousel', () => {
 })
 
 test.describe('theme and layout', () => {
-  test('manual theme switch also drives dark: variants such as the inverted logo', async ({
-    browser,
-    isMobile,
-  }) => {
+  test('manual theme switch drives the theme tokens', async ({ browser, isMobile }) => {
     test.skip(isMobile, 'the theme button lives in the mobile menu')
     const context = await browser.newContext({ colorScheme: 'light' })
     const page = await context.newPage()
     await page.goto('/en')
-    const logo = page.locator('header img').first()
-    const filter = () => logo.evaluate((el) => getComputedStyle(el).filter)
+    const paper = () => page.evaluate(() => getComputedStyle(document.body).backgroundColor)
 
-    await expect.poll(filter).toBe('none')
+    await expect.poll(paper).toBe('rgb(243, 239, 230)')
     await page.getByRole('button', { name: 'Switch theme' }).first().click()
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
-    await expect.poll(filter).toContain('invert')
+    await expect.poll(paper).toBe('rgb(30, 29, 26)')
     await page.getByRole('button', { name: 'Switch theme' }).first().click()
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'light')
-    await expect.poll(filter).toBe('none')
+    await expect.poll(paper).toBe('rgb(243, 239, 230)')
     await context.close()
   })
 

@@ -1,35 +1,40 @@
 import { ArrowRight } from 'lucide-react'
 import { useMessages } from '@/lib/i18n'
 import { AppLink } from '../ui/AppLink'
+import { buttonStyles } from '../ui/buttonStyles'
 import { Container } from '../ui/Container'
+import { Headline } from '../ui/Headline'
+import { Magnetic } from '../ui/Magnetic'
 
+/** The closing act: red, poster-size question, one button. */
 export function CtaBand() {
   const { home } = useMessages()
   const { cta } = home
   return (
     <section
+      data-act="red"
       aria-labelledby="cta-title"
-      className="relative overflow-hidden border-t border-ink bg-inverse text-on-inverse"
+      className="relative overflow-hidden bg-canvas text-ink"
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-20 -top-10 hidden aspect-square w-[32rem] sm:block"
-      >
-        <div className="mark-mask h-full w-full bg-on-inverse/10" />
-      </div>
-      <Container className="relative flex flex-col gap-10 py-20 sm:py-28 md:flex-row md:items-center md:justify-between">
-        <div className="max-w-2xl">
-          <h2 id="cta-title" className="text-6xl sm:text-8xl">
-            {cta.title}
-          </h2>
-          <p className="mt-5 max-w-md text-lg text-on-inverse/80">{cta.description}</p>
+        className="mark-mask pointer-events-none absolute -right-24 -top-16 hidden aspect-square w-[36rem] bg-ink/10 sm:block"
+      />
+      <Container className="relative py-28 sm:py-40">
+        <Headline
+          as="h2"
+          id="cta-title"
+          text={cta.title}
+          className="max-w-5xl text-5xl sm:text-8xl lg:text-9xl"
+        />
+        <div className="mt-12 flex flex-col gap-10 sm:flex-row sm:items-end sm:justify-between">
+          <p className="max-w-md text-lg sm:text-xl">{cta.description}</p>
+          <Magnetic>
+            <AppLink to="contact" className={buttonStyles({ size: 'lg' })}>
+              {cta.button} <ArrowRight size={18} aria-hidden />
+            </AppLink>
+          </Magnetic>
         </div>
-        <AppLink
-          to="contact"
-          className="inline-flex h-14 shrink-0 items-center justify-center gap-2 border border-on-inverse bg-accent px-8 text-base font-semibold text-on-accent transition duration-200 hover:bg-on-inverse hover:text-inverse"
-        >
-          {cta.button} <ArrowRight size={18} aria-hidden />
-        </AppLink>
       </Container>
     </section>
   )

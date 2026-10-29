@@ -1,14 +1,16 @@
+import { Suspense, lazy } from 'react'
 import { SEO } from '@/components/SEO'
-import { CasesPreview } from '@/components/sections/CasesPreview'
-import { CtaBand } from '@/components/sections/CtaBand'
 import { Hero } from '@/components/sections/Hero'
-import { Process } from '@/components/sections/Process'
-import { ServicesOverview } from '@/components/sections/ServicesOverview'
-import { TeamPreview } from '@/components/sections/TeamPreview'
 import { TechMarquee } from '@/components/sections/TechMarquee'
 import { useSectionKeys } from '@/hooks/useSectionKeys'
 import { useLanguage, useMessages } from '@/lib/i18n'
 import { websiteJsonLd } from '@/lib/seo'
+
+const HomeBelowFold = lazy(() =>
+  import('@/components/sections/HomeBelowFold').then((module) => ({
+    default: module.HomeBelowFold,
+  })),
+)
 
 export function HomePage() {
   const { seo } = useMessages()
@@ -24,11 +26,10 @@ export function HomePage() {
       />
       <Hero />
       <TechMarquee />
-      <ServicesOverview />
-      <CasesPreview />
-      <Process />
-      <TeamPreview />
-      <CtaBand />
+      {/* Tall placeholder keeps the footer out of view while the rest of the page loads. */}
+      <Suspense fallback={<div className="min-h-screen" aria-hidden />}>
+        <HomeBelowFold />
+      </Suspense>
     </>
   )
 }

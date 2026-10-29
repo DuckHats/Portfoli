@@ -1,47 +1,54 @@
 import type { ReactNode } from 'react'
+import type { Act } from '@/hooks/useActiveAct'
 import { Container } from './Container'
+import { Headline } from './Headline'
 
 interface SectionProps {
   id?: string
-  /** Position on the sheet, shown as a monospaced index in the margin. */
-  no?: string
+  act?: Act
+  /** Short label above the title (e.g. its position on the page). */
+  label?: string
   title: string
   intro?: string
   action?: ReactNode
-  tone?: 'default' | 'tint'
   children: ReactNode
 }
 
+/** A full-bleed "act": its own background and colours, an oversized title and the content. */
 export function Section({
   id,
-  no,
+  act = 'paper',
+  label,
   title,
   intro,
   action,
-  tone = 'default',
   children,
 }: SectionProps) {
   const headingId = id ? `${id}-title` : undefined
   return (
     <section
       id={id}
+      data-act={act}
       aria-labelledby={headingId}
-      className={`overflow-x-clip border-t border-ink py-20 sm:py-28 ${tone === 'tint' ? 'bg-tint' : ''}`}
+      className="overflow-x-clip bg-canvas py-24 text-ink sm:py-32"
     >
       <Container>
-        <div className="mb-12 grid gap-4 sm:mb-16 lg:grid-cols-12 lg:gap-8">
-          {no && (
-            <p aria-hidden className="meta lg:col-span-2">
-              {no}
-            </p>
-          )}
-          <div className="lg:col-span-7">
-            <h2 id={headingId} className="text-5xl leading-[0.95] sm:text-7xl">
-              {title}
-            </h2>
-            {intro && <p className="mt-6 max-w-prose text-lg text-muted">{intro}</p>}
+        <div className="mb-14 grid gap-8 sm:mb-20 lg:grid-cols-12 lg:items-end">
+          <div className="lg:col-span-9">
+            {label && (
+              <p aria-hidden className="label mb-6">
+                {label}
+              </p>
+            )}
+            <Headline
+              as="h2"
+              id={headingId}
+              text={title}
+              className="text-[2.3rem] sm:text-7xl lg:text-8xl"
+            />
+            {intro && <p className="mt-8 max-w-prose text-lg text-muted">{intro}</p>}
           </div>
-          {action && <div className="lg:col-span-3 lg:self-end lg:justify-self-end">{action}</div>}
+          {action && <div className="lg:col-span-3 lg:justify-self-end">{action}</div>}
         </div>
         {children}
       </Container>

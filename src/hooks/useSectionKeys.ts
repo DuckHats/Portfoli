@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { usePrefersReducedMotion } from './usePrefersReducedMotion'
 
-const SECTIONS = 'main > section'
+const SECTIONS = 'main [data-act]'
 // Keys that already mean something to the focused control must stay untouched.
 const OWN_KEYS =
   'input, textarea, select, [contenteditable="true"], [aria-roledescription="carousel"]'

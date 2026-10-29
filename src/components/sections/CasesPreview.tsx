@@ -2,9 +2,10 @@ import { ArrowRight } from 'lucide-react'
 import { featuredProject, projects } from '@/content/projects'
 import { useMessages } from '@/lib/i18n'
 import { AppLink } from '../ui/AppLink'
-import { Reveal } from '../ui/Reveal'
 import { Section } from '../ui/Section'
-import { ProjectShowcase } from './ProjectShowcase'
+import { ProjectStack } from './ProjectStack'
+
+const others = projects.filter((project) => project !== featuredProject).slice(0, 2)
 
 export function CasesPreview() {
   const { home } = useMessages()
@@ -12,29 +13,20 @@ export function CasesPreview() {
   return (
     <Section
       id="cases"
-      no="03 / 06"
+      label="02"
       title={cases.title}
       intro={cases.intro}
       action={
         <AppLink
           to="projects"
-          className="inline-flex items-center gap-2 font-medium text-accent-text"
+          className="inline-flex items-center gap-2 font-semibold text-accent-text"
         >
           <span className="link-underline pb-0.5">{cases.link}</span>{' '}
           <ArrowRight size={16} aria-hidden />
         </AppLink>
       }
     >
-      <div className="space-y-28 sm:space-y-36">
-        {projects
-          .filter((project) => project !== featuredProject)
-          .slice(0, 2)
-          .map((project, index) => (
-            <Reveal key={project.id}>
-              <ProjectShowcase project={project} reverse={index % 2 === 1} />
-            </Reveal>
-          ))}
-      </div>
+      <ProjectStack projects={others} />
     </Section>
   )
 }

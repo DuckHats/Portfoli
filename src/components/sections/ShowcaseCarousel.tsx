@@ -40,6 +40,7 @@ export function ShowcaseCarousel({
             alt={slide.alt}
             aria-hidden={i !== index}
             loading={priority && i === 0 ? 'eager' : 'lazy'}
+            {...(priority && i === 0 ? { fetchpriority: 'high' } : {})}
             decoding="async"
             className={`absolute inset-0 h-full w-full object-cover object-top transition-opacity duration-700 ease-out ${
               i === index ? 'opacity-100' : 'opacity-0'
@@ -66,7 +67,7 @@ export function ShowcaseCarousel({
                   onClick={() => go(i)}
                   aria-label={t('projects.goTo', { n: i + 1 })}
                   aria-current={i === index ? 'true' : undefined}
-                  className="group inline-flex h-8 w-6 items-center justify-center"
+                  className="group inline-flex h-9 w-7 items-center justify-center"
                 >
                   <span
                     className={`h-1.5 transition-all duration-300 ${

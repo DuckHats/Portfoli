@@ -6,11 +6,11 @@ function Page() {
   useSectionKeys()
   return (
     <main>
-      <section data-id="a">
+      <section data-act="paper" data-id="a">
         <input aria-label="field" />
       </section>
-      <section data-id="b" />
-      <section data-id="c" />
+      <section data-act="paper" data-id="b" />
+      <section data-act="paper" data-id="c" />
     </main>
   )
 }

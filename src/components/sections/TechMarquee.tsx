@@ -9,16 +9,16 @@ export function TechMarquee() {
   const row = (hidden: boolean) => (
     <ul
       aria-hidden={hidden || undefined}
-      className={`flex shrink-0 items-center gap-10 pr-10 motion-reduce:flex-wrap motion-reduce:justify-center ${
+      className={`flex shrink-0 items-center gap-12 pr-12 motion-reduce:flex-wrap motion-reduce:justify-center ${
         hidden ? 'motion-reduce:hidden' : ''
       }`}
     >
       {technologies.map((name) => (
-        <li key={name} className="flex items-center gap-10 whitespace-nowrap">
-          <span className="font-display text-4xl font-extrabold uppercase text-on-accent">
+        <li key={name} className="flex items-center gap-12 whitespace-nowrap">
+          <span className="font-display text-5xl font-black uppercase tracking-tight sm:text-6xl">
             {name}
           </span>
-          <span aria-hidden className="h-2.5 w-2.5 bg-on-accent" />
+          <span aria-hidden className="mark-mask h-8 w-8 bg-accent" />
         </li>
       ))}
     </ul>
@@ -26,8 +26,9 @@ export function TechMarquee() {
 
   return (
     <section
+      data-act="paper"
       aria-label={home.tech.label}
-      className="overflow-hidden border-y border-ink bg-accent py-5"
+      className="overflow-hidden bg-canvas py-8 text-ink"
     >
       <div className="flex w-max animate-marquee hover:[animation-play-state:paused] motion-reduce:w-auto motion-reduce:animate-none motion-reduce:justify-center">
         {row(false)}

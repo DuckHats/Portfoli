@@ -1,5 +1,4 @@
 import type { Project } from '@/content/projects'
-import { useScrollProgress } from '@/hooks/useScrollProgress'
 import { useLocalize, useMessages } from '@/lib/i18n'
 import { displayUrl, showcaseImages } from '@/lib/projectUrl'
 import { AppLink } from '../ui/AppLink'
@@ -14,7 +13,7 @@ interface ProjectShowcaseProps {
   as?: 'h2' | 'h3'
 }
 
-/** The signature piece: a project presented inside a live browser window next to its story. */
+/** A project presented inside a live browser window next to its story. */
 export function ProjectShowcase({
   project,
   reverse = false,
@@ -22,7 +21,6 @@ export function ProjectShowcase({
 }: ProjectShowcaseProps) {
   const localize = useLocalize()
   const { projects } = useMessages()
-  const parallax = useScrollProgress<HTMLDivElement>()
 
   const slides = showcaseImages(project).map((src, i) => ({
     src,
@@ -31,30 +29,24 @@ export function ProjectShowcase({
 
   return (
     <article className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
-      <div className={`relative lg:col-span-7 ${reverse ? 'lg:order-2' : ''}`}>
-        <div
-          ref={parallax}
-          className="relative [--p:0.5]"
-          style={{ transform: 'translate3d(0, calc((var(--p) - 0.5) * -28px), 0)' }}
-        >
-          <BrowserFrame url={displayUrl(project)}>
-            <ShowcaseCarousel slides={slides} />
-          </BrowserFrame>
-        </div>
+      <div className={`lg:col-span-7 ${reverse ? 'lg:order-2' : ''}`}>
+        <BrowserFrame url={displayUrl(project)}>
+          <ShowcaseCarousel slides={slides} />
+        </BrowserFrame>
       </div>
 
       <div className="lg:col-span-5">
-        <p className="text-sm text-muted">
+        <p className="label">
           {localize(project.category)} · {localize(project.status)}
         </p>
-        <Heading className="mt-3 text-4xl sm:text-5xl">{project.title}</Heading>
+        <Heading className="mt-4 text-4xl sm:text-5xl">{project.title}</Heading>
         <p className="mt-5 text-lg text-ink/85">{localize(project.summary)}</p>
         <ul className="mt-6 space-y-2 text-ink/85">
           {localize(project.results)
             .slice(0, 2)
             .map((result) => (
               <li key={result} className="flex gap-3">
-                <span aria-hidden className="mt-3 h-0.5 w-5 shrink-0 bg-accent" />
+                <span aria-hidden className="mt-2.5 h-2 w-2 shrink-0 rounded-full bg-accent" />
                 {result}
               </li>
             ))}

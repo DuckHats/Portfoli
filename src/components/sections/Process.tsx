@@ -1,28 +1,33 @@
+import { m } from 'motion/react'
 import { useMessages } from '@/lib/i18n'
-import { Reveal } from '../ui/Reveal'
 import { Section } from '../ui/Section'
 
-/** The way of working as a vertical timeline: one accent node per step on a thin rule. */
+/** The way of working as four acts on the dark stage, each turning in from the side. */
 export function Process() {
   const { home } = useMessages()
   const { process } = home
   return (
-    <Section id="process" no="04 / 06" tone="tint" title={process.title} intro={process.intro}>
-      <ol className="relative ml-2 border-l border-ink lg:ml-[calc(100%/12*2)]">
+    <Section id="process" act="ink" label="03" title={process.title} intro={process.intro}>
+      <ol className="grid gap-x-16 gap-y-16 [perspective:1400px] md:grid-cols-2">
         {process.steps.map((step, index) => (
-          <li key={step.title} className="relative pb-14 pl-10 last:pb-0 sm:pl-16">
+          <m.li
+            key={step.title}
+            initial={{ opacity: 0, rotateY: -35, x: -30 }}
+            whileInView={{ opacity: 1, rotateY: 0, x: 0 }}
+            viewport={{ once: true, margin: '0px 0px -100px 0px' }}
+            transition={{ type: 'spring', stiffness: 80, damping: 18, delay: index * 0.12 }}
+            style={{ transformOrigin: '0% 50%' }}
+            className={index % 2 === 1 ? 'md:mt-32' : ''}
+          >
             <span
               aria-hidden
-              className="absolute -left-[7px] top-3 h-3.5 w-3.5 border border-ink bg-accent"
-            />
-            <Reveal delay={index * 0.06}>
-              <p aria-hidden className="meta">
-                {String(index + 1).padStart(2, '0')}
-              </p>
-              <h3 className="mt-2 text-4xl sm:text-5xl">{step.title}</h3>
-              <p className="mt-4 max-w-prose text-lg text-muted">{step.description}</p>
-            </Reveal>
-          </li>
+              className="block font-display text-[8rem] font-black leading-none text-transparent [-webkit-text-stroke:2px_rgb(var(--color-accent))] sm:text-[10rem]"
+            >
+              {index + 1}
+            </span>
+            <h3 className="mt-4 text-2xl sm:text-4xl">{step.title}</h3>
+            <p className="mt-4 max-w-md text-lg text-muted">{step.description}</p>
+          </m.li>
         ))}
       </ol>
     </Section>

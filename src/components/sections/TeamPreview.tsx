@@ -1,9 +1,8 @@
 import { ArrowRight } from 'lucide-react'
-import { teamMembers } from '@/content/team'
 import { useMessages } from '@/lib/i18n'
 import { AppLink } from '../ui/AppLink'
 import { Section } from '../ui/Section'
-import { MemberRow } from './MemberCard'
+import { TeamStrip } from './TeamStrip'
 
 export function TeamPreview() {
   const { home } = useMessages()
@@ -11,7 +10,7 @@ export function TeamPreview() {
   return (
     <Section
       id="team"
-      no="05 / 06"
+      label="04"
       title={team.title}
       intro={team.intro}
       action={
@@ -21,13 +20,7 @@ export function TeamPreview() {
         </AppLink>
       }
     >
-      <ul className="border-t border-ink">
-        {teamMembers.map((member) => (
-          <li key={member.id} className="border-b border-ink">
-            <MemberRow member={member} />
-          </li>
-        ))}
-      </ul>
+      <TeamStrip />
     </Section>
   )
 }

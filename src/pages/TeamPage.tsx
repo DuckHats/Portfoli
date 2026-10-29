@@ -1,8 +1,7 @@
-import { MemberCard } from '@/components/sections/MemberCard'
+import { TeamStrip } from '@/components/sections/TeamStrip'
 import { SEO } from '@/components/SEO'
 import { Container } from '@/components/ui/Container'
 import { PageHeader } from '@/components/ui/PageHeader'
-import { teamMembers } from '@/content/team'
 import { useMessages } from '@/lib/i18n'
 
 export function TeamPage() {
@@ -11,24 +10,19 @@ export function TeamPage() {
     <>
       <SEO title={seo.team.title} description={seo.team.description} />
       <PageHeader title={team.title} intro={team.intro} />
-      <Container className="py-16 sm:py-24">
-        <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-4">
-          {teamMembers.map((member, index) => (
-            <div key={member.id} className={index % 2 === 1 ? 'md:mt-10' : ''}>
-              <MemberCard member={member} />
-            </div>
-          ))}
-        </div>
-        <section
-          aria-labelledby="work"
-          className="mt-24 max-w-prose border border-ink bg-tint p-6 sm:p-8"
-        >
-          <h2 id="work" className="text-3xl sm:text-4xl">
+      <div data-act="paper">
+        <Container className="py-20 sm:py-28">
+          <TeamStrip heading="h2" />
+        </Container>
+      </div>
+      <section data-act="red" aria-labelledby="work" className="bg-canvas text-ink">
+        <Container className="grid gap-8 py-20 sm:py-28 lg:grid-cols-12">
+          <h2 id="work" className="text-4xl sm:text-6xl lg:col-span-7">
             {team.workTitle}
           </h2>
-          <p className="mt-4 text-lg text-ink/85">{team.workBody}</p>
-        </section>
-      </Container>
+          <p className="text-lg sm:text-xl lg:col-span-5 lg:self-end">{team.workBody}</p>
+        </Container>
+      </section>
     </>
   )
 }
