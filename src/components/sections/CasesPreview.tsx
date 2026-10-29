@@ -13,7 +13,7 @@ export function CasesPreview() {
   return (
     <Section
       id="cases"
-      label="02"
+      label="03"
       title={cases.title}
       intro={cases.intro}
       action={

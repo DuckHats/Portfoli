@@ -7,7 +7,7 @@ export function Process() {
   const { home } = useMessages()
   const { process } = home
   return (
-    <Section id="process" act="ink" label="03" title={process.title} intro={process.intro}>
+    <Section id="process" act="ink" label="04" title={process.title} intro={process.intro}>
       <ol className="grid gap-x-16 gap-y-16 [perspective:1400px] md:grid-cols-2">
         {process.steps.map((step, index) => (
           <m.li

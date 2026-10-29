@@ -19,7 +19,7 @@ export function ServicesOverview() {
     <Section
       id="services"
       act="red"
-      label="01"
+      label="02"
       title={services.title}
       intro={services.intro}
       action={

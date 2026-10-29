@@ -3,7 +3,9 @@ import { SITE } from '@/config/site'
 import { useMessages } from '@/lib/i18n'
 import { AppLink, ExternalLink } from '../ui/AppLink'
 import { Container } from '../ui/Container'
+import { LocalTime } from './LocalTime'
 import { FOOTER_NAV, LEGAL_NAV } from './navigation'
+import { Wordmark } from './Wordmark'
 
 const XIcon = () => (
   <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
@@ -31,6 +33,9 @@ export function Footer() {
               {SITE.name}
             </p>
             <p className="mt-5 max-w-xs text-ink/70">{footer.tagline}</p>
+            <div className="mt-6">
+              <LocalTime />
+            </div>
           </div>
 
           <nav aria-label={a11y.footerNav}>
@@ -89,13 +94,7 @@ export function Footer() {
           </ul>
         </div>
       </Container>
-      {/* Oversized wordmark cropped by the bottom edge. Drawn as pseudo-element text so it is graphic only,
-          not content for assistive tech or contrast checks. */}
-      <div
-        aria-hidden
-        data-text={SITE.name}
-        className="mt-4 select-none whitespace-nowrap text-center font-display text-[14vw] font-black uppercase leading-[0.78] text-ink/[0.07] before:content-[attr(data-text)] "
-      />
+      <Wordmark />
     </footer>
   )
 }

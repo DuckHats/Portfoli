@@ -45,6 +45,7 @@ export function Hero() {
       <Container className="relative pb-24 pt-12 sm:pt-16 lg:pb-32">
         <Headline
           id="hero-title"
+          lively
           text={hero.title}
           className="max-w-6xl text-[2.6rem] sm:text-7xl lg:text-[4.75rem] xl:text-[5.25rem]"
         />

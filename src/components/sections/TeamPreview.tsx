@@ -10,7 +10,7 @@ export function TeamPreview() {
   return (
     <Section
       id="team"
-      label="04"
+      label="05"
       title={team.title}
       intro={team.intro}
       action={
