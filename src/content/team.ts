@@ -5,6 +5,8 @@ export interface TeamMember {
   name: string
   role: Localized
   photo: string
+  /** Where the face is in the photo (percentages) and how far to zoom in on it. */
+  photoFocus?: { x: number; y: number; zoom?: number }
   links: { label: string; url: string }[]
 }
 
@@ -21,6 +23,7 @@ export const teamMembers: TeamMember[] = [
       en: 'Coordination and administration',
     },
     photo: '/team/Sergi.webp',
+    photoFocus: { x: 45, y: 35 },
     links: [
       { label: 'LinkedIn', url: 'https://linkedin.com/in/sergigiribet' },
       { label: 'GitHub', url: 'https://github.com/SergiGiribet' },
@@ -35,6 +38,7 @@ export const teamMembers: TeamMember[] = [
       en: 'Back-end developer',
     },
     photo: '/team/Gerard.webp',
+    photoFocus: { x: 52, y: 70, zoom: 1.9 },
     links: [{ label: 'Web', url: 'https://www.gerardloriz.com/' }],
   },
   {
@@ -46,6 +50,7 @@ export const teamMembers: TeamMember[] = [
       en: 'Front-end developer',
     },
     photo: '/team/Arnau.webp',
+    photoFocus: { x: 50, y: 42 },
     links: [],
   },
   {
@@ -57,6 +62,7 @@ export const teamMembers: TeamMember[] = [
       en: 'Front-end developer',
     },
     photo: '/team/Ferran.webp',
+    photoFocus: { x: 50, y: 38 },
     links: [],
   },
 ]
