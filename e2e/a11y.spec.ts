@@ -21,7 +21,7 @@ async function axe(page: Page, include?: string) {
 }
 
 test('every page passes axe in the dark theme', async ({ browser, isMobile }) => {
-  test.setTimeout(180_000)
+  test.setTimeout(360_000)
   const context = await browser.newContext({
     colorScheme: 'dark',
     reducedMotion: 'reduce',
@@ -41,7 +41,7 @@ test('every page passes axe in the dark theme', async ({ browser, isMobile }) =>
 test('every page has one h1, no skipped heading levels and alt text on content images', async ({
   page,
 }) => {
-  test.setTimeout(120_000)
+  test.setTimeout(300_000)
   const issues: string[] = []
   for (const path of pages) {
     await page.goto(path)
@@ -74,7 +74,7 @@ test('every page has one h1, no skipped heading levels and alt text on content i
 })
 
 test('interactive targets are at least 24×24 px (WCAG 2.5.8)', async ({ page }) => {
-  test.setTimeout(120_000)
+  test.setTimeout(300_000)
   const issues: string[] = []
   for (const path of pages) {
     await page.goto(path)
@@ -104,7 +104,7 @@ test('interactive targets are at least 24×24 px (WCAG 2.5.8)', async ({ page })
 test('pages reflow at 320 px without sideways scrolling or broken headline words', async ({
   browser,
 }) => {
-  test.setTimeout(120_000)
+  test.setTimeout(300_000)
   const context = await browser.newContext({
     viewport: { width: 320, height: 640 },
     reducedMotion: 'reduce',
@@ -124,7 +124,7 @@ test('pages reflow at 320 px without sideways scrolling or broken headline words
 test('without JavaScript every page still shows its heading, content and navigation', async ({
   browser,
 }) => {
-  test.setTimeout(120_000)
+  test.setTimeout(300_000)
   const context = await browser.newContext({ javaScriptEnabled: false })
   const page = await context.newPage()
   for (const path of pages) {

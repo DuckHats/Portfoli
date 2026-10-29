@@ -251,7 +251,7 @@ test('the project brief walks through its steps, passes axe on each and sends', 
 test('no headline word is split, sticks out of its heading or makes the page scroll sideways', async ({
   page,
 }) => {
-  test.setTimeout(120_000)
+  test.setTimeout(300_000)
   const issues: string[] = []
   for (const path of pages) {
     await page.goto(path)

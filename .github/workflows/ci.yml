@@ -34,9 +34,11 @@ jobs:
       - run: pnpm check:bundle
       - name: Check generated files
         run: |
-          for f in dist/sitemap.xml dist/robots.txt dist/.well-known/security.txt dist/ca.html dist/ca/services.html; do
+          for f in dist/sitemap.xml dist/robots.txt dist/.well-known/security.txt dist/ca.html dist/ca/serveis.html dist/es/servicios.html dist/en/services.html dist/404.html; do
             test -s "$f" || { echo "missing $f"; exit 1; }
           done
+          # Pages ship their prerendered content, not an empty app shell.
+          grep -q '<div id="root"><' dist/ca/serveis.html || { echo "dist/ca/serveis.html is not prerendered"; exit 1; }
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: dist
@@ -48,7 +50,8 @@ jobs:
   e2e:
     needs: verify
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    # The accessibility suite visits every page in both themes on desktop and mobile.
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
