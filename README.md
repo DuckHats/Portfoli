@@ -58,15 +58,28 @@ e2e/  test/       Playwright specs; API and config tests
 
 ## SEO
 
-- `pnpm build` writes one prerendered HTML file per route and language (`dist/ca/serveis.html`, ...)
-  with the right title, description, canonical, hreflang, Open Graph and JSON-LD, so crawlers and
-  link previews work without JavaScript. The same helpers (`src/lib/seo.ts`) feed the client
-  `<SEO>` component, and every prerendered tag carries `data-rh` so react-helmet-async replaces it
-  instead of duplicating it.
-- `sitemap.xml` is generated from the same page list (with reciprocal hreflang), plus `robots.txt`
-  and `/.well-known/security.txt` (its `Expires` is renewed on every build).
-- Titles stay within 50 characters and descriptions within 170; `test/seo.test.ts` and
-  `translations.test.ts` enforce it.
+- **Prerendered pages.** `pnpm build` renders every page (and the 404 page) to HTML with
+  `src/entry-server.tsx` and writes one file per route and language (`dist/ca/serveis.html`, ...):
+  the real content, plus the right title, description, canonical, hreflang, Open Graph and
+  JSON-LD. Crawlers, AI assistants and link previews get the whole page without JavaScript; the
+  browser hydrates it (`src/main.tsx`). Every prerendered head tag carries `data-rh` so
+  react-helmet-async replaces it instead of duplicating it.
+- **Structured data.** Every page has the studio as an `Organization`; the home page adds
+  `WebSite`, inner pages a `BreadcrumbList`, and Services, Projects, each project, About and
+  Contact their own types (`src/lib/jsonLd.ts`, shared by the client and the build).
+- **URLs.** Localised slugs, permanent server redirects from every old URL, a real 404 status for
+  unknown ones (see Content and languages, and Deployment).
+- `sitemap.xml` comes from the same page list (reciprocal hreflang and the project and team images),
+  plus `robots.txt` and `/.well-known/security.txt` (its `Expires` is renewed on every build).
+- Titles stay within 60 characters and descriptions between 70 and 160, in all three languages
+  (`test/seo.test.ts`); longer project summaries are shortened at a word (`metaDescription`).
+
+## Accessibility
+
+WCAG 2.2 AA. `e2e/a11y.spec.ts` and `e2e/smoke.spec.ts` run axe on every page in the light and dark
+themes on desktop and mobile, and check headings, alt text, 24 px targets, reflow at 320 px, the
+site without JavaScript, the skip link, keyboard use, the mobile menu, forms with errors and the
+pause controls of everything that moves.
 
 ## Design tokens
 
@@ -91,5 +104,7 @@ and is what the e2e tests and Lighthouse run against.
 
 ## Pending before launch
 
-Search the repo for `TODO(client)`: domain, corporate phone, legal details, measured project
-results and missing team profiles.
+Search the repo for `TODO(client)`: domain, corporate phone and address (they would let the
+Organization become a LocalBusiness), legal details, budget ranges, real team photos, measured
+project results and missing team profiles. Once the domain is live, register it in Google Search
+Console and Bing Webmaster Tools and submit `/sitemap.xml`.

@@ -80,8 +80,8 @@ with the `domMax` features in a lazy chunk, `m.*` components only (`strict`), an
 - Page transitions: the old page sinks back and the new one rises (`Layout`, `AnimatePresence`);
   scroll and focus reset once the old page has left. The first load is not animated.
 - Primary calls to action are magnetic (`ui/Magnetic`, mouse only). Form results animate in.
-- The service marquee and the carousel keep their pause rules (hover, focus, off screen,
-  reduced motion).
+- The service marquee and the carousel pause on hover, focus and off screen, never move with
+  reduced motion, and each has a visible control to stop it for good (WCAG 2.2.2).
 
 ## Interaction layer
 

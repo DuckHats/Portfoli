@@ -28,9 +28,22 @@ Read README.md first. Things that are not obvious from the code:
   (WebP, originals deleted), and reference the `.webp` path.
 - **Dates**: `SITE.legalUpdated` is the privacy/legal review date; bump it when the text changes.
 - **Analytics** loads only after consent (`lib/consent.ts`); the CSP only allows Google Tag Manager.
-- **SEO shells**: `scripts/lib/shells.ts` writes `dist/<lang>/<page>.html` after the build. Tags it
-  emits (and the managed ones in `index.html`) carry `data-rh="true"` so react-helmet-async replaces
-  them. Keep `src/lib/seo.ts` as the only place that formats titles, canonicals and hreflang.
+- **Prerendered pages**: `pnpm build` runs `vite build`, then `vite build --ssr src/entry-server.tsx
+--outDir dist-ssr`, then `scripts/generate-seo.ts`, which renders each page and writes
+  `dist/<lang>/<page>.html` and `dist/404.html` (`scripts/lib/shells.ts`). Head tags carry
+  `data-rh="true"` so react-helmet-async replaces them. Keep `src/lib/seo.ts` as the only place that
+  formats titles, canonicals and hreflang, and `src/lib/jsonLd.ts` for page structured data.
+- **Hydration rules** (the browser takes over the prerendered HTML with `hydrateRoot`): the first
+  client render must equal the HTML. Never read browser state while rendering: use
+  `useSyncExternalStore` with a server snapshot, or `useHydrated()` for things like the stored
+  cookie choice or the clock. Do not re-render a component that contains a lazy route or section
+  right after mounting (React would throw away its HTML, error #421): read preferences such as
+  reduced motion inside handlers or in CSS (`motion-reduce:`). The animation engine is loaded before
+  hydrating (`main.tsx`) for the same reason. e2e fails on any console error, which catches this.
+- **Routes and redirects**: slugs per language live in `ROUTES`; `pnpm redirects` writes the
+  permanent redirects into `vercel.json` (`scripts/lib/redirects.ts`), and `test/vercel.test.ts`
+  fails when they are out of date. There is no catch-all rewrite: unknown URLs get `404.html` with
+  a 404 status. `scripts/serve-dist.ts` applies the same redirects and 404 locally.
 - **`cleanUrls: true` + `trailingSlash: false`** in `vercel.json` are what make `/ca/serveis` resolve
   to the prerendered file. `vite preview` does not do this: use `scripts/serve-dist.ts` (e2e does).
 - **Dependency overrides** in `package.json` (`pnpm.overrides`) pin patched transitive versions so
