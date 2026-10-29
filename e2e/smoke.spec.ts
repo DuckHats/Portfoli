@@ -157,15 +157,12 @@ test('switching language keeps the page visible (no curtain left behind)', async
   }
 })
 
-test('the name intro plays once per session, on the home page only, and never blocks the page', async ({
+test('the loader plays once per session, on whichever page the visit starts, without blocking it', async ({
   browser,
 }) => {
   const context = await browser.newContext({ reducedMotion: 'no-preference' })
   const page = await context.newPage()
   await page.goto('/en/services')
-  await expect(page.locator('#intro')).toBeHidden()
-
-  await page.goto('/en')
   await expect(page.locator('html')).toHaveAttribute('data-intro', '')
   const intro = page.locator('#intro')
   await expect(intro).toBeVisible()
@@ -173,10 +170,13 @@ test('the name intro plays once per session, on the home page only, and never bl
   await expect(intro).toHaveCSS('position', 'fixed')
   // Clicks go through it while it plays.
   await page.getByRole('banner').getByRole('link', { name: 'DuckHats' }).click({ timeout: 2000 })
+  await expect(page).toHaveURL(/\/en$/)
   await expect(intro).toBeHidden({ timeout: 4000 })
 
-  await page.reload()
-  await expect(page.locator('html')).not.toHaveAttribute('data-intro', '')
+  for (const path of ['/en', '/en/team']) {
+    await page.goto(path)
+    await expect(page.locator('html')).not.toHaveAttribute('data-intro', '')
+  }
   await context.close()
 })
 

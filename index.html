@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="/theme-init.js"></script>
     <!--
-      Name intro (#intro below, flagged by theme-init.js): styled inline so it is right from the
-      first paint, in development too, without waiting for the app's stylesheet. Pure CSS: the
-      name rises on the dark stage, the stage lifts away; it never takes clicks.
+      First-visit loader (#intro below, flagged by theme-init.js): styled inline so it is right from
+      the first paint, in development too, without waiting for the app's stylesheet. Pure CSS, about
+      1.6 s: the mark wipes in, the name rises letter by letter over a filling red line, then the
+      curtain splits open. It never takes clicks and never plays with reduced motion.
     -->
     <style>
       #intro {
@@ -17,34 +18,99 @@
         position: fixed;
         inset: 0;
         z-index: 70;
+        display: block;
+        pointer-events: none;
+        animation: intro-done 0s linear 1.6s both;
+      }
+      #intro .intro-top,
+      #intro .intro-bottom {
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 50.5%;
+        background: rgb(13 13 12);
+        animation: 0.55s cubic-bezier(0.76, 0, 0.24, 1) 1.05s both;
+      }
+      #intro .intro-top {
+        top: 0;
+        animation-name: intro-up;
+      }
+      #intro .intro-bottom {
+        bottom: 0;
+        animation-name: intro-down;
+      }
+      #intro .intro-stage {
+        position: absolute;
+        inset: 0;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        overflow: hidden;
-        pointer-events: none;
-        background: rgb(13 13 12);
+        gap: 1.5rem;
         color: rgb(243 239 230);
-        animation: intro-lift 0.6s cubic-bezier(0.76, 0, 0.24, 1) 1s both;
+        animation: intro-fade 0.2s ease-in 1s both;
+      }
+      #intro .intro-brand {
+        display: flex;
+        align-items: center;
+        gap: clamp(1rem, 2.5vw, 2rem);
+      }
+      #intro .intro-mark {
+        width: clamp(3.5rem, 8vw, 7rem);
+        aspect-ratio: 1;
+        background: currentColor;
+        -webkit-mask: url('/brand/logo-mark.png') center / contain no-repeat;
+        mask: url('/brand/logo-mark.png') center / contain no-repeat;
+        animation: intro-wipe 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
       }
       #intro p {
         display: flex;
+        margin: 0;
         overflow: hidden;
         padding-block: 0.08em;
         font-family: 'Archivo Variable', 'Archivo', system-ui, sans-serif;
-        font-size: clamp(3rem, 12vw, 13rem);
+        font-size: clamp(2.5rem, 8vw, 8rem);
         font-weight: 900;
         font-stretch: 125%;
         letter-spacing: -0.03em;
         line-height: 0.9;
       }
-      #intro span {
+      #intro p span {
         display: inline-block;
-        animation: intro-letter 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-        animation-delay: calc(var(--i) * 0.05s);
+        animation: intro-letter 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+        animation-delay: calc(0.15s + var(--i) * 0.045s);
+      }
+      #intro .intro-line {
+        width: min(24rem, 60vw);
+        height: 3px;
+        border-radius: 3px;
+        background: rgb(243 239 230 / 0.15);
+        overflow: hidden;
+      }
+      #intro .intro-line::after {
+        content: '';
+        display: block;
+        height: 100%;
+        background: rgb(255 89 100);
+        transform-origin: left;
+        animation: intro-fill 0.8s cubic-bezier(0.65, 0, 0.35, 1) 0.2s both;
       }
       @media (max-width: 639px) {
+        #intro .intro-brand {
+          flex-direction: column;
+        }
         #intro p {
           font-stretch: 100%;
+          font-size: 14vw;
+        }
+      }
+      @keyframes intro-wipe {
+        from {
+          clip-path: inset(0 100% 0 0);
+          transform: scale(0.85) rotate(-6deg);
+        }
+        to {
+          clip-path: inset(0 0 0 0);
         }
       }
       @keyframes intro-letter {
@@ -52,9 +118,29 @@
           transform: translateY(110%);
         }
       }
-      @keyframes intro-lift {
+      @keyframes intro-fill {
+        from {
+          transform: scaleX(0);
+        }
+      }
+      @keyframes intro-fade {
+        to {
+          opacity: 0;
+          transform: scale(0.96);
+        }
+      }
+      @keyframes intro-up {
         to {
           transform: translateY(-100%);
+        }
+      }
+      @keyframes intro-down {
+        to {
+          transform: translateY(100%);
+        }
+      }
+      @keyframes intro-done {
+        to {
           visibility: hidden;
         }
       }
@@ -113,13 +199,21 @@
     </script>
   </head>
   <body>
-    <!-- Name intro: shown only when theme-init.js sets data-intro; pure CSS (see index.css). -->
+    <!-- First-visit loader: shown only when theme-init.js sets data-intro (styles in <head>). -->
     <div id="intro" aria-hidden="true">
-      <p>
-        <span style="--i: 0">D</span><span style="--i: 1">U</span><span style="--i: 2">C</span
-        ><span style="--i: 3">K</span><span style="--i: 4">H</span><span style="--i: 5">A</span
-        ><span style="--i: 6">T</span><span style="--i: 7">S</span>
-      </p>
+      <div class="intro-top"></div>
+      <div class="intro-bottom"></div>
+      <div class="intro-stage">
+        <div class="intro-brand">
+          <span class="intro-mark"></span>
+          <p>
+            <span style="--i: 0">D</span><span style="--i: 1">U</span><span style="--i: 2">C</span
+            ><span style="--i: 3">K</span><span style="--i: 4">H</span><span style="--i: 5">A</span
+            ><span style="--i: 6">T</span><span style="--i: 7">S</span>
+          </p>
+        </div>
+        <div class="intro-line"></div>
+      </div>
     </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
