@@ -29,7 +29,10 @@ export function ServicesPage() {
                   <p aria-hidden className="label mb-4">
                     {String(index + 1).padStart(2, '0')}
                   </p>
-                  <h2 id={`${category.id}-title`} className="text-[1.7rem] sm:text-4xl md:text-5xl">
+                  <h2
+                    id={`${category.id}-title`}
+                    className="text-2xl min-[400px]:text-[1.7rem] sm:text-4xl md:text-5xl"
+                  >
                     {localize(category.title)}
                   </h2>
                 </div>

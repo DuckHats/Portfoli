@@ -1,5 +1,5 @@
 import { Menu, Search, X } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useActiveAct } from '@/hooks/useActiveAct'
 import { SITE } from '@/config/site'
@@ -31,9 +31,18 @@ export function Header() {
   // The bar takes the colours of the act scrolling under it.
   const act = useActiveAct()
 
+  const toggle = useRef<HTMLButtonElement>(null)
+  const menu = useRef<HTMLDivElement>(null)
+
+  // Opening the menu moves focus into it; Escape closes it and returns focus to the toggle.
   useEffect(() => {
     if (!open) return
-    const onKey = (event: KeyboardEvent) => event.key === 'Escape' && setOpenKey(null)
+    menu.current?.querySelector<HTMLElement>('a, button')?.focus()
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return
+      setOpenKey(null)
+      toggle.current?.focus()
+    }
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
   }, [open])
@@ -60,11 +69,11 @@ export function Header() {
           <button
             type="button"
             onClick={openQuickSearch}
-            aria-label={palette.open}
             aria-keyshortcuts="Control+K Meta+K"
             className="inline-flex h-10 items-center gap-2 rounded-full px-3 text-sm text-muted transition-colors hover:bg-ink/10 hover:text-ink"
           >
             <Search size={16} aria-hidden />
+            <span className="sr-only">{palette.open}</span>
             <kbd className="hidden font-sans text-xs lg:inline">Ctrl K</kbd>
           </button>
           <LanguageSwitcher />
@@ -75,6 +84,7 @@ export function Header() {
         </div>
 
         <button
+          ref={toggle}
           type="button"
           className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-ink/30 hover:bg-ink/10 md:hidden"
           aria-expanded={open}
@@ -88,7 +98,7 @@ export function Header() {
       <ScrollProgress />
 
       {open && (
-        <div id="mobile-menu" className="border-t border-ink/15 bg-canvas md:hidden">
+        <div ref={menu} id="mobile-menu" className="border-t border-ink/15 bg-canvas md:hidden">
           <Container className="flex flex-col gap-1 py-4">
             <nav aria-label={a11y.mainNav} className="flex flex-col">
               {PRIMARY_NAV.map((key) => (

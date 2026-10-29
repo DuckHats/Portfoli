@@ -56,6 +56,7 @@ export function ChoiceCards({
                 value={option}
                 checked={checked}
                 onChange={() => onChange(option, pointer.current)}
+                required
                 aria-describedby={error ? `${name}-error` : undefined}
                 className="sr-only"
               />
@@ -160,9 +161,10 @@ export function SelectField({
   error?: string
 }) {
   return (
-    <FormField id={id} label={label} error={error}>
+    <FormField id={id} label={label} error={error} required>
       <select
         id={id}
+        required
         value={value}
         onChange={(event) => onChange(event.target.value)}
         aria-invalid={error ? true : undefined}

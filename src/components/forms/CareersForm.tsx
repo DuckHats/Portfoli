@@ -12,6 +12,7 @@ import { inputStyles } from '../ui/inputStyles'
 import { ConsentNote } from './ConsentNote'
 import { FormStatus } from './FormStatus'
 import { Honeypot } from './Honeypot'
+import { RequiredNote } from './RequiredNote'
 
 export function CareersForm() {
   const { careers, validation } = useMessages()
@@ -66,11 +67,13 @@ export function CareersForm() {
   return (
     <form onSubmit={onSubmit} noValidate className="relative space-y-5">
       <Honeypot />
+      <RequiredNote />
       <div className="grid gap-5 sm:grid-cols-2">
-        <FormField id="name" label={copy.name} error={error('name')}>
+        <FormField id="name" label={copy.name} error={error('name')} required>
           <input
             id="name"
             name="name"
+            required
             type="text"
             autoComplete="name"
             placeholder={copy.namePlaceholder}
@@ -78,10 +81,11 @@ export function CareersForm() {
             {...aria('name')}
           />
         </FormField>
-        <FormField id="email" label={copy.email} error={error('email')}>
+        <FormField id="email" label={copy.email} error={error('email')} required>
           <input
             id="email"
             name="email"
+            required
             type="email"
             autoComplete="email"
             placeholder={copy.emailPlaceholder}
@@ -91,10 +95,11 @@ export function CareersForm() {
         </FormField>
       </div>
 
-      <FormField id="role" label={copy.role} error={error('role')}>
+      <FormField id="role" label={copy.role} error={error('role')} required>
         <select
           id="role"
           name="role"
+          required
           value={role}
           onChange={(e) => setRole(e.target.value)}
           className={inputStyles}
@@ -110,10 +115,11 @@ export function CareersForm() {
       </FormField>
 
       {role === 'other' && (
-        <FormField id="customRole" label={copy.otherRole} error={error('customRole')}>
+        <FormField id="customRole" label={copy.otherRole} error={error('customRole')} required>
           <input
             id="customRole"
             name="customRole"
+            required
             type="text"
             className={inputStyles}
             {...aria('customRole')}
@@ -156,7 +162,7 @@ export function CareersForm() {
           <button
             type="button"
             onClick={() => setLinks([...links, ''])}
-            className="mt-2 inline-flex items-center gap-1.5 text-sm text-muted hover:text-ink"
+            className="mt-2 inline-flex min-h-6 items-center gap-1.5 text-sm text-muted hover:text-ink"
           >
             <Plus size={14} aria-hidden /> {copy.addLink}
           </button>
@@ -174,10 +180,11 @@ export function CareersForm() {
         />
       </FormField>
 
-      <FormField id="message" label={copy.message} error={error('message')}>
+      <FormField id="message" label={copy.message} error={error('message')} required>
         <textarea
           id="message"
           name="message"
+          required
           rows={6}
           placeholder={copy.messagePlaceholder}
           className={inputStyles}

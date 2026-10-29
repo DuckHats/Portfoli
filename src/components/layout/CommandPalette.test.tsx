@@ -49,7 +49,7 @@ describe('quick search', () => {
   it('opens from the header button, ignores accents and closes with Escape', async () => {
     const user = userEvent.setup()
     renderApp()
-    await user.click(await screen.findByRole('button', { name: en.palette.open }))
+    await user.click(await screen.findByRole('button', { name: new RegExp(en.palette.open) }))
     const input = await screen.findByRole('combobox', {}, { timeout: 8000 })
 
     await user.type(input, 'SERVICES')

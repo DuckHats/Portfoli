@@ -8,7 +8,8 @@ import {
   useTransform,
   useVelocity,
 } from 'motion/react'
-import { useEffect, useRef } from 'react'
+import { Pause, Play } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
 import { useMessages } from '@/lib/i18n'
 
 /** Percent of one row's width travelled per second when the page is still. */
@@ -21,8 +22,8 @@ const wrap = (min: number, max: number, value: number) => {
 
 /**
  * The services we offer, on a band that reacts to scrolling: it speeds up and
- * leans with the scroll velocity and turns round when you scroll back up. It pauses on hover and
- * is a static, wrapped list for reduced motion.
+ * leans with the scroll velocity and turns round when you scroll back up. It pauses on hover, a
+ * button stops it for good (WCAG 2.2.2) and it is a static, wrapped list for reduced motion.
  */
 export function ServiceMarquee() {
   const { home, contact } = useMessages()
@@ -39,6 +40,7 @@ export function ServiceMarquee() {
   const x = useTransform(offset, (value) => `${value}%`)
   const direction = useRef(-1)
   const paused = useRef(false)
+  const [stopped, setStopped] = useState(false)
   const band = useRef<HTMLElement>(null)
   // No per-frame work while the band is off screen (assumed on screen where unsupported).
   const onScreen = useRef(true)
@@ -53,7 +55,7 @@ export function ServiceMarquee() {
   }, [])
 
   useAnimationFrame((_, delta) => {
-    if (reduce || paused.current || !onScreen.current) return
+    if (reduce || stopped || paused.current || !onScreen.current) return
     const speed = boost.get()
     if (speed < 0) direction.current = 1
     else if (speed > 0) direction.current = -1
@@ -84,7 +86,7 @@ export function ServiceMarquee() {
       ref={band}
       data-act="paper"
       aria-label={home.marquee.label}
-      className="overflow-hidden bg-canvas py-8 text-ink"
+      className="relative overflow-hidden bg-canvas py-8 text-ink"
       onPointerEnter={() => (paused.current = true)}
       onPointerLeave={() => (paused.current = false)}
     >
@@ -95,6 +97,16 @@ export function ServiceMarquee() {
         {row(false)}
         {row(true)}
       </m.div>
+      {/* Hidden in CSS for reduced motion (nothing moves), so the HTML is the same for everyone. */}
+      <button
+        type="button"
+        aria-pressed={stopped}
+        onClick={() => setStopped((value) => !value)}
+        className="absolute bottom-2 right-4 inline-flex h-8 items-center gap-1.5 rounded-full bg-canvas/90 px-3 text-xs font-semibold text-ink ring-1 ring-ink/20 transition-colors hover:bg-ink hover:text-canvas motion-reduce:hidden sm:right-6"
+      >
+        {stopped ? <Play size={12} aria-hidden /> : <Pause size={12} aria-hidden />}
+        {home.marquee.pause}
+      </button>
     </section>
   )
 }

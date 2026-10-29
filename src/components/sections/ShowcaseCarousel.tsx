@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react'
 import { useCarousel } from '@/hooks/useCarousel'
 import { useMessages, useT } from '@/lib/i18n'
 
@@ -21,7 +21,9 @@ export function ShowcaseCarousel({
 }) {
   const { projects } = useMessages()
   const t = useT()
-  const { index, playing, go, next, prev, ref, handlers } = useCarousel({ count: slides.length })
+  const { index, playing, autoplay, stopped, toggle, go, next, prev, ref, handlers } = useCarousel({
+    count: slides.length,
+  })
 
   return (
     <div
@@ -51,6 +53,16 @@ export function ShowcaseCarousel({
 
       {slides.length > 1 && (
         <div className="absolute bottom-3 right-3 flex items-center border border-ink bg-canvas px-1">
+          {autoplay && (
+            <button
+              type="button"
+              onClick={toggle}
+              aria-label={stopped ? projects.play : projects.pause}
+              className="inline-flex h-8 w-8 items-center justify-center text-ink hover:bg-accent"
+            >
+              {stopped ? <Play size={14} aria-hidden /> : <Pause size={14} aria-hidden />}
+            </button>
+          )}
           <button
             type="button"
             onClick={prev}

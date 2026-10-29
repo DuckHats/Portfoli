@@ -48,7 +48,7 @@ export function ProjectDetailPage() {
           <Container className="pb-16 pt-14 sm:pb-24 sm:pt-20">
             <AppLink
               to="projects"
-              className="link-underline pb-0.5 text-sm text-muted hover:text-ink"
+              className="link-underline inline-flex min-h-6 items-center text-sm text-muted hover:text-ink"
             >
               ← {copy.back}
             </AppLink>

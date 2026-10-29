@@ -42,7 +42,7 @@ export function ServicesOverview() {
               className="border-t border-ink/25 last:border-b"
               onPointerEnter={(event) => event.pointerType === 'mouse' && setOpen(index)}
             >
-              <h3 className="text-[1.7rem] sm:text-5xl md:text-6xl lg:text-7xl">
+              <h3 className="text-xl min-[400px]:text-[1.7rem] sm:text-5xl md:text-6xl lg:text-7xl">
                 <button
                   type="button"
                   aria-expanded={isOpen}

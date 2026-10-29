@@ -120,7 +120,7 @@ function MemberMeta({
               <ExternalLink
                 href={link.url}
                 aria-label={`${team.profile} ${member.name}: ${link.label}`}
-                className={`link-underline pb-0.5 font-semibold ${light ? 'text-white' : 'text-accent-text'}`}
+                className={`link-underline inline-flex min-h-6 items-center font-semibold ${light ? 'text-white' : 'text-accent-text'}`}
               >
                 {link.label}
               </ExternalLink>

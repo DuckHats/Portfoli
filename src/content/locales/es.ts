@@ -17,6 +17,7 @@ export const es: Messages = {
     externalLink: '(se abre en una pestaña nueva)',
     logoAlt: 'Logotipo de DuckHats',
     backToTop: 'Volver arriba',
+    requiredNote: 'Campos obligatorios',
   },
   nav: {
     home: 'Inicio',
@@ -126,6 +127,7 @@ export const es: Messages = {
     },
     marquee: {
       label: 'Qué hacemos',
+      pause: 'Detener la animación',
     },
     process: {
       title: 'Cómo trabajamos',
@@ -192,6 +194,8 @@ export const es: Messages = {
     previous: 'Captura anterior',
     next: 'Captura siguiente',
     goTo: 'Mostrar la captura {n}',
+    pause: 'Detener el pase automático',
+    play: 'Reanudar el pase automático',
     slide: 'Captura {n} de {total}',
     nextProject: 'Proyecto siguiente',
     enlarge: 'Amplía la captura {n}',

@@ -65,9 +65,9 @@ describe('routing and language', () => {
   })
 
   it('switches language while keeping the page', async () => {
-    renderAt('/ca/services')
+    renderAt('/ca/serveis')
     await screen.findByRole('heading', { level: 1, name: messages.ca.services.title })
-    const link = screen.getAllByRole('link', { name: 'English' })[0]!
+    const link = screen.getAllByRole('link', { name: /English/ })[0]!
     expect(link).toHaveAttribute('href', '/en/services')
   })
 })

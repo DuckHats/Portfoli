@@ -40,7 +40,10 @@ describe('ContactForm (project brief)', () => {
 
     // Step 2: "already exists" asks for the current address.
     await user.click(screen.getByRole('radio', { name: new RegExp(copy.stages.existing.label) }))
-    await user.type(screen.getByLabelText(copy.currentUrl), 'https://shop.example.com')
+    await user.type(
+      screen.getByLabelText(copy.currentUrl, { exact: false }),
+      'https://shop.example.com',
+    )
     await user.click(screen.getByRole('button', { name: copy.next }))
 
     // Step 3: the features on offer follow the project type.
@@ -48,18 +51,27 @@ describe('ContactForm (project brief)', () => {
     expect(screen.getByRole('checkbox', { name: copy.features.catalog })).toBeInTheDocument()
     expect(screen.queryByRole('checkbox', { name: copy.features.booking })).not.toBeInTheDocument()
     await user.click(screen.getByRole('checkbox', { name: copy.features.payments }))
-    await user.type(screen.getByLabelText(copy.goal), 'Sell our wine online{Enter}')
+    await user.type(
+      screen.getByLabelText(copy.goal, { exact: false }),
+      'Sell our wine online{Enter}',
+    )
 
     // Step 4: dropdowns.
     await heading(copy.steps.plan.title)
-    await user.selectOptions(screen.getByLabelText(copy.timeline), copy.timelines.short)
-    await user.selectOptions(screen.getByLabelText(copy.budget), copy.budgets.unknown)
+    await user.selectOptions(
+      screen.getByLabelText(copy.timeline, { exact: false }),
+      copy.timelines.short,
+    )
+    await user.selectOptions(
+      screen.getByLabelText(copy.budget, { exact: false }),
+      copy.budgets.unknown,
+    )
     await user.click(screen.getByRole('button', { name: copy.next }))
 
     // Step 5: who you are.
     await heading(copy.steps.contact.title)
-    await user.type(screen.getByLabelText(copy.name), 'Ada')
-    await user.type(screen.getByLabelText(copy.email), 'ada@example.com')
+    await user.type(screen.getByLabelText(copy.name, { exact: false }), 'Ada')
+    await user.type(screen.getByLabelText(copy.email, { exact: false }), 'ada@example.com')
     await user.click(screen.getByRole('button', { name: copy.next }))
 
     // Summary, then send.
@@ -88,7 +100,7 @@ describe('ContactForm (project brief)', () => {
     await user.click(screen.getByRole('radio', { name: new RegExp(copy.projectTypes.other.label) }))
     await user.click(screen.getByRole('button', { name: copy.next }))
     expect(screen.getByRole('alert')).toHaveTextContent(validation.required)
-    await user.type(screen.getByLabelText(copy.projectTypeOther), 'A scraper')
+    await user.type(screen.getByLabelText(copy.projectTypeOther, { exact: false }), 'A scraper')
     await user.click(screen.getByRole('button', { name: copy.next }))
     await heading(copy.steps.stage.title)
   })
@@ -101,18 +113,24 @@ describe('ContactForm (project brief)', () => {
     )
     await user.click(await screen.findByRole('radio', { name: new RegExp(copy.stages.idea.label) }))
     await user.click(screen.getByRole('button', { name: copy.next }))
-    await user.type(await screen.findByLabelText(copy.goal), 'A new site{Enter}')
-    await user.selectOptions(await screen.findByLabelText(copy.timeline), copy.timelines.flexible)
-    await user.selectOptions(screen.getByLabelText(copy.budget), copy.budgets.small)
+    await user.type(await screen.findByLabelText(copy.goal, { exact: false }), 'A new site{Enter}')
+    await user.selectOptions(
+      await screen.findByLabelText(copy.timeline, { exact: false }),
+      copy.timelines.flexible,
+    )
+    await user.selectOptions(
+      screen.getByLabelText(copy.budget, { exact: false }),
+      copy.budgets.small,
+    )
     await user.click(screen.getByRole('button', { name: copy.next }))
-    await user.type(await screen.findByLabelText(copy.name), 'Ada')
-    await user.type(screen.getByLabelText(copy.email), 'ada@example.com{Enter}')
+    await user.type(await screen.findByLabelText(copy.name, { exact: false }), 'Ada')
+    await user.type(screen.getByLabelText(copy.email, { exact: false }), 'ada@example.com{Enter}')
     await heading(copy.steps.summary.title)
 
     await user.click(
       screen.getByRole('button', { name: `${copy.edit}: ${copy.steps.features.title}` }),
     )
-    const goal = await screen.findByLabelText(copy.goal)
+    const goal = await screen.findByLabelText(copy.goal, { exact: false })
     await user.clear(goal)
     await user.type(goal, 'A faster site')
     await user.click(screen.getByRole('button', { name: copy.backToSummary }))

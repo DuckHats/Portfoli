@@ -17,14 +17,15 @@ export function LanguageSwitcher() {
           hrefLang={language}
           lang={language}
           title={LANGUAGE_NAMES[language]}
-          aria-label={LANGUAGE_NAMES[language]}
           aria-current={language === current ? 'true' : undefined}
           onClick={() => storeLanguage(language)}
-          className={`px-2.5 py-1.5 uppercase transition-colors ${
+          className={`inline-flex min-h-7 items-center px-2.5 uppercase transition-colors ${
             language === current ? 'bg-ink text-canvas' : 'text-muted hover:text-ink'
           }`}
         >
+          {/* The visible code is part of the name (WCAG 2.5.3); the full name follows for AT. */}
           {language}
+          <span className="sr-only"> · {LANGUAGE_NAMES[language]}</span>
         </Link>
       ))}
     </nav>

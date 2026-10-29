@@ -17,6 +17,7 @@ export const ca = {
     externalLink: '(s’obre en una pestanya nova)',
     logoAlt: 'Logotip de DuckHats',
     backToTop: 'Torna a dalt',
+    requiredNote: 'Camps obligatoris',
   },
   nav: {
     home: 'Inici',
@@ -126,6 +127,7 @@ export const ca = {
     },
     marquee: {
       label: 'Què fem',
+      pause: 'Atura l’animació',
     },
     process: {
       title: 'Com treballem',
@@ -189,6 +191,8 @@ export const ca = {
     previous: 'Captura anterior',
     next: 'Captura següent',
     goTo: 'Mostra la captura {n}',
+    pause: 'Atura el passi automàtic',
+    play: 'Reprèn el passi automàtic',
     slide: 'Captura {n} de {total}',
     nextProject: 'Projecte següent',
     enlarge: 'Amplia la captura {n}',

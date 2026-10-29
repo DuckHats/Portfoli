@@ -3,7 +3,6 @@ import { Suspense, useRef } from 'react'
 import { useLocation, useOutlet } from 'react-router-dom'
 import { useMessages } from '@/lib/i18n'
 import { ErrorBoundary } from '../ErrorBoundary'
-import { AppLink } from '../ui/AppLink'
 import { buttonStyles } from '../ui/buttonStyles'
 import { Container } from '../ui/Container'
 import { CookieBanner } from './CookieBanner'
@@ -93,13 +92,5 @@ export function Layout() {
       <CookieBanner />
       <QuickSearch />
     </div>
-  )
-}
-
-export function BackLink({ to, children }: { to: 'projects' | 'home'; children: string }) {
-  return (
-    <AppLink to={to} className="text-sm text-muted transition-colors hover:text-ink">
-      ← {children}
-    </AppLink>
   )
 }

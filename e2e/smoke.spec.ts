@@ -237,7 +237,7 @@ test('the project brief walks through its steps, passes axe on each and sends', 
   await next.click()
 
   await step('Who are you?')
-  await page.getByLabel('Name', { exact: true }).fill('Ada')
+  await page.getByRole('textbox', { name: 'Name', exact: true }).fill('Ada')
   await page.getByLabel('Email').fill('ada@example.com')
   await axe('contact')
   await next.click()

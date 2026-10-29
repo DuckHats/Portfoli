@@ -144,8 +144,8 @@ describe('careers form', () => {
     expect((await screen.findAllByRole('alert')).length).toBeGreaterThanOrEqual(3)
     expect(fetchMock).not.toHaveBeenCalled()
 
-    await user().selectOptions(screen.getByLabelText(copy.role), 'other')
-    expect(screen.getByLabelText(copy.otherRole)).toBeInTheDocument()
+    await user().selectOptions(screen.getByLabelText(copy.role, { exact: false }), 'other')
+    expect(screen.getByLabelText(copy.otherRole, { exact: false })).toBeInTheDocument()
   })
 
   it('adds and removes link fields up to the limit', async () => {
@@ -163,10 +163,10 @@ describe('careers form', () => {
     const fetchMock = vi.spyOn(globalThis, 'fetch')
     renderApp('/en/careers')
     const u = user()
-    await u.type(await screen.findByLabelText(copy.name), 'Ada')
-    await u.type(screen.getByLabelText(copy.email), 'ada@example.com')
-    await u.selectOptions(screen.getByLabelText(copy.role), 'backend')
-    await u.type(screen.getByLabelText(copy.message), 'Hello')
+    await u.type(await screen.findByLabelText(copy.name, { exact: false }), 'Ada')
+    await u.type(screen.getByLabelText(copy.email, { exact: false }), 'ada@example.com')
+    await u.selectOptions(screen.getByLabelText(copy.role, { exact: false }), 'backend')
+    await u.type(screen.getByLabelText(copy.message, { exact: false }), 'Hello')
     await u.upload(
       screen.getByLabelText(new RegExp(copy.cv.split('(')[0]!.trim())),
       new File(['x'], 'cv.txt', { type: 'text/plain' }),
@@ -182,11 +182,11 @@ describe('careers form', () => {
       .mockResolvedValue(new Response('{}', { status: 200 }))
     renderApp('/en/careers')
     const u = user()
-    await u.type(await screen.findByLabelText(copy.name), 'Ada')
-    await u.type(screen.getByLabelText(copy.email), 'ada@example.com')
-    await u.selectOptions(screen.getByLabelText(copy.role), 'frontend')
+    await u.type(await screen.findByLabelText(copy.name, { exact: false }), 'Ada')
+    await u.type(screen.getByLabelText(copy.email, { exact: false }), 'ada@example.com')
+    await u.selectOptions(screen.getByLabelText(copy.role, { exact: false }), 'frontend')
     await u.type(screen.getAllByPlaceholderText(copy.linkPlaceholder)[0]!, 'https://github.com/ada')
-    await u.type(screen.getByLabelText(copy.message), 'Hello')
+    await u.type(screen.getByLabelText(copy.message, { exact: false }), 'Hello')
     const pdf = new File(['%PDF-1.4'], 'cv.pdf', { type: 'application/pdf' })
     await u.upload(screen.getByLabelText(new RegExp(copy.cv.split('(')[0]!.trim())), pdf)
     await u.click(screen.getByRole('button', { name: copy.submit }))

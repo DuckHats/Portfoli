@@ -41,7 +41,10 @@ export function Footer() {
             <ul className="mt-4 space-y-2.5">
               {FOOTER_NAV.map((key) => (
                 <li key={key}>
-                  <AppLink to={key} className="link-underline pb-0.5 text-ink/80 hover:text-ink">
+                  <AppLink
+                    to={key}
+                    className="link-underline inline-flex min-h-6 items-center text-ink/80 hover:text-ink"
+                  >
                     {nav[key]}
                   </AppLink>
                 </li>
@@ -85,7 +88,10 @@ export function Footer() {
           <ul className="flex gap-5">
             {LEGAL_NAV.map((key) => (
               <li key={key}>
-                <AppLink to={key} className="transition-colors hover:text-ink">
+                <AppLink
+                  to={key}
+                  className="inline-flex min-h-6 items-center transition-colors hover:text-ink"
+                >
                   {nav[key]}
                 </AppLink>
               </li>

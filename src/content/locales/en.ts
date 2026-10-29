@@ -17,6 +17,7 @@ export const en: Messages = {
     externalLink: '(opens in a new tab)',
     logoAlt: 'DuckHats logo',
     backToTop: 'Back to top',
+    requiredNote: 'Required fields',
   },
   nav: {
     home: 'Home',
@@ -126,6 +127,7 @@ export const en: Messages = {
     },
     marquee: {
       label: 'What we do',
+      pause: 'Pause the animation',
     },
     process: {
       title: 'How we work',
@@ -188,6 +190,8 @@ export const en: Messages = {
     previous: 'Previous screenshot',
     next: 'Next screenshot',
     goTo: 'Show screenshot {n}',
+    pause: 'Pause the slideshow',
+    play: 'Resume the slideshow',
     slide: 'Screenshot {n} of {total}',
     nextProject: 'Next project',
     enlarge: 'Enlarge screenshot {n}',

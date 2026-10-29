@@ -89,6 +89,8 @@
 
   html {
     scroll-behavior: smooth;
+    /* Keyboard focus and in-page jumps never end up under the sticky header (WCAG 2.4.11). */
+    scroll-padding-top: 5rem;
     scrollbar-color: rgb(var(--color-ink)) rgb(var(--color-tint));
     scrollbar-width: thin;
   }

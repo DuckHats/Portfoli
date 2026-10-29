@@ -37,6 +37,7 @@ import { ChipGroup, ChoiceCards, SelectField } from './BriefControls'
 import { ConsentNote } from './ConsentNote'
 import { FormStatus } from './FormStatus'
 import { Honeypot } from './Honeypot'
+import { RequiredNote } from './RequiredNote'
 
 const STEPS = ['type', 'stage', 'features', 'plan', 'contact', 'summary'] as const
 const SUMMARY = STEPS.length - 1
@@ -256,9 +257,11 @@ export function ContactForm() {
             id="projectTypeOther"
             label={copy.projectTypeOther}
             error={error('projectTypeOther')}
+            required
           >
             <input
               id="projectTypeOther"
+              required
               type="text"
               value={brief.projectTypeOther}
               onChange={(e) => set('projectTypeOther', e.target.value)}
@@ -310,9 +313,10 @@ export function ContactForm() {
             label: copy.features[value],
           }))}
         />
-        <FormField id="goal" label={copy.goal} error={error('goal')}>
+        <FormField id="goal" label={copy.goal} error={error('goal')} required>
           <input
             id="goal"
+            required
             type="text"
             value={brief.goal}
             onChange={(e) => set('goal', e.target.value)}
@@ -353,9 +357,10 @@ export function ContactForm() {
             ['email', 'email', 'email'],
           ] as const
         ).map(([field, inputType, autoComplete]) => (
-          <FormField key={field} id={field} label={copy[field]} error={error(field)}>
+          <FormField key={field} id={field} label={copy[field]} error={error(field)} required>
             <input
               id={field}
+              required
               type={inputType}
               autoComplete={autoComplete}
               value={brief[field]}
@@ -476,6 +481,9 @@ export function ContactForm() {
             transition={{ type: 'spring', stiffness: 120, damping: 20 }}
           />
         </div>
+      </div>
+      <div className="mt-4">
+        <RequiredNote />
       </div>
       <p aria-live="polite" className="sr-only">
         {t('contact.form.stepOf', { n: step + 1, total: STEPS.length })}

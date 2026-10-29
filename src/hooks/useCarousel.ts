@@ -9,16 +9,20 @@ interface Options {
 
 /**
  * Carousel state with autoplay that stays out of the way: it only runs while the carousel is on
- * screen, not hovered or focused, and never for users who prefer reduced motion.
+ * screen, not hovered or focused, never for users who prefer reduced motion, and the visitor can
+ * stop it for good with `toggle` (WCAG 2.2.2).
  */
 export function useCarousel({ count, interval = 3500 }: Options) {
   const [index, setIndex] = useState(0)
   const [interacting, setInteracting] = useState(false)
+  const [stopped, setStopped] = useState(false)
   const [visible, setVisible] = useState(() => typeof IntersectionObserver === 'undefined')
   const reduceMotion = usePrefersReducedMotion()
   const element = useRef<HTMLElement | null>(null)
 
-  const playing = !reduceMotion && !interacting && visible && count > 1
+  /** Whether it would advance on its own at all (so a pause control makes sense). */
+  const autoplay = !reduceMotion && count > 1
+  const playing = autoplay && !stopped && !interacting && visible
 
   useEffect(() => {
     if (!playing) return
@@ -48,6 +52,9 @@ export function useCarousel({ count, interval = 3500 }: Options) {
   return {
     index,
     playing,
+    autoplay,
+    stopped,
+    toggle: () => setStopped((value) => !value),
     go,
     next: () => go(index + 1),
     prev: () => go(index - 1),
