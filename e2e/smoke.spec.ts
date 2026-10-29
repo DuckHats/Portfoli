@@ -244,3 +244,20 @@ test('no headline word is split, sticks out of its heading or makes the page scr
   }
   expect(issues).toEqual([])
 })
+
+test('the footer legal links can be clicked (nothing covers them)', async ({ page, isMobile }) => {
+  // The giant wordmark's letters reach higher on wide screens.
+  if (!isMobile) await page.setViewportSize({ width: 1920, height: 1080 })
+  // Answer the cookie notice once; the choice is remembered.
+  await page.goto('/ca')
+  await page.getByRole('button', { name: 'Rebutja' }).click()
+  for (const [name, url] of [
+    ['Política de privacitat', /\/ca\/privacy$/],
+    ['Avís legal', /\/ca\/legal$/],
+  ] as const) {
+    await page.goto('/ca')
+    // A real click (no force): it fails if anything sits on top of the link.
+    await page.locator('footer').getByRole('link', { name }).click({ timeout: 5000 })
+    await expect(page).toHaveURL(url)
+  }
+})

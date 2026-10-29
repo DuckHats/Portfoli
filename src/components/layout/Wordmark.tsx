@@ -8,7 +8,8 @@ const MAX_LIFT = 0.18 // em
 /**
  * The oversized footer wordmark, cropped by the bottom edge. Letters rise toward a nearby mouse
  * pointer. Each letter is pseudo-element text, so it stays graphic only (not read out, not a
- * contrast target). Only `transform` changes, and only while the pointer is over it.
+ * contrast target). Only `transform` changes, and only while the pointer is over it. The glyphs
+ * reach above the line box, so they take no pointer events: they would cover the links above.
  */
 export function Wordmark() {
   const root = useRef<HTMLDivElement>(null)
@@ -25,6 +26,8 @@ export function Wordmark() {
           amount = Math.max(0, 1 - distance / RADIUS)
         }
         letter.style.transform = `translateY(${(-amount * MAX_LIFT).toFixed(3)}em)`
+        // The nearest letters also take the accent.
+        letter.style.color = amount > 0.6 ? 'rgb(var(--color-accent) / 0.4)' : ''
       })
     })
   }
@@ -47,7 +50,7 @@ export function Wordmark() {
         <span
           key={`${char}-${index}`}
           data-char={char}
-          className="inline-block transition-transform duration-300 ease-out before:content-[attr(data-char)] hover:text-accent/40"
+          className="pointer-events-none inline-block transition-[transform,color] duration-300 ease-out before:content-[attr(data-char)]"
         />
       ))}
     </div>
