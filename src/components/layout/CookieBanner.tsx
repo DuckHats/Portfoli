@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useHydrated } from '@/hooks/useHydrated'
 import { getConsent, setConsent } from '@/lib/consent'
 import { useMessages } from '@/lib/i18n'
 import { AppLink } from '../ui/AppLink'
@@ -6,12 +7,14 @@ import { buttonStyles } from '../ui/buttonStyles'
 
 export function CookieBanner() {
   const { cookies } = useMessages()
-  const [visible, setVisible] = useState(() => getConsent() === null)
-  if (!visible) return null
+  // Only in the browser: the prerendered page cannot know the visitor's choice.
+  const hydrated = useHydrated()
+  const [answered, setAnswered] = useState(false)
+  if (!hydrated || answered || getConsent() !== null) return null
 
   const choose = (value: 'granted' | 'denied') => {
     setConsent(value)
-    setVisible(false)
+    setAnswered(true)
   }
 
   return (

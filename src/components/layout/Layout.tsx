@@ -1,4 +1,4 @@
-import { AnimatePresence, m, useReducedMotion } from 'motion/react'
+import { AnimatePresence, m } from 'motion/react'
 import { Suspense, useRef } from 'react'
 import { useLocation, useOutlet } from 'react-router-dom'
 import { useMessages } from '@/lib/i18n'
@@ -38,7 +38,6 @@ export function Layout() {
   const pageKey = pathname.replace(/^\/[^/]+/, '') || '/'
   const mainRef = useRef<HTMLElement>(null)
   const outlet = useOutlet()
-  const reduce = useReducedMotion()
 
   // Once the old page has left: reset scroll and move focus to <main>, so keyboard and
   // screen-reader users land on the new page.
@@ -59,36 +58,31 @@ export function Layout() {
       <main id="main-content" ref={mainRef} tabIndex={-1} className="flex-1 outline-none">
         {/*
           Page change as a curtain: a dark panel rises over the old page, the new page mounts behind it
-          and the panel lifts away. The first load is not animated; reduced motion gets a plain fade.
+          and the panel lifts away. The first load is not animated. Nothing here reads the reduced-motion
+          preference while rendering (a re-render would undo the prerendered HTML's hydration): CSS
+          hides the curtain and the page simply changes.
         */}
         <AnimatePresence mode="wait" initial={false} onExitComplete={onPageLeft}>
-          <m.div
-            key={pageKey}
-            initial={{ opacity: reduce ? 0 : 1 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: reduce ? 0 : 1 }}
-            transition={{ duration: reduce ? 0.15 : 0.3 }}
-          >
-            {!reduce && (
-              <m.div
-                aria-hidden
-                data-curtain
-                data-act="ink"
-                className="pointer-events-none fixed inset-0 z-[55] bg-canvas"
-                initial={{ scaleY: 1, originY: 0 }}
-                animate={{
-                  scaleY: 0,
-                  originY: 0,
-                  transition: { duration: 0.3, ease: [0.65, 0, 0.35, 1] },
-                }}
-                exit={{
-                  scaleY: 1,
-                  originY: 1,
-                  transition: { duration: 0.25, ease: [0.65, 0, 0.35, 1] },
-                }}
-                style={{ scaleY: 0 }}
-              />
-            )}
+          <m.div key={pageKey} exit={{ opacity: 1 }} transition={{ duration: 0.3 }}>
+            {/* Always rendered (the prerendered HTML has it too); reduced motion hides it in CSS. */}
+            <m.div
+              aria-hidden
+              data-curtain
+              data-act="ink"
+              className="pointer-events-none fixed inset-0 z-[55] bg-canvas motion-reduce:hidden"
+              initial={{ scaleY: 1, originY: 0 }}
+              animate={{
+                scaleY: 0,
+                originY: 0,
+                transition: { duration: 0.3, ease: [0.65, 0, 0.35, 1] },
+              }}
+              exit={{
+                scaleY: 1,
+                originY: 1,
+                transition: { duration: 0.25, ease: [0.65, 0, 0.35, 1] },
+              }}
+              style={{ scaleY: 0 }}
+            />
             <ErrorBoundary fallback={(reset) => <RouteError reset={reset} />}>
               <Suspense fallback={<PageFallback />}>{outlet}</Suspense>
             </ErrorBoundary>

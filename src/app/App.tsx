@@ -1,3 +1,4 @@
+import type { FeatureBundle } from 'motion/react'
 import { lazy } from 'react'
 import type { ReactElement } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
@@ -63,10 +64,10 @@ export function AppRoutes() {
   )
 }
 
-export function App() {
+export function App({ motionFeatures }: { motionFeatures?: FeatureBundle }) {
   return (
     <HelmetProvider>
-      <MotionProvider>
+      <MotionProvider features={motionFeatures}>
         <BrowserRouter>
           <AppRoutes />
         </BrowserRouter>

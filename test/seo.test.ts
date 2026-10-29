@@ -113,8 +113,9 @@ describe('renderShell', () => {
     expect(out).toContain(`${BASE}/es/proyectos/menu-ginebro`)
   })
 
-  it('includes a noscript fallback', () => {
-    expect(html).toMatch(/<noscript><h1>Services \| DuckHats<\/h1><p>.+<\/p><\/noscript>/)
+  it('puts the prerendered body inside the root element', () => {
+    const out = renderShell(template, page, BASE, '<main><h1>Services</h1></main>')
+    expect(out).toContain('<div id="root"><main><h1>Services</h1></main></div>')
   })
 })
 

@@ -150,6 +150,15 @@
         }
       }
     </style>
+    <!-- Without JavaScript, content waiting for a scroll-in animation is shown as it is. -->
+    <noscript>
+      <style>
+        #root [style*='opacity:0'] {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      </style>
+    </noscript>
 
     <title>DuckHats | Programari i serveis digitals per a negocis</title>
     <meta

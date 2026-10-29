@@ -145,8 +145,8 @@ function headTags(page: PageMeta, base: string): string {
     .join('\n')
 }
 
-export function renderShell(template: string, page: PageMeta, base: string): string {
-  const title = escapeHtml(formatTitle(page.title, page.home))
+/** The page's HTML: its own <head> tags and, when given, its prerendered body (`body`). */
+export function renderShell(template: string, page: PageMeta, base: string, body = ''): string {
   const stripped = template
     .replace(/<title>[\s\S]*?<\/title>\s*/, '')
     .replace(/[ \t]*<(?:meta|link)\b[^>]*\bdata-rh="true"[^>]*>[ \t]*\r?\n?/g, '')
@@ -159,8 +159,5 @@ export function renderShell(template: string, page: PageMeta, base: string): str
       : ''
   return stripped
     .replace('</head>', `${headTags(page, base)}${heroPreload}\n  </head>`)
-    .replace(
-      '<div id="root"></div>',
-      `<div id="root"></div>\n    <noscript><h1>${title}</h1><p>${escapeHtml(page.description)}</p></noscript>`,
-    )
+    .replace('<div id="root"></div>', `<div id="root">${body}</div>`)
 }

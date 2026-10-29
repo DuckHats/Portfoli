@@ -11,20 +11,25 @@ const siteUrl = (): Plugin => ({
     html.replaceAll('%SITE_URL%', SITE.url).replaceAll('%SITE_EMAIL%', SITE.email),
 })
 
-export default defineConfig({
+export default defineConfig(({ isSsrBuild }) => ({
   plugins: [react(), siteUrl()],
   resolve: {
     alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) },
   },
-  build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          react: ['react', 'react-dom', 'react-router-dom'],
+  // CommonJS-only packages are bundled into the prerender build so Node can import them.
+  ssr: { noExternal: ['react-helmet-async'] },
+  // The prerender build (src/entry-server.tsx) keeps React external, so it gets no vendor chunk.
+  build: isSsrBuild
+    ? {}
+    : {
+        rollupOptions: {
+          output: {
+            manualChunks: {
+              react: ['react', 'react-dom', 'react-router-dom'],
+            },
+          },
         },
       },
-    },
-  },
   test: {
     environment: 'jsdom',
     globals: true,
@@ -36,4 +41,4 @@ export default defineConfig({
       thresholds: { statements: 70, functions: 70, lines: 70, branches: 60 },
     },
   },
-})
+}))

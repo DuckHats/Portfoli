@@ -78,7 +78,8 @@ export function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col gap-3 border-t border-ink/20 pt-6 text-sm text-ink/70 sm:flex-row sm:items-center sm:justify-between">
-          <p>
+          {/* The prerendered year may be older than the visitor's clock around New Year. */}
+          <p suppressHydrationWarning>
             © {new Date().getFullYear()} {SITE.name}. {footer.rights}
           </p>
           <ul className="flex gap-5">

@@ -1,12 +1,14 @@
 /**
  * Post-build SEO step (runs after `vite build`):
- *  - dist/<lang>/<page>.html  prerendered shells with per-page <head>
+ *  - dist/<lang>/<page>.html  prerendered pages: per-page <head> and the rendered body
+ *  - dist/404.html             the same for the not-found page (served with a 404 status)
  *  - dist/sitemap.xml, dist/robots.txt and dist/.well-known/security.txt
  * `lastmod` is the date of the last git commit touching src/content, or today without git.
  */
 import { execFileSync } from 'node:child_process'
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
+import { pathToFileURL } from 'node:url'
 import { SITE } from '../src/config/site'
 import { buildPages, notFoundPage, renderShell } from './lib/shells'
 import { renderRobots, renderSecurityTxt, renderSitemap } from './lib/sitemap'
@@ -46,11 +48,16 @@ const preloaded = await withFontPreload(await readFile(path.join(DIST, 'index.ht
 await writeFile(path.join(DIST, 'index.html'), preloaded)
 const template = preloaded
 
+// The prerender build (`vite build --ssr src/entry-server.tsx --outDir dist-ssr`).
+const { render } = (await import(pathToFileURL(path.resolve('dist-ssr/entry-server.js')).href)) as {
+  render: (url: string) => Promise<string>
+}
+
 const pages = [...buildPages(), notFoundPage()]
 for (const page of pages) {
   const target = path.join(DIST, page.file)
   await mkdir(path.dirname(target), { recursive: true })
-  await writeFile(target, renderShell(template, page, base))
+  await writeFile(target, renderShell(template, page, base, await render(page.pathname)))
 }
 
 const { xml, count } = renderSitemap(base, lastModified())

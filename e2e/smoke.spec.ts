@@ -98,6 +98,8 @@ test('mobile menu opens and closes with Escape', async ({ page, isMobile }) => {
 test('arrow keys move between sections of the home page', async ({ page, isMobile }) => {
   test.skip(isMobile, 'keyboard navigation is a desktop affordance')
   await page.goto('/ca')
+  // The prerendered page is visible before the script that handles the keys has run.
+  await page.waitForLoadState('networkidle')
   await page.locator('body').click({ position: { x: 5, y: 400 } })
   await page.keyboard.press('ArrowRight')
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(200)
@@ -163,9 +165,10 @@ test('switching language keeps the page visible (no curtain left behind)', async
     await expect(page.locator('html')).toHaveAttribute('lang', 'es')
     await page.waitForTimeout(1200)
     const covered = await page.evaluate(() =>
-      [...document.querySelectorAll('[data-curtain]')].some(
-        (node) => new DOMMatrix(getComputedStyle(node).transform).d > 0.01,
-      ),
+      [...document.querySelectorAll('[data-curtain]')].some((node) => {
+        const style = getComputedStyle(node)
+        return style.display !== 'none' && new DOMMatrix(style.transform).d > 0.01
+      }),
     )
     expect(covered).toBe(false)
   }

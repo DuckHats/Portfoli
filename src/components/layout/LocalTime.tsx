@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useHydrated } from '@/hooks/useHydrated'
 import { useLanguage, useMessages } from '@/lib/i18n'
 import { catalanTime } from '@/lib/time'
 
@@ -6,6 +7,8 @@ import { catalanTime } from '@/lib/time'
 export function LocalTime() {
   const { footer } = useMessages()
   const language = useLanguage()
+  // Shown only in the browser, so the prerendered page never shows the build's time.
+  const hydrated = useHydrated()
   const [now, setNow] = useState(() => new Date())
 
   useEffect(() => {
@@ -20,9 +23,11 @@ export function LocalTime() {
         <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
       </span>
       {footer.localTime}{' '}
-      <time className="font-semibold tabular-nums text-ink" dateTime={now.toISOString()}>
-        {catalanTime(now, language)}
-      </time>
+      {hydrated && (
+        <time className="font-semibold tabular-nums text-ink" dateTime={now.toISOString()}>
+          {catalanTime(now, language)}
+        </time>
+      )}
     </p>
   )
 }

@@ -25,7 +25,8 @@ for (const page of pages) {
       expect(html).toContain(`hreflang="${hrefLang}"`)
     expect(html.match(/<title/g)).toHaveLength(1)
     expect(html.match(/property="og:title"/g)).toHaveLength(1)
-    expect(html).toContain('<noscript><h1>')
+    // The page's own content is in the HTML, not only an empty app shell.
+    expect(html).toMatch(/<div id="root">[\s\S]*<main[\s\S]*<h1[\s\S]*<\/main>/)
   })
 }
 

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
-import { usePrefersReducedMotion } from './usePrefersReducedMotion'
 
-const SECTIONS = 'main [data-act]'
+// The page curtain (Layout) also carries an act but is not a section.
+const SECTIONS = 'main [data-act]:not([data-curtain])'
 // Keys that already mean something to the focused control must stay untouched.
 const OWN_KEYS =
   'input, textarea, select, [contenteditable="true"], [aria-roledescription="carousel"]'
@@ -10,8 +10,6 @@ const PREV = new Set(['ArrowLeft', 'k'])
 
 /** ←/→ (or J/K) jump between the sections of the page. Never touches Tab, Space or modified keys. */
 export function useSectionKeys() {
-  const reduced = usePrefersReducedMotion()
-
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey) return
@@ -29,9 +27,11 @@ export function useSectionKeys() {
       const target =
         sections[Math.min(Math.max(current + (forward ? 1 : -1), 0), sections.length - 1)]
       event.preventDefault()
+      // Read on use, not as state: a re-render of the page would undo its hydration.
+      const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
       target?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' })
     }
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
-  }, [reduced])
+  }, [])
 }
