@@ -4,6 +4,7 @@ import type { Page } from '@playwright/test'
 import { projects } from '../src/content/projects'
 import { LANGUAGES } from '../src/lib/languages'
 import { ROUTES, buildPath, projectPath } from '../src/lib/routes'
+import { brokenText } from './lib/brokenText'
 
 const pages = LANGUAGES.flatMap((language) => [
   ...ROUTES.map((route) => buildPath(language, route.key)),
@@ -168,6 +169,8 @@ test('the name intro plays once per session, on the home page only, and never bl
   await expect(page.locator('html')).toHaveAttribute('data-intro', '')
   const intro = page.locator('#intro')
   await expect(intro).toBeVisible()
+  // Styled inline in the shell, so it never shows as plain text while the app loads.
+  await expect(intro).toHaveCSS('position', 'fixed')
   // Clicks go through it while it plays.
   await page.getByRole('banner').getByRole('link', { name: 'DuckHats' }).click({ timeout: 2000 })
   await expect(intro).toBeHidden({ timeout: 4000 })
@@ -226,4 +229,18 @@ test('the project brief walks through its steps, passes axe on each and sends', 
   await axe('summary')
   await page.getByRole('button', { name: 'Send the request' }).click()
   await expect(page.getByRole('heading', { level: 2, name: 'Request sent' })).toBeFocused()
+})
+
+test('no headline word is split, sticks out of its heading or makes the page scroll sideways', async ({
+  page,
+}) => {
+  test.setTimeout(120_000)
+  const issues: string[] = []
+  for (const path of pages) {
+    await page.goto(path)
+    await page.waitForLoadState('networkidle')
+    await page.evaluate(() => document.fonts.ready)
+    issues.push(...(await brokenText(page)).map((issue) => `${path}: ${issue}`))
+  }
+  expect(issues).toEqual([])
 })
