@@ -7,7 +7,7 @@
  */
 import { SITE } from '../../src/config/site'
 import { messages } from '../../src/content/messages'
-import { projects } from '../../src/content/projects'
+import { featuredProject, projects } from '../../src/content/projects'
 import { LANGUAGES } from '../../src/lib/languages'
 import type { Language } from '../../src/lib/languages'
 import { ROUTES, buildPath, projectPath } from '../../src/lib/routes'
@@ -133,8 +133,13 @@ export function renderShell(template: string, page: PageMeta, base: string): str
     .replace(/[ \t]*<(?:meta|link)\b[^>]*\bdata-rh="true"[^>]*>[ \t]*\r?\n?/g, '')
     .replace(/<html lang="[^"]*"/, `<html lang="${page.language}"`)
 
+  // The home hero screenshot is the LCP element; start fetching it before the script runs.
+  const heroPreload =
+    page.home && featuredProject
+      ? `\n    <link rel="preload" as="image" href="${featuredProject.image}" fetchpriority="high" />`
+      : ''
   return stripped
-    .replace('</head>', `${headTags(page, base)}\n  </head>`)
+    .replace('</head>', `${headTags(page, base)}${heroPreload}\n  </head>`)
     .replace(
       '<div id="root"></div>',
       `<div id="root"></div>\n    <noscript><h1>${title}</h1><p>${escapeHtml(page.description)}</p></noscript>`,

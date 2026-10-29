@@ -59,6 +59,29 @@ describe.each(Object.entries(themes))('%s inverse blocks (CTA and footer)', (_, 
   })
 })
 
+// Acts redefine the tokens on full-bleed sections and are the same in both themes.
+const acts = {
+  ink: tokens("[data-act='ink'] {"),
+  red: tokens("[data-act='red'] {"),
+}
+
+describe.each(Object.entries(acts))('%s act contrast (WCAG AA)', (_, t) => {
+  it.each(['canvas', 'surface', 'tint'] as const)('text is readable on %s', (bg) => {
+    for (const fg of ['ink', 'muted', 'accent-text'] as const) {
+      expect(ratio(t[fg]!, t[bg]!), `${fg} on ${bg}`).toBeGreaterThanOrEqual(4.5)
+    }
+  })
+
+  it('keeps buttons and accent graphics readable', () => {
+    expect(ratio(t['on-accent']!, t.accent!)).toBeGreaterThanOrEqual(4.5)
+    expect(ratio(t.accent!, t.canvas!)).toBeGreaterThanOrEqual(3)
+  })
+
+  it('declares every token', () => {
+    expect(Object.keys(t).sort()).toEqual(Object.keys(themes.light).sort())
+  })
+})
+
 describe('theme definitions', () => {
   it('declare the same tokens in light and dark', () => {
     expect(Object.keys(themes.dark).sort()).toEqual(Object.keys(themes.light).sort())

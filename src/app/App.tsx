@@ -2,6 +2,7 @@ import { lazy } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Layout } from '@/components/layout/Layout'
+import { MotionProvider } from '@/components/motion/MotionProvider'
 import { HomePage } from '@/pages/HomePage'
 import { LangRoute, RootRedirect } from './LangRoute'
 
@@ -46,9 +47,11 @@ export function AppRoutes() {
 export function App() {
   return (
     <HelmetProvider>
-      <BrowserRouter>
-        <AppRoutes />
-      </BrowserRouter>
+      <MotionProvider>
+        <BrowserRouter>
+          <AppRoutes />
+        </BrowserRouter>
+      </MotionProvider>
     </HelmetProvider>
   )
 }

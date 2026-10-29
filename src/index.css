@@ -2,57 +2,95 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Design tokens: space-separated RGB so Tailwind opacity modifiers work. */
+/*
+ * Design tokens: space-separated RGB so Tailwind opacity modifiers work.
+ * The page is built in "acts": full-bleed sections in paper (the theme default), ink or red.
+ * `[data-act]` redefines the tokens locally, so components never need to know which act they are in.
+ */
 @layer base {
   :root {
-    --color-canvas: 239 235 227;
-    --color-surface: 247 244 238;
-    --color-tint: 228 223 212;
-    --color-ink: 20 19 15;
-    --color-muted: 88 84 75;
+    --color-canvas: 243 239 230;
+    --color-surface: 250 247 241;
+    --color-tint: 233 228 217;
+    --color-ink: 13 13 12;
+    --color-muted: 87 83 75;
     --color-line: 190 184 171;
     --color-accent: 230 57 70;
     --color-accent-text: 176 30 43;
     --color-on-accent: 8 7 4;
-    --color-inverse: 20 19 15;
-    --color-on-inverse: 239 235 227;
+    --color-inverse: 13 13 12;
+    --color-on-inverse: 243 239 230;
     color-scheme: light;
   }
 
   :root[data-theme='dark'] {
-    --color-canvas: 20 19 15;
-    --color-surface: 29 28 23;
-    --color-tint: 38 36 30;
-    --color-ink: 239 235 227;
-    --color-muted: 172 167 156;
+    --color-canvas: 30 29 26;
+    --color-surface: 38 37 33;
+    --color-tint: 44 42 38;
+    --color-ink: 243 239 230;
+    --color-muted: 178 173 162;
     --color-line: 74 71 63;
     --color-accent: 255 89 100;
     --color-accent-text: 255 138 146;
-    --color-on-accent: 20 19 15;
-    --color-inverse: 29 28 23;
-    --color-on-inverse: 239 235 227;
+    --color-on-accent: 13 13 12;
+    --color-inverse: 13 13 12;
+    --color-on-inverse: 243 239 230;
     color-scheme: dark;
   }
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme='light']) {
-      --color-canvas: 20 19 15;
-      --color-surface: 29 28 23;
-      --color-tint: 38 36 30;
-      --color-ink: 239 235 227;
-      --color-muted: 172 167 156;
+      --color-canvas: 30 29 26;
+      --color-surface: 38 37 33;
+      --color-tint: 44 42 38;
+      --color-ink: 243 239 230;
+      --color-muted: 178 173 162;
       --color-line: 74 71 63;
       --color-accent: 255 89 100;
       --color-accent-text: 255 138 146;
-      --color-on-accent: 20 19 15;
-      --color-inverse: 29 28 23;
-      --color-on-inverse: 239 235 227;
+      --color-on-accent: 13 13 12;
+      --color-inverse: 13 13 12;
+      --color-on-inverse: 243 239 230;
       color-scheme: dark;
     }
   }
 
+  /* The dark stage: same in both themes, darker than the dark theme's paper. */
+  [data-act='ink'] {
+    --color-canvas: 13 13 12;
+    --color-surface: 24 23 21;
+    --color-tint: 30 29 26;
+    --color-ink: 243 239 230;
+    --color-muted: 176 171 160;
+    --color-line: 70 68 62;
+    --color-accent: 255 89 100;
+    --color-accent-text: 255 138 146;
+    --color-on-accent: 13 13 12;
+    --color-inverse: 243 239 230;
+    --color-on-inverse: 13 13 12;
+    color-scheme: dark;
+  }
+
+  /* The red act: ink does everything, including the "accent" graphics and buttons. */
+  [data-act='red'] {
+    --color-canvas: 230 57 70;
+    --color-surface: 236 84 95;
+    --color-tint: 236 84 95;
+    --color-ink: 8 7 4;
+    --color-muted: 8 7 4;
+    --color-line: 8 7 4;
+    --color-accent: 8 7 4;
+    --color-accent-text: 8 7 4;
+    --color-on-accent: 243 239 230;
+    --color-inverse: 8 7 4;
+    --color-on-inverse: 243 239 230;
+    color-scheme: light;
+  }
+
   html {
     scroll-behavior: smooth;
+    scrollbar-color: rgb(var(--color-ink)) rgb(var(--color-tint));
+    scrollbar-width: thin;
   }
 
   body {
@@ -61,14 +99,26 @@
     font-variant-numeric: tabular-nums;
   }
 
-  /* Condensed grotesque headlines: Archivo's width axis does the work, so there is one family to load. */
+  /* Wide, black headlines: Archivo's width axis at its widest. */
   h1,
   h2,
   h3 {
-    @apply font-display font-extrabold;
-    font-stretch: 72%;
-    letter-spacing: -0.005em;
+    @apply font-display font-black uppercase;
+    font-stretch: 125%;
+    letter-spacing: -0.03em;
+    line-height: 0.92;
     text-wrap: balance;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  /* Phones: long Catalan and Spanish words do not fit at full width, so the type narrows a step. */
+  @media (max-width: 639px) {
+    h1,
+    h2,
+    h3 {
+      font-stretch: 100%;
+    }
   }
 
   p {
@@ -80,7 +130,7 @@
   }
 
   /* Sections jumped to with the arrow keys land below the sticky header. */
-  main > section {
+  main [data-act] {
     scroll-margin-top: 4.5rem;
   }
 
@@ -93,18 +143,9 @@
     @apply outline outline-[3px] outline-offset-2 outline-accent;
   }
 
-  /* Thin scrollbar drawn from the palette instead of the browser default. */
-  html {
-    scrollbar-color: rgb(var(--color-ink)) rgb(var(--color-tint));
-    scrollbar-width: thin;
-  }
-
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
-    }
-    .draw-line {
-      animation: none;
     }
     *,
     *::before,
@@ -136,56 +177,38 @@
     -webkit-mask: url('/brand/logo-mark.png') center / contain no-repeat;
     mask: url('/brand/logo-mark.png') center / contain no-repeat;
   }
+
+  /* Small spaced capitals for labels and indexes. */
+  .label {
+    @apply font-sans text-xs font-semibold uppercase tracking-[0.18em] text-muted;
+  }
 }
 
 /* The width axis applies wherever the display family is used, not only in headings. */
 .font-display {
-  font-stretch: 72%;
+  font-stretch: 125%;
+}
+@media (max-width: 639px) {
+  .font-display {
+    font-stretch: 100%;
+  }
 }
 
-/* Guide lines and dimension marks draw themselves once (see ui/GuideLine). */
-@keyframes draw {
+/*
+ * Headline lines turn up from below like a poster flipping into place (see ui/Headline).
+ * Pure CSS so the LCP text never waits for JavaScript; reduced motion shows it in place.
+ */
+@keyframes line-up {
   from {
-    transform: scaleX(0);
+    opacity: 0;
+    transform: perspective(800px) rotateX(-80deg) translateY(0.4em);
   }
   to {
-    transform: scaleX(1);
+    opacity: 1;
+    transform: perspective(800px) rotateX(0) translateY(0);
   }
 }
-.draw-line {
-  transform-origin: left center;
-  animation: draw 1s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-/* Visible 12-column sheet behind wide layouts; desktop only and very faint. */
-.sheet-grid {
-  background-image: repeating-linear-gradient(
-    to right,
-    rgb(var(--color-line) / 0.35) 0,
-    rgb(var(--color-line) / 0.35) 1px,
-    transparent 1px,
-    transparent calc(100% / 12)
-  );
-}
-
-/* Technical annotation layer: index numbers, dimensions, labels. */
-.meta {
-  @apply font-mono text-xs uppercase tracking-wider text-muted;
-}
-
-/* Rows of the index tables shift on hover; only transform changes. */
-.row-shift > * {
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-}
-@media (hover: hover) {
-  .row-shift:hover > :first-child {
-    transform: translateX(0.75rem);
-  }
-}
-
-/* Page-to-page crossfade where the browser supports view transitions. */
-@media (prefers-reduced-motion: no-preference) {
-  @view-transition {
-    navigation: auto;
-  }
+.line-up {
+  transform-origin: 50% 100%;
+  animation: line-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
