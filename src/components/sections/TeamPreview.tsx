@@ -14,7 +14,7 @@ export function TeamPreview() {
       title={team.title}
       intro={team.intro}
       action={
-        <AppLink to="team" className="inline-flex items-center gap-2 font-medium text-accent-text">
+        <AppLink to="about" className="inline-flex items-center gap-2 font-medium text-accent-text">
           <span className="link-underline pb-0.5">{team.link}</span>{' '}
           <ArrowRight size={16} aria-hidden />
         </AppLink>

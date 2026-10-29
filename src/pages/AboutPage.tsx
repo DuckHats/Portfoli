@@ -1,3 +1,4 @@
+import { TeamStrip } from '@/components/sections/TeamStrip'
 import { SEO } from '@/components/SEO'
 import { Container } from '@/components/ui/Container'
 import { PageHeader } from '@/components/ui/PageHeader'
@@ -6,12 +7,31 @@ import { SITE } from '@/config/site'
 import { useMessages, useT } from '@/lib/i18n'
 
 export function AboutPage() {
-  const { seo, about } = useMessages()
+  const { seo, about, team } = useMessages()
   const t = useT()
   return (
     <>
       <SEO title={seo.about.title} description={seo.about.description} />
       <PageHeader title={about.title} intro={about.intro} />
+      <section data-act="paper" aria-labelledby="team" className="bg-canvas text-ink">
+        <Container className="py-24 sm:py-32">
+          <h2 id="team" className="text-4xl sm:text-6xl">
+            {team.title}
+          </h2>
+          <p className="mt-6 max-w-prose text-lg text-muted">{team.intro}</p>
+          <div className="mt-14">
+            <TeamStrip />
+          </div>
+        </Container>
+      </section>
+      <section data-act="red" aria-labelledby="work" className="bg-canvas text-ink">
+        <Container className="grid gap-8 py-20 sm:py-28 lg:grid-cols-12">
+          <h2 id="work" className="text-4xl sm:text-6xl lg:col-span-7 lg:text-5xl xl:text-6xl">
+            {team.workTitle}
+          </h2>
+          <p className="text-lg sm:text-xl lg:col-span-5 lg:self-end">{team.workBody}</p>
+        </Container>
+      </section>
       <section data-act="paper" aria-labelledby="values" className="bg-canvas text-ink">
         <Container className="py-24 sm:py-32">
           <h2 id="values" className="text-4xl sm:text-6xl">

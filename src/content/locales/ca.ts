@@ -22,7 +22,6 @@ export const ca = {
     home: 'Inici',
     services: 'Serveis',
     projects: 'Projectes',
-    team: 'Equip',
     about: 'Nosaltres',
     contact: 'Contacte',
     careers: 'Treballa amb nosaltres',
@@ -45,14 +44,10 @@ export const ca = {
       title: 'Projectes',
       description: 'Una selecció dels projectes que hem dissenyat i desenvolupat per a clients.',
     },
-    team: {
-      title: 'Equip',
-      description:
-        'Les persones darrere de DuckHats: desenvolupament, coordinació i administració.',
-    },
     about: {
-      title: 'Nosaltres',
-      description: 'Qui som, com treballem i quins principis guien els nostres projectes.',
+      title: 'Nosaltres i l’equip',
+      description:
+        'Qui som, les persones darrere de DuckHats, com treballem i quins principis guien els nostres projectes.',
     },
     contact: {
       title: 'Contacte',

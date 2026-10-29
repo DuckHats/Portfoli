@@ -6,7 +6,6 @@ export const ROUTES = [
   { key: 'home', path: '' },
   { key: 'services', path: 'services' },
   { key: 'projects', path: 'projects' },
-  { key: 'team', path: 'team' },
   { key: 'about', path: 'about' },
   { key: 'contact', path: 'contact' },
   { key: 'careers', path: 'careers' },

@@ -24,7 +24,6 @@ const PAGES = [
   'home',
   'services',
   'projects',
-  'team',
   'about',
   'contact',
   'careers',

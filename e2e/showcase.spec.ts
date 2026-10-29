@@ -83,7 +83,7 @@ test.describe('theme and layout', () => {
     '/es/projects',
     '/en/projects/menu-ginebro',
     '/ca/services',
-    '/ca/team',
+    '/ca/about',
   ]) {
     test(`${path} has no horizontal scroll`, async ({ page }) => {
       await page.goto(path)

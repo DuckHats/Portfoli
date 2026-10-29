@@ -47,12 +47,12 @@ describe('mobile menu', () => {
     expect(document.getElementById('mobile-menu')).not.toBeInTheDocument()
 
     await userEvent.click(screen.getByRole('button', { name: en.openMenu }))
-    const link = document.querySelector('#mobile-menu a[href="/en/team"]') as HTMLElement
+    const link = document.querySelector('#mobile-menu a[href="/en/about"]') as HTMLElement
     await userEvent.click(link)
     expect(document.getElementById('mobile-menu')).not.toBeInTheDocument()
     // Let the page transition finish so nothing from this render outlives the test.
     expect(
-      await screen.findByRole('heading', { level: 1, name: messages.en.team.title }),
+      await screen.findByRole('heading', { level: 1, name: messages.en.about.title }),
     ).toBeInTheDocument()
   })
 })

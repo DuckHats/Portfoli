@@ -22,7 +22,6 @@ export const en: Messages = {
     home: 'Home',
     services: 'Services',
     projects: 'Projects',
-    team: 'Team',
     about: 'About',
     contact: 'Contact',
     careers: 'Work with us',
@@ -45,13 +44,10 @@ export const en: Messages = {
       title: 'Projects',
       description: 'A selection of the projects we have designed and built for clients.',
     },
-    team: {
-      title: 'Team',
-      description: 'The people behind DuckHats: development, coordination and administration.',
-    },
     about: {
-      title: 'About',
-      description: 'Who we are, how we work and the principles behind our projects.',
+      title: 'About us and the team',
+      description:
+        'Who we are, the people behind DuckHats, how we work and the principles behind our projects.',
     },
     contact: {
       title: 'Contact',

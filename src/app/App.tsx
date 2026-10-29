@@ -14,7 +14,6 @@ const named = <T extends Record<string, React.ComponentType<never>>>(
 const ServicesPage = named(() => import('@/pages/ServicesPage'), 'ServicesPage')
 const ProjectsPage = named(() => import('@/pages/ProjectsPage'), 'ProjectsPage')
 const ProjectDetailPage = named(() => import('@/pages/ProjectDetailPage'), 'ProjectDetailPage')
-const TeamPage = named(() => import('@/pages/TeamPage'), 'TeamPage')
 const AboutPage = named(() => import('@/pages/AboutPage'), 'AboutPage')
 const ContactPage = named(() => import('@/pages/ContactPage'), 'ContactPage')
 const CareersPage = named(() => import('@/pages/CareersPage'), 'CareersPage')
@@ -31,7 +30,6 @@ export function AppRoutes() {
           <Route path="services" element={<ServicesPage />} />
           <Route path="projects" element={<ProjectsPage />} />
           <Route path="projects/:projectId" element={<ProjectDetailPage />} />
-          <Route path="team" element={<TeamPage />} />
           <Route path="about" element={<AboutPage />} />
           <Route path="contact" element={<ContactPage />} />
           <Route path="careers" element={<CareersPage />} />

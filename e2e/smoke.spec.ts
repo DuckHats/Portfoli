@@ -173,7 +173,7 @@ test('the loader plays once per session, on whichever page the visit starts, wit
   await expect(page).toHaveURL(/\/en$/)
   await expect(intro).toBeHidden({ timeout: 4000 })
 
-  for (const path of ['/en', '/en/team']) {
+  for (const path of ['/en', '/en/about']) {
     await page.goto(path)
     await expect(page.locator('html')).not.toHaveAttribute('data-intro', '')
   }
