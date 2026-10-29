@@ -28,7 +28,9 @@ export function AboutPage() {
                     >
                       {index + 1}
                     </span>
-                    <h3 className="text-3xl sm:text-4xl lg:col-span-5">{value.title}</h3>
+                    <h3 className="text-3xl sm:text-4xl lg:col-span-5 lg:text-2xl xl:text-3xl">
+                      {value.title}
+                    </h3>
                     <p className="text-lg text-muted lg:col-span-5">{value.description}</p>
                   </div>
                 </Reveal>
@@ -41,7 +43,7 @@ export function AboutPage() {
       <div data-act="ink" className="bg-canvas text-ink">
         <Container className="grid gap-16 py-24 sm:py-32 md:grid-cols-2">
           <section aria-labelledby="origin">
-            <h2 id="origin" className="text-4xl sm:text-5xl">
+            <h2 id="origin" className="text-4xl md:text-3xl lg:text-4xl xl:text-5xl">
               {about.originTitle}
             </h2>
             <p className="mt-6 text-lg text-muted">
@@ -49,7 +51,7 @@ export function AboutPage() {
             </p>
           </section>
           <section aria-labelledby="approach">
-            <h2 id="approach" className="text-4xl sm:text-5xl">
+            <h2 id="approach" className="text-4xl md:text-3xl lg:text-4xl xl:text-5xl">
               {about.approachTitle}
             </h2>
             <p className="mt-6 text-lg text-muted">{about.approachBody}</p>

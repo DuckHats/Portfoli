@@ -25,7 +25,7 @@ export function Process() {
             >
               {index + 1}
             </span>
-            <h3 className="mt-4 text-2xl sm:text-4xl">{step.title}</h3>
+            <h3 className="mt-4 text-2xl lg:text-3xl xl:text-4xl">{step.title}</h3>
             <p className="mt-4 max-w-md text-lg text-muted">{step.description}</p>
           </m.li>
         ))}

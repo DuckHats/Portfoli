@@ -17,7 +17,7 @@ export function TeamPage() {
       </div>
       <section data-act="red" aria-labelledby="work" className="bg-canvas text-ink">
         <Container className="grid gap-8 py-20 sm:py-28 lg:grid-cols-12">
-          <h2 id="work" className="text-4xl sm:text-6xl lg:col-span-7">
+          <h2 id="work" className="text-4xl sm:text-6xl lg:col-span-7 lg:text-5xl xl:text-6xl">
             {team.workTitle}
           </h2>
           <p className="text-lg sm:text-xl lg:col-span-5 lg:self-end">{team.workBody}</p>

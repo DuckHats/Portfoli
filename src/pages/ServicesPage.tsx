@@ -16,20 +16,19 @@ export function ServicesPage() {
       <div data-act="paper" className="bg-canvas">
         <Container className="py-20 sm:py-28">
           <div className="space-y-24 sm:space-y-32">
-            {serviceCategories.map((category) => (
-              <section
-                key={category.id}
-                aria-labelledby={`${category.id}-title`}
-                className="grid gap-8 lg:grid-cols-[20rem_1fr] lg:gap-16"
-              >
-                <h2
-                  id={`${category.id}-title`}
-                  className="text-3xl sm:text-4xl lg:sticky lg:top-28 lg:self-start"
-                >
-                  {localize(category.title)}
-                </h2>
-                <div>
-                  <ul className="space-y-3">
+            {serviceCategories.map((category, index) => (
+              <section key={category.id} aria-labelledby={`${category.id}-title`}>
+                {/* Title above its list at full width: long category names never squeeze. */}
+                <div className="border-b border-ink/20 pb-6">
+                  <p aria-hidden className="label mb-4">
+                    {String(index + 1).padStart(2, '0')}
+                  </p>
+                  <h2 id={`${category.id}-title`} className="text-[1.7rem] sm:text-4xl md:text-5xl">
+                    {localize(category.title)}
+                  </h2>
+                </div>
+                <div className="mt-8">
+                  <ul className="grid gap-3 lg:grid-cols-2">
                     {category.items.map((item) => (
                       <li
                         key={item.id}

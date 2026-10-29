@@ -17,7 +17,10 @@ export function PageHeader({ title, intro, children }: PageHeaderProps) {
         className="mark-mask pointer-events-none absolute -bottom-24 -right-16 hidden aspect-square w-[30rem] bg-ink/[0.06] lg:block"
       />
       <Container className="relative pb-16 pt-20 sm:pb-24 sm:pt-28">
-        <Headline text={title} className="max-w-5xl text-5xl sm:text-8xl lg:text-9xl" />
+        <Headline
+          text={title}
+          className="max-w-6xl text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"
+        />
         {intro && (
           <p className="line-up mt-10 max-w-prose text-lg text-muted [animation-delay:0.3s] sm:text-xl">
             {intro}

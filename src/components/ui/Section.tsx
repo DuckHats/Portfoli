@@ -34,7 +34,7 @@ export function Section({
     >
       <Container>
         <div className="mb-14 grid gap-8 sm:mb-20 lg:grid-cols-12 lg:items-end">
-          <div className="lg:col-span-9">
+          <div className="lg:col-span-12 xl:col-span-9">
             {label && (
               <p aria-hidden className="label mb-6">
                 {label}
@@ -44,11 +44,13 @@ export function Section({
               as="h2"
               id={headingId}
               text={title}
-              className="text-[2.3rem] sm:text-7xl lg:text-8xl"
+              className="text-[2.3rem] sm:text-5xl md:text-6xl lg:text-7xl"
             />
             {intro && <p className="mt-8 max-w-prose text-lg text-muted">{intro}</p>}
           </div>
-          {action && <div className="lg:col-span-3 lg:justify-self-end">{action}</div>}
+          {action && (
+            <div className="lg:col-span-12 xl:col-span-3 xl:justify-self-end">{action}</div>
+          )}
         </div>
         {children}
       </Container>

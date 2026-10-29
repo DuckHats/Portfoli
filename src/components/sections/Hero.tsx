@@ -47,7 +47,7 @@ export function Hero() {
           id="hero-title"
           lively
           text={hero.title}
-          className="max-w-6xl text-[2.6rem] sm:text-7xl lg:text-[4.75rem] xl:text-[5.25rem]"
+          className="max-w-6xl text-[2.6rem] sm:text-6xl md:text-7xl lg:text-[4.75rem] xl:text-[5.25rem]"
         />
 
         <div className="mt-12 grid items-center gap-14 lg:grid-cols-12 lg:gap-10">

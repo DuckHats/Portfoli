@@ -25,7 +25,7 @@ export function CtaBand() {
           as="h2"
           id="cta-title"
           text={cta.title}
-          className="max-w-5xl text-5xl sm:text-8xl lg:text-9xl"
+          className="max-w-5xl text-5xl sm:text-6xl md:text-7xl lg:text-9xl"
         />
         <div className="mt-12 flex flex-col gap-10 sm:flex-row sm:items-end sm:justify-between">
           <p className="max-w-md text-lg sm:text-xl">{cta.description}</p>
