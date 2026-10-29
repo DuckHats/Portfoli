@@ -1,21 +1,35 @@
-import { Hero } from '../components/Hero';
-import { Navbar } from '../components/Navbar';
-import { Helmet } from 'react-helmet-async';
+import { Suspense, lazy } from 'react'
+import { SEO } from '@/components/SEO'
+import { Hero } from '@/components/sections/Hero'
+import { ServiceMarquee } from '@/components/sections/ServiceMarquee'
+import { useSectionKeys } from '@/hooks/useSectionKeys'
+import { useLanguage, useMessages } from '@/lib/i18n'
+import { websiteJsonLd } from '@/lib/seo'
+
+const HomeBelowFold = lazy(() =>
+  import('@/components/sections/HomeBelowFold').then((module) => ({
+    default: module.HomeBelowFold,
+  })),
+)
+
 export function HomePage() {
-  return <main className="min-h-screen w-full bg-[#f5f5f5] selection:bg-[#e63946] selection:text-white flex flex-col">
-    <Helmet>
-      <title>Home - DuckHats</title>
-      <link rel="canonical" href="https://duckhats.com/" />
-      <meta
-        name="description"
-        content="Welcome to DuckHats, your go-to platform for innovative projects and a passionate team."
+  const { seo } = useMessages()
+  const language = useLanguage()
+  useSectionKeys()
+  return (
+    <>
+      <SEO
+        home
+        title={seo.home.title}
+        description={seo.home.description}
+        jsonLd={websiteJsonLd(language)}
       />
-    </Helmet>
-
-    <Navbar />
-    <div className="flex-1">
       <Hero />
-    </div>
-  </main>;
-
+      <ServiceMarquee />
+      {/* Tall placeholder keeps the footer out of view while the rest of the page loads. */}
+      <Suspense fallback={<div className="min-h-screen" aria-hidden />}>
+        <HomeBelowFold />
+      </Suspense>
+    </>
+  )
 }

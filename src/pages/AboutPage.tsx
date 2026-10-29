@@ -1,68 +1,89 @@
-import { About } from '../components/About';
-import { Navbar } from '../components/Navbar';
-import { Footer } from '../components/Footer';
-import { motion } from 'framer-motion';
-import { Helmet } from 'react-helmet-async';
-import { useContent } from '../hooks/useContent';
+import { TeamStrip } from '@/components/sections/TeamStrip'
+import { SEO } from '@/components/SEO'
+import { pageJsonLd } from '@/lib/jsonLd'
+import { Container } from '@/components/ui/Container'
+import { PageHeader } from '@/components/ui/PageHeader'
+import { Reveal } from '@/components/ui/Reveal'
+import { SITE } from '@/config/site'
+import { useMessages, useT, useLanguage } from '@/lib/i18n'
 
 export function AboutPage() {
-  const content = useContent();
-
+  const language = useLanguage()
+  const { seo, about, team } = useMessages()
+  const t = useT()
   return (
     <>
-      <Helmet>
-        <title>About Us - DuckHats</title>
-        <link rel="canonical" href="https://duckhats.com/about" />
-        <meta
-          name="description"
-          content="Learn more about DuckHats and our mission."
-        />
-      </Helmet>
+      <SEO
+        title={seo.about.title}
+        description={seo.about.description}
+        jsonLd={pageJsonLd('about', language)}
+      />
+      <PageHeader title={about.title} intro={about.intro} />
+      <section data-act="paper" aria-labelledby="team" className="bg-canvas text-ink">
+        <Container className="py-24 sm:py-32">
+          <h2 id="team" className="text-4xl sm:text-6xl">
+            {team.title}
+          </h2>
+          <p className="mt-6 max-w-prose text-lg text-muted">{team.intro}</p>
+          <div className="mt-14">
+            <TeamStrip />
+          </div>
+        </Container>
+      </section>
+      <section data-act="red" aria-labelledby="work" className="bg-canvas text-ink">
+        <Container className="grid gap-8 py-20 sm:py-28 lg:grid-cols-12">
+          <h2 id="work" className="text-4xl sm:text-6xl lg:col-span-7 lg:text-5xl xl:text-6xl">
+            {team.workTitle}
+          </h2>
+          <p className="text-lg sm:text-xl lg:col-span-5 lg:self-end">{team.workBody}</p>
+        </Container>
+      </section>
+      <section data-act="paper" aria-labelledby="values" className="bg-canvas text-ink">
+        <Container className="py-24 sm:py-32">
+          <h2 id="values" className="text-4xl sm:text-6xl">
+            {about.valuesTitle}
+          </h2>
+          <ol className="mt-16 space-y-4">
+            {about.values.map((value, index) => (
+              <li key={value.title}>
+                <Reveal delay={index * 0.08}>
+                  <div className="grid gap-4 rounded-2xl bg-surface p-6 ring-1 ring-ink/10 min-[400px]:p-8 sm:p-12 lg:grid-cols-12 lg:items-baseline">
+                    <span
+                      aria-hidden
+                      className="font-display text-6xl font-black text-accent lg:col-span-2"
+                    >
+                      {index + 1}
+                    </span>
+                    <h3 className="text-xl min-[400px]:text-3xl sm:text-4xl lg:col-span-5 lg:text-2xl xl:text-3xl">
+                      {value.title}
+                    </h3>
+                    <p className="text-lg text-muted lg:col-span-5">{value.description}</p>
+                  </div>
+                </Reveal>
+              </li>
+            ))}
+          </ol>
+        </Container>
+      </section>
 
-      <div className="min-h-screen bg-[#f5f5f5] flex flex-col">
-        <Navbar />
-        <div className="pt-20 flex-1">
-          <About />
-
-          {/* Expanded Content Section */}
-          <section className="py-24 px-4 md:px-8 max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="space-y-12 text-lg md:text-xl leading-relaxed text-gray-800 font-light"
-            >
-              <div>
-                <h3 className="text-3xl font-display font-bold mb-6">
-                  {content.about.origins.title}
-                </h3>
-                <p className="mb-6">{content.about.origins.paragraph1}</p>
-                <p>{content.about.origins.paragraph2}</p>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-8 py-12 border-t border-b border-gray-200">
-                <div>
-                  <h4 className="font-bold text-xl mb-4">
-                    {content.about.dna.title}
-                  </h4>
-                  <p className="text-gray-600 text-base">
-                    {content.about.dna.description}
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-bold text-xl mb-4">
-                    {content.about.hats.title}
-                  </h4>
-                  <p className="text-gray-600 text-base">
-                    {content.about.hats.description}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
+      <div data-act="ink" className="bg-canvas text-ink">
+        <Container className="grid gap-16 py-24 sm:py-32 md:grid-cols-2">
+          <section aria-labelledby="origin">
+            <h2 id="origin" className="text-4xl md:text-3xl lg:text-4xl xl:text-5xl">
+              {about.originTitle}
+            </h2>
+            <p className="mt-6 text-lg text-muted">
+              {t('about.originBody', { year: SITE.foundedYear })}
+            </p>
           </section>
-        </div>
-        <Footer />
+          <section aria-labelledby="approach">
+            <h2 id="approach" className="text-4xl md:text-3xl lg:text-4xl xl:text-5xl">
+              {about.approachTitle}
+            </h2>
+            <p className="mt-6 text-lg text-muted">{about.approachBody}</p>
+          </section>
+        </Container>
       </div>
     </>
-  );
+  )
 }

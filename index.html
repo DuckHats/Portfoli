@@ -1,84 +1,214 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ca">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="/theme-init.js"></script>
+    <!--
+      First-visit loader (#intro below, flagged by theme-init.js): styled inline so it is right from
+      the first paint, in development too, without waiting for the app's stylesheet. Pure CSS, about
+      1.6 s: the mark wipes in, the name rises letter by letter over a filling red line, then the
+      curtain splits open. It never takes clicks and never plays with reduced motion.
+    -->
+    <style>
+      #intro {
+        display: none;
+      }
+      html[data-intro] #intro {
+        position: fixed;
+        inset: 0;
+        z-index: 70;
+        display: block;
+        pointer-events: none;
+        animation: intro-done 0s linear 1.6s both;
+      }
+      #intro .intro-top,
+      #intro .intro-bottom {
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 50.5%;
+        background: rgb(13 13 12);
+        animation: 0.55s cubic-bezier(0.76, 0, 0.24, 1) 1.05s both;
+      }
+      #intro .intro-top {
+        top: 0;
+        animation-name: intro-up;
+      }
+      #intro .intro-bottom {
+        bottom: 0;
+        animation-name: intro-down;
+      }
+      #intro .intro-stage {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+        color: rgb(243 239 230);
+        animation: intro-fade 0.2s ease-in 1s both;
+      }
+      #intro .intro-brand {
+        display: flex;
+        align-items: center;
+        gap: clamp(1rem, 2.5vw, 2rem);
+      }
+      #intro .intro-mark {
+        width: clamp(3.5rem, 8vw, 7rem);
+        aspect-ratio: 1;
+        background: currentColor;
+        -webkit-mask: url('/brand/logo-mark.png') center / contain no-repeat;
+        mask: url('/brand/logo-mark.png') center / contain no-repeat;
+        animation: intro-wipe 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+      #intro p {
+        display: flex;
+        margin: 0;
+        overflow: hidden;
+        padding-block: 0.08em;
+        font-family: 'Archivo Variable', 'Archivo', system-ui, sans-serif;
+        font-size: clamp(2.5rem, 8vw, 8rem);
+        font-weight: 900;
+        font-stretch: 125%;
+        letter-spacing: -0.03em;
+        line-height: 0.9;
+      }
+      #intro p span {
+        display: inline-block;
+        animation: intro-letter 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+        animation-delay: calc(0.15s + var(--i) * 0.045s);
+      }
+      #intro .intro-line {
+        width: min(24rem, 60vw);
+        height: 3px;
+        border-radius: 3px;
+        background: rgb(243 239 230 / 0.15);
+        overflow: hidden;
+      }
+      #intro .intro-line::after {
+        content: '';
+        display: block;
+        height: 100%;
+        background: rgb(255 89 100);
+        transform-origin: left;
+        animation: intro-fill 0.8s cubic-bezier(0.65, 0, 0.35, 1) 0.2s both;
+      }
+      @media (max-width: 639px) {
+        #intro .intro-brand {
+          flex-direction: column;
+        }
+        #intro p {
+          font-stretch: 100%;
+          font-size: 14vw;
+        }
+      }
+      @keyframes intro-wipe {
+        from {
+          clip-path: inset(0 100% 0 0);
+          transform: scale(0.85) rotate(-6deg);
+        }
+        to {
+          clip-path: inset(0 0 0 0);
+        }
+      }
+      @keyframes intro-letter {
+        from {
+          transform: translateY(110%);
+        }
+      }
+      @keyframes intro-fill {
+        from {
+          transform: scaleX(0);
+        }
+      }
+      @keyframes intro-fade {
+        to {
+          opacity: 0;
+          transform: scale(0.96);
+        }
+      }
+      @keyframes intro-up {
+        to {
+          transform: translateY(-100%);
+        }
+      }
+      @keyframes intro-down {
+        to {
+          transform: translateY(100%);
+        }
+      }
+      @keyframes intro-done {
+        to {
+          visibility: hidden;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html[data-intro] #intro {
+          display: none;
+        }
+      }
+    </style>
+    <!-- Without JavaScript, content waiting for a scroll-in animation is shown as it is. -->
+    <noscript>
+      <style>
+        #root [style*='opacity:0'] {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      </style>
+    </noscript>
 
-    <title>DuckHats | Desenvolupant amb passió i un toc d'humor</title>
-    <link rel="canonical" href="https://duckhats.cat/" />
-
-    <!-- Primary SEO -->
+    <title>DuckHats | Programari i serveis digitals per a negocis</title>
     <meta
       name="description"
-      content="DuckHats — Creem experiències digitals amb personalitat, on la professionalitat del codi es troba amb el caos creatiu per deixar empremta."
+      content="Estudi de desenvolupament a Catalunya: aplicacions web, APIs, automatització i manteniment. Dissenyem, construïm i mantenim programari a mida."
+      data-rh="true"
     />
     <meta name="author" content="DuckHats" />
-    <meta name="referrer" content="no-referrer-when-downgrade" />
-    <meta name="theme-color" content="#111827" />
-    <meta
-      name="keywords"
-      content="DuckHats, Desenvolupament web, Desenvolupament de software, Desenvolupament de aplicacions, Startup"
-    />
+    <meta name="theme-color" content="#EFEBE3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#14130F" media="(prefers-color-scheme: dark)" />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://duckhats.cat/" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Defaults for crawlers that do not run JavaScript; <SEO> overrides them per page. -->
+    <meta property="og:type" content="website" data-rh="true" />
+    <meta property="og:site_name" content="DuckHats" data-rh="true" />
     <meta
       property="og:title"
-      content="DuckHats | Desenvolupant amb passió i un toc d'humor"
+      content="DuckHats | Programari i serveis digitals per a negocis"
+      data-rh="true"
     />
     <meta
       property="og:description"
-      content="DuckHats — Creem experiències digitals que deixen empremta, amb professionalitat juganera, on el codi seriós es troba amb el caos creatiu."
+      content="Estudi de desenvolupament a Catalunya: aplicacions web, APIs, automatització i manteniment."
+      data-rh="true"
     />
-    <meta property="og:image" content="https://duckhats.cat/logo.jpg" />
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:image" content="%SITE_URL%/og-cover.png" data-rh="true" />
+    <meta name="twitter:card" content="summary_large_image" data-rh="true" />
     <meta name="twitter:site" content="@Hats4Ducks" />
-    <meta name="twitter:creator" content="@Hats4Ducks" />
-    <meta property="twitter:url" content="https://duckhats.cat/" />
-    <meta
-      name="twitter:title"
-      content="DuckHats | Desenvolupant amb passió i un toc d'humor"
-    />
-    <meta
-      name="twitter:description"
-      content="DuckHats — Creem experiències digitals que deixen empremta, amb professionalitat juganera, on el codi seriós es troba amb el caos creatiu."
-    />
-    <meta name="twitter:image" content="https://duckhats.cat/logo.jpg" />
-
-    <link rel="icon" type="image" href="public/logo.jpg" />
-
-    <!-- Schema.org JSON-LD -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "DuckHats",
-        "url": "https://duckhats.cat",
-        "logo": "https://duckhats.cat/logo.jpg",
-        "sameAs": [
-          "https://twitter.com/Hats4Ducks",
-          "https://instagram.com/hats4_ducks",
-          "https://github.com/DuckHats"
-        ]
-      }
-    </script>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TTWP9NN570"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-TTWP9NN570');
-    </script>
   </head>
   <body>
+    <!-- First-visit loader: shown only when theme-init.js sets data-intro (styles in <head>). -->
+    <div id="intro" aria-hidden="true">
+      <div class="intro-top"></div>
+      <div class="intro-bottom"></div>
+      <div class="intro-stage">
+        <div class="intro-brand">
+          <span class="intro-mark"></span>
+          <p>
+            <span style="--i: 0">D</span><span style="--i: 1">U</span><span style="--i: 2">C</span
+            ><span style="--i: 3">K</span><span style="--i: 4">H</span><span style="--i: 5">A</span
+            ><span style="--i: 6">T</span><span style="--i: 7">S</span>
+          </p>
+        </div>
+        <div class="intro-line"></div>
+      </div>
+    </div>
     <div id="root"></div>
-    <script type="module" src="/src/index.tsx"></script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -1,261 +1,110 @@
-# DuckHats - Creative Digital Solutions
+# DuckHats web
 
-> Desenvolupant amb passió i un toc d'humor
+Corporate site of DuckHats, a software and digital services studio. Static SPA (React + Vite)
+with three languages (ca, es, en) and two serverless form endpoints on Vercel.
 
-A modern, multi-language portfolio website built with React, TypeScript, and Framer Motion. Features a distinctive design system with centralized configuration for branding, content, and styling.
+## Stack
 
-## 🦆 Features
+React 18 · TypeScript (strict) · Vite 7 · Tailwind 3 · React Router 7 · react-helmet-async ·
+Zod · Vitest + Testing Library · Playwright + axe · pnpm.
 
-- **Multi-language Support:** Catalan (default), Spanish, English
-- **Centralized Configuration:** All colors, text, and branding in config files
-- **Smooth Animations:** Framer Motion for delightful interactions
-- **Responsive Design:** Mobile-first approach
-- **Manual Carousel:** Scroll or arrow-controlled hero section
-- **Fixed Preview Projects:** Split-screen layout with sticky preview
-- **Scroll-based Animations:** Team image scales on scroll
-
-## 🎨 Design System
-
-### Brand Colors
-
-- **Primary:** Black (#1a1a1a), White (#f5f5f5)
-- **Accent:** Red (#e63946)
-- **Neutrals:** Gray scale from 50-900
-
-### Typography
-
-- **Display:** Space Grotesk (headers, bold statements)
-- **Body:** Inter (readable, modern)
-- **Mono:** Monospace (technical elements)
-
-### Animation Principles
-
-- **Fast:** 0.3s (interactions)
-- **Normal:** 0.5s (transitions)
-- **Slow:** 0.8s (page loads)
-
-## 📁 Project Structure
-
-```
-duckhats/
-├── config/
-│   ├── brand.config.ts      # Colors, typography, spacing, animations
-│   ├── content.config.ts    # All text content (CA/ES/EN)
-│   └── team.config.ts       # Team member data
-├── hooks/
-│   ├── useLanguage.ts       # Language state management (Zustand)
-│   └── useContent.ts        # Access translated content
-├── components/
-│   ├── Navbar.tsx           # Pill-shaped navigation
-│   ├── Hero.tsx             # Manual carousel hero section
-│   ├── Projects.tsx         # Split-screen project showcase
-│   ├── About.tsx            # Company story
-│   ├── Team.tsx             # Team photo with scroll animation
-│   ├── Members.tsx          # Team member grid
-│   ├── Footer.tsx           # Site footer
-│   ├── FullScreenMenu.tsx   # Mobile/hamburger menu
-│   └── JoinUs.tsx           # CTA section
-├── pages/
-│   ├── HomePage.tsx
-│   ├── AboutPage.tsx
-│   ├── TeamPage.tsx
-│   ├── ProjectsPage.tsx
-│   └── JoinUsPage.tsx
-└── App.tsx                  # Main app with routing
-```
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js 16+
-- npm or yarn
-
-### Installation
+## Getting started
 
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/duckhats.git
-
-# Navigate to project
-cd duckhats
-
-# Install dependencies
-npm install
-
-# Start development server
-npm start
+nvm use            # Node 24+ (see .nvmrc)
+pnpm install
+cp .env.example .env   # only needed to test the API locally (vercel dev)
+pnpm dev
 ```
 
-### Build for Production
+| Script                                         | What it does                                                      |
+| ---------------------------------------------- | ----------------------------------------------------------------- |
+| `pnpm dev` / `pnpm preview`                    | Dev server / serve the production build                           |
+| `pnpm build`                                   | Typecheck, build, then generate `sitemap.xml` and `robots.txt`    |
+| `pnpm lint` / `pnpm format` / `pnpm typecheck` | ESLint (a11y rules included), Prettier, `tsc`                     |
+| `pnpm test` / `test:run` / `test:coverage`     | Vitest                                                            |
+| `pnpm test:e2e`                                | Playwright smoke + axe against the built site (run `build` first) |
+| `pnpm check:bundle`                            | Fails if the entry chunk exceeds its gzip budget                  |
+| `pnpm images`                                  | Converts photos to WebP and regenerates logo, favicon, OG cover   |
 
-```bash
-npm run build
+Set `CHROMIUM_PATH=/usr/bin/chromium` to run e2e with a system browser.
+
+## Structure
+
+```
+api/              Vercel functions (submit-contact, submit-join-us) + _utils/
+scripts/          Build tooling: images, SEO shells/sitemap (lib/), bundle budget, serve-dist
+src/
+  app/            Router and language route
+  components/     layout/, sections/, forms/, ui/ primitives
+  content/        locales/{ca,es,en}.ts, projects.ts, team.ts, services.ts
+  lib/            routes, languages, i18n, schemas (shared with api/), consent
+  pages/          One component per route
+  config/site.ts  Domain, email, social links, analytics id
+e2e/  test/       Playwright specs; API and config tests
 ```
 
-## 🌐 Language Configuration
+## Content and languages
 
-Languages are managed through Zustand with localStorage persistence:
+- Languages live in the URL and slugs are localised: `/ca/serveis`, `/es/servicios`,
+  `/en/services`. `/`, the old English slugs and legacy URLs redirect on the server (`vercel.json`).
+- Add or edit copy in `src/content/locales/ca.ts` first; `es.ts` and `en.ts` are typed as
+  `Messages`, so the compiler and `translations.test.ts` fail if a key is missing.
+- Use `useMessages()` for objects and `useT()('home.hero.title')` for typed key lookups.
+- Projects, team and services are typed data with `{ca, es, en}` fields.
+- Add a page: add it to `ROUTES` in `src/lib/routes.ts` with a slug per language, create the page,
+  add it to `PAGES` in `src/app/App.tsx`, add `seo.<key>` and `nav.<key>` messages and run
+  `pnpm redirects` (a test fails if `vercel.json` is out of date).
 
-```typescript
-import { useLanguage } from "./hooks/useLanguage";
-import { useContent } from "./hooks/useContent";
+## SEO
 
-function Component() {
-  const { language, setLanguage } = useLanguage();
-  const content = useContent();
+- **Prerendered pages.** `pnpm build` renders every page (and the 404 page) to HTML with
+  `src/entry-server.tsx` and writes one file per route and language (`dist/ca/serveis.html`, ...):
+  the real content, plus the right title, description, canonical, hreflang, Open Graph and
+  JSON-LD. Crawlers, AI assistants and link previews get the whole page without JavaScript; the
+  browser hydrates it (`src/main.tsx`). Every prerendered head tag carries `data-rh` so
+  react-helmet-async replaces it instead of duplicating it.
+- **Structured data.** Every page has the studio as an `Organization`; the home page adds
+  `WebSite`, inner pages a `BreadcrumbList`, and Services, Projects, each project, About and
+  Contact their own types (`src/lib/jsonLd.ts`, shared by the client and the build).
+- **URLs.** Localised slugs, permanent server redirects from every old URL, a real 404 status for
+  unknown ones (see Content and languages, and Deployment).
+- `sitemap.xml` comes from the same page list (reciprocal hreflang and the project and team images),
+  plus `robots.txt` and `/.well-known/security.txt` (its `Expires` is renewed on every build).
+- Titles stay within 60 characters and descriptions between 70 and 160, in all three languages
+  (`test/seo.test.ts`); longer project summaries are shortened at a word (`metaDescription`).
 
-  return <h1>{content.nav.home}</h1>;
-}
-```
+## Accessibility
 
-### Adding New Languages
+WCAG 2.2 AA. `e2e/a11y.spec.ts` and `e2e/smoke.spec.ts` run axe on every page in the light and dark
+themes on desktop and mobile, and check headings, alt text, 24 px targets, reflow at 320 px, the
+site without JavaScript, the skip link, keyboard use, the mobile menu, forms with errors and the
+pause controls of everything that moves.
 
-1. Add language code to `config/content.config.ts`
-2. Translate all content keys
-3. Update `Language` type
-4. Add language toggle in Navbar
+## Design tokens
 
-## 🎨 Customizing Brand
+Colours, fonts and radii are defined once as CSS variables in `src/index.css` (light and dark)
+and exposed through `tailwind.config.js`. Use `bg-canvas`, `text-ink`, `text-muted`,
+`border-line`, `bg-accent`: never hex values. See [docs/BRAND.md](docs/BRAND.md).
 
-All branding is centralized in `config/brand.config.ts`:
+## Environment
 
-```typescript
-export const brandConfig = {
-  name: "DuckHats",
-  colors: {
-    primary: { black: "#1a1a1a", white: "#f5f5f5" },
-    accent: { red: "#e63946" },
-    // ...
-  },
-  typography: {
-    /* ... */
-  },
-  animation: {
-    /* ... */
-  },
-};
-```
+| Variable              | Used by                   | Notes                                             |
+| --------------------- | ------------------------- | ------------------------------------------------- |
+| `DISCORD_WEBHOOK_URL` | `api/submit-*`            | Server only. The handlers fail closed without it. |
+| `SITE_URL`            | `scripts/generate-seo.ts` | Optional override for sitemap/robots.             |
 
-### Using Brand Config
+## Deployment
 
-```typescript
-import { brandConfig } from "../config/brand.config";
+Vercel. `vercel.json` enables `cleanUrls` (so `ca/serveis.html` is served at `/ca/serveis`), holds
+the permanent redirects generated from `ROUTES` (`pnpm redirects`), serves `404.html` with a real 404
+for anything else, and sets the security headers (CSP, HSTS, ...), all covered by
+`test/vercel.test.ts`. `scripts/serve-dist.ts` reproduces that URL resolution locally
+and is what the e2e tests and Lighthouse run against.
 
-// In JSX:
-<div
-  style={{
-    backgroundColor: brandConfig.colors.primary.white,
-    color: brandConfig.colors.primary.black,
-  }}
->
-  {brandConfig.name}
-</div>;
-```
+## Pending before launch
 
-## 📝 Content Management
-
-All text content lives in `config/content.config.ts`:
-
-```typescript
-export const contentConfig = {
-  ca: {
-    nav: { home: "Inici", about: "Qui Som" /* ... */ },
-    hero: { tagline: "Desenvolupant amb passió..." /* ... */ },
-    // ...
-  },
-  es: {
-    /* Spanish translations */
-  },
-  en: {
-    /* English translations */
-  },
-};
-```
-
-## 🔧 Tech Stack
-
-- **Framework:** React 18
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS
-- **Animation:** Framer Motion
-- **Routing:** React Router v6
-- **State:** Zustand (language management)
-- **Build:** Create React App / Vite
-
-## 📦 Key Dependencies
-
-```json
-{
-  "react": "^18.2.0",
-  "react-router-dom": "^6.x",
-  "framer-motion": "^10.x",
-  "zustand": "^4.x",
-  "lucide-react": "^0.x"
-}
-```
-
-## 🎯 Component Patterns
-
-### Consistent Styling
-
-Always use brandConfig for colors:
-
-```typescript
-// ❌ Don't
-<div className="bg-black text-white">
-
-// ✅ Do
-<div style={{
-  backgroundColor: brandConfig.colors.primary.black,
-  color: brandConfig.colors.primary.white
-}}>
-```
-
-### Animations
-
-Use brandConfig durations and easing:
-
-```typescript
-<motion.div
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  transition={{
-    duration: brandConfig.animation.duration.normal,
-    ease: brandConfig.animation.easing.default,
-  }}
-/>
-```
-
-### Content
-
-Always use content hooks:
-
-```typescript
-const content = useContent();
-return <h1>{content.hero.tagline}</h1>;
-```
-
-## 🚧 Development Guidelines
-
-1. **Never hardcode colors** - Use `brandConfig.colors`
-2. **Never hardcode text** - Use `contentConfig` via `useContent()`
-3. **Use named exports** - No default exports
-4. **Mobile-first** - Design for mobile, enhance for desktop
-5. **Semantic HTML** - Use proper tags (header, nav, section, etc.)
-6. **Accessibility** - ARIA labels, keyboard navigation
-7. **Consistent spacing** - Use brandConfig spacing values
-
-## 📄 License
-
-© 2025 DuckHats. All rights reserved.
-
-## 🤝 Contributing
-
-We're always looking for new ducks to join our pond! Designers, developers, and dreamers welcome.
-
-Contact: info@duckhats.cat
-
----
-
-Built with ❤️ and code from the pond 🦆
+Search the repo for `TODO(client)`: domain, corporate phone and address (they would let the
+Organization become a LocalBusiness), legal details, budget ranges, real team photos, measured
+project results and missing team profiles. Once the domain is live, register it in Google Search
+Console and Bing Webmaster Tools and submit `/sitemap.xml`.

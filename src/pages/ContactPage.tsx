@@ -1,60 +1,77 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
-import { motion } from 'framer-motion';
-import { Navbar } from '../components/Navbar';
-import { Footer } from '../components/Footer';
-import { ContactForm } from '../components/ContactForm';
-import { useContent } from '../hooks/useContent';
-import { brandConfig } from '../config/brand.config';
+import { Github, Instagram, Mail, Phone } from 'lucide-react'
+import { ContactForm } from '@/components/forms/ContactForm'
+import { SEO } from '@/components/SEO'
+import { pageJsonLd } from '@/lib/jsonLd'
+import { ExternalLink } from '@/components/ui/AppLink'
+import { Container } from '@/components/ui/Container'
+import { PageHeader } from '@/components/ui/PageHeader'
+import { SITE } from '@/config/site'
+import { useMessages, useLanguage } from '@/lib/i18n'
 
-const ContactPage: React.FC = () => {
-  const content = useContent();
-  const { contact } = content;
-
-  if (!contact) return null;
-
+export function ContactPage() {
+  const language = useLanguage()
+  const { seo, contact } = useMessages()
   return (
-    <div className="min-h-screen" style={{ backgroundColor: brandConfig.colors.primary.white }}>
-      <Helmet>
-        <title>{contact.title} - DuckHats</title>
-        <meta name="description" content={contact.subtitle} />
-      </Helmet>
-      
-      <Navbar />
-      
-      <main className="pt-32 pb-20 px-4 md:px-8">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-16"
-          >
-            <h1 
-              className="text-4xl md:text-6xl font-bold mb-6"
-              style={{ fontFamily: brandConfig.typography.fontFamily.display, color: brandConfig.colors.primary.black }}
-            >
-              {contact.title}
-            </h1>
-            <p 
-              className="text-xl md:text-2xl max-w-2xl mx-auto"
-              style={{ fontFamily: brandConfig.typography.fontFamily.body, color: brandConfig.colors.neutral.gray600 }}
-            >
-              {contact.subtitle}
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
+    <>
+      <SEO
+        title={seo.contact.title}
+        description={seo.contact.description}
+        jsonLd={pageJsonLd('contact', language)}
+      />
+      <PageHeader title={contact.title} intro={contact.intro} />
+      <div data-act="paper" className="bg-canvas">
+        <Container className="grid gap-12 py-20 sm:py-28 lg:grid-cols-[1fr_24rem] lg:gap-20">
+          <div className="max-w-2xl">
             <ContactForm />
-          </motion.div>
-        </div>
-      </main>
-      <Footer />
-    </div>
-  );
-};
-
-export default ContactPage;
+          </div>
+          <aside
+            data-act="ink"
+            aria-labelledby="details"
+            className="self-start rounded-2xl bg-canvas p-8 text-ink sm:p-10 lg:sticky lg:top-28"
+          >
+            <h2 id="details" className="text-3xl">
+              {contact.detailsTitle}
+            </h2>
+            <ul className="mt-6 space-y-4">
+              <li className="flex items-center gap-3">
+                <Mail size={16} aria-hidden className="text-muted" />
+                <span className="sr-only">{contact.emailLabel}: </span>
+                <a
+                  href={`mailto:${SITE.email}`}
+                  className="link-underline pb-0.5 hover:text-accent-text"
+                >
+                  {SITE.email}
+                </a>
+              </li>
+              {SITE.phone && (
+                <li className="flex items-center gap-3">
+                  <Phone size={16} aria-hidden className="text-muted" />
+                  <span className="sr-only">{contact.phoneLabel}: </span>
+                  <a href={`tel:${SITE.phone.replace(/\s/g, '')}`}>{SITE.phone}</a>
+                </li>
+              )}
+              <li className="flex items-center gap-3">
+                <Github size={16} aria-hidden className="text-muted" />
+                <ExternalLink
+                  href={SITE.social.github}
+                  className="link-underline pb-0.5 hover:text-accent-text"
+                >
+                  GitHub
+                </ExternalLink>
+              </li>
+              <li className="flex items-center gap-3">
+                <Instagram size={16} aria-hidden className="text-muted" />
+                <ExternalLink
+                  href={SITE.social.instagram}
+                  className="link-underline pb-0.5 hover:text-accent-text"
+                >
+                  Instagram
+                </ExternalLink>
+              </li>
+            </ul>
+          </aside>
+        </Container>
+      </div>
+    </>
+  )
+}

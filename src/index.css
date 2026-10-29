@@ -1,28 +1,242 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Design tokens: space-separated RGB so Tailwind opacity modifiers work.
+ * The page is built in "acts": full-bleed sections in paper (the theme default), ink or red.
+ * `[data-act]` redefines the tokens locally, so components never need to know which act they are in.
+ */
 @layer base {
   :root {
-    --brand-accent: #E63946;
-    --brand-white: #F1FAEE;
-  }
-  
-  body {
-    @apply font-sans antialiased;
+    --color-canvas: 243 239 230;
+    --color-surface: 250 247 241;
+    --color-tint: 233 228 217;
+    --color-ink: 13 13 12;
+    --color-muted: 87 83 75;
+    --color-line: 190 184 171;
+    --color-accent: 230 57 70;
+    --color-accent-text: 176 30 43;
+    --color-on-accent: 8 7 4;
+    --color-inverse: 13 13 12;
+    --color-on-inverse: 243 239 230;
+    color-scheme: light;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-display;
+  :root[data-theme='dark'] {
+    --color-canvas: 30 29 26;
+    --color-surface: 38 37 33;
+    --color-tint: 44 42 38;
+    --color-ink: 243 239 230;
+    --color-muted: 178 173 162;
+    --color-line: 74 71 63;
+    --color-accent: 255 89 100;
+    --color-accent-text: 255 138 146;
+    --color-on-accent: 13 13 12;
+    --color-inverse: 13 13 12;
+    --color-on-inverse: 243 239 230;
+    color-scheme: dark;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) {
+      --color-canvas: 30 29 26;
+      --color-surface: 38 37 33;
+      --color-tint: 44 42 38;
+      --color-ink: 243 239 230;
+      --color-muted: 178 173 162;
+      --color-line: 74 71 63;
+      --color-accent: 255 89 100;
+      --color-accent-text: 255 138 146;
+      --color-on-accent: 13 13 12;
+      --color-inverse: 13 13 12;
+      --color-on-inverse: 243 239 230;
+      color-scheme: dark;
+    }
+  }
+
+  /* The dark stage: same in both themes, darker than the dark theme's paper. */
+  [data-act='ink'] {
+    --color-canvas: 13 13 12;
+    --color-surface: 24 23 21;
+    --color-tint: 30 29 26;
+    --color-ink: 243 239 230;
+    --color-muted: 176 171 160;
+    --color-line: 70 68 62;
+    --color-accent: 255 89 100;
+    --color-accent-text: 255 138 146;
+    --color-on-accent: 13 13 12;
+    --color-inverse: 243 239 230;
+    --color-on-inverse: 13 13 12;
+    color-scheme: dark;
+  }
+
+  /* The red act: ink does everything, including the "accent" graphics and buttons. */
+  [data-act='red'] {
+    --color-canvas: 230 57 70;
+    --color-surface: 236 84 95;
+    --color-tint: 236 84 95;
+    --color-ink: 8 7 4;
+    --color-muted: 8 7 4;
+    --color-line: 8 7 4;
+    --color-accent: 8 7 4;
+    --color-accent-text: 8 7 4;
+    --color-on-accent: 243 239 230;
+    --color-inverse: 8 7 4;
+    --color-on-inverse: 243 239 230;
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Keyboard focus and in-page jumps never end up under the sticky header (WCAG 2.4.11). */
+    scroll-padding-top: 5rem;
+    scrollbar-color: rgb(var(--color-ink)) rgb(var(--color-tint));
+    scrollbar-width: thin;
+  }
+
+  body {
+    @apply bg-canvas font-sans text-ink antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+
+  /*
+ * Wide, black headlines: Archivo's width axis at its widest. Words are never split or hyphenated:
+ * a headline that does not fit gets a smaller size where it is used (e2e checks every page).
+ */
+  h1,
+  h2,
+  h3 {
+    @apply font-display font-black uppercase;
+    font-stretch: 125%;
+    letter-spacing: -0.03em;
+    line-height: 0.92;
+    text-wrap: balance;
+  }
+
+  /* Phones: long Catalan and Spanish words do not fit at full width, so the type narrows a step. */
+  @media (max-width: 639px) {
+    h1,
+    h2,
+    h3 {
+      font-stretch: 100%;
+      word-spacing: 0.08em;
+    }
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    @apply bg-accent text-on-accent;
+  }
+
+  /* Sections jumped to with the arrow keys land below the sticky header. */
+  main [data-act] {
+    scroll-margin-top: 4.5rem;
+  }
+
+  input,
+  textarea {
+    caret-color: rgb(var(--color-accent-text));
+  }
+
+  :focus-visible {
+    @apply outline outline-[3px] outline-offset-2 outline-accent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
-/* Dark mode transitions */
-* {
-  transition-property: background-color, border-color, color, fill, stroke;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 300ms;
+@layer components {
+  /* Underline that draws in on hover. */
+  .link-underline {
+    text-underline-offset: 0.25em;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0 1px;
+    transition: background-size 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  /* The logo mark as a flat silhouette that takes any background colour. */
+  .mark-mask {
+    -webkit-mask: url('/brand/logo-mark.png') center / contain no-repeat;
+    mask: url('/brand/logo-mark.png') center / contain no-repeat;
+  }
+
+  /* Small spaced capitals for labels and indexes. */
+  .label {
+    @apply font-sans text-xs font-semibold uppercase tracking-[0.18em] text-muted;
+  }
+}
+
+/* The width axis applies wherever the display family is used, not only in headings. */
+.font-display {
+  font-stretch: 125%;
+}
+@media (max-width: 639px) {
+  .font-display {
+    font-stretch: 100%;
+  }
+}
+
+/*
+ * Headline lines turn up from below like a poster flipping into place (see ui/Headline).
+ * Pure CSS so the LCP text never waits for JavaScript; reduced motion shows it in place.
+ */
+@keyframes line-up {
+  from {
+    opacity: 0;
+    transform: perspective(800px) rotateX(-80deg) translateY(0.4em);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(800px) rotateX(0) translateY(0);
+  }
+}
+.line-up {
+  transform-origin: 50% 100%;
+  animation: line-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Hero words: lift and take the accent under a mouse pointer. */
+.word-lift {
+  display: inline-block;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.2s ease-out;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .word-lift:hover {
+    color: rgb(var(--color-accent));
+    transform: translateY(-0.06em) rotate(-2deg);
+  }
+}
+
+/* Field errors slide in once; reduced motion shows them in place. */
+@keyframes error-in {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+}
+.error-in {
+  animation: error-in 0.25s ease-out both;
 }
