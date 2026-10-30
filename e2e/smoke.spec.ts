@@ -5,6 +5,7 @@ import { projects } from '../src/content/projects'
 import { LANGUAGES } from '../src/lib/languages'
 import { ROUTES, buildPath, projectPath } from '../src/lib/routes'
 import { brokenText } from './lib/brokenText'
+import { settled } from './lib/settled'
 
 const pages = LANGUAGES.flatMap((language) => [
   ...ROUTES.map((route) => buildPath(language, route.key)),
@@ -114,6 +115,7 @@ test('quick search opens from the keyboard and goes to a project', async ({ page
   await page.keyboard.press('Control+k')
   const dialog = page.getByRole('dialog', { name: 'Quick search' })
   await expect(dialog).toBeVisible()
+  await settled(page, '[role="dialog"]')
 
   const results = await new AxeBuilder({ page })
     .include('[role="dialog"]')
@@ -200,11 +202,13 @@ test('the loader plays once per session, on whichever page the visit starts, wit
 test('the project brief walks through its steps, passes axe on each and sends', async ({
   page,
 }) => {
+  test.setTimeout(90_000) // six axe passes: slow on a busy CI runner
   await page.route('/api/submit-contact', (route) =>
     route.fulfill({ status: 200, contentType: 'application/json', body: '{"success":true}' }),
   )
   await page.goto('/en/contact')
   const axe = async (step: string) => {
+    await settled(page, 'form')
     const results = await new AxeBuilder({ page })
       .include('form')
       .withTags(['wcag2a', 'wcag2aa'])
